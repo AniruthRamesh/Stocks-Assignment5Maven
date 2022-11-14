@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 
@@ -39,8 +40,12 @@ public class JsonPackage implements SavingDataSource{
   }
 
   public List<String> anotherFormatter(){
-    //System.out.println(new Gson().toJson(flexiblePort));
     return List.of(new Gson().toJson(flexiblePort));
+  }
+
+  public Map<String,Map<String,List<List<String>>>> anotherParser(String json){
+    Map<String,Map<String,List<List<String>>>> obj = new Gson().fromJson(json, HashMap.class);
+    return obj;
   }
 
   @Override
