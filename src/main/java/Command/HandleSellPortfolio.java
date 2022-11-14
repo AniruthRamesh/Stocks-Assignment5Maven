@@ -94,6 +94,7 @@ public class HandleSellPortfolio implements Command {
           }
           break;
         case 2:
+          model.saveFlexiblePortfolios();
           optionExit = true;
           break;
         default:
@@ -193,19 +194,16 @@ public class HandleSellPortfolio implements Command {
     double stockToSell;
     sc.nextLine();
     stockToSell = Double.parseDouble(sc.nextLine());
-    sc.nextLine();
-    if (stockToSell < stockNumber && stockToSell >= 0) {
+    if (stockToSell == stockNumber) {
+      model.removeTickerFromPortfolio(ticker, portfolioName);
+      view.displayPortfolioUpdated();
+    } else if (stockToSell < stockNumber && stockToSell >= 0) {
       Map<String, List<List<String>>> val = new HashMap<>();
       val.put(ticker, List.of(List.of(ticker, String.valueOf((stockNumber - stockToSell)), date)));
       model.setFlexibleNewPortfolio(portfolioName, val);
       view.displayPortfolioUpdated();
-    } else if (stockToSell == stockNumber) {
-      model.removeTickerFromPortfolio(ticker);
-      view.displayPortfolioUpdated();
     } else {
       view.enterValidStockToSell();
     }
-    System.out.println(portfolioData);
-    model.saveFlexiblePortfolios();
   }
 }

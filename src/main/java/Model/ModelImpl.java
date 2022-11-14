@@ -197,8 +197,8 @@ public class ModelImpl implements Model {
       newPath += "\\" + names.get(i);
       newPath += ".txt";
       try {
-        PrintWriter out = new PrintWriter(newPath);
-        out.println(jsonPortfolios.get(i));
+        File myObj = new File(newPath);
+        Files.writeString(Path.of(newPath), jsonPortfolios.get(0));
 
 //        File myObj = new File(newPath);
 //        Files.writeString(Path.of(newPath), jsonPortfolios.get(i));
@@ -477,7 +477,7 @@ public class ModelImpl implements Model {
   }
 
   @Override
-  public void removeTickerFromPortfolio(String ticker) {
-    flexiblePort.remove(ticker);
+  public void removeTickerFromPortfolio(String ticker, String portfolioName) {
+    flexiblePort.get(portfolioName).remove(ticker);
   }
 }
