@@ -52,7 +52,7 @@ public class ModelImpl implements Model {
           "List all portfolios", "Create Flexible Portfolio", "Sell Stocks from a Portfolio"
           , "Determine Cost Basis", "Exit");
 
-  Map<String,Map<String,List<List<String>>>> flexiblePort = new HashMap<>();
+  Map<String, Map<String, List<List<String>>>> flexiblePort = new HashMap<>();
   Map<String, List<List<String>>> flexiblePortfolio = new HashMap<>();
   List<HashMap<String, String>> apiStockData = new ArrayList<>();
 
@@ -60,18 +60,18 @@ public class ModelImpl implements Model {
 
   Set<String> companiesInPortfolio = new HashSet<>();
 
-  public Map<String, Map<String, List<List<String>>>> getFlexiblePort(){
+  public Map<String, Map<String, List<List<String>>>> getFlexiblePort() {
     return flexiblePort;
   }
 
   @Override
   public void setFlexibleNewPortfolio(String name, Map<String, List<List<String>>> companyDetails) {
-    flexiblePort.put(name,companyDetails);
+    flexiblePort.put(name, companyDetails);
   }
 
   @Override
   public void setFlexiblePortfolioWith(String portfolioName, String keyName, List<String> val) {
-    flexiblePort.get(portfolioName).put(keyName,List.of(val));
+    flexiblePort.get(portfolioName).put(keyName, List.of(val));
   }
 
   @Override
@@ -218,7 +218,7 @@ public class ModelImpl implements Model {
     inflexiblePortfolio.forEach((key, value) -> names.add(key));
     //Json json = new Json(this.inflexiblePortfolio, names);
 
-    JsonPackage jsonp = new JsonPackage(this.inflexiblePortfolio,names);
+    JsonPackage jsonp = new JsonPackage(this.inflexiblePortfolio, names);
     List<String> jsonPortfolios = jsonp.FormatFromHashMap();
 
     //List<String> jsonPortfolios = json.FormatFromHashMap();
@@ -408,10 +408,10 @@ public class ModelImpl implements Model {
     try {
       Files.createDirectories(Path.of(String.valueOf(Path.of(
               Path.of(System.getProperty("user.dir")) + "\\" +
-              "InFlexiblePortfolios"))));
+                      "InFlexiblePortfolios"))));
       Files.createDirectories(Path.of(String.valueOf(
               Path.of(Path.of(System.getProperty("user.dir")) + "\\" +
-              "FlexiblePortfolios"))));
+                      "FlexiblePortfolios"))));
     } catch (IOException e) {
       //
     }
@@ -434,7 +434,7 @@ public class ModelImpl implements Model {
 
   @Override
   public boolean flexiblePortfolioContainsCertainKey(String name) {
-    return flexiblePortfolio.containsKey(name);
+    return flexiblePort.containsKey(name);
   }
 
   @Override
@@ -464,11 +464,20 @@ public class ModelImpl implements Model {
 
 
   @Override
-  public void setFlexibleAddPortfolio(String portfolioName,String key, List<String> companies){
+  public void setFlexibleAddPortfolio(String portfolioName, String key, List<String> companies) {
     List<List<String>> company = new ArrayList<>();
     company.addAll(flexiblePort.get(portfolioName).get(key));
     company.add(companies);
-    flexiblePort.get(portfolioName).put(key,company);
+    flexiblePort.get(portfolioName).put(key, company);
   }
 
+  @Override
+  public Map<String, List<List<String>>> getParticularFlexiblePortfolio(String portfolioName) {
+    return flexiblePort.get(portfolioName);
+  }
+
+  @Override
+  public void removeTickerFromPortfolio(String ticker) {
+    flexiblePort.remove(ticker);
+  }
 }

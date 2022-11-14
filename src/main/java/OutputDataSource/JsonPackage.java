@@ -9,9 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class JsonPackage implements SavingDataSource{
+public class JsonPackage implements SavingDataSource {
   Map<String, List<List<String>>> portfolio;
-  Map<String,Map<String,List<List<String>>>> flexiblePort;
+  Map<String, Map<String, List<List<String>>>> flexiblePort;
   List<String> keys;
 
   /**
@@ -25,7 +25,7 @@ public class JsonPackage implements SavingDataSource{
     this.keys = keys;
   }
 
-  public JsonPackage(Map<String,Map<String,List<List<String>>>> flexiblePort){
+  public JsonPackage(Map<String, Map<String, List<List<String>>>> flexiblePort) {
     this.flexiblePort = flexiblePort;
   }
 
@@ -38,7 +38,7 @@ public class JsonPackage implements SavingDataSource{
     keys = new ArrayList<>();
   }
 
-  public List<String> anotherFormatter(){
+  public List<String> anotherFormatter() {
     //System.out.println(new Gson().toJson(flexiblePort));
     return List.of(new Gson().toJson(flexiblePort));
   }
@@ -53,7 +53,7 @@ public class JsonPackage implements SavingDataSource{
 
   @Override
   public HashMap<String, List<List<String>>> Parser(String json) {
-    HashMap<String,List<List<String>>> parsed = new Gson().fromJson(json,HashMap.class);
+    HashMap<String, List<List<String>>> parsed = new Gson().fromJson(json, HashMap.class);
     return parsed;
   }
 }
