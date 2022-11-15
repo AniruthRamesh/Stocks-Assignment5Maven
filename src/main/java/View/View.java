@@ -400,6 +400,11 @@ public class View {
     this.out.println("2. Exit");
   }
 
+  public void askForFlexibleOrInFlexible() {
+    this.out.println("Enter 1, for Inflexible Portfolios:");
+    this.out.println("Enter 2, for Flexible Portfolios:");
+  }
+
   /**
    * Printing out a message to the user that the number of stocks they want to sell is
    * either negative or more than the stocks that exists.

@@ -217,9 +217,10 @@ public interface Model {
   /**
    * creates a List of all the files in the src\\portfolios\\ directory.
    *
+   * @param choice integer, 1 for Inflexible and 2 for flexible.
    * @return List of Strings containing the files in the mentioned directory.
    */
-  List<String> getListOfPortfolio();
+  List<String> getListOfPortfolio(int choice);
 
   /**
    * A helper method to round off a number.
@@ -368,6 +369,22 @@ public interface Model {
    * @param companies     List of String, containing company details.
    */
   void setFlexibleAddPortfolio(String portfolioName, String key, List<String> companies);
+
+  /**
+   * This method is used when a user uploads a file, we parse the string in json format to
+   * hashmap.
+   *
+   * @param data String, data containing json string.
+   * @return Hashmap, containing portfolio name, unique identifiers and stock data.
+   */
+  Map<String, Map<String, List<List<String>>>> parseFlexiblePortfolio(String data);
+
+  /**
+   * Setter for flexiblePortfolio.
+   *
+   * @param parsed
+   */
+  void setFlexible(Map<String, Map<String, List<List<String>>>> parsed);
 
   /**
    * This function returns a map of the portfolio name and a list of lists of the portfolio's

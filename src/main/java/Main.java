@@ -25,18 +25,17 @@ public class Main {
     controller.start();
 
     //change model.getContentsFromFile when building jar
-    //handle saving uploaded files(while uploading ask if its immutable or not)
 
-    //show list of portfolios shows both flexible and inflexible
-
-    //change the save method in HandleImmutablePortfolio
+    //we are using object of jsonPackage class and not using SavingDataSource(change this)
     //change the upload file method
     //in the current session files in the folder should be loaded
 
     //handle upload portfolio checking for flexiblePortfolio
     //handle code duplication for saving and upload
 
-    //handle saving separate portfolios(flexible now saves a long string of all the portfolios)
+    //change handleUploadFile if the hashmap is changed(if included commission)
+
+    //commission for buying is $25, per stock
   }
 
 }

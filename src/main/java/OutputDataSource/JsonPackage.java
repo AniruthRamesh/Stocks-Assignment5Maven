@@ -39,8 +39,12 @@ public class JsonPackage implements SavingDataSource {
   }
 
   public List<String> anotherFormatter() {
-    //System.out.println(new Gson().toJson(flexiblePort));
     return List.of(new Gson().toJson(flexiblePort));
+  }
+
+  public Map<String, Map<String, List<List<String>>>> anotherParser(String json) {
+    Map<String, Map<String, List<List<String>>>> obj = new Gson().fromJson(json, HashMap.class);
+    return obj;
   }
 
   @Override
