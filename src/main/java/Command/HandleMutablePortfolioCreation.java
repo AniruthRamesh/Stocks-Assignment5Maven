@@ -129,7 +129,7 @@ public class HandleMutablePortfolioCreation implements Command {
             model.addStockDataToFlexibleList(stockData);
             int num = model.getApiStockDataSize();
             model.putNameInCompanyInPortfolio(companyName);
-            model.putCompanyNameInTickerFinder(companyName, num-1);
+            model.putCompanyNameInTickerFinder(companyName, num - 1);
           } else {
             int ind = model.getTickerFinder().get(companyName);
             stockData = model.getApiStockData().get(ind);
@@ -158,20 +158,19 @@ public class HandleMutablePortfolioCreation implements Command {
           if (stockData.containsKey(dateVal)) {
             Map<String, Map<String, List<List<String>>>> flexible = model.getFlexiblePort();
             if (flexible.containsKey(portfolioName)) {
-              Map<String,List<List<String>>> portfolio = flexible.get(portfolioName);
-              if(portfolio.containsKey(alreadyExisting)){
-                model.setFlexibleAddPortfolio(portfolioName,alreadyExisting,
-                        List.of(companyName,String.valueOf(numberOfStocks),dateVal));
-              }
-              else{
-                model.setFlexiblePortfolioWith(portfolioName,alreadyExisting,
-                        List.of(companyName,String.valueOf(numberOfStocks),dateVal));
+              Map<String, List<List<String>>> portfolio = flexible.get(portfolioName);
+              if (portfolio.containsKey(alreadyExisting)) {
+                model.setFlexibleAddPortfolio(portfolioName, alreadyExisting,
+                        List.of(companyName, String.valueOf(numberOfStocks), dateVal));
+              } else {
+                model.setFlexiblePortfolioWith(portfolioName, alreadyExisting,
+                        List.of(companyName, String.valueOf(numberOfStocks), dateVal));
               }
             } else {
-              Map<String,List<List<String>>> val = new HashMap<>();
-              val.put(alreadyExisting,List.of(List.of(companyName,String.valueOf(numberOfStocks),
+              Map<String, List<List<String>>> val = new HashMap<>();
+              val.put(alreadyExisting, List.of(List.of(companyName, String.valueOf(numberOfStocks),
                       dateVal)));
-              model.setFlexibleNewPortfolio(portfolioName,val);
+              model.setFlexibleNewPortfolio(portfolioName, val);
             }
 
 

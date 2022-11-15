@@ -25,7 +25,6 @@ public class Main {
     controller.start();
 
     //change model.getContentsFromFile when building jar
-    //handle saving uploaded files(while uploading ask if its immutable or not)
 
     //we are using object of jsonPackage class and not using SavingDataSource(change this)
     //change the upload file method

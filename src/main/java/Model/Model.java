@@ -216,6 +216,7 @@ public interface Model {
 
   /**
    * creates a List of all the files in the src\\portfolios\\ directory.
+   *
    * @param choice integer, 1 for Inflexible and 2 for flexible.
    * @return List of Strings containing the files in the mentioned directory.
    */
@@ -329,27 +330,31 @@ public interface Model {
 
   /**
    * Getter for flexiblePort.
+   *
    * @return Map of String,and value containing map of string and list.
    */
-  Map<String,Map<String,List<List<String>>>> getFlexiblePort();
+  Map<String, Map<String, List<List<String>>>> getFlexiblePort();
 
   /**
    * Setter for flexiblePort.
-   * @param name String, containing name of the portfolio.
+   *
+   * @param name           String, containing name of the portfolio.
    * @param companyDetails Map of String and List of strings containing unique key,company stock.
    */
-  void setFlexibleNewPortfolio(String name,Map<String,List<List<String>>> companyDetails);
+  void setFlexibleNewPortfolio(String name, Map<String, List<List<String>>> companyDetails);
 
   /**
    * Another setter for flexiblePort given different Set of arguments.
+   *
    * @param portfolioName String, portfolio name.
-   * @param keyName String, unique key to identify company stocks.
-   * @param val List of Strings containing company StockValue.
+   * @param keyName       String, unique key to identify company stocks.
+   * @param val           List of Strings containing company StockValue.
    */
-  void setFlexiblePortfolioWith(String portfolioName,String keyName,List<String> val);
+  void setFlexiblePortfolioWith(String portfolioName, String keyName, List<String> val);
 
   /**
    * Checker to find if flexiblePort contains certain key.
+   *
    * @param name String, portfolio name.
    * @return boolean, True or false representing if portfolio contains a key or not.
    */
@@ -358,23 +363,26 @@ public interface Model {
   /**
    * Given a portfolio name and the ticker symbol, company stock details will be added under the
    * same ticker symbol key.
+   *
    * @param portfolioName String, name of the Portfolio.
-   * @param key String, ticker symbol of the company.
-   * @param companies List of String, containing company details.
+   * @param key           String, ticker symbol of the company.
+   * @param companies     List of String, containing company details.
    */
-  void setFlexibleAddPortfolio(String portfolioName,String key, List<String> companies);
+  void setFlexibleAddPortfolio(String portfolioName, String key, List<String> companies);
 
   /**
    * This method is used when a user uploads a file, we parse the string in json format to
    * hashmap.
+   *
    * @param data String, data containing json string.
    * @return Hashmap, containing portfolio name, unique identifiers and stock data.
    */
-  Map<String,Map<String,List<List<String>>>> parseFlexiblePortfolio(String data);
+  Map<String, Map<String, List<List<String>>>> parseFlexiblePortfolio(String data);
 
   /**
    * Setter for flexiblePortfolio.
+   *
    * @param parsed
    */
-  void setFlexible(Map<String,Map<String,List<List<String>>>> parsed);
+  void setFlexible(Map<String, Map<String, List<List<String>>>> parsed);
 }

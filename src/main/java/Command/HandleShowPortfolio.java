@@ -25,13 +25,12 @@ public class HandleShowPortfolio implements Command {
   public Model execute() {
     view.askForFlexibleOrInFlexible();
     int choice = 0;
-    try{
+    try {
       choice = sc.nextInt();
-    }
-    catch(InputMismatchException e){
+    } catch (InputMismatchException e) {
       sc.next();
     }
-    if(choice==1||choice==2){
+    if (choice == 1 || choice == 2) {
       List<String> files = model.getListOfPortfolio(choice);
       if (files == null || files.size() == 0) {
         view.displayNoPortfolio();
@@ -41,8 +40,7 @@ public class HandleShowPortfolio implements Command {
         }
         view.displayEmptyLine();
       }
-    }
-    else{
+    } else {
       view.displaySwitchCaseDefault();
     }
 

@@ -35,23 +35,21 @@ public class HandleUploadFile implements Command {
     }
     view.askForFlexibleOrInFlexible();
     int choice = 0;
-    try{
+    try {
       choice = sc.nextInt();
-    }
-    catch(InputMismatchException e){
+    } catch (InputMismatchException e) {
       sc.next();
     }
-    if(choice==1){
+    if (choice == 1) {
       Map<String, List<List<String>>> parsedPortfolio = model.parseJson(isFileReadSuccessFull);
       if (parsedPortfolio == null) {
         view.displayDataNotInProperFormat();
         return model;
       }
       boolean checker = false;
-      try{
+      try {
         checker = model.checkParsedPortfolio(parsedPortfolio);
-      }
-      catch(Exception e){
+      } catch (Exception e) {
         view.displayDataNotInProperFormat();
         return model;
       }
@@ -61,34 +59,31 @@ public class HandleUploadFile implements Command {
       }
       model.setInflexiblePortfolio(parsedPortfolio);
       model.savePortfolio();
-    }
-    else if(choice==2){
-      Map<String,Map<String,List<List<String>>>> parseFlexiblePortfolio =
+    } else if (choice == 2) {
+      Map<String, Map<String, List<List<String>>>> parseFlexiblePortfolio =
               model.parseFlexiblePortfolio(isFileReadSuccessFull);
       List<String> keys = new ArrayList<>();
-      try{
+      try {
         keys = new ArrayList<>(parseFlexiblePortfolio.keySet());
-      }
-      catch(Exception e){
+      } catch (Exception e) {
         view.displayDataNotInProperFormat();
         return model;
       }
-      for(int i=0;i<keys.size();i++){
-        Map<String,List<List<String>>> insideContents = parseFlexiblePortfolio.get(keys.get(i));
+      for (int i = 0; i < keys.size(); i++) {
+        Map<String, List<List<String>>> insideContents = parseFlexiblePortfolio.get(keys.get(i));
         List<String> insideKeySet;
-        try{
+        try {
           insideKeySet = new ArrayList<>(insideContents.keySet());
-          if(insideKeySet.size()==0){
+          if (insideKeySet.size() == 0) {
             view.displayDataNotInProperFormat();
             return model;
           }
-        }
-        catch(Exception e){
+        } catch (Exception e) {
           view.displayDataNotInProperFormat();
           return model;
         }
-        for(int k=0;k<insideKeySet.size();k++){
-          if(parseFlexiblePortfolio.get(keys.get(i)).get(insideKeySet.get(k)).size()!=3){
+        for (int k = 0; k < insideKeySet.size(); k++) {
+          if (parseFlexiblePortfolio.get(keys.get(i)).get(insideKeySet.get(k)).size() != 3) {
             view.displayDataNotInProperFormat();
             return model;
           }
@@ -96,8 +91,7 @@ public class HandleUploadFile implements Command {
       }
       model.setFlexible(parseFlexiblePortfolio);
       model.saveFlexiblePortfolios();
-    }
-    else{
+    } else {
       view.displaySwitchCaseDefault();
     }
 
