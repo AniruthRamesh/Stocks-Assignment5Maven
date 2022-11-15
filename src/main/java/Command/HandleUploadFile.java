@@ -86,13 +86,13 @@ public class HandleUploadFile implements Command {
         for (int k = 0; k < insideKeySet.size(); k++) {
           List<List<String>> contents =
                   parseFlexiblePortfolio.get(keys.get(i)).get(insideKeySet.get(k));
-          for(int j=0;j<contents.size();j++){
+          for (int j = 0; j < contents.size(); j++) {
             List<String> insideValues = contents.get(j);
-            if(insideValues.size()!=5){
+            if (insideValues.size() != 5) {
               view.displayDataNotInProperFormat();
               return model;
             }
-            if(insideValues.get(0)!="Buy"||insideValues.get(0)!="Sell"){
+            if (insideValues.get(0) != "Buy" || insideValues.get(0) != "Sell") {
               view.displayDataNotInProperFormat();
               return model;
             }
@@ -100,24 +100,22 @@ public class HandleUploadFile implements Command {
             String date = insideValues.get(2);
             String numberOfStocks = insideValues.get(3);
             String commission = insideValues.get(4);
-            if(!model.isValidDate(date)){
+            if (!model.isValidDate(date)) {
               view.displayDataNotInProperFormat();
               return model;
             }
-            try{
+            try {
               Double.parseDouble(numberOfStocks);
               Double.parseDouble(commission);
-            }
-            catch(Exception e){
+            } catch (Exception e) {
               view.displayDataNotInProperFormat();
               return model;
             }
             String data = model.addApiCompanyStockData(ticker);
-            if(data.equals("Failure")){
+            if (data.equals("Failure")) {
               view.displayDataNotInProperFormat();
               return model;
-            }
-            else{
+            } else {
               HashMap<String, String> stockData = model.convertingStringToHashMap(data);
 
               model.addStockDataToFlexibleList(stockData);

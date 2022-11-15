@@ -153,7 +153,7 @@ public class HandleMutablePortfolioCreation implements Command {
             break;
           }
           numberOfStocks = model.helper(numberOfStocks);
-          Double commission = numberOfStocks*25;
+          Double commission = numberOfStocks * 25;
           String alreadyExisting = companyName;
 
           if (stockData.containsKey(dateVal)) {
@@ -162,14 +162,14 @@ public class HandleMutablePortfolioCreation implements Command {
               Map<String, List<List<String>>> portfolio = flexible.get(portfolioName);
               if (portfolio.containsKey(alreadyExisting)) {
                 model.setFlexibleAddPortfolio(portfolioName, alreadyExisting,
-                        List.of("Buy",companyName, String.valueOf(numberOfStocks), dateVal,
+                        List.of("Buy", companyName, String.valueOf(numberOfStocks), dateVal,
                                 String.valueOf(commission)
-                                ));
+                        ));
               } else {
                 model.setFlexiblePortfolioWith(portfolioName, alreadyExisting,
                         List.of("Buy", companyName, String.valueOf(numberOfStocks), dateVal,
                                 String.valueOf(commission)
-                                ));
+                        ));
               }
             } else {
               Map<String, List<List<String>>> val = new HashMap<>();
