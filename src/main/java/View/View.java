@@ -381,9 +381,15 @@ public class View {
     this.out.println("Enter ticker symbol for the company:");
     this.out.println();
   }
-  public void dateSelectionMenu(){
+
+  public void dateSelectionMenu() {
     this.out.println("1. Enter the Date");
     this.out.println("2. Exit");
+  }
+
+  public void askForFlexibleOrInFlexible() {
+    this.out.println("Enter 1, for Inflexible Portfolios:");
+    this.out.println("Enter 2, for Flexible Portfolios:");
   }
 }
 

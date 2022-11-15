@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
@@ -52,7 +51,7 @@ public class ModelImpl implements Model {
           "List all portfolios", "Create Flexible Portfolio", "Sell Stocks from a Portfolio"
           , "Determine Cost Basis", "Exit");
 
-  Map<String,Map<String,List<List<String>>>> flexiblePort = new HashMap<>();
+  Map<String, Map<String, List<List<String>>>> flexiblePort = new HashMap<>();
   Map<String, List<List<String>>> flexiblePortfolio = new HashMap<>();
   List<HashMap<String, String>> apiStockData = new ArrayList<>();
 
@@ -60,18 +59,18 @@ public class ModelImpl implements Model {
 
   Set<String> companiesInPortfolio = new HashSet<>();
 
-  public Map<String, Map<String, List<List<String>>>> getFlexiblePort(){
+  public Map<String, Map<String, List<List<String>>>> getFlexiblePort() {
     return flexiblePort;
   }
 
   @Override
   public void setFlexibleNewPortfolio(String name, Map<String, List<List<String>>> companyDetails) {
-    flexiblePort.put(name,companyDetails);
+    flexiblePort.put(name, companyDetails);
   }
 
   @Override
   public void setFlexiblePortfolioWith(String portfolioName, String keyName, List<String> val) {
-    flexiblePort.get(portfolioName).put(keyName,List.of(val));
+    flexiblePort.get(portfolioName).put(keyName, List.of(val));
   }
 
   @Override
@@ -184,24 +183,25 @@ public class ModelImpl implements Model {
   public void saveFlexiblePortfolios() {
     List<String> names = new ArrayList<>();
     flexiblePort.forEach((key, value) -> names.add(key));
-
+    if (names.size() == 0) {
+      return;
+    }
     //Json json = new Json(this.flexiblePortfolio, names);
-    JsonPackage json = new JsonPackage(this.flexiblePort);
-    List<String> jsonPortfolios = json.anotherFormatter();
+    for (int i = 0; i < names.size(); i++) {
+      Map<String, Map<String, List<List<String>>>> tester = new HashMap<>();
+      tester.put(names.get(i), flexiblePort.get(names.get(i)));
+      JsonPackage json = new JsonPackage(tester);
+      List<String> jsonPortfolios = json.anotherFormatter();
 
-    Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\" +
-            "FlexiblePortfolios");
-    System.out.println(path.toString());
-    for (int i = 0; i < jsonPortfolios.size(); i++) {
+      Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\" +
+              "FlexiblePortfolios");
       String newPath = String.valueOf(path);
       newPath += "\\" + names.get(i);
       newPath += ".txt";
       try {
-        PrintWriter out = new PrintWriter(newPath);
-        out.println(jsonPortfolios.get(i));
 
-//        File myObj = new File(newPath);
-//        Files.writeString(Path.of(newPath), jsonPortfolios.get(i));
+        File myObj = new File(newPath);
+        Files.writeString(Path.of(newPath), jsonPortfolios.get(0));
       } catch (FileNotFoundException e) {
         //
 //        System.out.println(e.getMessage());
@@ -209,6 +209,7 @@ public class ModelImpl implements Model {
       } catch (IOException e) {
         //System.out.println("Exception2");
       }
+
     }
   }
 
@@ -218,7 +219,7 @@ public class ModelImpl implements Model {
     inflexiblePortfolio.forEach((key, value) -> names.add(key));
     //Json json = new Json(this.inflexiblePortfolio, names);
 
-    JsonPackage jsonp = new JsonPackage(this.inflexiblePortfolio,names);
+    JsonPackage jsonp = new JsonPackage(this.inflexiblePortfolio, names);
     List<String> jsonPortfolios = jsonp.FormatFromHashMap();
 
     //List<String> jsonPortfolios = json.FormatFromHashMap();
@@ -388,12 +389,18 @@ public class ModelImpl implements Model {
   }
 
   @Override
-  public List<String> getListOfPortfolio() {
+  public List<String> getListOfPortfolio(int choice) {
+    Path path = null;
+    if (choice == 1) {
+      path = Path.of(System.getProperty("user.dir") + "\\" +
+              "InFlexiblePortfolios");
+    } else if (choice == 2) {
+      path = Path.of(System.getProperty("user.dir") + "\\" +
+              "FlexiblePortfolios");
+    }
     //Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\" + "portfolios");
     List<String> files;
-    File f = new File(String.valueOf(Path.of(String.valueOf(Path.of(
-            Path.of(System.getProperty("user.dir")) + "\\" +
-                    "InFlexiblePortfolios")))));
+    File f = new File(String.valueOf(path));
     files = List.of(f.list());
     return files;
   }
@@ -408,10 +415,10 @@ public class ModelImpl implements Model {
     try {
       Files.createDirectories(Path.of(String.valueOf(Path.of(
               Path.of(System.getProperty("user.dir")) + "\\" +
-              "InFlexiblePortfolios"))));
+                      "InFlexiblePortfolios"))));
       Files.createDirectories(Path.of(String.valueOf(
               Path.of(Path.of(System.getProperty("user.dir")) + "\\" +
-              "FlexiblePortfolios"))));
+                      "FlexiblePortfolios"))));
     } catch (IOException e) {
       //
     }
@@ -464,11 +471,22 @@ public class ModelImpl implements Model {
 
 
   @Override
-  public void setFlexibleAddPortfolio(String portfolioName,String key, List<String> companies){
+  public void setFlexibleAddPortfolio(String portfolioName, String key, List<String> companies) {
     List<List<String>> company = new ArrayList<>();
     company.addAll(flexiblePort.get(portfolioName).get(key));
     company.add(companies);
-    flexiblePort.get(portfolioName).put(key,company);
+    flexiblePort.get(portfolioName).put(key, company);
+  }
+
+  @Override
+  public Map<String, Map<String, List<List<String>>>> parseFlexiblePortfolio(String data) {
+    JsonPackage json = new JsonPackage();
+    Map<String, Map<String, List<List<String>>>> check = json.anotherParser(data);
+    return check;
+  }
+
+  public void setFlexible(Map<String, Map<String, List<List<String>>>> parsed) {
+    this.flexiblePort = parsed;
   }
 
 }
