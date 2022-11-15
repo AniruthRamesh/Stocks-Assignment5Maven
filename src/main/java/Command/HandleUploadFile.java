@@ -1,6 +1,7 @@
 package Command;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
@@ -83,10 +84,49 @@ public class HandleUploadFile implements Command {
           return model;
         }
         for (int k = 0; k < insideKeySet.size(); k++) {
-          if (parseFlexiblePortfolio.get(keys.get(i)).get(insideKeySet.get(k)).size() != 3) {
-            view.displayDataNotInProperFormat();
-            return model;
+          List<List<String>> contents =
+                  parseFlexiblePortfolio.get(keys.get(i)).get(insideKeySet.get(k));
+          for(int j=0;j<contents.size();j++){
+            List<String> insideValues = contents.get(j);
+            if(insideValues.size()!=5){
+              view.displayDataNotInProperFormat();
+              return model;
+            }
+            if(insideValues.get(0)!="Buy"||insideValues.get(0)!="Sell"){
+              view.displayDataNotInProperFormat();
+              return model;
+            }
+            String ticker = insideValues.get(1);
+            String date = insideValues.get(2);
+            String numberOfStocks = insideValues.get(3);
+            String commission = insideValues.get(4);
+            if(!model.isValidDate(date)){
+              view.displayDataNotInProperFormat();
+              return model;
+            }
+            try{
+              Double.parseDouble(numberOfStocks);
+              Double.parseDouble(commission);
+            }
+            catch(Exception e){
+              view.displayDataNotInProperFormat();
+              return model;
+            }
+            String data = model.addApiCompanyStockData(ticker);
+            if(data.equals("Failure")){
+              view.displayDataNotInProperFormat();
+              return model;
+            }
+            else{
+              HashMap<String, String> stockData = model.convertingStringToHashMap(data);
+
+              model.addStockDataToFlexibleList(stockData);
+              int num = model.getApiStockDataSize();
+              model.putNameInCompanyInPortfolio(ticker);
+              model.putCompanyNameInTickerFinder(ticker, num - 1);
+            }
           }
+
         }
       }
       model.setFlexible(parseFlexiblePortfolio);

@@ -34,6 +34,8 @@ public class Main {
     //handle code duplication for saving and upload
 
     //change handleUploadFile if the hashmap is changed(if included commission)
+
+    //commission for buying is $25, per stock
   }
 
 }
