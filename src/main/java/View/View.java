@@ -376,12 +376,25 @@ public class View {
     this.out.println();
   }
 
-  // Asking the user to enter the ticker symbol of the company.
+  /**
+   * This function prints out a message asking the user to enter a ticker symbol for the company
+   */
   public void askForTickerSymbol() {
     this.out.println("Enter ticker symbol for the company:");
     this.out.println();
   }
 
+  /**
+   * This function asks the user for the number of stocks to sell.
+   */
+  public void askForNumberOfStocksToSell() {
+    this.out.println("Enter number of stock to sell:");
+    this.out.println();
+  }
+
+  /**
+   * This function prints out the menu for the user to select the date.
+   */
   public void dateSelectionMenu() {
     this.out.println("1. Enter the Date");
     this.out.println("2. Exit");
@@ -391,5 +404,20 @@ public class View {
     this.out.println("Enter 1, for Inflexible Portfolios:");
     this.out.println("Enter 2, for Flexible Portfolios:");
   }
+
+  /**
+   * Printing out a message to the user that the number of stocks they want to sell is
+   * either negative or more than the stocks that exists.
+   */
+
+  public void enterValidStockToSell() {
+    this.out.println("Please enter a valid number. The number is either negative or more than the" +
+            " stocks that exists.");
+  }
+
+  public void displayPortfolioUpdated() {
+    this.out.println("Portfolio updated.");
+  }
+
 }
 

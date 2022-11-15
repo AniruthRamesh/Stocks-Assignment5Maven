@@ -385,4 +385,21 @@ public interface Model {
    * @param parsed
    */
   void setFlexible(Map<String, Map<String, List<List<String>>>> parsed);
+
+  /**
+   * This function returns a map of the portfolio name and a list of lists of the portfolio's
+   * flexible positions.
+   *
+   * @param portfolioName The name of the portfolio you want to get.
+   * @return A HashMap of String to List of List of String.
+   */
+  Map<String, List<List<String>>> getParticularFlexiblePortfolio(String portfolioName);
+
+  /**
+   * Removes a ticker from a portfolio.
+   *
+   * @param ticker        The ticker symbol of the stock you want to remove from the portfolio.
+   * @param portfolioName The name of the portfolio you want to remove the ticker from.
+   */
+  void removeTickerFromPortfolio(String ticker, String portfolioName);
 }

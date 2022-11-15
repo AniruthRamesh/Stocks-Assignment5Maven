@@ -441,7 +441,7 @@ public class ModelImpl implements Model {
 
   @Override
   public boolean flexiblePortfolioContainsCertainKey(String name) {
-    return flexiblePortfolio.containsKey(name);
+    return flexiblePort.containsKey(name);
   }
 
   @Override
@@ -478,6 +478,15 @@ public class ModelImpl implements Model {
     flexiblePort.get(portfolioName).put(key, company);
   }
 
+  @Override
+  public Map<String, List<List<String>>> getParticularFlexiblePortfolio(String portfolioName) {
+    return flexiblePort.get(portfolioName);
+  }
+
+  @Override
+  public void removeTickerFromPortfolio(String ticker, String portfolioName) {
+    flexiblePort.get(portfolioName).remove(ticker);
+  }
   @Override
   public Map<String, Map<String, List<List<String>>>> parseFlexiblePortfolio(String data) {
     JsonPackage json = new JsonPackage();
