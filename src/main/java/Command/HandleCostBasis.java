@@ -21,6 +21,18 @@ public class HandleCostBasis implements Command {
 
   @Override
   public Model execute() {
+    view.displayEnterNameForPortfolio();
+    String portfolioName = sc.nextLine();
+    if(!model.flexiblePortContainsCertainKey(portfolioName)){
+      view.displayNoSuchPortfolio();
+      return model;
+    }
+    DateHelper dateValue = new DateHelper(view,model,sc);
+    String date = dateValue.helper();
+    if((date.length()==0)){
+      System.out.println("check is correct, proceed");
+    }
+
     return model;
   }
 }

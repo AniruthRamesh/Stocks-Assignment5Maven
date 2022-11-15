@@ -441,7 +441,7 @@ public class ModelImpl implements Model {
 
   @Override
   public boolean flexiblePortfolioContainsCertainKey(String name) {
-    return flexiblePortfolio.containsKey(name);
+    return flexiblePort.containsKey(name);
   }
 
   @Override
