@@ -50,7 +50,7 @@ public class HandleMutablePortfolioCreationTest {
    */
   @Test
   public void checkControllerSendProperTickerSymbolForCheckIfTickerExists(){
-    String input = "7\n1\n1\nfees\n3\n1\naapl\n1\n12\n12\n2006\n19\n2\n4\n10";
+    String input = "7\n1\n1\nfees\n3\n1\naapl\n1\n12\n12\n2006\n19\n2\n4\n11";
     tester = testingHelper(input);
     assertEquals("Received : aapl",tester.getLogforCheckIfTickerExist());
   }
@@ -61,7 +61,7 @@ public class HandleMutablePortfolioCreationTest {
    */
   @Test
   public void checkModelsReturnValueCheckIfTickerExistFalse(){
-    String input = "7\n1\n1\nfees\n3\n1\naapl\n1\n12\n12\n2006\n19\n2\n4\n10";
+    String input = "7\n1\n1\nfees\n3\n1\naapl\n1\n12\n12\n2006\n19\n2\n4\n11";
     tester = testingHelper(input);
     assertEquals("false",tester.getCheckIfTickerExistsReturnValue());
   }
@@ -73,7 +73,7 @@ public class HandleMutablePortfolioCreationTest {
   @Test
   public void checkModelsReturnValueCheckIfTickerExistTrue(){
     String input = "7\n1\n1\nfees\n3\n1\naapl\n1\n12\n12\n2006\n19\n1\naapl\n1\n25\n10\n2022\n18" +
-            "\n2\n4\n10";
+            "\n2\n4\n11";
     tester = testingHelper(input);
     assertEquals("true",tester.getCheckIfTickerExistsReturnValue());
   }

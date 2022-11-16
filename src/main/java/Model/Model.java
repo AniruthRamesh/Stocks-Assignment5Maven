@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
 /**
  * This is an interface for stock model.
  * Contains all the data-related logic that the user requires.
@@ -133,6 +132,13 @@ public interface Model {
    * @return the size of portfolio
    */
   int getPortfolioSize();
+
+  /**
+   * Returns the number of flexible assets in the portfolio.
+   *
+   * @return The size of the flexible portfolio.
+   */
+  int getFlexiblePortfolioSize();
 
   /**
    * Returns true if the portfolio contains a stock with the given name.
@@ -388,8 +394,24 @@ public interface Model {
   void setFlexible(Map<String, Map<String, List<List<String>>>> parsed);
 
   /**
-   * Given a portfolio name, this method returns all the company names in that portfolio
+   * This function returns a map of the portfolio name and a list of lists of the portfolio's
+   * flexible positions.
    *
+   * @param portfolioName The name of the portfolio you want to get.
+   * @return A HashMap of String to List of List of String.
+   */
+  Map<String, List<List<String>>> getParticularFlexiblePortfolio(String portfolioName);
+
+  /**
+   * Removes a ticker from a portfolio.
+   *
+   * @param ticker        The ticker symbol of the stock you want to remove from the portfolio.
+   * @param portfolioName The name of the portfolio you want to remove the ticker from.
+   */
+  void removeTickerFromPortfolio(String ticker, String portfolioName);
+
+  /**
+   * Given a portfolio name, this method returns all the company names in that portfolio
    * @param portfolioName String, containing portfolio name.
    * @return List of Strings, containing ticker symbol of companies.
    */
@@ -397,10 +419,11 @@ public interface Model {
 
   /**
    * Given a portfolio name and company ticker symbol, this method fetches all the stock data.
-   *
    * @param portfolioName String, portfolio name.
-   * @param CompanyName   String, company ticker Symbol.
+   * @param CompanyName String, company ticker Symbol.
    * @return Nested List of Strings containing stock data for that company.
    */
   List<List<String>> getStockDataInCertainPortfolio(String portfolioName, String CompanyName);
+
+  HashMap<String, Double> getTotalFlexibleStockValue(String portfolioName, String currentDate);
 }

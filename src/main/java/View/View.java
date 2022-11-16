@@ -212,7 +212,6 @@ public class View {
    * Display message to input year.
    */
   public void askForYear() {
-
     this.out.println("Enter the year you wish to jump to(2001 - 2022):");
   }
 
@@ -261,6 +260,14 @@ public class View {
   public void displayTotalStockValue(String portfolioName, String currentDate, String totalValue) {
     this.out.println("Portfolio: " + portfolioName);
     this.out.println("Date: " + currentDate);
+    this.out.println("Total Value: " + totalValue);
+    this.out.println();
+  }
+
+  public void displayTotalFlexibleStockValue(String portfolioName, String DateSelected,
+                                             String totalValue) {
+    this.out.println("Portfolio: " + portfolioName);
+    this.out.println("Date: " + DateSelected);
     this.out.println("Total Value: " + totalValue);
     this.out.println();
   }
@@ -390,6 +397,17 @@ public class View {
   /**
    * This function prints the date selection menu.
    */
+  /**
+   * This function asks the user for the number of stocks to sell.
+   */
+  public void askForNumberOfStocksToSell() {
+    this.out.println("Enter number of stock to sell:");
+    this.out.println();
+  }
+
+  /**
+   * This function prints out the menu for the user to select the date.
+   */
   public void dateSelectionMenu() {
     this.out.println("1. Enter the Date");
     this.out.println("2. Exit");
@@ -411,5 +429,34 @@ public class View {
   public void displayContentsInParameter(String contents) {
     this.out.println(contents);
   }
+
+  /**
+   * Printing out a message to the user that the number of stocks they want to sell is
+   * either negative or more than the stocks that exists.
+   */
+
+  public void enterValidStockToSell() {
+    this.out.println("Please enter a valid number. The number is either negative or more than the" +
+            " stocks that exists.");
+  }
+
+  /**
+   * This function displays a message to the user that the profile is updated.
+   */
+  public void displayPortfolioUpdated() {
+    this.out.println("Portfolio updated.");
+  }
+
+  /**
+   * This function displays a message to the user that there are no stocks to sell.
+   */
+  public void displayNoStockToSell() {
+    this.out.println("No Stocks to sell.");
+  }
+
+  public void displayTotalFlexValue(String companyName, String value) {
+    this.out.println(companyName + "-->" + value);
+  }
+
 }
 

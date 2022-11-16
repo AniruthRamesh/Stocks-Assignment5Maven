@@ -283,6 +283,11 @@ public class MockModel implements Model {
   }
 
   @Override
+  public int getFlexiblePortfolioSize() {
+    return 0;
+  }
+
+  @Override
   public boolean portfolioContainsCertainKey(String name) {
     return inflexiblePortfolio.containsKey(name);
   }
@@ -503,6 +508,16 @@ public class MockModel implements Model {
   }
 
   @Override
+  public Map<String, List<List<String>>> getParticularFlexiblePortfolio(String portfolioName) {
+    return null;
+  }
+
+  @Override
+  public void removeTickerFromPortfolio(String ticker, String portfolioName) {
+
+  }
+
+  @Override
   public List<String> getCompaniesInCertainPortfolio(String portfolioName) {
     return new ArrayList<>(flexiblePort.get(portfolioName).keySet());
   }
@@ -511,5 +526,10 @@ public class MockModel implements Model {
   public List<List<String>> getStockDataInCertainPortfolio(String portfolioName,
                                                            String companyName) {
     return flexiblePort.get(portfolioName).get(companyName);
+  }
+
+  @Override
+  public HashMap<String, Double> getTotalFlexibleStockValue(String portfolioName, String currentDate) {
+    return null;
   }
 }
