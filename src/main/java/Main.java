@@ -33,7 +33,7 @@ public class Main {
     //handle code duplication for saving and upload
 
 
-    //commission for buying is $25, per stock
+    //commission is 10%
   }
 
 }

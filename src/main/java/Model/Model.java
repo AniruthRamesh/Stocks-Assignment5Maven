@@ -402,4 +402,19 @@ public interface Model {
    * @param portfolioName The name of the portfolio you want to remove the ticker from.
    */
   void removeTickerFromPortfolio(String ticker, String portfolioName);
+
+  /**
+   * Given a portfolio name, this method returns all the company names in that portfolio
+   * @param portfolioName String, containing portfolio name.
+   * @return List of Strings, containing ticker symbol of companies.
+   */
+  List<String> getCompaniesInCertainPortfolio(String portfolioName);
+
+  /**
+   * Given a portfolio name and company ticker symbol, this method fetches all the stock data.
+   * @param portfolioName String, portfolio name.
+   * @param CompanyName String, company ticker Symbol.
+   * @return Nested List of Strings containing stock data for that company.
+   */
+  List<List<String>> getStockDataInCertainPortfolio(String portfolioName,String CompanyName);
 }

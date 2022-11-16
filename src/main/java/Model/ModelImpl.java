@@ -499,4 +499,15 @@ public class ModelImpl implements Model {
     this.flexiblePort = parsed;
   }
 
+  @Override
+  public List<String> getCompaniesInCertainPortfolio(String portfolioName) {
+    return new ArrayList<>(flexiblePort.get(portfolioName).keySet());
+  }
+
+  @Override
+  public List<List<String>> getStockDataInCertainPortfolio(String portfolioName,
+                                                           String companyName) {
+    return flexiblePort.get(portfolioName).get(companyName);
+  }
+
 }
