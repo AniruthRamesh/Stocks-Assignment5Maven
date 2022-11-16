@@ -1,7 +1,9 @@
 package Command;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.InputMismatchException;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -87,12 +89,18 @@ public class HandleTotalStockForFlexiblePortfolio implements Command {
 
 
   public String handleTotalStockOnCurrentDate(String portfolioName, String date) {
-    double totalValue = model.getTotalFlexibleStockValue(portfolioName, model.getCurrentDate());
-    if (totalValue == -1) {
+    HashMap<String, Double> totalValue = model.getTotalFlexibleStockValue(portfolioName, date);
+    Double amount = 0.0;
+    for (Map.Entry<String, Double> set : totalValue.entrySet()) {
+      amount += set.getValue();
+      view.displayTotalStockValue(portfolioName, model.getCurrentDate(),
+              new BigDecimal(amount).toPlainString());
+    }
+    if (amount == -1) {
       return "Failure";
     }
     view.displayTotalStockValue(portfolioName, model.getCurrentDate(),
-            new BigDecimal(totalValue)
+            new BigDecimal(amount)
                     .toPlainString());
     return "Success";
   }
@@ -156,8 +164,22 @@ public class HandleTotalStockForFlexiblePortfolio implements Command {
         //check if date exist
         boolean checker = model.setContainsGivenDate(dateWishToChange);
         if (checker) {
-          double amount = model.getTotalFlexibleStockValue(portfolioName, dateWishToChange);
-          view.displayTotalStockValue(portfolioName, dateWishToChange, new BigDecimal(amount)
+          HashMap<String, Double> totalValueData = model.getTotalFlexibleStockValue(portfolioName,
+                  dateWishToChange);
+          double totalValue = 0.0;
+          for (Map.Entry<String, Double> set :
+                  totalValueData.entrySet()) {
+            totalValue += set.getValue();
+            if (set.getValue() != 0) {
+              view.displayTotalFlexValue(set.getKey(), String.valueOf(set.getValue()));
+
+            } else {
+              view.displayTotalFlexValue(set.getKey(), "no value for selected date");
+
+            }
+
+          }
+          view.displayTotalStockValue(portfolioName, dateWishToChange, new BigDecimal(totalValue)
                   .toPlainString());
         } else {
           view.displayNoStockDataForGivenDate();

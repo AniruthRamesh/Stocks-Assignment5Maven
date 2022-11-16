@@ -20,18 +20,17 @@ import InputData.InputDataSource;
 import OutputDataSource.JsonPackage;
 
 public class ModelImpl implements Model {
-  List<String> stockCompanies = List.of("AAPL.txt", "AMZN.txt", "ATVI.txt", "BCS.txt",
-          "CAJ.txt", "CSCO.txt", "DIS.txt", "JPM.txt", "MCD.txt", "MSFT.txt", "ORCL.txt", "SBUX.txt"
-          , "WFC.txt");
+  List<String> stockCompanies = List.of("AAPL.txt", "AMZN.txt", "ATVI.txt", "BCS.txt", "CAJ.txt",
+          "CSCO.txt", "DIS.txt", "JPM.txt", "MCD.txt", "MSFT.txt", "ORCL.txt", "SBUX.txt", "WFC" +
+                  ".txt");
 
-  List<String> stockCompanyName = List.of("APPLE", "AMAZON", "ACTIVISION", "BARCLAYS"
-          , "CANON INC", "CISCO SYSTEMS", "DISNEY", "JP MORGAN", "MCDONALD", "MICROSOFT"
-          , "ORACLE", "STARBUCKS", "WELLS FARGO");
+  List<String> stockCompanyName = List.of("APPLE", "AMAZON", "ACTIVISION", "BARCLAYS", "CANON " +
+          "INC", "CISCO SYSTEMS", "DISNEY", "JP MORGAN", "MCDONALD", "MICROSOFT", "ORACLE",
+          "STARBUCKS", "WELLS FARGO");
 
-  String apiErrorMessage = "{\n" +
-          "    \"Error Message\": \"Invalid API call. Please retry or visit the documentation " +
-          "(https://www.alphavantage.co/documentation/) for TIME_SERIES_DAILY.\"\n" +
-          "}";
+  String apiErrorMessage = "{\n" + "    \"Error Message\": \"Invalid API call. Please retry or " +
+          "visit the documentation " + "(https://www.alphavantage.co/documentation/) for " +
+          "TIME_SERIES_DAILY.\"\n" + "}";
   //ArrayList of HashMap containing StockData of companies with date as key and stock value on
   //that date as value.
   List<HashMap<String, String>> stockData = new ArrayList<>();
@@ -45,12 +44,11 @@ public class ModelImpl implements Model {
 
   Map<String, List<List<String>>> inflexiblePortfolio = new HashMap<>();
 
-  List<String> initialOptions = List.of("Create Inflexible Portfolio",
-          "Examine Composition of current Portfolio",
-          "Fast Forward Time", "Determine value of stocks on certain Date", "Upload a portfolio",
-          "List all portfolios", "Create Flexible Portfolio", "Sell Stocks from a Portfolio"
-          , "Determine Cost Basis", "Determine value of Flexible portfolio on certain Date",
-          "Exit");
+  List<String> initialOptions = List.of("Create Inflexible Portfolio", "Examine Composition of " +
+          "current Portfolio", "Fast Forward Time", "Determine value of stocks on certain Date",
+          "Upload a portfolio", "List all portfolios", "Create Flexible Portfolio", "Sell Stocks " +
+                  "from a Portfolio", "Determine Cost Basis", "Determine value of Flexible " +
+                  "portfolio on certain Date", "Exit");
 
   Map<String, Map<String, List<List<String>>>> flexiblePort = new HashMap<>();
   Map<String, List<List<String>>> flexiblePortfolio = new HashMap<>();
@@ -132,8 +130,7 @@ public class ModelImpl implements Model {
     for (String filepath : stockCompanies) {
       try {
         //change this when building jar file
-        Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\" +
-                "stockData");
+        Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\" + "stockData");
         String files = String.valueOf(path);
 
         data = new String(Files.readAllBytes(Path.of(files + "\\" + filepath)));
@@ -194,8 +191,7 @@ public class ModelImpl implements Model {
       JsonPackage json = new JsonPackage(tester);
       List<String> jsonPortfolios = json.anotherFormatter();
 
-      Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\" +
-              "FlexiblePortfolios");
+      Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\" + "FlexiblePortfolios");
       String newPath = String.valueOf(path);
       newPath += "\\" + names.get(i);
       newPath += ".txt";
@@ -203,12 +199,7 @@ public class ModelImpl implements Model {
 
         File myObj = new File(newPath);
         Files.writeString(Path.of(newPath), jsonPortfolios.get(0));
-      } catch (FileNotFoundException e) {
-        //
-//        System.out.println(e.getMessage());
-//        System.out.println("exception1");
       } catch (IOException e) {
-        //System.out.println("Exception2");
       }
 
     }
@@ -225,9 +216,8 @@ public class ModelImpl implements Model {
 
     //List<String> jsonPortfolios = json.FormatFromHashMap();
 
-    Path path = Path.of(String.valueOf(Path.of(
-            Path.of(System.getProperty("user.dir")) + "\\" +
-                    "InFlexiblePortfolios")));
+    Path path = Path.of(String.valueOf(Path.of(Path.of(System.getProperty("user.dir")) + "\\" +
+            "InFlexiblePortfolios")));
     //System.out.println(path.toString());
     for (int i = 0; i < jsonPortfolios.size(); i++) {
       String newPath = String.valueOf(path);
@@ -266,9 +256,7 @@ public class ModelImpl implements Model {
 
       double price;
       try {
-        price = Double.parseDouble(stockData.get(stockCompanyName.indexOf(company
-                        .toUpperCase()))
-                .get(currentDate));
+        price = Double.parseDouble(stockData.get(stockCompanyName.indexOf(company.toUpperCase())).get(currentDate));
         ans *= (price * numbers);
       } catch (NullPointerException e) {
         //caught
@@ -307,8 +295,7 @@ public class ModelImpl implements Model {
       monthVal = String.valueOf(month);
     }
 
-    return year + "-" + monthVal + "-"
-            + dateVal;
+    return year + "-" + monthVal + "-" + dateVal;
   }
 
   @Override
@@ -338,10 +325,7 @@ public class ModelImpl implements Model {
   @Override
   public HashMap<String, List<List<String>>> parseJson(String data) {
     JsonPackage jsonp = new JsonPackage();
-    HashMap<String, List<List<String>>> filePortfolio = jsonp.Parser(data);
-//    Json json = new Json();
-//    HashMap<String, List<List<String>>> filePortfolio = json.Parser(data);
-    return filePortfolio;
+    return jsonp.Parser(data);
   }
 
   @Override
@@ -398,11 +382,9 @@ public class ModelImpl implements Model {
   public List<String> getListOfPortfolio(int choice) {
     Path path = null;
     if (choice == 1) {
-      path = Path.of(System.getProperty("user.dir") + "\\" +
-              "InFlexiblePortfolios");
+      path = Path.of(System.getProperty("user.dir") + "\\" + "InFlexiblePortfolios");
     } else if (choice == 2) {
-      path = Path.of(System.getProperty("user.dir") + "\\" +
-              "FlexiblePortfolios");
+      path = Path.of(System.getProperty("user.dir") + "\\" + "FlexiblePortfolios");
     }
     //Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\" + "portfolios");
     List<String> files;
@@ -413,18 +395,16 @@ public class ModelImpl implements Model {
 
   @Override
   public Double helper(Double val) {
-    return Double.valueOf(Math.round(val));
+    return (double) Math.round(val);
   }
 
   @Override
   public void createDirectory() {
     try {
-      Files.createDirectories(Path.of(String.valueOf(Path.of(
-              Path.of(System.getProperty("user.dir")) + "\\" +
-                      "InFlexiblePortfolios"))));
-      Files.createDirectories(Path.of(String.valueOf(
-              Path.of(Path.of(System.getProperty("user.dir")) + "\\" +
-                      "FlexiblePortfolios"))));
+      Files.createDirectories(Path.of(String.valueOf(Path.of(Path.of(System.getProperty("user" +
+              ".dir")) + "\\" + "InFlexiblePortfolios"))));
+      Files.createDirectories(Path.of(String.valueOf(Path.of(Path.of(System.getProperty("user" +
+              ".dir")) + "\\" + "FlexiblePortfolios"))));
     } catch (IOException e) {
       //
     }
@@ -478,8 +458,7 @@ public class ModelImpl implements Model {
 
   @Override
   public void setFlexibleAddPortfolio(String portfolioName, String key, List<String> companies) {
-    List<List<String>> company = new ArrayList<>();
-    company.addAll(flexiblePort.get(portfolioName).get(key));
+    List<List<String>> company = new ArrayList<>(flexiblePort.get(portfolioName).get(key));
     company.add(companies);
     flexiblePort.get(portfolioName).put(key, company);
   }
@@ -497,8 +476,7 @@ public class ModelImpl implements Model {
   @Override
   public Map<String, Map<String, List<List<String>>>> parseFlexiblePortfolio(String data) {
     JsonPackage json = new JsonPackage();
-    Map<String, Map<String, List<List<String>>>> check = json.anotherParser(data);
-    return check;
+    return json.anotherParser(data);
   }
 
   public void setFlexible(Map<String, Map<String, List<List<String>>>> parsed) {
@@ -517,33 +495,40 @@ public class ModelImpl implements Model {
   }
 
   @Override
-  public double getTotalFlexibleStockValue(String portfolioName, String currentDate) {
+  public HashMap<String, Double> getTotalFlexibleStockValue(String portfolioName,
+                                                            String currentDate) {
+    HashMap<String, Double> finalData = null;
+    String[] tickerSymbol = {null};
     Double[] result = {null};
     result[0] = 0.0;
+    tickerSymbol[0] = "";
     Map<String, List<List<String>>> contents = flexiblePort.get(portfolioName);
 
     contents.forEach((key, value) -> {
-
-      Double totalStock = 0.0;
-      List<List<String>> tickerData = value;
-      for (int i = 0; i < tickerData.size(); i++) {
-        int compareDate =
-                LocalDate.parse(tickerData.get(i).get(3)).compareTo(LocalDate.parse(currentDate));
-        if (compareDate <= 0) {
-          if (tickerData.get(i).get(0).equals("Buy")) {
-            totalStock += Double.parseDouble(tickerData.get(i).get(2));
-          } else if (tickerData.get(i).get(0).equals("Sell")) {
-            totalStock -= Double.parseDouble(tickerData.get(i).get(2));
-          }
-        }
-      }
       int ticker = getTickerFinder().get(key);
       HashMap<String, String> companyStock = getApiStockData().get(ticker);
       double valueOfStocks = Double.parseDouble(companyStock.get(currentDate));
-
-      result[0] += valueOfStocks * totalStock;
+      if (!companyStock.get(currentDate).isEmpty()) {
+        double totalStock = 0.0;
+        for (int i = 0; i < value.size(); i++) {
+          int compareDate =
+                  LocalDate.parse(value.get(i).get(3)).compareTo(LocalDate.parse(currentDate));
+          if (compareDate <= 0) {
+            if (value.get(i).get(0).equals("Buy")) {
+              totalStock += Double.parseDouble(value.get(i).get(2));
+            } else if (value.get(i).get(0).equals("Sell")) {
+              totalStock -= Double.parseDouble(value.get(i).get(2));
+            }
+          }
+        }
+        result[0] += valueOfStocks * totalStock;
+      } else {
+        result[0] = 0.0;
+      }
+      tickerSymbol[1] = key;
+      finalData.put(tickerSymbol[0], result[0]);
     });
 
-    return result[0];
+    return finalData;
   }
 }

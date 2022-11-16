@@ -264,6 +264,13 @@ public class View {
     this.out.println();
   }
 
+  public void displayTotalFlexibleStockValue(String portfolioName, String DateSelected,
+                                       String totalValue) {
+    this.out.println("Portfolio: " + portfolioName);
+    this.out.println("Date: " + DateSelected);
+    this.out.println("Total Value: " + totalValue);
+    this.out.println();
+  }
   /**
    * Displays message if no portfolio exists for the name entered.
    */
@@ -427,6 +434,9 @@ public class View {
    */
   public void displayNoStockToSell() {
     this.out.println("No Stocks to sell.");
+  }
+  public void displayTotalFlexValue(String companyName, String value) {
+    this.out.println(companyName + "-->" + value);
   }
 
 }

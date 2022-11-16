@@ -427,5 +427,5 @@ public interface Model {
    */
   List<List<String>> getStockDataInCertainPortfolio(String portfolioName, String CompanyName);
 
-  double getTotalFlexibleStockValue(String portfolioName, String currentDate);
+  HashMap<String, Double> getTotalFlexibleStockValue(String portfolioName, String currentDate);
 }
