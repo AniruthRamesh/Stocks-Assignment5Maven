@@ -91,10 +91,18 @@ public class HandleTotalStockForFlexiblePortfolio implements Command {
   public String handleTotalStockOnCurrentDate(String portfolioName, String date) {
     HashMap<String, Double> totalValue = model.getTotalFlexibleStockValue(portfolioName, date);
     Double amount = 0.0;
-    for (Map.Entry<String, Double> set : totalValue.entrySet()) {
+    for (Map.Entry<String, Double> set :
+            totalValue.entrySet()) {
+      amount = 0.0;
       amount += set.getValue();
-      view.displayTotalStockValue(portfolioName, model.getCurrentDate(),
-              new BigDecimal(amount).toPlainString());
+      if (set.getValue() != 0) {
+        view.displayTotalFlexValue(set.getKey(), String.valueOf(set.getValue()));
+
+      } else {
+        view.displayTotalFlexValue(set.getKey(), "no value for selected date");
+
+      }
+
     }
     if (amount == -1) {
       return "Failure";
@@ -106,92 +114,28 @@ public class HandleTotalStockForFlexiblePortfolio implements Command {
   }
 
   public void handleTotalStockOnDifferentDate(String portfolioName) {
-    int choice;
-    view.displaySelectDateOption(model.getCurrentDate());
-    try {
-      choice = sc.nextInt();
-    } catch (InputMismatchException e) {
-      view.displayOnlyIntegers();
-      sc.next();
-      return;
-    }
-
-    if (choice == 1) {
-      int day;
-      int month;
-      int year;
-      view.askForDayOfTheMonth();
-      try {
-        day = sc.nextInt();
-      } catch (InputMismatchException e) {
-        view.displayOnlyIntegers();
-        sc.next();
-        return;
-      }
-      if (day > 31 || day == 0) {
-        view.displayEnterValidDetailsForDate();
-        return;
-      }
-      view.askForMonth();
-      try {
-        month = sc.nextInt();
-      } catch (InputMismatchException e) {
-        view.displayOnlyIntegers();
-        sc.next();
-        return;
-      }
-      if (month > 12 || month == 0) {
-        view.displayEnterValidDetailsForDate();
-        return;
-      }
-      view.askForYear();
-      try {
-        year = sc.nextInt();
-      } catch (InputMismatchException e) {
-        view.displayOnlyIntegers();
-        sc.next();
-        return;
-      }
-      if (year > 2022 || year < 2001) {
-        view.displayEnterValidDetailsForDate();
-        return;
-      }
-
-      String dateWishToChange = model.makeStringDate(day, month, year);
-
-      boolean checker1 = model.isValidDate(dateWishToChange);
-      if (checker1) {
-        //check if date exist
-        boolean checker = model.setContainsGivenDate(dateWishToChange);
-        if (checker) {
-          HashMap<String, Double> totalValueData = model.getTotalFlexibleStockValue(portfolioName,
-                  dateWishToChange);
-          double totalValue = 0.0;
-          for (Map.Entry<String, Double> set :
-                  totalValueData.entrySet()) {
-            totalValue += set.getValue();
-            if (set.getValue() != 0) {
-              view.displayTotalFlexValue(set.getKey(), String.valueOf(set.getValue()));
-
-            } else {
-              view.displayTotalFlexValue(set.getKey(), "no value for selected date");
-
-            }
-
-          }
-          view.displayTotalStockValue(portfolioName, dateWishToChange, new BigDecimal(totalValue)
-                  .toPlainString());
+    DateHelper helper = new DateHelper(view, model, sc);
+    String dateWishToChange = helper.helper();
+    if (!dateWishToChange.isEmpty()) {
+      HashMap<String, Double> totalValueData = model.getTotalFlexibleStockValue(portfolioName,
+              dateWishToChange);
+      double totalValue = 0.0;
+      for (Map.Entry<String, Double> set :
+              totalValueData.entrySet()) {
+        totalValue += set.getValue();
+        if (set.getValue() != 0) {
+          view.displayTotalFlexValue(set.getKey(), String.valueOf(set.getValue()));
         } else {
-          view.displayNoStockDataForGivenDate();
+          view.displayTotalFlexValue(set.getKey(), "no value for selected date");
         }
-      } else {
-        view.displayDateIsNotValid();
       }
-    } else if (choice == 2) {
-      //
+      view.displayTotalStockValue(portfolioName, dateWishToChange, new BigDecimal(totalValue)
+              .toPlainString());
     } else {
-      view.displaySwitchCaseDefault();
+      view.displayDateIsNotValid();
     }
+
+
   }
 }
 

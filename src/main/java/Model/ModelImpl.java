@@ -25,7 +25,7 @@ public class ModelImpl implements Model {
                   ".txt");
 
   List<String> stockCompanyName = List.of("APPLE", "AMAZON", "ACTIVISION", "BARCLAYS", "CANON " +
-          "INC", "CISCO SYSTEMS", "DISNEY", "JP MORGAN", "MCDONALD", "MICROSOFT", "ORACLE",
+                  "INC", "CISCO SYSTEMS", "DISNEY", "JP MORGAN", "MCDONALD", "MICROSOFT", "ORACLE",
           "STARBUCKS", "WELLS FARGO");
 
   String apiErrorMessage = "{\n" + "    \"Error Message\": \"Invalid API call. Please retry or " +
@@ -45,7 +45,8 @@ public class ModelImpl implements Model {
   Map<String, List<List<String>>> inflexiblePortfolio = new HashMap<>();
 
   List<String> initialOptions = List.of("Create Inflexible Portfolio", "Examine Composition of " +
-          "current Portfolio", "Fast Forward Time", "Determine value of stocks on certain Date",
+                  "current Portfolio", "Fast Forward Time", "Determine value of stocks on certain" +
+                  " Date",
           "Upload a portfolio", "List all portfolios", "Create Flexible Portfolio", "Sell Stocks " +
                   "from a Portfolio", "Determine Cost Basis", "Determine value of Flexible " +
                   "portfolio on certain Date", "Exit");
@@ -497,19 +498,17 @@ public class ModelImpl implements Model {
   @Override
   public HashMap<String, Double> getTotalFlexibleStockValue(String portfolioName,
                                                             String currentDate) {
-    HashMap<String, Double> finalData = null;
-    String[] tickerSymbol = {null};
-    Double[] result = {null};
-    result[0] = 0.0;
-    tickerSymbol[0] = "";
+    HashMap<String, Double> finalData = new HashMap<>();
+    Double[] result = {0.0};
     Map<String, List<List<String>>> contents = flexiblePort.get(portfolioName);
 
     contents.forEach((key, value) -> {
       int ticker = getTickerFinder().get(key);
       HashMap<String, String> companyStock = getApiStockData().get(ticker);
-      double valueOfStocks = Double.parseDouble(companyStock.get(currentDate));
-      if (!companyStock.get(currentDate).isEmpty()) {
+      if (companyStock.get(currentDate) != null) {
+        double valueOfStocks = Double.parseDouble(companyStock.get(currentDate));
         double totalStock = 0.0;
+        result[0] = 0.0;
         for (int i = 0; i < value.size(); i++) {
           int compareDate =
                   LocalDate.parse(value.get(i).get(3)).compareTo(LocalDate.parse(currentDate));
@@ -525,8 +524,7 @@ public class ModelImpl implements Model {
       } else {
         result[0] = 0.0;
       }
-      tickerSymbol[1] = key;
-      finalData.put(tickerSymbol[0], result[0]);
+      finalData.put(key, result[0]);
     });
 
     return finalData;
