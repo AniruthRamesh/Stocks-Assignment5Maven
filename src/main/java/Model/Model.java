@@ -134,6 +134,13 @@ public interface Model {
   int getPortfolioSize();
 
   /**
+   * Returns the number of flexible assets in the portfolio.
+   *
+   * @return The size of the flexible portfolio.
+   */
+  int getFlexiblePortfolioSize();
+
+  /**
    * Returns true if the portfolio contains a stock with the given name.
    *
    * @param name The name of the portfolio you want to check.
@@ -419,4 +426,6 @@ public interface Model {
    * @return Nested List of Strings containing stock data for that company.
    */
   List<List<String>> getStockDataInCertainPortfolio(String portfolioName, String CompanyName);
+
+  HashMap<String, Double> getTotalFlexibleStockValue(String portfolioName, String currentDate);
 }

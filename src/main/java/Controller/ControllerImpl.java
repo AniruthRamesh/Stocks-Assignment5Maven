@@ -13,6 +13,7 @@ import Command.HandlePortfolioComposition;
 import Command.HandlePortfolioCreation;
 import Command.HandleSellPortfolio;
 import Command.HandleShowPortfolio;
+import Command.HandleTotalStockForFlexiblePortfolio;
 import Command.HandleTotalStockValueDisplay;
 import Command.HandleUploadFile;
 import Model.Model;
@@ -95,6 +96,9 @@ public class ControllerImpl implements Controller {
           command = new HandleCostBasis(model, view, sc);
           break;
         case 10:
+          command = new HandleTotalStockForFlexiblePortfolio(model, view, sc);
+          break;
+        case 11:
           initialOptions = true;
           break;
         default:
@@ -107,6 +111,4 @@ public class ControllerImpl implements Controller {
       }
     }
   }
-
-
 }

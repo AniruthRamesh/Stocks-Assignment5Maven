@@ -2,7 +2,6 @@ package Command;
 
 import java.time.LocalDate;
 import java.util.HashMap;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -115,69 +114,13 @@ public class HandleSellPortfolio implements Command {
   }
 
   public void handleDateSelection(String portfolioName, String ticker) {
-    int choice;
     view.displaySelectDateOption(model.getCurrentDate());
-    try {
-      choice = sc.nextInt();
-    } catch (InputMismatchException e) {
-      view.displayOnlyIntegers();
-      sc.next();
-      return;
-    }
-
-    if (choice == 1) {
-      int day;
-      int month;
-      int year;
-      view.askForDayOfTheMonth();
-      try {
-        day = sc.nextInt();
-      } catch (InputMismatchException e) {
-        view.displayOnlyIntegers();
-        sc.next();
-        return;
-      }
-      if (day > 31 || day == 0) {
-        view.displayEnterValidDetailsForDate();
-        return;
-      }
-      view.askForMonth();
-      try {
-        month = sc.nextInt();
-      } catch (InputMismatchException e) {
-        view.displayOnlyIntegers();
-        sc.next();
-        return;
-      }
-      if (month > 12 || month == 0) {
-        view.displayEnterValidDetailsForDate();
-        return;
-      }
-      view.askForYear();
-      try {
-        year = sc.nextInt();
-      } catch (InputMismatchException e) {
-        view.displayOnlyIntegers();
-        sc.next();
-        return;
-      }
-      if (year > 2022 || year < 2001) {
-        view.displayEnterValidDetailsForDate();
-        return;
-      }
-
-      String dateWishToChange = model.makeStringDate(day, month, year);
-
-      boolean checker1 = model.isValidDate(dateWishToChange);
-      if (checker1) {
-        handleStockForSelling(portfolioName, ticker, dateWishToChange);
-      } else {
-        view.displayDateIsNotValid();
-      }
-    } else if (choice == 2) {
-      //
+    DateHelper helper = new DateHelper(view, model, sc);
+    String dateWishToChange = helper.helper();
+    if (!dateWishToChange.isEmpty()) {
+      handleStockForSelling(portfolioName, ticker, dateWishToChange);
     } else {
-      view.displaySwitchCaseDefault();
+      view.displayDateIsNotValid();
     }
   }
 
@@ -218,9 +161,6 @@ public class HandleSellPortfolio implements Command {
         }
 
         double commission = totalStock * 0.1 * valueOfStocks;
-//         List<List<String>> val = new HashMap<>();
-//        val.put(ticker, List.of(List.of("Sell", ticker, String.valueOf(stockToSell),
-//                dateWishToChange, String.valueOf(commission), String.valueOf(totalStock))));
         model.setFlexibleAddPortfolio(portfolioName, ticker, List.of("Sell", ticker,
                 String.valueOf(stockToSell),
                 dateWishToChange, String.valueOf(commission), String.valueOf(totalStock)));
