@@ -391,5 +391,9 @@ public class View {
     this.out.println("Enter 1, for Inflexible Portfolios:");
     this.out.println("Enter 2, for Flexible Portfolios:");
   }
+
+  public void displayContentsInParameter(String contents){
+    this.out.println(contents);
+  }
 }
 
