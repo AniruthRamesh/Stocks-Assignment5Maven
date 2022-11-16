@@ -283,6 +283,11 @@ public class ModelImpl implements Model {
   }
 
   @Override
+  public int getFlexiblePortfolioSize() {
+    return flexiblePort.size();
+  }
+
+  @Override
   public boolean portfolioContainsCertainKey(String name) {
     return inflexiblePortfolio.containsKey(name);
   }
@@ -511,4 +516,34 @@ public class ModelImpl implements Model {
     return flexiblePort.get(portfolioName).get(companyName);
   }
 
+  @Override
+  public double getTotalFlexibleStockValue(String portfolioName, String currentDate) {
+    Double[] result = {null};
+    result[0] = 0.0;
+    Map<String, List<List<String>>> contents = flexiblePort.get(portfolioName);
+
+    contents.forEach((key, value) -> {
+
+      Double totalStock = 0.0;
+      List<List<String>> tickerData = value;
+      for (int i = 0; i < tickerData.size(); i++) {
+        int compareDate =
+                LocalDate.parse(tickerData.get(i).get(3)).compareTo(LocalDate.parse(currentDate));
+        if (compareDate <= 0) {
+          if (tickerData.get(i).get(0).equals("Buy")) {
+            totalStock += Double.parseDouble(tickerData.get(i).get(2));
+          } else if (tickerData.get(i).get(0).equals("Sell")) {
+            totalStock -= Double.parseDouble(tickerData.get(i).get(2));
+          }
+        }
+      }
+      int ticker = getTickerFinder().get(key);
+      HashMap<String, String> companyStock = getApiStockData().get(ticker);
+      double valueOfStocks = Double.parseDouble(companyStock.get(currentDate));
+
+      result[0] += valueOfStocks * totalStock;
+    });
+
+    return result[0];
+  }
 }

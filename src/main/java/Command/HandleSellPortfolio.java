@@ -218,9 +218,6 @@ public class HandleSellPortfolio implements Command {
         }
 
         double commission = totalStock * 0.1 * valueOfStocks;
-//         List<List<String>> val = new HashMap<>();
-//        val.put(ticker, List.of(List.of("Sell", ticker, String.valueOf(stockToSell),
-//                dateWishToChange, String.valueOf(commission), String.valueOf(totalStock))));
         model.setFlexibleAddPortfolio(portfolioName, ticker, List.of("Sell", ticker,
                 String.valueOf(stockToSell),
                 dateWishToChange, String.valueOf(commission), String.valueOf(totalStock)));
