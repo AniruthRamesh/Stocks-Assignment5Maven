@@ -1,7 +1,6 @@
 package Command;
 
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 import Model.Model;
@@ -26,18 +25,18 @@ public class HandleCostBasis implements Command {
     view.displayEnterNameForPortfolio();
     sc.nextLine();
     String portfolioName = sc.nextLine();
-    if(!model.flexiblePortContainsCertainKey(portfolioName)){
+    if (!model.flexiblePortContainsCertainKey(portfolioName)) {
       view.displayNoSuchPortfolio();
       return model;
     }
-    DateHelper dateValue = new DateHelper(view,model,sc);
+    DateHelper dateValue = new DateHelper(view, model, sc);
     String date = dateValue.helper();
-    if(date.length()==0){
+    if (date.length() == 0) {
       view.displayDateIsNotValid();
       return model;
     }
     List<String> companies = model.getCompaniesInCertainPortfolio(portfolioName);
-    for(int i=0;i<companies.size();i++){
+    for (int i = 0; i < companies.size(); i++) {
       System.out.println(companies.get(i));
     }
 

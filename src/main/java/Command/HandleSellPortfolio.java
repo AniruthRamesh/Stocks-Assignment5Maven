@@ -10,6 +10,8 @@ import java.util.Scanner;
 import Model.Model;
 import View.View;
 
+import static java.lang.Math.ceil;
+
 public class HandleSellPortfolio implements Command {
   Model model;
   View view;
@@ -202,11 +204,26 @@ public class HandleSellPortfolio implements Command {
       view.askForNumberOfStocksToSell();
       double stockToSell;
       sc.nextLine();
-      stockToSell = Double.parseDouble(sc.nextLine());
-      if (stockToSell == totalStock || stockToSell < totalStock && stockToSell >= 0) {
-        Map<String, List<List<String>>> val = new HashMap<>();
-        val.put(ticker, List.of(List.of(ticker, String.valueOf(totalStock), dateWishToChange)));
-        model.setFlexibleNewPortfolio(portfolioName, val);
+      stockToSell = ceil(Double.parseDouble(sc.nextLine()));
+      if (stockToSell == totalStock || (stockToSell < totalStock && stockToSell >= 0)) {
+        totalStock -= stockToSell;
+        int index = model.getTickerFinder().get(ticker);
+        HashMap<String, String> companyStock = model.getApiStockData().get(index);
+        double valueOfStocks = 0.0;
+        try {
+          valueOfStocks = Double.parseDouble(companyStock.get(dateWishToChange));
+        } catch (Exception e) {
+          view.displayNoStockDataForGivenDate();
+          return;
+        }
+
+        double commission = totalStock * 0.1 * valueOfStocks;
+//         List<List<String>> val = new HashMap<>();
+//        val.put(ticker, List.of(List.of("Sell", ticker, String.valueOf(stockToSell),
+//                dateWishToChange, String.valueOf(commission), String.valueOf(totalStock))));
+        model.setFlexibleAddPortfolio(portfolioName, ticker, List.of("Sell", ticker,
+                String.valueOf(stockToSell),
+                dateWishToChange, String.valueOf(commission), String.valueOf(totalStock)));
         view.displayPortfolioUpdated();
       } else {
         view.enterValidStockToSell();
