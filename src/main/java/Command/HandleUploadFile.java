@@ -88,7 +88,7 @@ public class HandleUploadFile implements Command {
                   parseFlexiblePortfolio.get(keys.get(i)).get(insideKeySet.get(k));
           for (int j = 0; j < contents.size(); j++) {
             List<String> insideValues = contents.get(j);
-            if (insideValues.size() < 5) {
+            if (insideValues.size() !=6) {
               view.displayDataNotInProperFormat();
               return model;
             }

@@ -64,7 +64,7 @@ public class DateHelper {
         sc.next();
         return "";
       }
-      if (year > 2022 || year < 2001) {
+      if (year > 2022 || year < 1999) {
         view.displayEnterValidDetailsForDate();
         return "";
       }
