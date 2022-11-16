@@ -487,6 +487,7 @@ public class ModelImpl implements Model {
   public void removeTickerFromPortfolio(String ticker, String portfolioName) {
     flexiblePort.get(portfolioName).remove(ticker);
   }
+
   @Override
   public Map<String, Map<String, List<List<String>>>> parseFlexiblePortfolio(String data) {
     JsonPackage json = new JsonPackage();

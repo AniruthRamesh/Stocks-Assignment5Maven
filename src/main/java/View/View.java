@@ -415,8 +415,18 @@ public class View {
             " stocks that exists.");
   }
 
+  /**
+   * This function displays a message to the user that the profile is updated.
+   */
   public void displayPortfolioUpdated() {
     this.out.println("Portfolio updated.");
+  }
+
+  /**
+   * This function displays a message to the user that there are no stocks to sell.
+   */
+  public void displayNoStockToSell() {
+    this.out.println("No Stocks to sell.");
   }
 
 }

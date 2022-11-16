@@ -1,5 +1,6 @@
 package Command;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -167,13 +168,7 @@ public class HandleSellPortfolio implements Command {
 
       boolean checker1 = model.isValidDate(dateWishToChange);
       if (checker1) {
-        //check if date exist
-        boolean checker = model.setContainsGivenDate(dateWishToChange);
-        if (checker) {
-          handleStockAfterSelling(portfolioName, ticker);
-        } else {
-          view.displayNoStockDataForGivenDate();
-        }
+        handleStockForSelling(portfolioName, ticker, dateWishToChange);
       } else {
         view.displayDateIsNotValid();
       }
@@ -184,26 +179,38 @@ public class HandleSellPortfolio implements Command {
     }
   }
 
-  public void handleStockAfterSelling(String portfolioName, String ticker) {
+  public void handleStockForSelling(String portfolioName, String ticker,
+                                    String dateWishToChange) {
     Map<String, List<List<String>>> portfolioData =
             model.getParticularFlexiblePortfolio(portfolioName);
+    Double totalStock = 0.0;
     List<List<String>> tickerData = portfolioData.get(ticker);
-    double stockNumber = Double.parseDouble(tickerData.get(0).get(1));
-    String date = tickerData.get(0).get(2);
-    view.askForNumberOfStocksToSell();
-    double stockToSell;
-    sc.nextLine();
-    stockToSell = Double.parseDouble(sc.nextLine());
-    if (stockToSell == stockNumber) {
-      model.removeTickerFromPortfolio(ticker, portfolioName);
-      view.displayPortfolioUpdated();
-    } else if (stockToSell < stockNumber && stockToSell >= 0) {
-      Map<String, List<List<String>>> val = new HashMap<>();
-      val.put(ticker, List.of(List.of(ticker, String.valueOf((stockNumber - stockToSell)), date)));
-      model.setFlexibleNewPortfolio(portfolioName, val);
-      view.displayPortfolioUpdated();
+    for (int i = 0; i < tickerData.size(); i++) {
+      int compareDate =
+              LocalDate.parse(tickerData.get(i).get(3)).compareTo(LocalDate.parse(dateWishToChange));
+      if (compareDate <= 0) {
+        if (tickerData.get(i).get(0).equals("Buy")) {
+          totalStock += Double.parseDouble(tickerData.get(i).get(2));
+        } else if (tickerData.get(i).get(0).equals("Sell")) {
+          totalStock -= Double.parseDouble(tickerData.get(i).get(2));
+        }
+      }
+    }
+    if (totalStock == 0) {
+      view.displayNoStockToSell();
     } else {
-      view.enterValidStockToSell();
+      view.askForNumberOfStocksToSell();
+      double stockToSell;
+      sc.nextLine();
+      stockToSell = Double.parseDouble(sc.nextLine());
+      if (stockToSell == totalStock || stockToSell < totalStock && stockToSell >= 0) {
+        Map<String, List<List<String>>> val = new HashMap<>();
+        val.put(ticker, List.of(List.of(ticker, String.valueOf(totalStock), dateWishToChange)));
+        model.setFlexibleNewPortfolio(portfolioName, val);
+        view.displayPortfolioUpdated();
+      } else {
+        view.enterValidStockToSell();
+      }
     }
   }
 }
