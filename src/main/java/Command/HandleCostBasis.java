@@ -8,13 +8,22 @@ import Model.Model;
 import View.View;
 
 /**
- * It's a command that handles the cost basis of a stock.
+ * It's a class which handles calculating the cost basis, and it tells the model to calculate
+ * necessary logic and tells view what to display of the cost basis.
  */
 public class HandleCostBasis implements Command {
   Model model;
   View view;
   Scanner sc;
 
+  /**
+   * Constructor for the HandleCostBasis class. Gets what model, view, scanner to use and processes
+   * accordingly.
+   *
+   * @param model Model object.
+   * @param view  View object.
+   * @param sc    Scanner object.
+   */
   public HandleCostBasis(Model model, View view, Scanner sc) {
     this.model = model;
     this.view = view;

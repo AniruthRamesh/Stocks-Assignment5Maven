@@ -9,11 +9,23 @@ import java.util.Scanner;
 import Model.Model;
 import View.View;
 
+/**
+ * This class handles the logic for creating inflexiblePortfolios, It gets the data from model
+ * of the company's stock data stored and gives the user the options to create new portfolios.
+ */
 public class HandlePortfolioCreation implements Command {
   Model model;
   View view;
   Scanner sc;
 
+  /**
+   * Constructor for this class. Gets what model, view, scanner to use and processes
+   * accordingly.
+   *
+   * @param model Model object.
+   * @param view  View object.
+   * @param sc    Scanner object.
+   */
   public HandlePortfolioCreation(Model model, View view, Scanner sc) {
     this.model = model;
     this.view = view;

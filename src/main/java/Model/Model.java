@@ -6,6 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 /**
  * This is an interface for stock model.
  * Contains all the data-related logic that the user requires.

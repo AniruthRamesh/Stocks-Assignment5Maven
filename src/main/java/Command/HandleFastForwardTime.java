@@ -8,14 +8,22 @@ import Model.Model;
 import View.View;
 
 /**
- * It takes in a date from the user, checks if it's valid, and if it is, it sets the current date to
- * that date and show value of stocks on that date.
+ * It takes in a date from the user, checks if it's valid, and if it is, it sets the current date
+ * to that date and show value of stocks on that date.
  */
 public class HandleFastForwardTime implements Command {
   final Model model;
   final View view;
   final Scanner sc;
 
+  /**
+   * Constructor for the HandleFastForwardTime class. Gets what model, view, scanner to use and
+   * processes accordingly.
+   *
+   * @param model Model object.
+   * @param view  View object.
+   * @param sc    Scanner object.
+   */
   public HandleFastForwardTime(Model model, View view, Scanner sc) {
     this.model = model;
     this.view = view;

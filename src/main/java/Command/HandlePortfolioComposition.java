@@ -16,6 +16,14 @@ public class HandlePortfolioComposition implements Command {
   final View view;
   final Scanner sc;
 
+  /**
+   * Constructor for this class. Gets what model, view, scanner to use and processes
+   * accordingly.
+   *
+   * @param model Model object.
+   * @param view  View object.
+   * @param sc    Scanner object.
+   */
   public HandlePortfolioComposition(Model model, View view, Scanner sc) {
     this.model = model;
     this.view = view;

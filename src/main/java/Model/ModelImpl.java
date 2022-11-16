@@ -21,7 +21,8 @@ import OutputDataSource.JsonPackage;
 
 public class ModelImpl implements Model {
   List<String> stockCompanies = List.of("AAPL.txt", "AMZN.txt", "ATVI.txt", "BCS.txt",
-          "CAJ.txt", "CSCO.txt", "DIS.txt", "JPM.txt", "MCD.txt", "MSFT.txt", "ORCL.txt", "SBUX.txt"
+          "CAJ.txt", "CSCO.txt", "DIS.txt", "JPM.txt", "MCD.txt", "MSFT.txt", "ORCL.txt",
+          "SBUX.txt"
           , "WFC.txt");
 
   List<String> stockCompanyName = List.of("APPLE", "AMAZON", "ACTIVISION", "BARCLAYS"
@@ -64,7 +65,8 @@ public class ModelImpl implements Model {
   }
 
   @Override
-  public void setFlexibleNewPortfolio(String name, Map<String, List<List<String>>> companyDetails) {
+  public void setFlexibleNewPortfolio(String name, Map<String,
+          List<List<String>>> companyDetails) {
     flexiblePort.put(name, companyDetails);
   }
 

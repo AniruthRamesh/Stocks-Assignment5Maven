@@ -212,6 +212,7 @@ public class View {
    * Display message to input year.
    */
   public void askForYear() {
+
     this.out.println("Enter the year you wish to jump to(2001 - 2022):");
   }
 
@@ -295,7 +296,8 @@ public class View {
    * @param path The path where the portfolio is saved.
    */
   void displayAllPortfolioSaved(String path) {
-    this.out.println("All the portfolio created have been saved and It is in the location: " + path);
+    this.out.println("All the portfolio created have been saved and It is in the location: "
+            + path);
     this.out.println();
   }
 
@@ -376,22 +378,36 @@ public class View {
     this.out.println();
   }
 
-  // Asking the user to enter the ticker symbol of the company.
+
+  /**
+   * This function asks the user for a ticker symbol.
+   */
   public void askForTickerSymbol() {
     this.out.println("Enter ticker symbol for the company:");
     this.out.println();
   }
 
+  /**
+   * This function prints the date selection menu.
+   */
   public void dateSelectionMenu() {
     this.out.println("1. Enter the Date");
     this.out.println("2. Exit");
   }
 
+  /**
+   * This function asks the user to enter 1 for inflexible portfolios or 2 for flexible portfolios.
+   */
   public void askForFlexibleOrInFlexible() {
     this.out.println("Enter 1, for Inflexible Portfolios:");
     this.out.println("Enter 2, for Flexible Portfolios:");
   }
 
+  /**
+   * This function displays the contents of the parameter in the console.
+   *
+   * @param contents The contents to be displayed.
+   */
   public void displayContentsInParameter(String contents) {
     this.out.println(contents);
   }

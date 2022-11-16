@@ -10,6 +10,14 @@ public class HandleSellPortfolio implements Command {
   View view;
   Scanner sc;
 
+  /**
+   * Constructor for this class. Gets what model, view, scanner to use and processes
+   * accordingly.
+   *
+   * @param model Model object.
+   * @param view  View object.
+   * @param sc    Scanner object.
+   */
   public HandleSellPortfolio(Model model, View view, Scanner sc) {
     this.model = model;
     this.view = view;
