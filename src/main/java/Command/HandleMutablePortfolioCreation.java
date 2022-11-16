@@ -158,27 +158,27 @@ public class HandleMutablePortfolioCreation implements Command {
 
           if (stockData.containsKey(dateVal)) {
             Double priceOnThatDate = Double.parseDouble(stockData.get(dateVal));
-            Double totalPrice = priceOnThatDate*numberOfStocks;
-            commission*=totalPrice;
+            Double totalPrice = priceOnThatDate * numberOfStocks;
+            commission *= totalPrice;
             Map<String, Map<String, List<List<String>>>> flexible = model.getFlexiblePort();
             if (flexible.containsKey(portfolioName)) {
               Map<String, List<List<String>>> portfolio = flexible.get(portfolioName);
               if (portfolio.containsKey(alreadyExisting)) {
                 model.setFlexibleAddPortfolio(portfolioName, alreadyExisting,
                         List.of("Buy", companyName, String.valueOf(numberOfStocks), dateVal,
-                                String.format("%.2f",commission),String.format("%.2f",totalPrice)
+                                String.format("%.2f", commission), String.format("%.2f", totalPrice)
                         ));
               } else {
                 model.setFlexiblePortfolioWith(portfolioName, alreadyExisting,
                         List.of("Buy", companyName, String.valueOf(numberOfStocks), dateVal,
-                                String.format("%.2f",commission),String.format("%.2f",totalPrice)
+                                String.format("%.2f", commission), String.format("%.2f", totalPrice)
                         ));
               }
             } else {
               Map<String, List<List<String>>> val = new HashMap<>();
               val.put(alreadyExisting, List.of(List.of("Buy",
                       companyName, String.valueOf(numberOfStocks), dateVal,
-                      String.format("%.2f",commission),String.format("%.2f",totalPrice))));
+                      String.format("%.2f", commission), String.format("%.2f", totalPrice))));
               model.setFlexibleNewPortfolio(portfolioName, val);
             }
 

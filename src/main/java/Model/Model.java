@@ -388,6 +388,7 @@ public interface Model {
 
   /**
    * Given a portfolio name, this method returns all the company names in that portfolio
+   *
    * @param portfolioName String, containing portfolio name.
    * @return List of Strings, containing ticker symbol of companies.
    */
@@ -395,9 +396,10 @@ public interface Model {
 
   /**
    * Given a portfolio name and company ticker symbol, this method fetches all the stock data.
+   *
    * @param portfolioName String, portfolio name.
-   * @param CompanyName String, company ticker Symbol.
+   * @param CompanyName   String, company ticker Symbol.
    * @return Nested List of Strings containing stock data for that company.
    */
-  List<List<String>> getStockDataInCertainPortfolio(String portfolioName,String CompanyName);
+  List<List<String>> getStockDataInCertainPortfolio(String portfolioName, String CompanyName);
 }

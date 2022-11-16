@@ -392,7 +392,7 @@ public class View {
     this.out.println("Enter 2, for Flexible Portfolios:");
   }
 
-  public void displayContentsInParameter(String contents){
+  public void displayContentsInParameter(String contents) {
     this.out.println(contents);
   }
 }
