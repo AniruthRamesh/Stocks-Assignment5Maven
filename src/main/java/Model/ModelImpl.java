@@ -49,7 +49,8 @@ public class ModelImpl implements Model {
           "Examine Composition of current Portfolio",
           "Fast Forward Time", "Determine value of stocks on certain Date", "Upload a portfolio",
           "List all portfolios", "Create Flexible Portfolio", "Sell Stocks from a Portfolio"
-          , "Determine Cost Basis", "Exit");
+          , "Determine Cost Basis", "Determine value of Flexible portfolio on certain Date",
+          "Exit");
 
   Map<String, Map<String, List<List<String>>>> flexiblePort = new HashMap<>();
   Map<String, List<List<String>>> flexiblePortfolio = new HashMap<>();
