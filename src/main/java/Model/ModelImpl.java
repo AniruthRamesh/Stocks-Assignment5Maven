@@ -487,6 +487,7 @@ public class ModelImpl implements Model {
   public void removeTickerFromPortfolio(String ticker, String portfolioName) {
     flexiblePort.get(portfolioName).remove(ticker);
   }
+
   @Override
   public Map<String, Map<String, List<List<String>>>> parseFlexiblePortfolio(String data) {
     JsonPackage json = new JsonPackage();
@@ -496,6 +497,17 @@ public class ModelImpl implements Model {
 
   public void setFlexible(Map<String, Map<String, List<List<String>>>> parsed) {
     this.flexiblePort = parsed;
+  }
+
+  @Override
+  public List<String> getCompaniesInCertainPortfolio(String portfolioName) {
+    return new ArrayList<>(flexiblePort.get(portfolioName).keySet());
+  }
+
+  @Override
+  public List<List<String>> getStockDataInCertainPortfolio(String portfolioName,
+                                                           String companyName) {
+    return flexiblePort.get(portfolioName).get(companyName);
   }
 
 }

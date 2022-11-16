@@ -88,19 +88,21 @@ public class HandleUploadFile implements Command {
                   parseFlexiblePortfolio.get(keys.get(i)).get(insideKeySet.get(k));
           for (int j = 0; j < contents.size(); j++) {
             List<String> insideValues = contents.get(j);
-            if (insideValues.size() != 5) {
+            if (insideValues.size() != 6) {
               view.displayDataNotInProperFormat();
               return model;
             }
-            if (insideValues.get(0) != "Buy" || insideValues.get(0) != "Sell") {
+
+            if ((!insideValues.get(0).equals("Buy") && !insideValues.get(0).equals("Sell"))) {
               view.displayDataNotInProperFormat();
               return model;
             }
             String ticker = insideValues.get(1);
-            String date = insideValues.get(2);
-            String numberOfStocks = insideValues.get(3);
+            String date = insideValues.get(3);
+            String numberOfStocks = insideValues.get(2);
             String commission = insideValues.get(4);
             if (!model.isValidDate(date)) {
+              System.out.println("here1");
               view.displayDataNotInProperFormat();
               return model;
             }
@@ -108,11 +110,13 @@ public class HandleUploadFile implements Command {
               Double.parseDouble(numberOfStocks);
               Double.parseDouble(commission);
             } catch (Exception e) {
+              System.out.println("here2");
               view.displayDataNotInProperFormat();
               return model;
             }
             String data = model.addApiCompanyStockData(ticker);
             if (data.equals("Failure")) {
+              System.out.println("here3");
               view.displayDataNotInProperFormat();
               return model;
             } else {

@@ -1,5 +1,6 @@
 package Command;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.InputMismatchException;
 import java.util.List;
@@ -8,6 +9,8 @@ import java.util.Scanner;
 
 import Model.Model;
 import View.View;
+
+import static java.lang.Math.ceil;
 
 public class HandleSellPortfolio implements Command {
   Model model;
@@ -167,13 +170,7 @@ public class HandleSellPortfolio implements Command {
 
       boolean checker1 = model.isValidDate(dateWishToChange);
       if (checker1) {
-        //check if date exist
-        boolean checker = model.setContainsGivenDate(dateWishToChange);
-        if (checker) {
-          handleStockAfterSelling(portfolioName, ticker);
-        } else {
-          view.displayNoStockDataForGivenDate();
-        }
+        handleStockForSelling(portfolioName, ticker, dateWishToChange);
       } else {
         view.displayDateIsNotValid();
       }
@@ -184,26 +181,53 @@ public class HandleSellPortfolio implements Command {
     }
   }
 
-  public void handleStockAfterSelling(String portfolioName, String ticker) {
+  public void handleStockForSelling(String portfolioName, String ticker,
+                                    String dateWishToChange) {
     Map<String, List<List<String>>> portfolioData =
             model.getParticularFlexiblePortfolio(portfolioName);
+    Double totalStock = 0.0;
     List<List<String>> tickerData = portfolioData.get(ticker);
-    double stockNumber = Double.parseDouble(tickerData.get(0).get(1));
-    String date = tickerData.get(0).get(2);
-    view.askForNumberOfStocksToSell();
-    double stockToSell;
-    sc.nextLine();
-    stockToSell = Double.parseDouble(sc.nextLine());
-    if (stockToSell == stockNumber) {
-      model.removeTickerFromPortfolio(ticker, portfolioName);
-      view.displayPortfolioUpdated();
-    } else if (stockToSell < stockNumber && stockToSell >= 0) {
-      Map<String, List<List<String>>> val = new HashMap<>();
-      val.put(ticker, List.of(List.of(ticker, String.valueOf((stockNumber - stockToSell)), date)));
-      model.setFlexibleNewPortfolio(portfolioName, val);
-      view.displayPortfolioUpdated();
+    for (int i = 0; i < tickerData.size(); i++) {
+      int compareDate =
+              LocalDate.parse(tickerData.get(i).get(3)).compareTo(LocalDate.parse(dateWishToChange));
+      if (compareDate <= 0) {
+        if (tickerData.get(i).get(0).equals("Buy")) {
+          totalStock += Double.parseDouble(tickerData.get(i).get(2));
+        } else if (tickerData.get(i).get(0).equals("Sell")) {
+          totalStock -= Double.parseDouble(tickerData.get(i).get(2));
+        }
+      }
+    }
+    if (totalStock == 0) {
+      view.displayNoStockToSell();
     } else {
-      view.enterValidStockToSell();
+      view.askForNumberOfStocksToSell();
+      double stockToSell;
+      sc.nextLine();
+      stockToSell = ceil(Double.parseDouble(sc.nextLine()));
+      if (stockToSell == totalStock || (stockToSell < totalStock && stockToSell >= 0)) {
+        totalStock -= stockToSell;
+        int index = model.getTickerFinder().get(ticker);
+        HashMap<String, String> companyStock = model.getApiStockData().get(index);
+        double valueOfStocks = 0.0;
+        try {
+          valueOfStocks = Double.parseDouble(companyStock.get(dateWishToChange));
+        } catch (Exception e) {
+          view.displayNoStockDataForGivenDate();
+          return;
+        }
+
+        double commission = totalStock * 0.1 * valueOfStocks;
+//         List<List<String>> val = new HashMap<>();
+//        val.put(ticker, List.of(List.of("Sell", ticker, String.valueOf(stockToSell),
+//                dateWishToChange, String.valueOf(commission), String.valueOf(totalStock))));
+        model.setFlexibleAddPortfolio(portfolioName, ticker, List.of("Sell", ticker,
+                String.valueOf(stockToSell),
+                dateWishToChange, String.valueOf(commission), String.valueOf(totalStock)));
+        view.displayPortfolioUpdated();
+      } else {
+        view.enterValidStockToSell();
+      }
     }
   }
 }

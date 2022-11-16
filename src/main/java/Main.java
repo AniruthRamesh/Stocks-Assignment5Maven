@@ -27,15 +27,13 @@ public class Main {
     //change model.getContentsFromFile when building jar
 
     //we are using object of jsonPackage class and not using SavingDataSource(change this)
-    //change the upload file method
+
     //in the current session files in the folder should be loaded
 
-    //handle upload portfolio checking for flexiblePortfolio
     //handle code duplication for saving and upload
 
-    //change handleUploadFile if the hashmap is changed(if included commission)
 
-    //commission for buying is $25, per stock
+    //commission is 10%
   }
 
 }

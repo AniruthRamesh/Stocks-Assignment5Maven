@@ -153,47 +153,36 @@ public class HandleMutablePortfolioCreation implements Command {
             break;
           }
           numberOfStocks = model.helper(numberOfStocks);
-          Double commission = numberOfStocks * 25;
+          Double commission = 0.1;
           String alreadyExisting = companyName;
 
           if (stockData.containsKey(dateVal)) {
+            Double priceOnThatDate = Double.parseDouble(stockData.get(dateVal));
+            Double totalPrice = priceOnThatDate * numberOfStocks;
+            commission *= totalPrice;
             Map<String, Map<String, List<List<String>>>> flexible = model.getFlexiblePort();
             if (flexible.containsKey(portfolioName)) {
               Map<String, List<List<String>>> portfolio = flexible.get(portfolioName);
               if (portfolio.containsKey(alreadyExisting)) {
                 model.setFlexibleAddPortfolio(portfolioName, alreadyExisting,
                         List.of("Buy", companyName, String.valueOf(numberOfStocks), dateVal,
-                                String.valueOf(commission)
+                                String.format("%.2f", commission), String.format("%.2f", totalPrice)
                         ));
               } else {
                 model.setFlexiblePortfolioWith(portfolioName, alreadyExisting,
                         List.of("Buy", companyName, String.valueOf(numberOfStocks), dateVal,
-                                String.valueOf(commission)
+                                String.format("%.2f", commission), String.format("%.2f", totalPrice)
                         ));
               }
             } else {
               Map<String, List<List<String>>> val = new HashMap<>();
               val.put(alreadyExisting, List.of(List.of("Buy",
                       companyName, String.valueOf(numberOfStocks), dateVal,
-                      String.valueOf(commission))));
+                      String.format("%.2f", commission), String.format("%.2f", totalPrice))));
               model.setFlexibleNewPortfolio(portfolioName, val);
             }
 
 
-//            Map<String, List<List<String>>> flexiblePortfolio = model.getFlexiblePortfolio();
-//            if (flexiblePortfolio.containsKey(portfolioName)) {
-//              List<List<String>> existing = new ArrayList<>();
-//              List<List<String>> anotherExisting = flexiblePortfolio.get(portfolioName);
-//              for (int i = 0; i < anotherExisting.size(); i++) {
-//                existing.add(anotherExisting.get(i));
-//              }
-//              existing.add(List.of(companyName,
-//                      String.valueOf(numberOfStocks), dateVal));
-//              model.setterForFlexiblePortfolio(portfolioName, existing);
-//            } else {
-//              model.setterForFlexiblePortfolio(portfolioName, List.of(List.of(companyName,
-//                      String.valueOf(numberOfStocks), dateVal)));
-//            }
           } else {
             view.displayNoStockDataForGivenDate();
           }
