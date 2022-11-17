@@ -31,4 +31,27 @@ public class ControllerTest extends Abstract {
     assertEquals("Received : aapl",tester.getLogforCheckIfTickerExist());
   }
 
+  @Test
+  public void checkControllerSendProperTickerSymbolForAddApiStockData(){
+    String input = "7\n1\n1\nfees\n3\n1\namzn\n1\n25\n10\n2022\n19\n2\n4\n11";
+    tester = super.testingHelper(input);
+    assertEquals("Received : amzn",tester.getAddApiCompanyStockDataLog());
+  }
+
+  @Test
+  public void checkControllerSentPutNameInCompanyInPortfolio(){
+    String input = "7\n1\n1\nfees\n3\n1\namzn\n1\n25\n10\n2022\n19\n2\n4\n11";
+    tester = super.testingHelper(input);
+    assertEquals("Received : amzn",tester.getPutNameInCompanyInPortfolioLog());
+  }
+
+  @Test
+  public void checkControllerSentPutCompanyNameInTickerFinder(){
+    String input = "7\n1\n1\nfees\n3\n1\namzn\n1\n25\n10\n2022\n19\n2\n4\n11";
+    tester = super.testingHelper(input);
+    assertEquals("Received : amzn:0",tester.getPutCompanyNameInTickerFinderLog());
+  }
+
+
+
 }

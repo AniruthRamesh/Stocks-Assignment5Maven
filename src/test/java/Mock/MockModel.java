@@ -432,13 +432,24 @@ public class MockModel implements Model {
     }
   }
 
+  private StringBuilder addApiCompanyStockDataLog = new StringBuilder("");
+
+  public String getAddApiCompanyStockDataLog() {
+    return addApiCompanyStockDataLog.toString();
+  }
+
+  private String addApiCompanyStockDataReturnValue;
+
   @Override
   public String addApiCompanyStockData(String companyTicker) {
+    addApiCompanyStockDataLog.append("Received : "+companyTicker);
     InputDataSource inp = new AlphaVantageAPI();
     String successOrFailure = inp.getData(companyTicker);
     if (successOrFailure.equals(apiErrorMessage)) {
+      addApiCompanyStockDataReturnValue = "failure";
       return "failure";
     }
+    addApiCompanyStockDataReturnValue = successOrFailure;
     return successOrFailure;
   }
 
@@ -474,8 +485,15 @@ public class MockModel implements Model {
     return this.apiStockData.size();
   }
 
+  String putCompanyNameInTickerFinderLog;
+
+  public String getPutCompanyNameInTickerFinderLog() {
+    return putCompanyNameInTickerFinderLog;
+  }
+
   @Override
   public void putCompanyNameInTickerFinder(String name, int number) {
+    putCompanyNameInTickerFinderLog = "Received : "+name+":"+number;
     tickerFinder.put(name, number);
   }
 
@@ -484,9 +502,25 @@ public class MockModel implements Model {
     flexiblePortfolio.put(name, companyDetails);
   }
 
+  private StringBuilder putNameInCompanyInPortfolioLog = new StringBuilder("");
+
+  public String getPutNameInCompanyInPortfolioLog() {
+    return putNameInCompanyInPortfolioLog.toString();
+  }
+
   @Override
   public void putNameInCompanyInPortfolio(String name) {
+    putNameInCompanyInPortfolioLog.append("Received : "+name);
     companiesInPortfolio.add(name);
+    putNameInCompanyReturnValue = ""+putNameInCompanyReturnValue(name);
+  }
+
+  public String getPutNameInCompanyReturnValue(){
+    return putNameInCompanyReturnValue;
+  }
+  private String putNameInCompanyReturnValue;
+  public boolean putNameInCompanyReturnValue(String name){
+    return companiesInPortfolio.contains(name);
   }
 
 
@@ -533,5 +567,9 @@ public class MockModel implements Model {
   @Override
   public HashMap<String, Double> getTotalFlexibleStockValue(String portfolioName, String currentDate) {
     return null;
+  }
+
+  public String getAddApiCompanyStockDataReturnValue() {
+    return addApiCompanyStockDataReturnValue;
   }
 }
