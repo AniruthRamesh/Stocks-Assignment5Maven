@@ -12,12 +12,6 @@ import java.util.Map;
  */
 public interface Model {
 
-  /**
-   * This method returns a list of Strings which is used for displaying Inital options that a user
-   * sees when using the applications. If new Features are added, Editing this list alone is enough.
-   *
-   * @return List of Strings, contains all the options.
-   */
   List<String> getInitialOptions();
 
 
@@ -253,7 +247,7 @@ public interface Model {
 
   /**
    * This method is used to find, if in the current session we have already bought stocks of that
-   * company
+   * company.
    *
    * @param ticker String, company's ticker symbol to find.
    * @return boolean, true if we have that company's stock in the current session.
@@ -277,11 +271,6 @@ public interface Model {
    */
   void addStockDataToFlexibleList(HashMap<String, String> stockData);
 
-  /**
-   * This method returns the size of the List of hashmap which contains stock data of companies.
-   *
-   * @return Integer, size of the List.
-   */
   int getApiStockDataSize();
 
   /**
@@ -387,9 +376,10 @@ public interface Model {
   Map<String, Map<String, List<List<String>>>> parseFlexiblePortfolio(String data);
 
   /**
-   * Setter for flexiblePortfolio.
+   * This function takes a map of maps of lists of lists of strings and sets the flexible variable
+   * to it.
    *
-   * @param parsed
+   * @param parsed The parsed data from the file.
    */
   void setFlexible(Map<String, Map<String, List<List<String>>>> parsed);
 
@@ -422,10 +412,10 @@ public interface Model {
    * Given a portfolio name and company ticker symbol, this method fetches all the stock data.
    *
    * @param portfolioName String, portfolio name.
-   * @param CompanyName   String, company ticker Symbol.
+   * @param companyName   String, company ticker Symbol.
    * @return Nested List of Strings containing stock data for that company.
    */
-  List<List<String>> getStockDataInCertainPortfolio(String portfolioName, String CompanyName);
+  List<List<String>> getStockDataInCertainPortfolio(String portfolioName, String companyName);
 
   /**
    * Given a portfolio name and a date, return a map of stock symbols to their total flexible stock

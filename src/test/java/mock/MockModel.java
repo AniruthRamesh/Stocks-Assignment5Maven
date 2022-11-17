@@ -18,7 +18,7 @@ import java.util.Set;
 import inputdata.AlphaVantageApi;
 import inputdata.InputDataSource;
 import model.Model;
-import outputDataSource.JsonPackage;
+import outputdatasource.JsonPackage;
 
 /**
  * This class is mock of the model, which is mainly used of logging what values controller sends
@@ -453,7 +453,7 @@ public class MockModel implements Model {
     inflexiblePortfolio.forEach((key, value) -> names.add(key));
 
     JsonPackage jsonp = new JsonPackage(this.inflexiblePortfolio, names);
-    List<String> jsonPortfolios = jsonp.FormatFromHashMap();
+    List<String> jsonPortfolios = jsonp.formatFromHashMap();
 
 
     Path path = Path.of(String.valueOf(Path.of(
@@ -614,7 +614,7 @@ public class MockModel implements Model {
   public HashMap<String, List<List<String>>> parseJson(String data) {
     logForParseJson.append(data);
     JsonPackage jsonp = new JsonPackage();
-    HashMap<String, List<List<String>>> filePortfolio = jsonp.Parser(data);
+    HashMap<String, List<List<String>>> filePortfolio = jsonp.parser(data);
     return filePortfolio;
   }
 

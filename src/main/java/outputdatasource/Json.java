@@ -1,4 +1,4 @@
-package outputDataSource;
+package outputdatasource;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -15,7 +15,7 @@ public class Json implements SavingDataSource {
   List<String> keys;
 
   /**
-   * Constructor for the Json class. Initializes the fields portfolio, keys with argument.
+   * Constructor for the Json class. Initializes the fields' portfolio, keys with argument.
    *
    * @param portfolio Map of string and a nested List of strings, represents the portfolio data.
    * @param keys      List of strings, containing keys(names of companies) of the portfolio.
@@ -34,7 +34,7 @@ public class Json implements SavingDataSource {
   }
 
   @Override
-  public List<String> FormatFromHashMap() {
+  public List<String> formatFromHashMap() {
     List<String> jsonPortfolio = new ArrayList<>();
 
     for (String portfolioName : keys) {
@@ -71,7 +71,7 @@ public class Json implements SavingDataSource {
   }
 
   @Override
-  public HashMap<String, List<List<String>>> Parser(String json) {
+  public HashMap<String, List<List<String>>> parser(String json) {
 
     HashMap<String, List<List<String>>> portfolio = new HashMap<>();
     List<String> portfolioNameAndData = Arrays.asList(json.split(":"));

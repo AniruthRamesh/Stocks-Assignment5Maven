@@ -135,8 +135,8 @@ public class View {
    * Display message for the value of stock cannot be less than or equal 0.
    */
   public void displayStockNumberCannotBeLessThanOrEqualToZero() {
-    this.out.println("Stock value cannot be less than or equal to zero. Please enter a valid" +
-            "number");
+    this.out.println("Stock value cannot be less than or equal to zero. Please enter a valid"
+            + "number");
     this.out.println();
   }
 
@@ -264,10 +264,18 @@ public class View {
     this.out.println();
   }
 
-  public void displayTotalFlexibleStockValue(String portfolioName, String DateSelected,
+  /**
+   * It prints out the portfolio name, date, and total value.
+   *
+   * @param portfolioName The name of the portfolio.
+   * @param dateSelected  The date that the user has selected to view the total value of the
+   *                      portfolio.
+   * @param totalValue    The total value of the portfolio.
+   */
+  public void displayTotalFlexibleStockValue(String portfolioName, String dateSelected,
                                              String totalValue) {
     this.out.println("Portfolio: " + portfolioName);
-    this.out.println("Date: " + DateSelected);
+    this.out.println("Date: " + dateSelected);
     this.out.println("Total Value: $" + totalValue);
     this.out.println();
   }
@@ -342,8 +350,8 @@ public class View {
    */
   public void displayWarning() {
     this.out.println("Warning: You are using older feature of Stocks");
-    this.out.println("If you wish to use Mutable portfolios, have options to use multiple " +
-            "companies, choose the newer version");
+    this.out.println("If you wish to use Mutable portfolios, have options to use multiple "
+            + "companies, choose the newer version");
   }
 
   /**
@@ -432,8 +440,8 @@ public class View {
    */
 
   public void enterValidStockToSell() {
-    this.out.println("Please enter a valid number. The number is either negative or more than the" +
-            " stocks that exists.");
+    this.out.println("Please enter a valid number. The number is either negative or more than the"
+            + " stocks that exists.");
   }
 
   /**

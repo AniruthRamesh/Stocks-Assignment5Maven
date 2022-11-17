@@ -25,7 +25,6 @@ import view.View;
  * store results and this class tells the view to display certain information.
  */
 public class ControllerImpl implements Controller {
-  private final InputStream input;
   Scanner sc;
   View view;
   Model model;
@@ -44,8 +43,7 @@ public class ControllerImpl implements Controller {
   public ControllerImpl(Model models, View viewer, InputStream in) {
     this.model = models;
     this.view = viewer;
-    this.input = in;
-    this.sc = new Scanner(this.input);
+    this.sc = new Scanner(in);
   }
 
   /**

@@ -17,20 +17,25 @@ import java.util.Set;
 
 import inputdata.AlphaVantageApi;
 import inputdata.InputDataSource;
-import outputDataSource.JsonPackage;
+import outputdatasource.JsonPackage;
 
+/**
+ * This class is the implementation of the Model interface. It manages how the data modifications
+ * are done in our code.
+ */
 public class ModelImpl implements Model {
   List<String> stockCompanies = List.of("AAPL.txt", "AMZN.txt", "ATVI.txt", "BCS.txt", "CAJ.txt",
-          "CSCO.txt", "DIS.txt", "JPM.txt", "MCD.txt", "MSFT.txt", "ORCL.txt", "SBUX.txt", "WFC" +
-                  ".txt");
+          "CSCO.txt", "DIS.txt", "JPM.txt", "MCD.txt", "MSFT.txt", "ORCL.txt", "SBUX.txt", "WFC"
+                  + ".txt");
 
-  List<String> stockCompanyName = List.of("APPLE", "AMAZON", "ACTIVISION", "BARCLAYS", "CANON " +
-                  "INC", "CISCO SYSTEMS", "DISNEY", "JP MORGAN", "MCDONALD", "MICROSOFT", "ORACLE",
+  List<String> stockCompanyName = List.of("APPLE", "AMAZON", "ACTIVISION", "BARCLAYS", "CANON "
+                  + "INC", "CISCO SYSTEMS", "DISNEY", "JP MORGAN", "MCDONALD", "MICROSOFT",
+          "ORACLE",
           "STARBUCKS", "WELLS FARGO");
 
-  String apiErrorMessage = "{\n" + "    \"Error Message\": \"Invalid API call. Please retry or " +
-          "visit the documentation " + "(https://www.alphavantage.co/documentation/) for " +
-          "TIME_SERIES_DAILY.\"\n" + "}";
+  String apiErrorMessage = "{\n" + "    \"Error Message\": \"Invalid API call. Please retry or "
+          + "visit the documentation " + "(https://www.alphavantage.co/documentation/) for "
+          + "TIME_SERIES_DAILY.\"\n" + "}";
   //ArrayList of HashMap containing StockData of companies with date as key and stock value on
   //that date as value.
   List<HashMap<String, String>> stockData = new ArrayList<>();
@@ -44,12 +49,12 @@ public class ModelImpl implements Model {
 
   Map<String, List<List<String>>> inflexiblePortfolio = new HashMap<>();
 
-  List<String> initialOptions = List.of("Create Inflexible Portfolio", "Examine Composition of " +
-                  "current Portfolio", "Fast Forward Time", "Determine value of stocks on certain" +
-                  " Date",
-          "Upload a portfolio", "List all portfolios", "Create Flexible Portfolio", "Sell Stocks " +
-                  "from a Portfolio", "Determine Cost Basis", "Determine value of Flexible " +
-                  "portfolio on certain Date", "Exit");
+  List<String> initialOptions = List.of("Create Inflexible Portfolio", "Examine Composition of "
+                  + "current Portfolio", "Fast Forward Time", "Determine value of stocks on certain"
+                  + " Date",
+          "Upload a portfolio", "List all portfolios", "Create Flexible Portfolio", "Sell Stocks "
+                  + "from a Portfolio", "Determine Cost Basis", "Determine value of Flexible "
+                  + "portfolio on certain Date", "Exit");
 
   Map<String, Map<String, List<List<String>>>> flexiblePort = new HashMap<>();
   Map<String, List<List<String>>> flexiblePortfolio = new HashMap<>();
@@ -132,12 +137,8 @@ public class ModelImpl implements Model {
     for (String filepath : stockCompanies) {
       try {
         //use this for main
-        Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\" +
-                "stockData");
-
-        //use this when building jar
-//        Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\" +
-//                "stockData");
+        Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\"
+                + "stockData");
 
         String files = String.valueOf(path);
 
@@ -208,8 +209,8 @@ public class ModelImpl implements Model {
         File myObj = new File(newPath);
         Files.writeString(Path.of(newPath), jsonPortfolios.get(0));
       } catch (IOException e) {
+        //
       }
-
     }
   }
 
@@ -220,9 +221,9 @@ public class ModelImpl implements Model {
     //Json json = new Json(this.inflexiblePortfolio, names);
 
     JsonPackage jsonp = new JsonPackage(this.inflexiblePortfolio, names);
-    List<String> jsonPortfolios = jsonp.FormatFromHashMap();
-    Path path = Path.of(String.valueOf(Path.of(Path.of(System.getProperty("user.dir")) + "\\" +
-            "InFlexiblePortfolios")));
+    List<String> jsonPortfolios = jsonp.formatFromHashMap();
+    Path path = Path.of(String.valueOf(Path.of(Path.of(System.getProperty("user.dir")) + "\\"
+            + "InFlexiblePortfolios")));
     for (int i = 0; i < jsonPortfolios.size(); i++) {
       String newPath = String.valueOf(path);
       newPath += "\\" + names.get(i);
@@ -260,7 +261,8 @@ public class ModelImpl implements Model {
 
       double price;
       try {
-        price = Double.parseDouble(stockData.get(stockCompanyName.indexOf(company.toUpperCase())).get(currentDate));
+        price = Double.parseDouble(stockData.get(stockCompanyName.indexOf(company.toUpperCase()))
+                .get(currentDate));
         ans *= (price * numbers);
       } catch (NullPointerException e) {
         //caught
@@ -329,7 +331,7 @@ public class ModelImpl implements Model {
   @Override
   public HashMap<String, List<List<String>>> parseJson(String data) {
     JsonPackage jsonp = new JsonPackage();
-    return jsonp.Parser(data);
+    return jsonp.parser(data);
   }
 
   @Override
@@ -403,10 +405,10 @@ public class ModelImpl implements Model {
   @Override
   public void createDirectory() {
     try {
-      Files.createDirectories(Path.of(String.valueOf(Path.of(Path.of(System.getProperty("user" +
-              ".dir")) + "\\" + "InFlexiblePortfolios"))));
-      Files.createDirectories(Path.of(String.valueOf(Path.of(Path.of(System.getProperty("user" +
-              ".dir")) + "\\" + "FlexiblePortfolios"))));
+      Files.createDirectories(Path.of(String.valueOf(Path.of(Path.of(System.getProperty("user"
+              + ".dir")) + "\\" + "InFlexiblePortfolios"))));
+      Files.createDirectories(Path.of(String.valueOf(Path.of(Path.of(System.getProperty("user"
+              + ".dir")) + "\\" + "FlexiblePortfolios"))));
     } catch (IOException e) {
       //
     }
