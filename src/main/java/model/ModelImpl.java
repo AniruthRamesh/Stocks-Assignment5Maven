@@ -7,17 +7,22 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 import inputdata.AlphaVantageApi;
 import inputdata.InputDataSource;
 import outputdatasource.JsonPackage;
+
+import static java.time.temporal.ChronoUnit.DAYS;
 
 /**
  * This class is the implementation of the Model interface. It manages how the data modifications
@@ -63,6 +68,7 @@ public class ModelImpl implements Model {
   Map<String, Integer> tickerFinder = new HashMap<>();
 
   Set<String> companiesInPortfolio = new HashSet<>();
+  private Map<String, String> dates = new HashMap<>();
 
   public Map<String, Map<String, List<List<String>>>> getFlexiblePort() {
     return flexiblePort;
@@ -95,7 +101,6 @@ public class ModelImpl implements Model {
   public List<HashMap<String, String>> getApiStockData() {
     return apiStockData;
   }
-
 
   @Override
   public List<String> getInitialOptions() {
@@ -459,7 +464,6 @@ public class ModelImpl implements Model {
     companiesInPortfolio.add(name);
   }
 
-
   @Override
   public void setFlexibleAddPortfolio(String portfolioName, String key, List<String> companies) {
     List<List<String>> company = new ArrayList<>();
@@ -532,5 +536,119 @@ public class ModelImpl implements Model {
     });
 
     return finalData;
+  }
+
+  //////////////////////////////////////////////////////////////////////////////
+
+  @Override
+  public long numberOfDays(LocalDate date1, LocalDate date2) {
+    return DAYS.between(date1, date2);
+  }
+
+  private List<String> helperForDate(LocalDate startingDate, LocalDate endingDate) {
+    List<String> dates = new ArrayList<>();
+    dates.add(startingDate.getMonth().toString());
+    dates.add(String.valueOf(startingDate.getYear()));
+    dates.add(endingDate.getMonth().toString());
+    dates.add(String.valueOf(endingDate.getYear()));
+    return dates;
+  }
+
+  private String helperForDay(int number, LocalDate date) {
+    String day = "";
+    if (number == 2) {
+      day = date.getYear() + "-" + "02" + "-28";
+    } else if (number == 4 || number == 6 || number == 9 || number == 11) {
+      day = date.getYear() + "-" + String.format("%02d", number) + "-30";
+    } else {
+      day = date.getYear() + "-" + String.format("%02d", number) + "-31";
+    }
+    return day;
+  }
+
+  @Override
+  public Map<String, String> calculatingMonths(LocalDate startingDate, LocalDate endingDate) {
+    dates = new LinkedHashMap<>();
+    LocalDate intermediate = startingDate;
+    while (intermediate.isBefore(endingDate) || intermediate.isEqual(endingDate)) {
+      int mon = intermediate.getMonthValue();
+      String display = intermediate.getMonth().toString().substring(0, 3)
+              + " " + intermediate.getYear();
+      String day = helperForDay(mon, intermediate);
+      dates.put(display, LocalDate.parse(day).toString());
+      intermediate = intermediate.plusMonths(1);
+    }
+    return dates;
+  }
+
+  @Override
+  public Map<String, String> calculatingYears(LocalDate startingDate, LocalDate endingDate) {
+    dates = new LinkedHashMap<>();
+    int year1 = startingDate.getYear();
+    int year2 = endingDate.getYear();
+    DateTimeFormatter formatUsing = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+    for (int i = year1; i <= year2; i++) {
+      String lastDay = i + "-12-31";
+      LocalDate day = LocalDate.parse(lastDay, formatUsing);
+      if (day.isAfter(LocalDate.now())) {
+        dates.put(String.valueOf(i), LocalDate.now().toString());
+      } else {
+        dates.put(String.valueOf(i), day.toString());
+      }
+    }
+    return dates;
+  }
+
+  @Override
+  public Map<String, String> moreMonths(LocalDate startingDate, LocalDate endingDate) {
+    dates = new LinkedHashMap<>();
+    LocalDate temp = startingDate;
+
+    while (temp.isBefore(endingDate) || temp.isEqual(endingDate)) {
+      int mon = temp.getMonthValue();
+      String display = String.format("%02d", mon) + " " + temp.getYear();
+      String day = helperForDay(mon, temp);
+      dates.put(display, LocalDate.parse(day).toString());
+      temp = temp.plusMonths(5);
+    }
+    return dates;
+  }
+
+  @Override
+  public Map<String, String> calculatingDays(LocalDate startingDate, LocalDate endingDate) {
+    dates = new TreeMap<>();
+    LocalDate temp = startingDate;
+    while (temp.isBefore(endingDate) || temp.isEqual(endingDate)) {
+      String display = temp.getYear() + "-" + String.format("%02d",
+              temp.getMonthValue()) + "-" + String.format("%02d", temp.getDayOfMonth());
+      String day = temp.toString();
+      dates.put(display, LocalDate.parse(day).toString());
+      temp = temp.plusDays(1);
+    }
+    return dates;
+  }
+
+  @Override
+  public Map<String, String> moreDays(LocalDate startingDate, LocalDate endingDate) {
+    dates = new LinkedHashMap<>();
+    LocalDate temp = startingDate;
+    while (temp.isBefore(endingDate) || temp.isEqual(endingDate)) {
+      String display = temp.getDayOfMonth() + " " + temp.getMonth()
+              + " " + temp.getYear();
+      String day = temp.toString();
+      dates.put(display, LocalDate.parse(day).toString());
+      temp = temp.plusDays(5);
+    }
+    return dates;
+  }
+
+  @Override
+  public Double calculateValueForGraph(HashMap<String, Double> totalValueData) {
+    double totalValue = 0.0;
+    for (Map.Entry<String, Double> set :
+            totalValueData.entrySet()) {
+      totalValue += set.getValue();
+    }
+    return totalValue;
   }
 }

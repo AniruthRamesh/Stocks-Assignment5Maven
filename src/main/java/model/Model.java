@@ -426,4 +426,73 @@ public interface Model {
    * @return A HashMap of the total value of the flexible stocks in the portfolio.
    */
   HashMap<String, Double> getTotalFlexibleStockValue(String portfolioName, String currentDate);
+
+  /**
+   * Given two dates, it returns the number of dates between those two dates.
+   *
+   * @param date1 LocalDate object containing starting date.
+   * @param date2 LocalDate object containing ending date.
+   * @return long, containing number of days.
+   */
+  long numberOfDays(LocalDate date1, LocalDate date2);
+
+  /**
+   * Given two dates, based on starting date and ending date, this method creates a map of string
+   * and string containing the string format of date as key and actual date as value.
+   *
+   * @param startingDate LocalDate object representing starting date.
+   * @param endingDate   LocalDate object representing ending date.
+   * @return Map of String and String containing the dates.
+   */
+  Map<String, String> calculatingMonths(LocalDate startingDate, LocalDate endingDate);
+
+  /**
+   * Given two dates, based on starting date and ending date, this method creates a map of string
+   * and string containing the string format of date as key and actual date as value.
+   *
+   * @param startingDate LocalDate object representing starting date.
+   * @param endingDate   LocalDate object representing ending date.
+   * @return Map of String and String containing the dates.
+   */
+  Map<String, String> moreMonths(LocalDate startingDate, LocalDate endingDate);
+
+  /**
+   * Given two dates, based on starting date and ending date, this method creates a map of string
+   * and string containing the string format of date as key and actual date as value.
+   *
+   * @param startingDate LocalDate object representing starting date.
+   * @param endingDate   LocalDate object representing ending date.
+   * @return Map of String and String containing the dates.
+   */
+  Map<String, String> calculatingYears(LocalDate startingDate, LocalDate endingDate);
+
+  /**
+   * Given two dates, based on starting date and ending date, this method creates a map of string
+   * and string containing the string format of date as key and actual date as value.
+   *
+   * @param startingDate LocalDate object representing starting date.
+   * @param endingDate   LocalDate object representing ending date.
+   * @return Map of String and String containing the dates.
+   */
+  Map<String, String> calculatingDays(LocalDate startingDate, LocalDate endingDate);
+
+
+  /**
+   * Given two dates, based on starting date and ending date, this method creates a map of string
+   * and string containing the string format of date as key and actual date as value.
+   *
+   * @param startingDate LocalDate object representing starting date.
+   * @param endingDate   LocalDate object representing ending date.
+   * @return Map of String and String containing the dates.
+   */
+  Map<String, String> moreDays(LocalDate startingDate, LocalDate endingDate);
+
+  /**
+   * Given a hashmap containing portfolio data, this method calculates the total value till a
+   * given date.
+   *
+   * @param data Hashmap of String and double containing portfolio data.
+   * @return Double, containing total value.
+   */
+  Double calculateValueForGraph(HashMap<String, Double> data);
 }

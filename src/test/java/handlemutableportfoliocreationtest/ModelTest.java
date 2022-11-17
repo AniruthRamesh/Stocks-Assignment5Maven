@@ -86,6 +86,7 @@ public class ModelTest extends Abstract {
             + ",please look at the documentation", tester.getLogForParser());
 
   }
+
   @Test
   public void checkValidDateFailTest() {
     String input = "7\n1\n1\ntest\n3\n1\naapl\n1\n30\n15\n2022\n2\n12";
