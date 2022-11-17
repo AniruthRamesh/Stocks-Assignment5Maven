@@ -452,7 +452,7 @@ public class View {
 
   // Calling the displayCannotSellStock method.
   public void displayCannotSellStock() {
-    this.out.println("Cannot sell stock on this date as some stocks are sold before this.");
+    this.out.println("Cannot sell stock on this date as some stocks are sold after this.");
   }
 
 }
