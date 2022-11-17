@@ -138,6 +138,7 @@ public class HandleSellPortfolio implements Command {
             model.getParticularFlexiblePortfolio(portfolioName);
     Double totalStock = 0.0;
     List<List<String>> tickerData = portfolioData.get(ticker);
+    Map<LocalDate, List<String>> sellDates = new HashMap<>();
     for (int i = 0; i < tickerData.size(); i++) {
       int compareDate =
               LocalDate.parse(tickerData.get(i).get(3)).compareTo(LocalDate.parse(dateWishToChange));
@@ -145,6 +146,7 @@ public class HandleSellPortfolio implements Command {
         if (tickerData.get(i).get(0).equals("Buy")) {
           totalStock += Double.parseDouble(tickerData.get(i).get(2));
         } else if (tickerData.get(i).get(0).equals("Sell")) {
+          sellDates.put(LocalDate.parse(tickerData.get(i).get(3)), tickerData.get(i));
           totalStock -= Double.parseDouble(tickerData.get(i).get(2));
         }
       }
@@ -176,6 +178,13 @@ public class HandleSellPortfolio implements Command {
       } else {
         view.enterValidStockToSell();
       }
+
     }
+
+    // Copy all data from hashMap into TreeMap
+//    sorted.putAll(sellDates);
+//    System.out.println(sorted);
+
+
   }
 }

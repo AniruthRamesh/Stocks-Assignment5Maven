@@ -395,9 +395,6 @@ public class View {
   }
 
   /**
-   * This function prints the date selection menu.
-   */
-  /**
    * This function asks the user for the number of stocks to sell.
    */
   public void askForNumberOfStocksToSell() {
@@ -454,8 +451,19 @@ public class View {
     this.out.println("No Stocks to sell.");
   }
 
+  /**
+   * This function displays the total flex value for a company.
+   *
+   * @param companyName The name of the company
+   * @param value       The value of the flex field.
+   */
   public void displayTotalFlexValue(String companyName, String value) {
     this.out.println(companyName + "-->" + value);
+  }
+
+  // Calling the displayCannotSellStock method.
+  public void displayCannotSellStock() {
+    this.out.println("Cannot sell stock on this date as some stocks are sold before this.");
   }
 
 }
