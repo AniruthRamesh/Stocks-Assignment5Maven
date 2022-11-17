@@ -31,6 +31,7 @@ public class MockModel implements Model {
   private final StringBuilder putNameInCompanyInPortfolioLog = new StringBuilder();
   private final StringBuilder validDateLog = new StringBuilder();
   private final StringBuilder logForCostBasis = new StringBuilder();
+  private final StringBuilder getFinalDataLog = new StringBuilder();
   List<String> stockCompanies = List.of("AAPL.txt", "AMZN.txt", "ATVI.txt", "BCS.txt",
           "CAJ.txt", "CSCO.txt", "DIS.txt", "JPM.txt", "MCD.txt", "MSFT.txt", "ORCL.txt",
           "SBUX.txt"
@@ -94,6 +95,10 @@ public class MockModel implements Model {
    */
   public String getFlexiblePortContainsCertainKeyLogger() {
     return flexiblePortContainsCertainKeyLogger;
+  }
+
+  public StringBuilder getGetFinalDataLog() {
+    return getFinalDataLog;
   }
 
   public StringBuilder getValidDateLog() {
@@ -299,6 +304,7 @@ public class MockModel implements Model {
   public boolean isValidDate(String date) {
     try {
       LocalDate.parse(date);
+      validDateLog.append("true");
       return true;
     } catch (DateTimeParseException e) {
       validDateLog.append("false");
@@ -676,7 +682,37 @@ public class MockModel implements Model {
   @Override
   public HashMap<String, Double> getTotalFlexibleStockValue(String portfolioName,
                                                             String currentDate) {
-    return null;
+    HashMap<String, Double> finalData = new HashMap<>();
+    Double[] result = {0.0};
+    Map<String, List<List<String>>> contents = flexiblePort.get(portfolioName);
+
+    contents.forEach((key, value) -> {
+      int ticker = getTickerFinder().get(key);
+      HashMap<String, String> companyStock = getApiStockData().get(ticker);
+      if (companyStock.get(currentDate) != null) {
+        double valueOfStocks = Double.parseDouble(companyStock.get(currentDate));
+        double totalStock = 0.0;
+        result[0] = 0.0;
+        for (int i = 0; i < value.size(); i++) {
+          int compareDate =
+                  LocalDate.parse(value.get(i).get(3)).compareTo(LocalDate.parse(currentDate));
+          if (compareDate <= 0) {
+            if (value.get(i).get(0).equals("Buy")) {
+              totalStock += Double.parseDouble(value.get(i).get(2));
+            } else if (value.get(i).get(0).equals("Sell")) {
+              totalStock -= Double.parseDouble(value.get(i).get(2));
+            }
+          }
+        }
+        result[0] += valueOfStocks * totalStock;
+      } else {
+        result[0] = 0.0;
+      }
+      finalData.put(key, result[0]);
+    });
+    getFinalDataLog.append(finalData);
+    System.out.println(finalData);
+    return finalData;
   }
 
   /**

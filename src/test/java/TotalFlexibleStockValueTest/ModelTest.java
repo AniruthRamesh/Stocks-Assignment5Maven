@@ -63,4 +63,24 @@ public class ModelTest extends Abstract {
     tester = super.testingHelper(input);
     assertEquals("true", tester.getPutNameInCompanyReturnValue());
   }
+
+  @Test
+  public void finalTotalStockValueTestOnCurrentDate() {
+    String input = "5\nD\\test.txt\n2\n10\n1" +
+            "\ntest\n2\n4\n11";
+    tester = super.testingHelper(input);
+    assertEquals("{}\n" +
+            "{aapl=4124.0}\n" +
+            "{aapl=4124.0,msft=0.0, amzn=0.0}", tester.getGetFinalDataLog());
+  }
+
+  @Test
+  public void finalTotalStockValueTestOnDifferentDate() {
+    String input = "5\nD\\test.txt\n2\n10\n1" +
+            "\ntest\n3\n1\n02\n02\n2022\n4\n11";
+    tester = super.testingHelper(input);
+    assertEquals("{}\n" +
+            "{aapl=38684.8}\n" +
+            "{aapl=38684.8,msft=5955.74, amzn=48196.0}", tester.getGetFinalDataLog());
+  }
 }

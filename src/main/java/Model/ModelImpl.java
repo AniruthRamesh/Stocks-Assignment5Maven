@@ -532,6 +532,7 @@ public class ModelImpl implements Model {
       } else {
         result[0] = 0.0;
       }
+      System.out.println(finalData);
       finalData.put(key, result[0]);
     });
 

@@ -89,7 +89,6 @@ public class ModelTest extends Abstract {
   @Test
   public void checkValidDatePassTest() {
     String input = "5\nD://test.txt\n2\n8\n1\ntest\n1\naapl\n1\n02\n02\n2022\n2\n11";
-    ;
     tester = super.testingHelper(input);
     assertEquals("true", tester.getValidDateLog());
   }
