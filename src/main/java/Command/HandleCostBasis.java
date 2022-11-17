@@ -84,6 +84,7 @@ public class HandleCostBasis implements Command {
       view.displayEmptyLine();
       for (int j = 0; j < data.size(); j++) {
         List<String> insideContents = data.get(j);
+        System.out.println(insideContents);
         if (date.compareTo(insideContents.get(3)) < 0) {
           continue;
         }

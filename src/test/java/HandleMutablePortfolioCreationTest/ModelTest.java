@@ -76,6 +76,18 @@ public class ModelTest extends Abstract {
     tester = super.testingHelper(input);
     assertEquals("true", tester.getPutCompanyNameInTickerFinderReturn());
   }
+  @Test
+  public void checkValidDateFailTest(){
+    String input = "7\n1\n1\nfees\n3\n1\namzn\n1\n25\n100\n2021\n19\n2\n4\n11";
+    tester = super.testingHelper(input);
+    assertEquals("false", tester.getValidDateLog());
+  }
+  @Test
+  public void checkValidDatePassTest(){
+    String input = "7\n1\n1\nfees\n3\n1\namzn\n1\n25\n10\n2021\n19\n2\n4\n11";
+    tester = super.testingHelper(input);
+    assertEquals("true", tester.getValidDateLog());
+  }
 
 
 }
