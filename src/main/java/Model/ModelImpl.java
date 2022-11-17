@@ -131,9 +131,14 @@ public class ModelImpl implements Model {
   public void getContentsFromFile() {
     for (String filepath : stockCompanies) {
       try {
-        //change this when building jar file
+        //use this for main
         Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\" +
                 "stockData");
+
+        //use this when building jar
+//        Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\" +
+//                "stockData");
+
         String files = String.valueOf(path);
 
         data = new String(Files.readAllBytes(Path.of(files + "\\" + filepath)));

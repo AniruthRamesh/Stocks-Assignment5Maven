@@ -50,15 +50,16 @@ public class ControllerTest extends Abstract {
     tester = super.testingHelper(input);
     assertEquals("Received : amzn:0", tester.getPutCompanyNameInTickerFinderLog());
   }
+
   @Test
-  public void checkSetFlexibleAddPortfolioLog(){
-    String input ="5\nD://test.txt\n2\n8\n1\ntest\n1\naapl\n1\n02\n02\n2022\n20\n2\n11";
+  public void checkSetFlexibleAddPortfolioLog() {
+    String input = "5\nD://test.txt\n2\n8\n1\ntest\n1\naapl\n1\n02\n02\n2022\n20\n2\n11";
     tester = super.testingHelper(input);
-    assertEquals("Received",tester.getSetFlexibleAddPortfolioLog());
+    assertEquals("Received", tester.getSetFlexibleAddPortfolioLog());
   }
 
   @Test
-  public void getflexiblePortfolioContainsCertainKeyLogTest(){
+  public void getflexiblePortfolioContainsCertainKeyLogTest() {
     String input = "8\n1\nfees\n2\n4\n11";
     tester = super.testingHelper(input);
     assertEquals("Received fees", tester.getflexiblePortfolioContainsCertainKeyLog());

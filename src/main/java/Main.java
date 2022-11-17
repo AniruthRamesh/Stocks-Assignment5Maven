@@ -1,3 +1,11 @@
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.file.Path;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
+
 import Controller.Controller;
 import Controller.ControllerImpl;
 import Model.Model;
@@ -18,6 +26,17 @@ public class Main {
    * @param args accepts a single argument of type String array
    */
   public static void main(String[] args) {
+    //use this for main
+    Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\");
+
+    //use this for jar
+    //Path path = Path.of(Path.of(System.getProperty("user.dir"))+"");
+
+    String zipFilePath = path.toString() + "\\stockData.zip";
+    String destDir = path.toString();
+    unzip(zipFilePath, destDir);
+
+
     Model model = new ModelImpl();
     View view = new View(System.out);
     model.createDirectory();
@@ -25,18 +44,35 @@ public class Main {
     controller.start();
 
     //change model.getContentsFromFile when building jar
-
-    //we are using object of jsonPackage class and not using SavingDataSource(change this)
-
-    //in the current session files in the folder should be loaded
-
-    //handle code duplication for saving and upload
-
-
-    //commission is 10%
-    //change getContentsFromfile while building
-
-    //with inflexible portfolio options 7-11 shouldnt work(check)
   }
 
+  private static void unzip(String zipFilePath, String destDir) {
+    File dir = new File(destDir);
+    if (!dir.exists()) dir.mkdirs();
+    FileInputStream fis;
+    byte[] buffer = new byte[1024];
+    try {
+      fis = new FileInputStream(zipFilePath);
+      ZipInputStream zis = new ZipInputStream(fis);
+      ZipEntry ze = zis.getNextEntry();
+      while (ze != null) {
+        String fileName = ze.getName();
+        File newFile = new File(destDir + File.separator + fileName);
+        new File(newFile.getParent()).mkdirs();
+        FileOutputStream fos = new FileOutputStream(newFile);
+        int len;
+        while ((len = zis.read(buffer)) > 0) {
+          fos.write(buffer, 0, len);
+        }
+        fos.close();
+        zis.closeEntry();
+        ze = zis.getNextEntry();
+      }
+      zis.closeEntry();
+      zis.close();
+      fis.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+  }
 }

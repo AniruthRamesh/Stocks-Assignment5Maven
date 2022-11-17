@@ -20,44 +20,58 @@ import InputData.InputDataSource;
 import Model.Model;
 import OutputDataSource.JsonPackage;
 
+/**
+ * This class is a mock of the model, which is mainly used of logging what values controller sends
+ * and what value is calculated after model performs an execution, it is mainly used for
+ * testing.
+ */
 public class MockModel implements Model {
   private final StringBuilder checkIfTickerExistsLogger = new StringBuilder();
+  private final StringBuilder addApiCompanyStockDataLog = new StringBuilder();
+  private final StringBuilder putNameInCompanyInPortfolioLog = new StringBuilder();
   List<String> stockCompanies = List.of("AAPL.txt", "AMZN.txt", "ATVI.txt", "BCS.txt",
           "CAJ.txt", "CSCO.txt", "DIS.txt", "JPM.txt", "MCD.txt", "MSFT.txt", "ORCL.txt",
-          "SBUX.txt", "WFC" + ".txt");
-  List<String> stockCompanyName = List.of("APPLE", "AMAZON", "ACTIVISION", "BARCLAYS",
-          "CANON " + "INC", "CISCO SYSTEMS", "DISNEY", "JP MORGAN", "MCDONALD", "MICROSOFT",
-          "ORACLE", "STARBUCKS", "WELLS FARGO");
-  String apiErrorMessage = "{\n" + "    \"Error Message\": \"Invalid API call. Please retry or " +
-          "visit the documentation " + "(https://www.alphavantage.co/documentation/) for " +
-          "TIME_SERIES_DAILY.\"\n" + "}";
+          "SBUX.txt"
+          , "WFC.txt");
+  List<String> stockCompanyName = List.of("APPLE", "AMAZON", "ACTIVISION", "BARCLAYS"
+          , "CANON INC", "CISCO SYSTEMS", "DISNEY", "JP MORGAN", "MCDONALD", "MICROSOFT"
+          , "ORACLE", "STARBUCKS", "WELLS FARGO");
+  String apiErrorMessage = "{\n" +
+          "    \"Error Message\": \"Invalid API call. Please retry or visit the documentation " +
+          "(https://www.alphavantage.co/documentation/) for TIME_SERIES_DAILY.\"\n" +
+          "}";
+  //String endingDate = "2022-10-25";
   //ArrayList of HashMap containing StockData of companies with date as key and stock value on
   //that date as value.
   List<HashMap<String, String>> stockData = new ArrayList<>();
-  //String endingDate = "2022-10-25";
   String startingDate = "2001-02-02";
   String currentDate = startingDate;
   Set<String> listOfDates = new HashSet<>();
   String data;
   Map<String, List<List<String>>> inflexiblePortfolio = new HashMap<>();
-  List<String> initialOptions = List.of("Create Inflexible Portfolio", "Examine Composition of " +
-                  "current Portfolio", "Fast Forward Time", "Determine value of stocks on certain" +
-                  " Date", "Upload a portfolio", "List all portfolios", "Create Flexible Portfolio",
-          "Sell Stocks " + "from a Portfolio", "Determine Cost Basis", "Exit");
+  List<String> initialOptions = List.of("Create Inflexible Portfolio",
+          "Examine Composition of current Portfolio",
+          "Fast Forward Time", "Determine value of stocks on certain Date", "Upload a portfolio",
+          "List all portfolios", "Create Flexible Portfolio", "Sell Stocks from a Portfolio"
+          , "Determine Cost Basis", "Exit");
   Map<String, Map<String, List<List<String>>>> flexiblePort = new HashMap<>();
   Map<String, List<List<String>>> flexiblePortfolio = new HashMap<>();
+  String flexiblePortfolioContainsCertainKeyLog;
   List<HashMap<String, String>> apiStockData = new ArrayList<>();
   Map<String, Integer> tickerFinder = new HashMap<>();
   Set<String> companiesInPortfolio = new HashSet<>();
+  String flexiblePortContainsCertainKeyLogger;
+  String flexiblePortContainsCertainKeyReturnValue;
+  HashMap<String, String> addStockDataFlexibleListLogger = new HashMap<>();
   String putCompanyNameInTickerFinderLog;
-  String flexiblePortfolioContainsCertainKeyLog;
-  String setFlexibleAddPortfolioLog;
-  private String checkIfTickerExistsReturnValue;
-  private StringBuilder addApiCompanyStockDataLog = new StringBuilder("");
+  String putCompanyNameInTickerFinderReturn;
   private String addApiCompanyStockDataReturnValue;
-  private StringBuilder putNameInCompanyInPortfolioLog = new StringBuilder("");
+  private String checkIfTickerExistsReturnValue;
   private String putNameInCompanyReturnValue;
 
+  private String setFlexibleAddPortfolioLog;
+
+  @Override
   public Map<String, Map<String, List<List<String>>>> getFlexiblePort() {
     return flexiblePort;
   }
@@ -72,8 +86,38 @@ public class MockModel implements Model {
     flexiblePort.get(portfolioName).put(keyName, List.of(val));
   }
 
+  /**
+   * This method returns the log for flexiblePortContainsCertainKeyLogger field.
+   *
+   * @return String, containing log data.
+   */
+  public String getFlexiblePortContainsCertainKeyLogger() {
+    return flexiblePortContainsCertainKeyLogger;
+  }
+
+  /**
+   * This method returns the log for flexiblePortContainsCertainKeyReturnValue.
+   *
+   * @return String, containing log data.
+   */
+  public String getFlexiblePortContainsCertainKeyReturnValue() {
+    return flexiblePortContainsCertainKeyReturnValue;
+  }
+
   @Override
   public boolean flexiblePortContainsCertainKey(String name) {
+    flexiblePortContainsCertainKeyLogger = "Received : " + name;
+    flexiblePortContainsCertainKeyReturnValue = "" + containsHelper(name);
+    return flexiblePort.containsKey(name);
+  }
+
+  /**
+   * This is a helper method to check if portfolio contains certain key, this will be reported to
+   * the logger.
+   *
+   * @return Boolean, containing true or false.
+   */
+  public boolean containsHelper(String name) {
     return flexiblePort.containsKey(name);
   }
 
@@ -88,6 +132,7 @@ public class MockModel implements Model {
   public List<HashMap<String, String>> getApiStockData() {
     return apiStockData;
   }
+
 
   @Override
   public List<String> getInitialOptions() {
@@ -129,7 +174,8 @@ public class MockModel implements Model {
     for (String filepath : stockCompanies) {
       try {
         //change this when building jar file
-        Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\" + "stockData");
+        Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\" +
+                "stockData");
         String files = String.valueOf(path);
 
         data = new String(Files.readAllBytes(Path.of(files + "\\" + filepath)));
@@ -190,7 +236,8 @@ public class MockModel implements Model {
       JsonPackage json = new JsonPackage(tester);
       List<String> jsonPortfolios = json.anotherFormatter();
 
-      Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\" + "FlexiblePortfolios");
+      Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\" +
+              "FlexiblePortfolios");
       String newPath = String.valueOf(path);
       newPath += "\\" + names.get(i);
       newPath += ".txt";
@@ -220,8 +267,9 @@ public class MockModel implements Model {
 
     //List<String> jsonPortfolios = json.FormatFromHashMap();
 
-    Path path = Path.of(String.valueOf(Path.of(Path.of(System.getProperty("user.dir")) + "\\" +
-            "InFlexiblePortfolios")));
+    Path path = Path.of(String.valueOf(Path.of(
+            Path.of(System.getProperty("user.dir")) + "\\" +
+                    "InFlexiblePortfolios")));
     //System.out.println(path.toString());
     for (int i = 0; i < jsonPortfolios.size(); i++) {
       String newPath = String.valueOf(path);
@@ -260,7 +308,9 @@ public class MockModel implements Model {
 
       double price;
       try {
-        price = Double.parseDouble(stockData.get(stockCompanyName.indexOf(company.toUpperCase())).get(currentDate));
+        price = Double.parseDouble(stockData.get(stockCompanyName.indexOf(company
+                        .toUpperCase()))
+                .get(currentDate));
         ans *= (price * numbers);
       } catch (NullPointerException e) {
         //caught
@@ -299,7 +349,8 @@ public class MockModel implements Model {
       monthVal = String.valueOf(month);
     }
 
-    return year + "-" + monthVal + "-" + dateVal;
+    return year + "-" + monthVal + "-"
+            + dateVal;
   }
 
   @Override
@@ -329,8 +380,9 @@ public class MockModel implements Model {
   @Override
   public HashMap<String, List<List<String>>> parseJson(String data) {
     JsonPackage jsonp = new JsonPackage();
-    HashMap<String, List<List<String>>> filePortfolio = jsonp.Parser(data);
-    return filePortfolio;
+    //    Json json = new Json();
+//    HashMap<String, List<List<String>>> filePortfolio = json.Parser(data);
+    return jsonp.Parser(data);
   }
 
   @Override
@@ -351,6 +403,8 @@ public class MockModel implements Model {
       return "Failure";
       //throw new RuntimeException(e);
     }
+    //System.out.println(output);
+
     return output.toString();
   }
 
@@ -385,9 +439,11 @@ public class MockModel implements Model {
   public List<String> getListOfPortfolio(int choice) {
     Path path = null;
     if (choice == 1) {
-      path = Path.of(System.getProperty("user.dir") + "\\" + "InFlexiblePortfolios");
+      path = Path.of(System.getProperty("user.dir") + "\\" +
+              "InFlexiblePortfolios");
     } else if (choice == 2) {
-      path = Path.of(System.getProperty("user.dir") + "\\" + "FlexiblePortfolios");
+      path = Path.of(System.getProperty("user.dir") + "\\" +
+              "FlexiblePortfolios");
     }
     //Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\" + "portfolios");
     List<String> files;
@@ -404,18 +460,26 @@ public class MockModel implements Model {
   @Override
   public void createDirectory() {
     try {
-      Files.createDirectories(Path.of(String.valueOf(Path.of(Path.of(System.getProperty("user" +
-              ".dir")) + "\\" + "InFlexiblePortfolios"))));
-      Files.createDirectories(Path.of(String.valueOf(Path.of(Path.of(System.getProperty("user" +
-              ".dir")) + "\\" + "FlexiblePortfolios"))));
+      Files.createDirectories(Path.of(String.valueOf(Path.of(
+              Path.of(System.getProperty("user.dir")) + "\\" +
+                      "InFlexiblePortfolios"))));
+      Files.createDirectories(Path.of(String.valueOf(
+              Path.of(Path.of(System.getProperty("user.dir")) + "\\" +
+                      "FlexiblePortfolios"))));
     } catch (IOException e) {
       //
     }
   }
 
+  /**
+   * This method is a getter for the addApiCompanyStockDataLog.
+   *
+   * @return String, containing the contents of the log.
+   */
   public String getAddApiCompanyStockDataLog() {
     return addApiCompanyStockDataLog.toString();
   }
+
 
   @Override
   public String addApiCompanyStockData(String companyTicker) {
@@ -430,10 +494,20 @@ public class MockModel implements Model {
     return successOrFailure;
   }
 
+  /**
+   * This method is a getter for the checkIfTickerExistsLogger.
+   *
+   * @return String, containing the contents of the log.
+   */
   public String getLogforCheckIfTickerExist() {
     return checkIfTickerExistsLogger.toString();
   }
 
+  /**
+   * This method is a getter for the checkIfTickerExistsReturnValue Log.
+   *
+   * @return String, containing the contents of the log.
+   */
   public String getCheckIfTickerExistsReturnValue() {
     return checkIfTickerExistsReturnValue;
   }
@@ -451,6 +525,15 @@ public class MockModel implements Model {
     return flexiblePort.containsKey(name);
   }
 
+  /**
+   * This method is a getter for the addStockDataFlexibleListLogger.
+   *
+   * @return Hashmap containing the contents of the log(stock data).
+   */
+  public HashMap<String, String> getAddStockDataFlexibleListLogger() {
+    return addStockDataFlexibleListLogger;
+  }
+
   public String getflexiblePortfolioContainsCertainKeyLog() {
     return flexiblePortfolioContainsCertainKeyLog;
   }
@@ -458,13 +541,15 @@ public class MockModel implements Model {
   public String getSetFlexibleAddPortfolioLog() {
     return setFlexibleAddPortfolioLog;
   }
-  public String getEnterValidStockToSellLog(){
+
+  public String getEnterValidStockToSellLog() {
     return "Please enter a valid number. The number is either negative or more than the stocks " +
             "that exists.";
   }
 
   @Override
   public void addStockDataToFlexibleList(HashMap<String, String> stockData) {
+    addStockDataFlexibleListLogger = stockData;
     apiStockData.add(stockData);
   }
 
@@ -473,14 +558,29 @@ public class MockModel implements Model {
     return this.apiStockData.size();
   }
 
+
   public String getPutCompanyNameInTickerFinderLog() {
     return putCompanyNameInTickerFinderLog;
+  }
+
+  public String getPutCompanyNameInTickerFinderReturn() {
+    return putCompanyNameInTickerFinderReturn;
   }
 
   @Override
   public void putCompanyNameInTickerFinder(String name, int number) {
     putCompanyNameInTickerFinderLog = "Received : " + name + ":" + number;
     tickerFinder.put(name, number);
+    putCompanyNameInTickerFinderReturn = "" + putCompanyNameInTickerFinderReturn(name, number);
+  }
+
+  private boolean putCompanyNameInTickerFinderReturn(String name, int number) {
+    if (tickerFinder.containsKey(name)) {
+      if (tickerFinder.get(name).equals(number)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @Override
@@ -488,6 +588,11 @@ public class MockModel implements Model {
     flexiblePortfolio.put(name, companyDetails);
   }
 
+  /**
+   * This method is a getter for the  putNameInCompanyInPortfolioLog.
+   *
+   * @return String containing the contents of the log.
+   */
   public String getPutNameInCompanyInPortfolioLog() {
     return putNameInCompanyInPortfolioLog.toString();
   }
@@ -499,11 +604,16 @@ public class MockModel implements Model {
     putNameInCompanyReturnValue = "" + putNameInCompanyReturnValue(name);
   }
 
+  /**
+   * This method is a getter for the  putNameInCompanyReturnValue.
+   *
+   * @return String containing the contents of the log.
+   */
   public String getPutNameInCompanyReturnValue() {
     return putNameInCompanyReturnValue;
   }
 
-  public boolean putNameInCompanyReturnValue(String name) {
+  private boolean putNameInCompanyReturnValue(String name) {
     return companiesInPortfolio.contains(name);
   }
 
@@ -524,6 +634,7 @@ public class MockModel implements Model {
     return check;
   }
 
+  @Override
   public void setFlexible(Map<String, Map<String, List<List<String>>>> parsed) {
     this.flexiblePort = parsed;
   }
@@ -555,6 +666,11 @@ public class MockModel implements Model {
     return null;
   }
 
+  /**
+   * This method is a getter for the  addApiCompanyStockDataReturnValue.
+   *
+   * @return String containing the contents of the log.
+   */
   public String getAddApiCompanyStockDataReturnValue() {
     return addApiCompanyStockDataReturnValue;
   }

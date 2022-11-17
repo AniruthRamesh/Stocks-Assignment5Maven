@@ -10,9 +10,10 @@ import Mock.MockModel;
 
 import static org.junit.Assert.assertEquals;
 
+
 /**
  * A Junit test for the class HandleMutablePortfolioCreation. This class is mainly a testing class
- * for the Model. A mock Model logs the calculated values, and we check by retrieving values
+ * for the Model. A mock Model logs the calculated values and we check by retrieving values
  * from the logger.
  */
 public class ModelTest extends Abstract {
@@ -67,6 +68,13 @@ public class ModelTest extends Abstract {
     String input = "7\n1\n1\nfees\n3\n1\namzn\n1\n25\n10\n2022\n19\n2\n4\n11";
     tester = super.testingHelper(input);
     assertEquals("true", tester.getPutNameInCompanyReturnValue());
+  }
+
+  @Test
+  public void checkModelProperlyAddsCompanyNameInTickerFinder() {
+    String input = "7\n1\n1\nfees\n3\n1\namzn\n1\n25\n10\n2022\n19\n2\n4\n11";
+    tester = super.testingHelper(input);
+    assertEquals("true", tester.getPutCompanyNameInTickerFinderReturn());
   }
 
 

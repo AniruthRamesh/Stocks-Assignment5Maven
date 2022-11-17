@@ -1,0 +1,31 @@
+package HandlleCostBasisTest;
+
+import org.junit.Before;
+import org.junit.Test;
+
+import Abstract.Abstract;
+import Mock.MockModel;
+
+import static org.junit.Assert.assertEquals;
+
+/**
+ * A Junit test for the class HandleMutablePortfolioCreation. This class is mainly a testing class
+ * for the Model. A mock Model logs the calculated values and we check by retrieving values
+ * from the logger.
+ */
+public class ModelTest extends Abstract {
+  MockModel tester;
+
+  @Before
+  public void setup() {
+    super.setup();
+  }
+
+  @Test
+  public void getFlexiblePortContainsCertainKeyReturn() {
+    String input = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven\\FlexiblePortfolios\\fees.txt\n" +
+            "2\n9\nfees\n1\n25\n10\n2022\n11";
+    tester = super.testingHelper(input);
+    assertEquals("true", tester.getFlexiblePortContainsCertainKeyReturnValue());
+  }
+}
