@@ -221,12 +221,8 @@ public class ModelImpl implements Model {
 
     JsonPackage jsonp = new JsonPackage(this.inflexiblePortfolio, names);
     List<String> jsonPortfolios = jsonp.FormatFromHashMap();
-
-    //List<String> jsonPortfolios = json.FormatFromHashMap();
-
     Path path = Path.of(String.valueOf(Path.of(Path.of(System.getProperty("user.dir")) + "\\" +
             "InFlexiblePortfolios")));
-    //System.out.println(path.toString());
     for (int i = 0; i < jsonPortfolios.size(); i++) {
       String newPath = String.valueOf(path);
       newPath += "\\" + names.get(i);
@@ -354,8 +350,6 @@ public class ModelImpl implements Model {
       return "Failure";
       //throw new RuntimeException(e);
     }
-    //System.out.println(output);
-
     return output.toString();
   }
 
@@ -532,7 +526,6 @@ public class ModelImpl implements Model {
       } else {
         result[0] = 0.0;
       }
-      System.out.println(finalData);
       finalData.put(key, result[0]);
     });
 

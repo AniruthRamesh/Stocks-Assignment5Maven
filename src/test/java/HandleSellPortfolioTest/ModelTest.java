@@ -10,9 +10,16 @@ import Mock.MockModel;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * This class tests the model class by checking if the correct data is sent from model to
+ * controller.
+ */
 public class ModelTest extends Abstract {
   MockModel tester;
 
+  /**
+   * Setting up the environment for the test.
+   */
   @Before
   public void setup() {
     super.setup();

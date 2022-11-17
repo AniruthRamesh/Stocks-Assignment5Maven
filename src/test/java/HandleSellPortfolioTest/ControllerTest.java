@@ -8,6 +8,9 @@ import Mock.MockModel;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * This class tests the controller class.
+ */
 public class ControllerTest extends Abstract {
   MockModel tester;
 

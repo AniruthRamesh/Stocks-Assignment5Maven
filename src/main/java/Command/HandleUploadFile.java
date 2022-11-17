@@ -112,7 +112,6 @@ public class HandleUploadFile implements Command {
             String numberOfStocks = insideValues.get(2);
             String commission = insideValues.get(4);
             if (!model.isValidDate(date)) {
-              System.out.println("here1");
               view.displayDataNotInProperFormat();
               return model;
             }
@@ -120,13 +119,11 @@ public class HandleUploadFile implements Command {
               Double.parseDouble(numberOfStocks);
               Double.parseDouble(commission);
             } catch (Exception e) {
-              System.out.println("here2");
               view.displayDataNotInProperFormat();
               return model;
             }
             String data = model.addApiCompanyStockData(ticker);
             if (data.equals("Failure")) {
-              System.out.println("here3");
               view.displayDataNotInProperFormat();
               return model;
             } else {

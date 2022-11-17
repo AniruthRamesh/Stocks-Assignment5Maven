@@ -16,6 +16,9 @@ import static org.junit.Assert.assertEquals;
 public class ModelTest extends Abstract {
   MockModel tester;
 
+  /**
+   * Setting up the environment for the test.
+   */
   @Before
   public void setup() {
     super.setup();

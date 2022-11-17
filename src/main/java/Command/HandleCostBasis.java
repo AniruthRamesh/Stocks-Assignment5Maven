@@ -84,7 +84,6 @@ public class HandleCostBasis implements Command {
       view.displayEmptyLine();
       for (int j = 0; j < data.size(); j++) {
         List<String> insideContents = data.get(j);
-        System.out.println(insideContents);
         if (date.compareTo(insideContents.get(3)) < 0) {
           continue;
         }
@@ -114,6 +113,13 @@ public class HandleCostBasis implements Command {
     return model;
   }
 
+  /**
+   * It takes in a number and returns a string of underscores of that length.
+   *
+   * @param number the number of underscores to return
+   * @return The number of underscores that are needed to fill the space between the left and right
+   * side of the tree.
+   */
   private String helper(int number) {
     StringBuilder str = new StringBuilder("");
     for (int i = 0; i < number; i++) {

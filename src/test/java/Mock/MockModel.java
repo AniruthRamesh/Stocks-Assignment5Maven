@@ -260,9 +260,6 @@ public class MockModel implements Model {
         File myObj = new File(newPath);
         Files.writeString(Path.of(newPath), jsonPortfolios.get(0));
       } catch (FileNotFoundException e) {
-        //
-//        System.out.println(e.getMessage());
-//        System.out.println("exception1");
       } catch (IOException e) {
         //System.out.println("Exception2");
       }

@@ -50,7 +50,6 @@ public class HandleMutablePortfolioCreation implements Command {
       switch (choice) {
         case 1:
           name = handleFlexiblePortfolioMenu();
-          //System.out.println(name);
           break;
         case 2:
           name = handleFlexiblePortfolioMenu();
@@ -84,6 +83,12 @@ public class HandleMutablePortfolioCreation implements Command {
     return model;
   }
 
+  /**
+   * This function displays a menu to the user, and returns the name of the portfolio that the user
+   * wants to create.
+   *
+   * @return The name of the portfolio.
+   */
   String handleFlexiblePortfolioMenu() {
     String name = "";
     view.displayPortfolioNameMenu();
@@ -109,6 +114,11 @@ public class HandleMutablePortfolioCreation implements Command {
     return name;
   }
 
+  /**
+   * This function is used to add a stock to a portfolio using the API.
+   *
+   * @param portfolioName The name of the portfolio that the user wants to add the stock to.
+   */
   void handleAddApiCompanyStock(String portfolioName) {
     boolean initialOptions = false;
     int choice;
