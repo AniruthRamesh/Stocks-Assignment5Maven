@@ -28,6 +28,7 @@ public class ModelTest extends Abstract {
     tester = super.testingHelper(input);
     assertEquals("true", tester.getFlexiblePortContainsCertainKeyReturnValue());
   }
+
   @Test
   public void getCalculatedCostBasis() {
     String input = "5\nD:\\qwe.txt\n2\n9\nqwe\n1\n25\n10\n2022\n11";

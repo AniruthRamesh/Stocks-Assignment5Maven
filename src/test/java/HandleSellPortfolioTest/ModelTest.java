@@ -78,15 +78,18 @@ public class ModelTest extends Abstract {
     assertEquals("Please enter a valid number. The number is either negative or more than the " +
             "stocks that exists.", tester.getEnterValidStockToSellLog());
   }
+
   @Test
-  public void checkValidDateFailTest(){
+  public void checkValidDateFailTest() {
     String input = "5\nD://test.txt\n2\n8\n1\ntest\n1\naapl\n1\n30\n02\n2022\n2\n11";
     tester = super.testingHelper(input);
     assertEquals("false", tester.getValidDateLog());
   }
+
   @Test
-  public void checkValidDatePassTest(){
-    String input = "5\nD://test.txt\n2\n8\n1\ntest\n1\naapl\n1\n02\n02\n2022\n2\n11";;
+  public void checkValidDatePassTest() {
+    String input = "5\nD://test.txt\n2\n8\n1\ntest\n1\naapl\n1\n02\n02\n2022\n2\n11";
+    ;
     tester = super.testingHelper(input);
     assertEquals("true", tester.getValidDateLog());
   }

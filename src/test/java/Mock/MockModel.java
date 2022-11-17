@@ -30,6 +30,7 @@ public class MockModel implements Model {
   private final StringBuilder addApiCompanyStockDataLog = new StringBuilder();
   private final StringBuilder putNameInCompanyInPortfolioLog = new StringBuilder();
   private final StringBuilder validDateLog = new StringBuilder();
+  private final StringBuilder logForCostBasis = new StringBuilder();
   List<String> stockCompanies = List.of("AAPL.txt", "AMZN.txt", "ATVI.txt", "BCS.txt",
           "CAJ.txt", "CSCO.txt", "DIS.txt", "JPM.txt", "MCD.txt", "MSFT.txt", "ORCL.txt",
           "SBUX.txt"
@@ -69,8 +70,6 @@ public class MockModel implements Model {
   private String addApiCompanyStockDataReturnValue;
   private String checkIfTickerExistsReturnValue;
   private String putNameInCompanyReturnValue;
-  private final StringBuilder logForCostBasis = new StringBuilder();
-
   private String setFlexibleAddPortfolioLog;
 
   @Override
@@ -96,13 +95,15 @@ public class MockModel implements Model {
   public String getFlexiblePortContainsCertainKeyLogger() {
     return flexiblePortContainsCertainKeyLogger;
   }
-  public StringBuilder getValidDateLog(){
+
+  public StringBuilder getValidDateLog() {
     return validDateLog;
   }
 
-  public StringBuilder getLogForCostBasis(){
+  public StringBuilder getLogForCostBasis() {
     return logForCostBasis;
   }
+
   /**
    * This method returns the log for flexiblePortContainsCertainKeyReturnValue.
    *
