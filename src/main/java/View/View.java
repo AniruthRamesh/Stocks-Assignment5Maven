@@ -260,7 +260,7 @@ public class View {
   public void displayTotalStockValue(String portfolioName, String currentDate, String totalValue) {
     this.out.println("Portfolio: " + portfolioName);
     this.out.println("Date: " + currentDate);
-    this.out.println("Total Value: " + totalValue);
+    this.out.println("Total Value: $ " + totalValue);
     this.out.println();
   }
 
@@ -268,7 +268,7 @@ public class View {
                                              String totalValue) {
     this.out.println("Portfolio: " + portfolioName);
     this.out.println("Date: " + DateSelected);
-    this.out.println("Total Value: " + totalValue);
+    this.out.println("Total Value: $" + totalValue);
     this.out.println();
   }
 
@@ -380,8 +380,7 @@ public class View {
    * symbol they inputted doesn't exist.
    */
   public void displayCompanyTickerSymbolIsNotValid() {
-    this.out.println("Company associated with this ticker symbol doesn't exists. Please input " +
-            "the" + " correct ticker symbol.");
+    this.out.println("Please input correct ticker Symbol");
     this.out.println();
   }
 
@@ -458,7 +457,7 @@ public class View {
    * @param value       The value of the flex field.
    */
   public void displayTotalFlexValue(String companyName, String value) {
-    this.out.println(companyName + "-->" + value);
+    this.out.println(companyName + "--> $" + value);
   }
 
   /**

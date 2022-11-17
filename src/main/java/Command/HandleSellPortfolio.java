@@ -165,10 +165,25 @@ public class HandleSellPortfolio implements Command {
    */
   public void handleStockForSelling(String portfolioName, String ticker,
                                     String dateWishToChange) {
-    Map<String, List<List<String>>> portfolioData =
-            model.getParticularFlexiblePortfolio(portfolioName);
+    Map<String, List<List<String>>> portfolioData = new HashMap<>();
+    try {
+      portfolioData =
+              model.getParticularFlexiblePortfolio(portfolioName);
+    } catch (NullPointerException e) {
+      view.displayNoSuchPortfolio();
+      return;
+    }
+    if (portfolioData == null) {
+      view.displayNoSuchPortfolio();
+      return;
+    }
+
     Double totalStock = 0.0;
     boolean check = false;
+    if (!portfolioData.containsKey(ticker)) {
+      view.displayCompanyTickerSymbolIsNotValid();
+      return;
+    }
     List<List<String>> tickerData = portfolioData.get(ticker);
     for (List<String> tickerDatum : tickerData) {
       int compareDate =
