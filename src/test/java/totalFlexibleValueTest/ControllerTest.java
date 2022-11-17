@@ -25,14 +25,14 @@ public class ControllerTest extends Abstract {
    */
   @Test
   public void checkControllerSendProperTickerSymbolForCheckIfTickerExists() {
-    String input = "7\n1\n1\nfees\n3\n1\naapl\n1\n12\n12\n2006\n19\n2\n4\n11";
+    String input = "7\n1\n1\nfees\n3\n1\naapl\n1\n12\n12\n2006\n19\n2\n4\n12";
     tester = super.testingHelper(input);
     assertEquals("Received : aapl", tester.getLogforCheckIfTickerExist());
   }
 
   @Test
   public void checkControllerSentPutCompanyNameInTickerFinder() {
-    String input = "7\n1\n1\nfees\n3\n1\namzn\n1\n25\n10\n2022\n19\n2\n4\n11";
+    String input = "7\n1\n1\nfees\n3\n1\namzn\n1\n25\n10\n2022\n19\n2\n4\n12";
     tester = super.testingHelper(input);
     assertEquals("Received : amzn:0", tester.getPutCompanyNameInTickerFinderLog());
   }

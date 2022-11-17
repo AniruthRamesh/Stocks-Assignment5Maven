@@ -33,8 +33,7 @@ public class MockModel implements Model {
   private final StringBuilder logForReadFromFile = new StringBuilder();
   private final StringBuilder logForParseJson = new StringBuilder();
   private final StringBuilder logForCheckParsedPortfolio = new StringBuilder();
-  private final StringBuilder logForSetPortfolio = new StringBuilder();
-  private final StringBuilder logForGetPortfolio = new StringBuilder();
+  private final StringBuilder logForCostBasis = new StringBuilder();
   private final StringBuilder logForGetPortfolioKeys = new StringBuilder();
   private final StringBuilder LogForGetPortfolioSize = new StringBuilder();
   private final StringBuilder logForHelper = new StringBuilder();
@@ -106,6 +105,10 @@ public class MockModel implements Model {
   public String getSetFlexibleAddPortfolioLog() {
 
     return setFlexibleAddPortfolioLog;
+  }
+
+  public StringBuilder getLogForCostBasis() {
+    return logForCostBasis;
   }
 
   /**
@@ -672,6 +675,7 @@ public class MockModel implements Model {
         }
         try {
           LocalDate.parse(insideContents.get(2));
+          logForCostBasis.append(insideContents);
         } catch (DateTimeParseException e) {
           return false;
         }

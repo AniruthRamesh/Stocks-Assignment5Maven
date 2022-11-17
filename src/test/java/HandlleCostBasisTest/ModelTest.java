@@ -27,15 +27,16 @@ public class ModelTest extends Abstract {
   @Test
   public void getFlexiblePortContainsCertainKeyReturn() {
     String input = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven\\FlexiblePortfolios\\fees.txt\n" +
-            "2\n9\nfees\n1\n25\n10\n2022\n11";
+            "2\n9\nfees\n1\n25\n10\n2022\n12";
     tester = super.testingHelper(input);
     assertEquals("true", tester.getFlexiblePortContainsCertainKeyReturnValue());
   }
 
   @Test
   public void getCalculatedCostBasis() {
-    String input = "5\nD:\\qwe.txt\n2\n9\nqwe\n1\n25\n10\n2022\n11";
+    String input = "5\nD:\\qwe.txt\n2\n9\nqwe\n1\n25\n10\n2022\n12";
     tester = super.testingHelper(input);
-    assertEquals("[Buy, aapl, 200.0, 2010-10-20, 6210.60, 62106.00]", tester.getLogForCostBasis());
+    assertEquals("[Buy, aapl, 200.0, 2010-10-20, 6210.60, 62106.00]",
+            tester.getLogForCostBasis());
   }
 }

@@ -59,7 +59,7 @@ public class ModelTest extends Abstract {
   @Test
   public void getPortfolioKeysTest() {
     String inputString = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven\\InFlexiblePortfolios" +
-            "\\fees.txt\n1\n2\n11";
+            "\\fees.txt\n1\n2\n12";
     testingHelper(inputString);
     assertEquals("fees", mock.getLogForPortfolioKeys());
   }
@@ -77,7 +77,7 @@ public class ModelTest extends Abstract {
   @Test
   public void getPortfolioSizeTest() {
     String inputString = "1\n1\nsaver\n3\napple\n10\n4\n1\n1\nsavingss\n3\napple\n12\n4\n" +
-            "1\n1\nsavers\n3\napple\n10\n4\n4\n4\n11";
+            "1\n1\nsavers\n3\napple\n10\n4\n4\n4\n12";
     testingHelper(inputString);
     assertEquals("3", mock.getLogForGetPortfolioSize());
 
@@ -85,12 +85,12 @@ public class ModelTest extends Abstract {
 
   @Test
   public void savePortfolioTest() {
-    String inputString = "1\n1\nnewPort\n3\namazon\n10\n4\n11";
+    String inputString = "1\n1\nnewPort\n3\namazon\n10\n4\n12";
 
     testingHelper(inputString);
     String inputStringCheck = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven" +
             "\\InFlexiblePortfolios" +
-            "\\newPort.txt\n1\n2\n11";
+            "\\newPort.txt\n1\n2\n12";
     testingHelper(inputStringCheck);
     assertEquals("{\"newPort\":[[\"amazon\",\"10\",\"2001-02-02\"]]}",
             mock.getLogForSavePortfolio());
@@ -98,7 +98,7 @@ public class ModelTest extends Abstract {
 
   @Test
   public void getModelTotalStock() {
-    String inputString = "1\n1\nabc\n3\namazon\n10\n4\n4\n1\nabc\n3\n1\n12\n2\n2020\n4\n11";
+    String inputString = "1\n1\nabc\n3\namazon\n10\n4\n4\n1\nabc\n3\n1\n12\n2\n2020\n4\n12";
     input = new ByteArrayInputStream(inputString.getBytes());
     controller = new ControllerImpl(mock, viewer, input);
     controller.start();
