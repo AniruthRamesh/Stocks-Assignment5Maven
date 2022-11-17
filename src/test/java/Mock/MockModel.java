@@ -106,7 +106,8 @@ public class MockModel implements Model {
 
     return setFlexibleAddPortfolioLog;
   }
-  public StringBuilder getLogForCostBasis(){
+
+  public StringBuilder getLogForCostBasis() {
     return logForCostBasis;
   }
 
