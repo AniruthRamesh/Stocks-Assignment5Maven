@@ -20,6 +20,11 @@ import InputData.InputDataSource;
 import Model.Model;
 import OutputDataSource.JsonPackage;
 
+/**
+ * This class is a mock of the model, which is mainly used of logging what values controller sends
+ * and what value is calculated after model performs an execution, it is mainly used for
+ * testing.
+ */
 public class MockModel implements Model {
   List<String> stockCompanies = List.of("AAPL.txt", "AMZN.txt", "ATVI.txt", "BCS.txt",
           "CAJ.txt", "CSCO.txt", "DIS.txt", "JPM.txt", "MCD.txt", "MSFT.txt", "ORCL.txt",
@@ -60,7 +65,19 @@ public class MockModel implements Model {
   Map<String, Integer> tickerFinder = new HashMap<>();
 
   Set<String> companiesInPortfolio = new HashSet<>();
+  String flexiblePortContainsCertainKeyLogger;
+  String flexiblePortContainsCertainKeyReturnValue;
+  HashMap<String, String> addStockDataFlexibleListLogger = new HashMap<>();
+  String putCompanyNameInTickerFinderLog;
+  String putCompanyNameInTickerFinderReturn;
+  private StringBuilder addApiCompanyStockDataLog = new StringBuilder("");
+  private String addApiCompanyStockDataReturnValue;
+  private StringBuilder checkIfTickerExistsLogger = new StringBuilder("");
+  private String checkIfTickerExistsReturnValue;
+  private StringBuilder putNameInCompanyInPortfolioLog = new StringBuilder("");
+  private String putNameInCompanyReturnValue;
 
+  @Override
   public Map<String, Map<String, List<List<String>>>> getFlexiblePort() {
     return flexiblePort;
   }
@@ -76,8 +93,38 @@ public class MockModel implements Model {
     flexiblePort.get(portfolioName).put(keyName, List.of(val));
   }
 
+  /**
+   * This method returns the log for flexiblePortContainsCertainKeyLogger field.
+   *
+   * @return String, containing log data.
+   */
+  public String getFlexiblePortContainsCertainKeyLogger() {
+    return flexiblePortContainsCertainKeyLogger;
+  }
+
+  /**
+   * This method returns the log for flexiblePortContainsCertainKeyReturnValue.
+   *
+   * @return String, containing log data.
+   */
+  public String getFlexiblePortContainsCertainKeyReturnValue() {
+    return flexiblePortContainsCertainKeyReturnValue;
+  }
+
   @Override
   public boolean flexiblePortContainsCertainKey(String name) {
+    flexiblePortContainsCertainKeyLogger = "Received : " + name;
+    flexiblePortContainsCertainKeyReturnValue = "" + containsHelper(name);
+    return flexiblePort.containsKey(name);
+  }
+
+  /**
+   * This is a helper method to check if portfolio contains certain key, this will be reported to
+   * the logger.
+   *
+   * @return Boolean, containing true or false.
+   */
+  public boolean containsHelper(String name) {
     return flexiblePort.containsKey(name);
   }
 
@@ -92,7 +139,6 @@ public class MockModel implements Model {
   public List<HashMap<String, String>> getApiStockData() {
     return apiStockData;
   }
-
 
   @Override
   public List<String> getInitialOptions() {
@@ -432,17 +478,18 @@ public class MockModel implements Model {
     }
   }
 
-  private StringBuilder addApiCompanyStockDataLog = new StringBuilder("");
-
+  /**
+   * This method is a getter for the addApiCompanyStockDataLog.
+   *
+   * @return String, containing the contents of the log.
+   */
   public String getAddApiCompanyStockDataLog() {
     return addApiCompanyStockDataLog.toString();
   }
 
-  private String addApiCompanyStockDataReturnValue;
-
   @Override
   public String addApiCompanyStockData(String companyTicker) {
-    addApiCompanyStockDataLog.append("Received : "+companyTicker);
+    addApiCompanyStockDataLog.append("Received : " + companyTicker);
     InputDataSource inp = new AlphaVantageAPI();
     String successOrFailure = inp.getData(companyTicker);
     if (successOrFailure.equals(apiErrorMessage)) {
@@ -453,19 +500,27 @@ public class MockModel implements Model {
     return successOrFailure;
   }
 
-  private StringBuilder checkIfTickerExistsLogger = new StringBuilder("");
-  private String checkIfTickerExistsReturnValue;
-  public String getLogforCheckIfTickerExist(){
+  /**
+   * This method is a getter for the checkIfTickerExistsLogger.
+   *
+   * @return String, containing the contents of the log.
+   */
+  public String getLogforCheckIfTickerExist() {
     return checkIfTickerExistsLogger.toString();
   }
 
-  public String getCheckIfTickerExistsReturnValue(){
+  /**
+   * This method is a getter for the checkIfTickerExistsReturnValue Log.
+   *
+   * @return String, containing the contents of the log.
+   */
+  public String getCheckIfTickerExistsReturnValue() {
     return checkIfTickerExistsReturnValue;
   }
 
   @Override
   public boolean checkIfTickerExists(String ticker) {
-    checkIfTickerExistsLogger.append("Received : "+ticker);
+    checkIfTickerExistsLogger.append("Received : " + ticker);
     checkIfTickerExistsReturnValue = String.valueOf(companiesInPortfolio.contains(ticker));
     return companiesInPortfolio.contains(ticker);
   }
@@ -475,8 +530,18 @@ public class MockModel implements Model {
     return flexiblePort.containsKey(name);
   }
 
+  /**
+   * This method is a getter for the addStockDataFlexibleListLogger.
+   *
+   * @return Hashmap containing the contents of the log(stock data).
+   */
+  public HashMap<String, String> getAddStockDataFlexibleListLogger() {
+    return addStockDataFlexibleListLogger;
+  }
+
   @Override
   public void addStockDataToFlexibleList(HashMap<String, String> stockData) {
+    addStockDataFlexibleListLogger = stockData;
     apiStockData.add(stockData);
   }
 
@@ -485,16 +550,28 @@ public class MockModel implements Model {
     return this.apiStockData.size();
   }
 
-  String putCompanyNameInTickerFinderLog;
-
   public String getPutCompanyNameInTickerFinderLog() {
     return putCompanyNameInTickerFinderLog;
   }
 
+  public String getPutCompanyNameInTickerFinderReturn() {
+    return putCompanyNameInTickerFinderReturn;
+  }
+
   @Override
   public void putCompanyNameInTickerFinder(String name, int number) {
-    putCompanyNameInTickerFinderLog = "Received : "+name+":"+number;
+    putCompanyNameInTickerFinderLog = "Received : " + name + ":" + number;
     tickerFinder.put(name, number);
+    putCompanyNameInTickerFinderReturn = "" + putCompanyNameInTickerFinderReturn(name, number);
+  }
+
+  private boolean putCompanyNameInTickerFinderReturn(String name, int number) {
+    if (tickerFinder.containsKey(name)) {
+      if (tickerFinder.get(name).equals(number)) {
+        return true;
+      }
+    }
+    return false;
   }
 
   @Override
@@ -502,27 +579,34 @@ public class MockModel implements Model {
     flexiblePortfolio.put(name, companyDetails);
   }
 
-  private StringBuilder putNameInCompanyInPortfolioLog = new StringBuilder("");
-
+  /**
+   * This method is a getter for the  putNameInCompanyInPortfolioLog.
+   *
+   * @return String containing the contents of the log.
+   */
   public String getPutNameInCompanyInPortfolioLog() {
     return putNameInCompanyInPortfolioLog.toString();
   }
 
   @Override
   public void putNameInCompanyInPortfolio(String name) {
-    putNameInCompanyInPortfolioLog.append("Received : "+name);
+    putNameInCompanyInPortfolioLog.append("Received : " + name);
     companiesInPortfolio.add(name);
-    putNameInCompanyReturnValue = ""+putNameInCompanyReturnValue(name);
+    putNameInCompanyReturnValue = "" + putNameInCompanyReturnValue(name);
   }
 
-  public String getPutNameInCompanyReturnValue(){
+  /**
+   * This method is a getter for the  putNameInCompanyReturnValue.
+   *
+   * @return String containing the contents of the log.
+   */
+  public String getPutNameInCompanyReturnValue() {
     return putNameInCompanyReturnValue;
   }
-  private String putNameInCompanyReturnValue;
-  public boolean putNameInCompanyReturnValue(String name){
+
+  private boolean putNameInCompanyReturnValue(String name) {
     return companiesInPortfolio.contains(name);
   }
-
 
   @Override
   public void setFlexibleAddPortfolio(String portfolioName, String key, List<String> companies) {
@@ -539,6 +623,7 @@ public class MockModel implements Model {
     return check;
   }
 
+  @Override
   public void setFlexible(Map<String, Map<String, List<List<String>>>> parsed) {
     this.flexiblePort = parsed;
   }
@@ -569,6 +654,11 @@ public class MockModel implements Model {
     return null;
   }
 
+  /**
+   * This method is a getter for the  addApiCompanyStockDataReturnValue.
+   *
+   * @return String containing the contents of the log.
+   */
   public String getAddApiCompanyStockDataReturnValue() {
     return addApiCompanyStockDataReturnValue;
   }

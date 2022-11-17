@@ -9,9 +9,9 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 
 import Controller.Controller;
+import Controller.ControllerImpl;
 import Mock.MockModel;
 import View.View;
-import Controller.ControllerImpl;
 
 /**
  * This class is a helper class which all test classes extend, Every test class needs object of
@@ -33,6 +33,7 @@ public abstract class Abstract {
 
   /**
    * This is a helper method which creates all the necessary objects and returns a MockModel obj.
+   *
    * @param inputString String, input which is entered sequentially to test.
    * @return Mock.MockModel object.
    */
