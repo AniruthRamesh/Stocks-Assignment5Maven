@@ -303,7 +303,8 @@ public class View {
    * @param path The path where the portfolio is saved.
    */
   void displayAllPortfolioSaved(String path) {
-    this.out.println("All the portfolio created have been saved and It is in the location: " + path);
+    this.out.println("All the portfolio created have been saved and It is in the location: "
+            + path);
     this.out.println();
   }
 
@@ -384,8 +385,9 @@ public class View {
     this.out.println();
   }
 
+
   /**
-   * This function prints out a message asking the user to enter a ticker symbol for the company.
+   * This function asks the user for a ticker symbol.
    */
   public void askForTickerSymbol() {
     this.out.println("Enter ticker symbol for the company:");
@@ -414,6 +416,15 @@ public class View {
   public void askForFlexibleOrInFlexible() {
     this.out.println("Enter 1, for Inflexible Portfolios:");
     this.out.println("Enter 2, for Flexible Portfolios:");
+  }
+
+  /**
+   * This function displays the contents of the parameter in the console.
+   *
+   * @param contents The contents to be displayed.
+   */
+  public void displayContentsInParameter(String contents) {
+    this.out.println(contents);
   }
 
   /**

@@ -9,13 +9,21 @@ import Model.Model;
 import View.View;
 
 /**
- * This class handles the total stock value display command.
+ * This class handles the logic to display total value of a stock.
  */
 public class HandleTotalStockValueDisplay implements Command {
   Model model;
   View view;
   Scanner sc;
 
+  /**
+   * Constructor for this class. Gets what model, view, scanner to use and processes
+   * accordingly.
+   *
+   * @param model Model object.
+   * @param view  View object.
+   * @param sc    Scanner object.
+   */
   public HandleTotalStockValueDisplay(Model model, View view, Scanner sc) {
     this.model = model;
     this.view = view;

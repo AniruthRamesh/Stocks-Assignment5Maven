@@ -11,13 +11,23 @@ import Model.Model;
 import View.View;
 
 /**
- * It handles the upload file command.
+ * It handles the upload file command from the Controller interface. Asks the user if the uploaded
+ * file is inflexible or flexible and validates the contents of the file, if it is a valid file
+ * stores the content of the file in model.
  */
 public class HandleUploadFile implements Command {
   final Model model;
   final View view;
   final Scanner sc;
 
+  /**
+   * Constructor for this class. Gets what model, view, scanner to use and processes
+   * accordingly.
+   *
+   * @param model Model object.
+   * @param view  View object.
+   * @param sc    Scanner object.
+   */
   public HandleUploadFile(Model model, View view, Scanner sc) {
     this.model = model;
     this.view = view;

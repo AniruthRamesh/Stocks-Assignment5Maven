@@ -8,13 +8,21 @@ import Model.Model;
 import View.View;
 
 /**
- * It displays the list of portfolios in the model.
+ * It displays the list of portfolios in the flexiblePortfolios and InflexiblePortfolios folder.
  */
 public class HandleShowPortfolio implements Command {
   Model model;
   View view;
   Scanner sc;
 
+  /**
+   * Constructor for this class. Gets what model, view, scanner to use and processes
+   * accordingly.
+   *
+   * @param model Model object.
+   * @param view  View object.
+   * @param sc    Scanner object.
+   */
   public HandleShowPortfolio(Model model, View view, Scanner sc) {
     this.model = model;
     this.view = view;

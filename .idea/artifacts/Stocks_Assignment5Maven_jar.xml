@@ -1,0 +1,10 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="Stocks-Assignment5Maven:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/Stocks_Assignment5Maven_jar</output-path>
+    <root id="archive" name="Stocks-Assignment5Maven.jar">
+      <element id="module-output" name="Stocks-Assignment5Maven" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/com/google/code/gson/gson/2.8.6/gson-2.8.6.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$MAVEN_REPOSITORY$/org/json/json/20180130/json-20180130.jar" path-in-jar="/" />
+    </root>
+  </artifact>
+</component>

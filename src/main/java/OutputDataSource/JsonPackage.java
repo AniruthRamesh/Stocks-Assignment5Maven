@@ -9,6 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * This class is used to convert the portfolio data into a JSON format and vice versa.
+ */
 public class JsonPackage implements SavingDataSource {
   Map<String, List<List<String>>> portfolio;
   Map<String, Map<String, List<List<String>>>> flexiblePort;
@@ -25,6 +28,11 @@ public class JsonPackage implements SavingDataSource {
     this.keys = keys;
   }
 
+  /**
+   * Constructor for JsonPackage class which initializes flexiblePort.
+   *
+   * @param flexiblePort Nested hashmap of strings and nested list of strings.
+   */
   public JsonPackage(Map<String, Map<String, List<List<String>>>> flexiblePort) {
     this.flexiblePort = flexiblePort;
   }
@@ -38,10 +46,24 @@ public class JsonPackage implements SavingDataSource {
     keys = new ArrayList<>();
   }
 
+  /**
+   * We're going to create a new Gson object, and then we're going to use that Gson
+   * object to convert our flexiblePort object into a JSON string, and then we're going to return
+   * that JSON string as a
+   * list.
+   *
+   * @return A list of strings.
+   */
   public List<String> anotherFormatter() {
     return List.of(new Gson().toJson(flexiblePort));
   }
 
+  /**
+   * It parses a JSON string into a Map of Maps of nested Lists of Strings.
+   *
+   * @param json The JSON string to parse.
+   * @return A map of maps of nested lists of strings.
+   */
   public Map<String, Map<String, List<List<String>>>> anotherParser(String json) {
     Map<String, Map<String, List<List<String>>>> obj = new Gson().fromJson(json, HashMap.class);
     return obj;

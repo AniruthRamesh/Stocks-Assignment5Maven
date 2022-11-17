@@ -34,6 +34,9 @@ public class Main {
 
 
     //commission is 10%
+    //change getContentsFromfile while building
+
+    //with inflexible portfolio options 7-11 shouldnt work(check)
   }
 
 }
