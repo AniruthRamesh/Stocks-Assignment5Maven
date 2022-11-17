@@ -49,7 +49,14 @@ public class MockModel implements Model {
   List<HashMap<String, String>> apiStockData = new ArrayList<>();
   Map<String, Integer> tickerFinder = new HashMap<>();
   Set<String> companiesInPortfolio = new HashSet<>();
+  String putCompanyNameInTickerFinderLog;
+  String flexiblePortfolioContainsCertainKeyLog;
+  String setFlexibleAddPortfolioLog;
   private String checkIfTickerExistsReturnValue;
+  private StringBuilder addApiCompanyStockDataLog = new StringBuilder("");
+  private String addApiCompanyStockDataReturnValue;
+  private StringBuilder putNameInCompanyInPortfolioLog = new StringBuilder("");
+  private String putNameInCompanyReturnValue;
 
   public Map<String, Map<String, List<List<String>>>> getFlexiblePort() {
     return flexiblePort;
@@ -406,17 +413,13 @@ public class MockModel implements Model {
     }
   }
 
-  private StringBuilder addApiCompanyStockDataLog = new StringBuilder("");
-
   public String getAddApiCompanyStockDataLog() {
     return addApiCompanyStockDataLog.toString();
   }
 
-  private String addApiCompanyStockDataReturnValue;
-
   @Override
   public String addApiCompanyStockData(String companyTicker) {
-    addApiCompanyStockDataLog.append("Received : "+companyTicker);
+    addApiCompanyStockDataLog.append("Received : " + companyTicker);
     InputDataSource inp = new AlphaVantageAPI();
     String successOrFailure = inp.getData(companyTicker);
     if (successOrFailure.equals(apiErrorMessage)) {
@@ -444,7 +447,16 @@ public class MockModel implements Model {
 
   @Override
   public boolean flexiblePortfolioContainsCertainKey(String name) {
+    flexiblePortfolioContainsCertainKeyLog = "Received " + name;
     return flexiblePort.containsKey(name);
+  }
+
+  public String getflexiblePortfolioContainsCertainKeyLog() {
+    return flexiblePortfolioContainsCertainKeyLog;
+  }
+
+  public String getSetFlexibleAddPortfolioLog() {
+    return setFlexibleAddPortfolioLog;
   }
 
   @Override
@@ -457,15 +469,13 @@ public class MockModel implements Model {
     return this.apiStockData.size();
   }
 
-  String putCompanyNameInTickerFinderLog;
-
   public String getPutCompanyNameInTickerFinderLog() {
     return putCompanyNameInTickerFinderLog;
   }
 
   @Override
   public void putCompanyNameInTickerFinder(String name, int number) {
-    putCompanyNameInTickerFinderLog = "Received : "+name+":"+number;
+    putCompanyNameInTickerFinderLog = "Received : " + name + ":" + number;
     tickerFinder.put(name, number);
   }
 
@@ -474,24 +484,22 @@ public class MockModel implements Model {
     flexiblePortfolio.put(name, companyDetails);
   }
 
-  private StringBuilder putNameInCompanyInPortfolioLog = new StringBuilder("");
-
   public String getPutNameInCompanyInPortfolioLog() {
     return putNameInCompanyInPortfolioLog.toString();
   }
 
   @Override
   public void putNameInCompanyInPortfolio(String name) {
-    putNameInCompanyInPortfolioLog.append("Received : "+name);
+    putNameInCompanyInPortfolioLog.append("Received : " + name);
     companiesInPortfolio.add(name);
-    putNameInCompanyReturnValue = ""+putNameInCompanyReturnValue(name);
+    putNameInCompanyReturnValue = "" + putNameInCompanyReturnValue(name);
   }
 
-  public String getPutNameInCompanyReturnValue(){
+  public String getPutNameInCompanyReturnValue() {
     return putNameInCompanyReturnValue;
   }
-  private String putNameInCompanyReturnValue;
-  public boolean putNameInCompanyReturnValue(String name){
+
+  public boolean putNameInCompanyReturnValue(String name) {
     return companiesInPortfolio.contains(name);
   }
 
@@ -499,6 +507,7 @@ public class MockModel implements Model {
   @Override
   public void setFlexibleAddPortfolio(String portfolioName, String key, List<String> companies) {
     List<List<String>> company = new ArrayList<>();
+    setFlexibleAddPortfolioLog = "Receive" + "name: " + portfolioName + "key:" + key;
     company.addAll(flexiblePort.get(portfolioName).get(key));
     company.add(companies);
     flexiblePort.get(portfolioName).put(key, company);
