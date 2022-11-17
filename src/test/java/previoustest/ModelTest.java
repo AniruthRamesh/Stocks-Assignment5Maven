@@ -1,4 +1,4 @@
-package previousTest;
+package previoustest;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,7 +10,7 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.List;
 
-import abstractTest.Abstract;
+import abstracttest.Abstract;
 import controller.Controller;
 import controller.ControllerImpl;
 import mock.MockModel;
@@ -20,6 +20,9 @@ import view.View;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * This class tests the Model class.
+ */
 public class ModelTest extends Abstract {
   Model models;
   Controller controller;
@@ -38,9 +41,9 @@ public class ModelTest extends Abstract {
 
   @Test
   public void showCompanyTest() {
-    List<String> stockCompanyName = List.of("APPLE", "AMAZON", "ACTIVISION", "BARCLAYS"
-            , "CANON INC", "CISCO SYSTEMS", "DISNEY", "JP MORGAN", "MCDONALD", "MICROSOFT"
-            , "ORACLE", "STARBUCKS", "WELLS FARGO");
+    List<String> stockCompanyName = List.of("APPLE", "AMAZON", "ACTIVISION", "BARCLAYS",
+            "CANON INC", "CISCO SYSTEMS", "DISNEY", "JP MORGAN", "MCDONALD", "MICROSOFT",
+            "ORACLE", "STARBUCKS", "WELLS FARGO");
     List<String> stockCompanyNameFromModel = models.getStockCompanyName();
 
     assertEquals(stockCompanyName.size(), stockCompanyNameFromModel.size());
@@ -49,6 +52,12 @@ public class ModelTest extends Abstract {
     }
   }
 
+  /**
+   * It takes a string, sets the input stream to that string, and then runs the controller.
+   *
+   * @param inp the input string that will be fed into the controller
+   * @return Nothing.
+   */
   public MockModel testingHelper(String inp) {
     input = new ByteArrayInputStream(inp.getBytes());
     controller = new ControllerImpl(mock, viewer, input);
@@ -58,8 +67,8 @@ public class ModelTest extends Abstract {
 
   @Test
   public void getPortfolioKeysTest() {
-    String inputString = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven\\InFlexiblePortfolios" +
-            "\\fees.txt\n1\n2\n12";
+    String inputString = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven\\InFlexiblePortfolios"
+            + "\\fees.txt\n1\n2\n12";
     testingHelper(inputString);
     assertEquals("fees", mock.getLogForPortfolioKeys());
   }
@@ -76,8 +85,8 @@ public class ModelTest extends Abstract {
 
   @Test
   public void getPortfolioSizeTest() {
-    String inputString = "1\n1\nsaver\n3\napple\n10\n4\n1\n1\nsavingss\n3\napple\n12\n4\n" +
-            "1\n1\nsavers\n3\napple\n10\n4\n4\n4\n12";
+    String inputString = "1\n1\nsaver\n3\napple\n10\n4\n1\n1\nsavingss\n3\napple\n12\n4\n"
+            + "1\n1\nsavers\n3\napple\n10\n4\n4\n4\n12";
     testingHelper(inputString);
     assertEquals("3", mock.getLogForGetPortfolioSize());
 
@@ -88,9 +97,9 @@ public class ModelTest extends Abstract {
     String inputString = "1\n1\nnewPort\n3\namazon\n10\n4\n12";
 
     testingHelper(inputString);
-    String inputStringCheck = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven" +
-            "\\InFlexiblePortfolios" +
-            "\\newPort.txt\n1\n2\n12";
+    String inputStringCheck = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven"
+            + "\\InFlexiblePortfolios"
+            + "\\newPort.txt\n1\n2\n12";
     testingHelper(inputStringCheck);
     assertEquals("{\"newPort\":[[\"amazon\",\"10\",\"2001-02-02\"]]}",
             mock.getLogForSavePortfolio());

@@ -1,11 +1,11 @@
-package handleMutablePortfolioCreationTest;
+package handlemutableportfoliocreationtest;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import abstractTest.Abstract;
-import inputData.AlphaVantageAPI;
-import inputData.InputDataSource;
+import abstracttest.Abstract;
+import inputdata.AlphaVantageApi;
+import inputdata.InputDataSource;
 import mock.MockModel;
 
 import static org.junit.Assert.assertEquals;
@@ -41,8 +41,8 @@ public class ModelTest extends Abstract {
    */
   @Test
   public void checkModelsReturnValueCheckIfTickerExistTrue() {
-    String input = "7\n1\n1\nfees\n3\n1\naapl\n1\n12\n12\n2006\n19\n1\naapl\n1\n25\n10\n2022\n18" +
-            "\n2\n4\n12";
+    String input = "7\n1\n1\nfees\n3\n1\naapl\n1\n12\n12\n2006\n19\n1\naapl\n1\n25\n10\n2022\n18"
+            + "\n2\n4\n12";
     tester = super.testingHelper(input);
     assertEquals("true", tester.getCheckIfTickerExistsReturnValue());
   }
@@ -51,7 +51,7 @@ public class ModelTest extends Abstract {
   public void checkModelReturnValueAddApiCompanyStockData() {
     String input = "7\n1\n1\nfees\n3\n1\namzn\n1\n25\n10\n2022\n19\n2\n4\n12";
     tester = super.testingHelper(input);
-    InputDataSource inp = new AlphaVantageAPI();
+    InputDataSource inp = new AlphaVantageApi();
     String successOrFailure = inp.getData("amzn");
     assertEquals(successOrFailure, tester.getAddApiCompanyStockDataReturnValue());
   }
@@ -79,11 +79,11 @@ public class ModelTest extends Abstract {
 
   @Test
   public void checkParser() {
-    String input = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven\\FlexiblePortfolios\\" +
-            "invalid.txt\n2\n12";
+    String input = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven\\FlexiblePortfolios\\"
+            + "invalid.txt\n2\n12";
     tester = super.testingHelper(input);
-    assertEquals("The portfolio provided in the text file is not in proper format" +
-            ",please look at the documentation", tester.getLogForParser());
+    assertEquals("The portfolio provided in the text file is not in proper format"
+            + ",please look at the documentation", tester.getLogForParser());
 
   }
 

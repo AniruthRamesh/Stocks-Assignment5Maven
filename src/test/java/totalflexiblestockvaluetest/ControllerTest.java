@@ -1,15 +1,17 @@
-package totalFlexibleStockValueTest;
+package totalflexiblestockvaluetest;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import abstractTest.Abstract;
+import abstracttest.Abstract;
 import mock.MockModel;
 
 import static org.junit.Assert.assertEquals;
 
 /**
- * This class tests the controller class.
+ * A Junit test for the class HandleTotalStockForFlexiblePort. This class is mainly a testing class
+ * for the controller by seeing if the controller send the correct data to the model. A mock model
+ * logs the data received, and we check based on that.
  */
 public class ControllerTest extends Abstract {
   MockModel tester;

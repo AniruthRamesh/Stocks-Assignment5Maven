@@ -1,9 +1,9 @@
-package totalFlexibleStockValueTest;
+package totalflexiblestockvaluetest;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import abstractTest.Abstract;
+import abstracttest.Abstract;
 import inputdata.AlphaVantageApi;
 import inputdata.InputDataSource;
 import mock.MockModel;
@@ -39,8 +39,8 @@ public class ModelTest extends Abstract {
    */
   @Test
   public void checkModelsReturnValueCheckIfTickerExistTrue() {
-    String input = "7\n1\n1\nfees\n3\n1\naapl\n1\n12\n12\n2006\n19\n1\naapl\n1\n25\n10\n2022\n18" +
-            "\n2\n4\n12";
+    String input = "7\n1\n1\nfees\n3\n1\naapl\n1\n12\n12\n2006\n19\n1\naapl\n1\n25\n10\n2022\n18"
+            + "\n2\n4\n12";
     tester = super.testingHelper(input);
     assertEquals("true", tester.getCheckIfTickerExistsReturnValue());
   }
@@ -70,21 +70,20 @@ public class ModelTest extends Abstract {
 
   @Test
   public void finalTotalStockValueTestOnCurrentDate() {
-    String input = "5\nD\\test.txt\n2\n10\n1" +
-            "\ntest\n2\n4\n12";
+    String input = "5\nD\\test.txt\n2\n10\n1\ntest\n2\n4\n12";
     tester = super.testingHelper(input);
-    assertEquals("{}\n" +
-            "{aapl=4124.0}\n" +
-            "{aapl=4124.0,msft=0.0, amzn=0.0}", tester.getGetFinalDataLog());
+    assertEquals("{}\n"
+            + "{aapl=4124.0}\n"
+            + "{aapl=4124.0,msft=0.0, amzn=0.0}", tester.getGetFinalDataLog());
   }
 
   @Test
   public void finalTotalStockValueTestOnDifferentDate() {
-    String input = "5\nD\\test.txt\n2\n10\n1" +
-            "\ntest\n3\n1\n02\n02\n2022\n4\n12";
+    String input = "5\nD\\test.txt\n2\n10\n1\ntest\n3\n1\n02\n02\n2022\n4\n12";
     tester = super.testingHelper(input);
-    assertEquals("{}\n" +
-            "{aapl=38684.8}\n" +
-            "{aapl=38684.8,msft=5955.74, amzn=48196.0}", tester.getGetFinalDataLog());
+    assertEquals("{}\n"
+            + "{aapl=38684.8}\n"
+            + "{aapl=38684.8,msft=5955.74, amzn=48196.0}", tester.getGetFinalDataLog());
   }
+
 }

@@ -1,17 +1,16 @@
-package previousTest;
+package previoustest;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import abstractTest.Abstract;
+import abstracttest.Abstract;
 import mock.MockModel;
 
 import static org.junit.Assert.assertEquals;
 
 /**
  * A JUnit test class for ControllerImpl(previous version). It tests the controller using a mock
- * model on various
- * scenarios to see if the controller sends the correct data to the model.
+ * model on various scenarios to see if the controller sends the correct data to the model.
  */
 public class ControllerTest extends Abstract {
   MockModel tester;
@@ -33,8 +32,8 @@ public class ControllerTest extends Abstract {
   @Test
   public void checkIfCompanyNameExists() {
     String inputString = "1\n1\nsavings\n3\nApple\n16\n3\nAmazon\n20\n3\nstarbucks\n30\n4\n12";
-    String assertVal = "Received:AppleReceived:AppleReceived:AmazonReceived:Amazon" +
-            "Received:starbucksReceived:starbucks";
+    String assertVal = "Received:AppleReceived:AppleReceived:AmazonReceived:Amazon"
+            + "Received:starbucksReceived:starbucks";
     tester = testingHelper(inputString);
     assertEquals(assertVal, tester.getLogForCheckingCompanyNameExist());
   }
@@ -57,11 +56,11 @@ public class ControllerTest extends Abstract {
 
   @Test
   public void readFromFile() {
-    String inputString = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven\\InFlexiblePortfolios" +
-            "\\saving.txt\n12";
-    String assertVal = "Received:A:\\Intellij\\PDP\\Stocks-Assignment5Maven\\InFlexiblePortfolios" +
-            "\\" +
-            "saving.txt";
+    String inputString = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven\\InFlexiblePortfolios"
+            + "\\saving.txt\n12";
+    String assertVal = "Received:A:\\Intellij\\PDP\\Stocks-Assignment5Maven\\InFlexiblePortfolios"
+            + "\\"
+            + "saving.txt";
     tester = testingHelper(inputString);
     assertEquals(assertVal, tester.getLogForReadFromFile());
   }

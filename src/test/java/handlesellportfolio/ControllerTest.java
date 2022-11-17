@@ -1,22 +1,26 @@
-package handleSellPortfolio;
+package handlesellportfolio;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import abstractTest.Abstract;
+import abstracttest.Abstract;
 import mock.MockModel;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * A Junit test for the class HandleSellPortfolio. This class is mainly a testing class
+ * for the controller by seeing if the controller send the correct data to the model. A mock model
+ * logs the data received, and we check based on that.
+ */
 public class ControllerTest extends Abstract {
   MockModel tester;
 
-  @Before
   /**
    * Setting up the environment for the test.
    */
-
-  public void setup() {
+  @Before
+    public void setup() {
     super.setup();
   }
 

@@ -1,4 +1,4 @@
-package abstractTest;
+package abstracttest;
 
 import org.junit.Before;
 

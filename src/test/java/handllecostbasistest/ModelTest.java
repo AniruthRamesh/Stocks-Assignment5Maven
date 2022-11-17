@@ -1,16 +1,16 @@
-package handlleCostBasisTest;
+package handllecostbasistest;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import abstractTest.Abstract;
+import abstracttest.Abstract;
 import mock.MockModel;
 
 import static org.junit.Assert.assertEquals;
 
 /**
- * A Junit test for the class HandleMutablePortfolioCreation. This class is mainly a testing class
- * for the Model. A mock Model logs the calculated values and we check by retrieving values
+ * A Junit test for the class HandleMutableCostBasis. This class is mainly a testing class
+ * for the Model. A mock Model logs the calculated values, and we check by retrieving values
  * from the logger.
  */
 public class ModelTest extends Abstract {

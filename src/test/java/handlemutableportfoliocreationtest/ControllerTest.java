@@ -1,11 +1,11 @@
-package handleMutablePortfolioCreationTest;
+package handlemutableportfoliocreationtest;
 
 import org.junit.Before;
 import org.junit.Test;
 
 import java.util.HashMap;
 
-import abstractTest.Abstract;
+import abstracttest.Abstract;
 import inputdata.AlphaVantageApi;
 import inputdata.InputDataSource;
 import mock.MockModel;

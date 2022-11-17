@@ -1,15 +1,20 @@
-package handleSellPortfolio;
+package handlesellportfolio;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import abstractTest.Abstract;
+import abstracttest.Abstract;
 import inputdata.AlphaVantageApi;
 import inputdata.InputDataSource;
 import mock.MockModel;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * A Junit test for the class HandleSellPortfolio. This class is mainly a testing class
+ * for the Model. A mock Model logs the calculated values, and we check by retrieving values
+ * from the logger.
+ */
 public class ModelTest extends Abstract {
   MockModel tester;
 
@@ -66,33 +71,33 @@ public class ModelTest extends Abstract {
 
   @Test
   public void sellExistingStocks() {
-    String input = "5\nC:\\Users\\anikr\\Desktop\\Career course\\" +
-            "test.txt\n2\n8\n1\ntest\n1\naapl\n1\n02\n02\n2022\n20\n2\n12";
+    String input = "5\nC:\\Users\\anikr\\Desktop\\Career course\\"
+            + "test.txt\n2\n8\n1\ntest\n1\naapl\n1\n02\n02\n2022\n20\n2\n12";
     tester = super.testingHelper(input);
     assertEquals("PortfolioUpdated", tester.portfolioUpdated());
   }
 
   @Test
   public void sellMoreThanExistingStocks() {
-    String input = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven\\FlexiblePortfolios" +
-            "test.txt\n2\n8\n1\ntest\n1\naapl\n1\n02\n02\n2022\n20000\n2\n12";
+    String input = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven\\FlexiblePortfolios"
+            + "test.txt\n2\n8\n1\ntest\n1\naapl\n1\n02\n02\n2022\n20000\n2\n12";
     tester = super.testingHelper(input);
-    assertEquals("Please enter a valid number. The number is either negative or more than the " +
-            "stocks that exists.", tester.getEnterValidStockToSellLog());
+    assertEquals("Please enter a valid number. The number is either negative or more than "
+            + "the " + "stocks that exists.", tester.getEnterValidStockToSellLog());
   }
 
   @Test
   public void checkValidDateFailTest() {
-    String input = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven\\FlexiblePortfolios\\" +
-            "test.txt\n2\n8\n1\ntest\n1\naapl\n1\n30\n02\n2022\n2\n12";
+    String input = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven\\FlexiblePortfolios\\"
+            + "test.txt\n2\n8\n1\ntest\n1\naapl\n1\n30\n02\n2022\n2\n12";
     tester = super.testingHelper(input);
     assertEquals("truetruetruetruetruetruetruetruefalse", tester.getValidDateLog());
   }
 
   @Test
   public void checkValidDatePassTest() {
-    String input = "5\nC:\\Users\\anikr\\Desktop\\Career course\\test.txt" +
-            "\n2\n8\n1\ntest\n1\naapl\n1\n02\n02\n2022\n2\n12";
+    String input = "5\nC:\\Users\\anikr\\Desktop\\Career course\\test.txt"
+            + "\n2\n8\n1\ntest\n1\naapl\n1\n02\n02\n2022\n2\n12";
     tester = super.testingHelper(input);
     assertEquals("truetruetruetruetruetruetruetruetrue", tester.getValidDateLog());
   }

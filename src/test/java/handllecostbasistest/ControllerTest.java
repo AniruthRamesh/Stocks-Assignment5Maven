@@ -1,9 +1,9 @@
-package handlleCostBasisTest;
+package handllecostbasistest;
 
 import org.junit.Before;
 import org.junit.Test;
 
-import abstractTest.Abstract;
+import abstracttest.Abstract;
 import mock.MockModel;
 
 import static org.junit.Assert.assertEquals;
@@ -26,8 +26,8 @@ public class ControllerTest extends Abstract {
 
   @Test
   public void getCompaniesInCertainPortfolioTest() {
-    String input = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven\\FlexiblePortfolios\\fees.txt\n" +
-            "2\n9\nfees\n1\n25\n10\n2022\n12";
+    String input = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven\\FlexiblePortfolios\\fees.txt\n"
+            + "2\n9\nfees\n1\n25\n10\n2022\n12";
     tester = super.testingHelper(input);
     assertEquals("Received : fees", tester.getFlexiblePortContainsCertainKeyLogger());
   }
