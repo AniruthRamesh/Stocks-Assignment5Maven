@@ -458,6 +458,10 @@ public class MockModel implements Model {
   public String getSetFlexibleAddPortfolioLog() {
     return setFlexibleAddPortfolioLog;
   }
+  public String getEnterValidStockToSellLog(){
+    return "Please enter a valid number. The number is either negative or more than the stocks " +
+            "that exists.";
+  }
 
   @Override
   public void addStockDataToFlexibleList(HashMap<String, String> stockData) {

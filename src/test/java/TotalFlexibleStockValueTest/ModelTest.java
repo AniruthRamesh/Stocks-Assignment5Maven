@@ -1,4 +1,4 @@
-package HandleSellPortfolioTest;
+package TotalFlexibleStockValueTest;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -63,13 +63,4 @@ public class ModelTest extends Abstract {
     tester = super.testingHelper(input);
     assertEquals("true", tester.getPutNameInCompanyReturnValue());
   }
-
-  @Test
-  public void sellMoreThanExistingStocks() {
-    String input = "5\nD://test.txt\n2\n8\n1\ntest\n1\naapl\n1\n02\n02\n2022\n20000\n2\n11";
-    tester = super.testingHelper(input);
-    assertEquals("Please enter a valid number. The number is either negative or more than the " +
-            "stocks that exists.", tester.getEnterValidStockToSellLog());
-  }
-
 }
