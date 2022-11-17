@@ -90,14 +90,14 @@ public class HandleCostBasis implements Command {
         if (insideContents.get(0).equals("Sell")) {
           view.displayContentsInParameter("Sell         -> " + insideContents.get(1) + " : " +
                   insideContents.get(2) + "\n" + "Date        -> " + insideContents.get(3) + "\n" +
-                  "Commission  -> " + insideContents.get(4));
+                  "Commission  -> $" + insideContents.get(4));
           totalMoneySpent += Double.parseDouble(insideContents.get(4));
 
         }
         if (insideContents.get(0).equals("Buy")) {
           view.displayContentsInParameter("Buy         -> " + insideContents.get(1) + " : " +
                   insideContents.get(2) + "\n" + "Date        -> " + insideContents.get(3) + "\n"
-                  + "Total value -> " + insideContents.get(5) + "\n" + "Commission  -> "
+                  + "Total value -> $" + insideContents.get(5) + "\n" + "Commission  -> $"
                   + insideContents.get(4));
           totalMoneySpent += Double.parseDouble(insideContents.get(4)) +
                   Double.parseDouble(insideContents.get(5));
@@ -105,9 +105,9 @@ public class HandleCostBasis implements Command {
         view.displayEmptyLine();
       }
       overallTotalMoneySpent += totalMoneySpent;
-      view.displayContentsInParameter("Total       -> " + totalMoneySpent);
+      view.displayContentsInParameter("Total       -> $" + totalMoneySpent);
     }
-    view.displayContentsInParameter("Overall Total -> " + overallTotalMoneySpent);
+    view.displayContentsInParameter("Overall Total -> $" + overallTotalMoneySpent);
 
 
     return model;

@@ -260,7 +260,7 @@ public class View {
   public void displayTotalStockValue(String portfolioName, String currentDate, String totalValue) {
     this.out.println("Portfolio: " + portfolioName);
     this.out.println("Date: " + currentDate);
-    this.out.println("Total Value: " + totalValue);
+    this.out.println("Total Value: $ " + totalValue);
     this.out.println();
   }
 
@@ -268,7 +268,7 @@ public class View {
                                              String totalValue) {
     this.out.println("Portfolio: " + portfolioName);
     this.out.println("Date: " + DateSelected);
-    this.out.println("Total Value: " + totalValue);
+    this.out.println("Total Value: $" + totalValue);
     this.out.println();
   }
 
@@ -457,7 +457,7 @@ public class View {
    * @param value       The value of the flex field.
    */
   public void displayTotalFlexValue(String companyName, String value) {
-    this.out.println(companyName + "-->" + value);
+    this.out.println(companyName + "--> $" + value);
   }
 
   // Calling the displayCannotSellStock method.
