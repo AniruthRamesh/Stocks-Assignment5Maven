@@ -21,53 +21,42 @@ import Model.Model;
 import OutputDataSource.JsonPackage;
 
 public class MockModel implements Model {
+  private final StringBuilder checkIfTickerExistsLogger = new StringBuilder();
   List<String> stockCompanies = List.of("AAPL.txt", "AMZN.txt", "ATVI.txt", "BCS.txt",
           "CAJ.txt", "CSCO.txt", "DIS.txt", "JPM.txt", "MCD.txt", "MSFT.txt", "ORCL.txt",
-          "SBUX.txt"
-          , "WFC.txt");
-
-  List<String> stockCompanyName = List.of("APPLE", "AMAZON", "ACTIVISION", "BARCLAYS"
-          , "CANON INC", "CISCO SYSTEMS", "DISNEY", "JP MORGAN", "MCDONALD", "MICROSOFT"
-          , "ORACLE", "STARBUCKS", "WELLS FARGO");
-
-  String apiErrorMessage = "{\n" +
-          "    \"Error Message\": \"Invalid API call. Please retry or visit the documentation " +
-          "(https://www.alphavantage.co/documentation/) for TIME_SERIES_DAILY.\"\n" +
-          "}";
+          "SBUX.txt", "WFC" + ".txt");
+  List<String> stockCompanyName = List.of("APPLE", "AMAZON", "ACTIVISION", "BARCLAYS",
+          "CANON " + "INC", "CISCO SYSTEMS", "DISNEY", "JP MORGAN", "MCDONALD", "MICROSOFT",
+          "ORACLE", "STARBUCKS", "WELLS FARGO");
+  String apiErrorMessage = "{\n" + "    \"Error Message\": \"Invalid API call. Please retry or " +
+          "visit the documentation " + "(https://www.alphavantage.co/documentation/) for " +
+          "TIME_SERIES_DAILY.\"\n" + "}";
   //ArrayList of HashMap containing StockData of companies with date as key and stock value on
   //that date as value.
   List<HashMap<String, String>> stockData = new ArrayList<>();
-  String startingDate = "2001-02-02";
   //String endingDate = "2022-10-25";
-
+  String startingDate = "2001-02-02";
   String currentDate = startingDate;
-
   Set<String> listOfDates = new HashSet<>();
   String data;
-
   Map<String, List<List<String>>> inflexiblePortfolio = new HashMap<>();
-
-  List<String> initialOptions = List.of("Create Inflexible Portfolio",
-          "Examine Composition of current Portfolio",
-          "Fast Forward Time", "Determine value of stocks on certain Date", "Upload a portfolio",
-          "List all portfolios", "Create Flexible Portfolio", "Sell Stocks from a Portfolio"
-          , "Determine Cost Basis", "Exit");
-
+  List<String> initialOptions = List.of("Create Inflexible Portfolio", "Examine Composition of " +
+                  "current Portfolio", "Fast Forward Time", "Determine value of stocks on certain" +
+                  " Date", "Upload a portfolio", "List all portfolios", "Create Flexible Portfolio",
+          "Sell Stocks " + "from a Portfolio", "Determine Cost Basis", "Exit");
   Map<String, Map<String, List<List<String>>>> flexiblePort = new HashMap<>();
   Map<String, List<List<String>>> flexiblePortfolio = new HashMap<>();
   List<HashMap<String, String>> apiStockData = new ArrayList<>();
-
   Map<String, Integer> tickerFinder = new HashMap<>();
-
   Set<String> companiesInPortfolio = new HashSet<>();
+  private String checkIfTickerExistsReturnValue;
 
   public Map<String, Map<String, List<List<String>>>> getFlexiblePort() {
     return flexiblePort;
   }
 
   @Override
-  public void setFlexibleNewPortfolio(String name, Map<String,
-          List<List<String>>> companyDetails) {
+  public void setFlexibleNewPortfolio(String name, Map<String, List<List<String>>> companyDetails) {
     flexiblePort.put(name, companyDetails);
   }
 
@@ -92,7 +81,6 @@ public class MockModel implements Model {
   public List<HashMap<String, String>> getApiStockData() {
     return apiStockData;
   }
-
 
   @Override
   public List<String> getInitialOptions() {
@@ -134,8 +122,7 @@ public class MockModel implements Model {
     for (String filepath : stockCompanies) {
       try {
         //change this when building jar file
-        Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\" +
-                "stockData");
+        Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\" + "stockData");
         String files = String.valueOf(path);
 
         data = new String(Files.readAllBytes(Path.of(files + "\\" + filepath)));
@@ -196,8 +183,7 @@ public class MockModel implements Model {
       JsonPackage json = new JsonPackage(tester);
       List<String> jsonPortfolios = json.anotherFormatter();
 
-      Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\" +
-              "FlexiblePortfolios");
+      Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\" + "FlexiblePortfolios");
       String newPath = String.valueOf(path);
       newPath += "\\" + names.get(i);
       newPath += ".txt";
@@ -227,9 +213,8 @@ public class MockModel implements Model {
 
     //List<String> jsonPortfolios = json.FormatFromHashMap();
 
-    Path path = Path.of(String.valueOf(Path.of(
-            Path.of(System.getProperty("user.dir")) + "\\" +
-                    "InFlexiblePortfolios")));
+    Path path = Path.of(String.valueOf(Path.of(Path.of(System.getProperty("user.dir")) + "\\" +
+            "InFlexiblePortfolios")));
     //System.out.println(path.toString());
     for (int i = 0; i < jsonPortfolios.size(); i++) {
       String newPath = String.valueOf(path);
@@ -268,9 +253,7 @@ public class MockModel implements Model {
 
       double price;
       try {
-        price = Double.parseDouble(stockData.get(stockCompanyName.indexOf(company
-                        .toUpperCase()))
-                .get(currentDate));
+        price = Double.parseDouble(stockData.get(stockCompanyName.indexOf(company.toUpperCase())).get(currentDate));
         ans *= (price * numbers);
       } catch (NullPointerException e) {
         //caught
@@ -309,8 +292,7 @@ public class MockModel implements Model {
       monthVal = String.valueOf(month);
     }
 
-    return year + "-" + monthVal + "-"
-            + dateVal;
+    return year + "-" + monthVal + "-" + dateVal;
   }
 
   @Override
@@ -341,8 +323,6 @@ public class MockModel implements Model {
   public HashMap<String, List<List<String>>> parseJson(String data) {
     JsonPackage jsonp = new JsonPackage();
     HashMap<String, List<List<String>>> filePortfolio = jsonp.Parser(data);
-//    Json json = new Json();
-//    HashMap<String, List<List<String>>> filePortfolio = json.Parser(data);
     return filePortfolio;
   }
 
@@ -364,8 +344,6 @@ public class MockModel implements Model {
       return "Failure";
       //throw new RuntimeException(e);
     }
-    //System.out.println(output);
-
     return output.toString();
   }
 
@@ -400,11 +378,9 @@ public class MockModel implements Model {
   public List<String> getListOfPortfolio(int choice) {
     Path path = null;
     if (choice == 1) {
-      path = Path.of(System.getProperty("user.dir") + "\\" +
-              "InFlexiblePortfolios");
+      path = Path.of(System.getProperty("user.dir") + "\\" + "InFlexiblePortfolios");
     } else if (choice == 2) {
-      path = Path.of(System.getProperty("user.dir") + "\\" +
-              "FlexiblePortfolios");
+      path = Path.of(System.getProperty("user.dir") + "\\" + "FlexiblePortfolios");
     }
     //Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\" + "portfolios");
     List<String> files;
@@ -421,12 +397,10 @@ public class MockModel implements Model {
   @Override
   public void createDirectory() {
     try {
-      Files.createDirectories(Path.of(String.valueOf(Path.of(
-              Path.of(System.getProperty("user.dir")) + "\\" +
-                      "InFlexiblePortfolios"))));
-      Files.createDirectories(Path.of(String.valueOf(
-              Path.of(Path.of(System.getProperty("user.dir")) + "\\" +
-                      "FlexiblePortfolios"))));
+      Files.createDirectories(Path.of(String.valueOf(Path.of(Path.of(System.getProperty("user" +
+              ".dir")) + "\\" + "InFlexiblePortfolios"))));
+      Files.createDirectories(Path.of(String.valueOf(Path.of(Path.of(System.getProperty("user" +
+              ".dir")) + "\\" + "FlexiblePortfolios"))));
     } catch (IOException e) {
       //
     }
@@ -442,19 +416,17 @@ public class MockModel implements Model {
     return successOrFailure;
   }
 
-  private StringBuilder checkIfTickerExistsLogger = new StringBuilder("");
-  private String checkIfTickerExistsReturnValue;
-  public String getLogforCheckIfTickerExist(){
+  public String getLogforCheckIfTickerExist() {
     return checkIfTickerExistsLogger.toString();
   }
 
-  public String getCheckIfTickerExistsReturnValue(){
+  public String getCheckIfTickerExistsReturnValue() {
     return checkIfTickerExistsReturnValue;
   }
 
   @Override
   public boolean checkIfTickerExists(String ticker) {
-    checkIfTickerExistsLogger.append("Received : "+ticker);
+    checkIfTickerExistsLogger.append("Received : " + ticker);
     checkIfTickerExistsReturnValue = String.valueOf(companiesInPortfolio.contains(ticker));
     return companiesInPortfolio.contains(ticker);
   }
@@ -531,7 +503,8 @@ public class MockModel implements Model {
   }
 
   @Override
-  public HashMap<String, Double> getTotalFlexibleStockValue(String portfolioName, String currentDate) {
+  public HashMap<String, Double> getTotalFlexibleStockValue(String portfolioName,
+                                                            String currentDate) {
     return null;
   }
 }

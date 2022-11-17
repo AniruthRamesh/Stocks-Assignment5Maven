@@ -1,4 +1,5 @@
 package HandleMutablePortfolioCreationTest;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -17,6 +18,10 @@ public class ControllerTest extends Abstract {
   MockModel tester;
 
   @Before
+  /**
+   * Setting up the environment for the test.
+   */
+
   public void setup() {
     super.setup();
   }
@@ -25,10 +30,10 @@ public class ControllerTest extends Abstract {
    * {Controller test} check if correct data is sent to model,checkIfTickerExist method.
    */
   @Test
-  public void checkControllerSendProperTickerSymbolForCheckIfTickerExists(){
+  public void checkControllerSendProperTickerSymbolForCheckIfTickerExists() {
     String input = "7\n1\n1\nfees\n3\n1\naapl\n1\n12\n12\n2006\n19\n2\n4\n11";
     tester = super.testingHelper(input);
-    assertEquals("Received : aapl",tester.getLogforCheckIfTickerExist());
+    assertEquals("Received : aapl", tester.getLogforCheckIfTickerExist());
   }
 
 }
