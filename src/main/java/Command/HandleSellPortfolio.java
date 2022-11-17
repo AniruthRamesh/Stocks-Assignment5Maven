@@ -27,7 +27,7 @@ public class HandleSellPortfolio implements Command {
   public Model execute() {
     boolean portfolioOptionExit = false;
     boolean nameEntered = false;
-    String name = "";
+    String name;
 
     while (!portfolioOptionExit) {
       int ans;
@@ -130,17 +130,17 @@ public class HandleSellPortfolio implements Command {
     Double totalStock = 0.0;
     boolean check = false;
     List<List<String>> tickerData = portfolioData.get(ticker);
-    for (int i = 0; i < tickerData.size(); i++) {
+    for (List<String> tickerDatum : tickerData) {
       int compareDate =
-              LocalDate.parse(tickerData.get(i).get(3)).compareTo(LocalDate.parse(dateWishToChange));
+              LocalDate.parse(tickerDatum.get(3)).compareTo(LocalDate.parse(dateWishToChange));
       if (compareDate <= 0) {
-        if (tickerData.get(i).get(0).equals("Buy")) {
-          totalStock += Double.parseDouble(tickerData.get(i).get(2));
-        } else if (tickerData.get(i).get(0).equals("Sell")) {
-          totalStock -= Double.parseDouble(tickerData.get(i).get(2));
+        if (tickerDatum.get(0).equals("Buy")) {
+          totalStock += Double.parseDouble(tickerDatum.get(2));
+        } else if (tickerDatum.get(0).equals("Sell")) {
+          totalStock -= Double.parseDouble(tickerDatum.get(2));
         }
       } else {
-        if (tickerData.get(i).get(0).equals("Sell")) {
+        if (tickerDatum.get(0).equals("Sell")) {
           check = true;
         }
       }
@@ -165,7 +165,7 @@ public class HandleSellPortfolio implements Command {
           totalStock -= stockToSell;
           int index = model.getTickerFinder().get(ticker);
           HashMap<String, String> companyStock = model.getApiStockData().get(index);
-          double valueOfStocks = 0.0;
+          double valueOfStocks;
           try {
             valueOfStocks = Double.parseDouble(companyStock.get(dateWishToChange));
           } catch (Exception e) {
