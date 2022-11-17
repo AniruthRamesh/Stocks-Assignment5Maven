@@ -244,7 +244,7 @@ public interface Model {
 
   /**
    * This method creates an Object of InputDataSource(with the source which we are using,
-   * currently we are using AlphaVantageAPI)
+   * currently we are using AlphaVantageAPI).
    *
    * @param companyTicker String, company ticker symbol to add.
    * @return String, containing a message "Failure" if the ticker is invalid or the stock data.
@@ -324,7 +324,7 @@ public interface Model {
   void setterForFlexiblePortfolio(String name, List<List<String>> companyDetails);
 
   /**
-   * Saves all the flexible Portfolios created
+   * Saves all the flexible Portfolios created.
    */
   void saveFlexiblePortfolios();
 
