@@ -1,4 +1,4 @@
-savePortfolio() -> no longer uses Json-> uses InputData.InputData
+savePortfolio() -> no longer uses Json-> uses inputdata.inputdata
 
 changed controller.start()-> command pattern
 
@@ -8,15 +8,15 @@ removed models.makeListOfDates()
 
 
 additional interfaces and classes
-Command.Command Interface
-(put every handle functions in controller.start() as separate classes implementing Command.Command
+command.command Interface
+(put every handle functions in controller.start() as separate classes implementing command.command
 Interface)
 
-InputData.InputData Interface
+inputdata.inputdata Interface
 
 
 
-additional View.View Methods
+additional view.view Methods
 Ask for which inputDataSource to use
 
 
