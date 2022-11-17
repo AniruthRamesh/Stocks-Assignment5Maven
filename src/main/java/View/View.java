@@ -450,7 +450,10 @@ public class View {
     this.out.println(companyName + "-->" + value);
   }
 
-  // Calling the displayCannotSellStock method.
+  /**
+   * This function prints a message to the user that they cannot sell stock on this date as some
+   * stocks are sold after this.
+   */
   public void displayCannotSellStock() {
     this.out.println("Cannot sell stock on this date as some stocks are sold after this.");
   }

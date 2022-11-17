@@ -91,6 +91,7 @@ public class HandleSellPortfolio implements Command {
           ticker = sc.nextLine();
           if (handleEnterTickerSymbol(ticker)) {
             handleDateSelection(portfolioName, ticker);
+            model.saveFlexiblePortfolios();
           } else {
             view.displayCompanyTickerSymbolIsNotValid();
           }
@@ -184,7 +185,6 @@ public class HandleSellPortfolio implements Command {
     } else {
       view.displayCannotSellStock();
     }
-
 
   }
 //    TreeMap<LocalDate, List<String>> sorted = new TreeMap<>();
