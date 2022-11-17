@@ -1,4 +1,4 @@
-package handleSellPortfolio;
+package totalFlexibleStockValueTest;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,6 +10,10 @@ import mock.MockModel;
 
 import static org.junit.Assert.assertEquals;
 
+/**
+ * This class tests the model class by checking if the correct data is sent from model to
+ * controller.
+ */
 public class ModelTest extends Abstract {
   MockModel tester;
 
@@ -65,38 +69,22 @@ public class ModelTest extends Abstract {
   }
 
   @Test
-  public void sellExistingStocks() {
-    String input = "5\nC:\\Users\\anikr\\Desktop\\Career course\\" +
-            "test.txt\n2\n8\n1\ntest\n1\naapl\n1\n02\n02\n2022\n20\n2\n12";
+  public void finalTotalStockValueTestOnCurrentDate() {
+    String input = "5\nD\\test.txt\n2\n10\n1" +
+            "\ntest\n2\n4\n12";
     tester = super.testingHelper(input);
-    assertEquals("PortfolioUpdated", tester.portfolioUpdated());
+    assertEquals("{}\n" +
+            "{aapl=4124.0}\n" +
+            "{aapl=4124.0,msft=0.0, amzn=0.0}", tester.getGetFinalDataLog());
   }
 
   @Test
-  public void sellMoreThanExistingStocks() {
-    String input = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven\\FlexiblePortfolios" +
-            "test.txt\n2\n8\n1\ntest\n1\naapl\n1\n02\n02\n2022\n20000\n2\n12";
+  public void finalTotalStockValueTestOnDifferentDate() {
+    String input = "5\nD\\test.txt\n2\n10\n1" +
+            "\ntest\n3\n1\n02\n02\n2022\n4\n12";
     tester = super.testingHelper(input);
-    assertEquals("Please enter a valid number. The number is either negative or more than the " +
-            "stocks that exists.", tester.getEnterValidStockToSellLog());
+    assertEquals("{}\n" +
+            "{aapl=38684.8}\n" +
+            "{aapl=38684.8,msft=5955.74, amzn=48196.0}", tester.getGetFinalDataLog());
   }
-
-  @Test
-  public void checkValidDateFailTest() {
-    String input = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven\\FlexiblePortfolios\\" +
-            "test.txt\n2\n8\n1\ntest\n1\naapl\n1\n30\n02\n2022\n2\n12";
-    tester = super.testingHelper(input);
-    assertEquals("truetruetruetruetruetruetruetruefalse", tester.getValidDateLog());
-  }
-
-  @Test
-  public void checkValidDatePassTest() {
-    String input = "5\nC:\\Users\\anikr\\Desktop\\Career course\\test.txt" +
-            "\n2\n8\n1\ntest\n1\naapl\n1\n02\n02\n2022\n2\n12";
-    tester = super.testingHelper(input);
-    assertEquals("truetruetruetruetruetruetruetruetrue", tester.getValidDateLog());
-  }
-
-
 }
-

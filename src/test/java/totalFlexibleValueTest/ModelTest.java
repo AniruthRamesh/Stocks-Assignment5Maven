@@ -3,10 +3,10 @@ package totalFlexibleValueTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import Abstract.Abstract;
-import InputData.AlphaVantageAPI;
-import InputData.InputDataSource;
-import Mock.MockModel;
+import abstractTest.Abstract;
+import inputdata.AlphaVantageApi;
+import inputdata.InputDataSource;
+import mock.MockModel;
 
 import static org.junit.Assert.assertEquals;
 
@@ -45,7 +45,7 @@ public class ModelTest extends Abstract {
   public void checkModelReturnValueAddApiCompanyStockData() {
     String input = "7\n1\n1\nfees\n3\n1\namzn\n1\n25\n10\n2022\n19\n2\n4\n12";
     tester = super.testingHelper(input);
-    InputDataSource inp = new AlphaVantageAPI();
+    InputDataSource inp = new AlphaVantageApi();
     String successOrFailure = inp.getData("amzn");
     assertEquals(successOrFailure, tester.getAddApiCompanyStockDataReturnValue());
   }

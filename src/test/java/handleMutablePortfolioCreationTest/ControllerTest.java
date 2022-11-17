@@ -1,21 +1,30 @@
-package handleSellPortfolio;
+package handleMutablePortfolioCreationTest;
 
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.HashMap;
+
 import abstractTest.Abstract;
+import inputdata.AlphaVantageApi;
+import inputdata.InputDataSource;
 import mock.MockModel;
 
 import static org.junit.Assert.assertEquals;
 
+
+/**
+ * A Junit test for the class HandleMutablePortfolioCreation. This class is mainly a testing class
+ * for the controller by seeing if the controller send the correct data to the model. A mock model
+ * logs the data received, and we check based on that.
+ */
 public class ControllerTest extends Abstract {
   MockModel tester;
 
-  @Before
   /**
    * Setting up the environment for the test.
    */
-
+  @Before
   public void setup() {
     super.setup();
   }
@@ -39,7 +48,7 @@ public class ControllerTest extends Abstract {
 
   @Test
   public void checkControllerSentPutNameInCompanyInPortfolio() {
-    String input = "7\n1\n1\nfees\n3\n1\namzn\n1\n25\n10\n2022\n19\n2\n4\n12";
+    String input = "7\n1\n1\nfees\n3\n1\namzn\n1\n25\n10\n2022\n19\n2\n4\\\n12";
     tester = super.testingHelper(input);
     assertEquals("Received : amzn", tester.getPutNameInCompanyInPortfolioLog());
   }
@@ -52,19 +61,14 @@ public class ControllerTest extends Abstract {
   }
 
   @Test
-  public void checkSetFlexibleAddPortfolioLog() {
-    String input = "5\nD://test.txt\n2\n8\n1\ntest\n1\naapl\n1\n02\n02\n2022\n20\n2\n12";
+  public void checkControllerSentAddStockData() {
+    String input = "7\n1\n1\nfees\n3\n1\namzn\n1\n25\n10\n2022\n19\n2\n4\n12";
     tester = super.testingHelper(input);
-    assertEquals("Received", tester.getSetFlexibleAddPortfolioLog());
-  }
-
-  @Test
-  public void getflexiblePortfolioContainsCertainKeyLogTest() {
-    String input = "8\n1\nfees\n2\n4\n12";
-    tester = super.testingHelper(input);
-    assertEquals("Received fees", tester.getflexiblePortfolioContainsCertainKeyLog());
+    InputDataSource inp = new AlphaVantageApi();
+    String successOrFailure = inp.getData("amzn");
+    HashMap<String, String> value = tester.convertingStringToHashMap(successOrFailure);
+    assertEquals(value, tester.getAddStockDataFlexibleListLogger());
   }
 
 
 }
-

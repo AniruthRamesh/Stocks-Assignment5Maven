@@ -3,8 +3,8 @@ package previousTest;
 import org.junit.Before;
 import org.junit.Test;
 
-import Abstract.Abstract;
-import Mock.MockModel;
+import abstractTest.Abstract;
+import mock.MockModel;
 
 import static org.junit.Assert.assertEquals;
 

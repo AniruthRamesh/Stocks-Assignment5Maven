@@ -10,13 +10,13 @@ import java.io.OutputStream;
 import java.io.PrintStream;
 import java.util.List;
 
-import Abstract.Abstract;
-import Controller.Controller;
-import Controller.ControllerImpl;
-import Mock.MockModel;
-import Model.Model;
-import Model.ModelImpl;
-import View.View;
+import abstractTest.Abstract;
+import controller.Controller;
+import controller.ControllerImpl;
+import mock.MockModel;
+import model.Model;
+import model.ModelImpl;
+import view.View;
 
 import static org.junit.Assert.assertEquals;
 
