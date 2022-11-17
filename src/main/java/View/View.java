@@ -385,7 +385,7 @@ public class View {
   }
 
   /**
-   * This function prints out a message asking the user to enter a ticker symbol for the company
+   * This function prints out a message asking the user to enter a ticker symbol for the company.
    */
   public void askForTickerSymbol() {
     this.out.println("Enter ticker symbol for the company:");
@@ -408,6 +408,9 @@ public class View {
     this.out.println("2. Exit");
   }
 
+  /**
+   * This function asks the user to enter 1 for inflexible portfolios or 2 for flexible portfolios.
+   */
   public void askForFlexibleOrInFlexible() {
     this.out.println("Enter 1, for Inflexible Portfolios:");
     this.out.println("Enter 2, for Flexible Portfolios:");
@@ -437,8 +440,19 @@ public class View {
     this.out.println("No Stocks to sell.");
   }
 
+  /**
+   * This function displays the total flex value for a company.
+   *
+   * @param companyName The name of the company
+   * @param value       The value of the flex field.
+   */
   public void displayTotalFlexValue(String companyName, String value) {
     this.out.println(companyName + "-->" + value);
+  }
+
+  // Calling the displayCannotSellStock method.
+  public void displayCannotSellStock() {
+    this.out.println("Cannot sell stock on this date as some stocks are sold before this.");
   }
 
 }

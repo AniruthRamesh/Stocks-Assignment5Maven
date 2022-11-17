@@ -93,7 +93,6 @@ public class HandleTotalStockForFlexiblePortfolio implements Command {
     Double amount = 0.0;
     for (Map.Entry<String, Double> set :
             totalValue.entrySet()) {
-      amount = 0.0;
       amount += set.getValue();
       if (set.getValue() != 0) {
         view.displayTotalFlexValue(set.getKey(), String.valueOf(set.getValue()));

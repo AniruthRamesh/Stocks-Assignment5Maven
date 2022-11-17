@@ -2,6 +2,7 @@ package Command;
 
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -75,7 +76,6 @@ public class HandleSellPortfolio implements Command {
   }
 
   public void handleSellPortfolioOptions(String portfolioName) {
-    String currentDate = model.getCurrentDate();
     boolean optionExit = false;
 
     while (!optionExit) {
@@ -109,12 +109,10 @@ public class HandleSellPortfolio implements Command {
   }
 
   public boolean handleEnterTickerSymbol(String name) {
-
     return model.checkIfTickerExists(name);
   }
 
   public void handleDateSelection(String portfolioName, String ticker) {
-    view.displaySelectDateOption(model.getCurrentDate());
     DateHelper helper = new DateHelper(view, model, sc);
     String dateWishToChange = helper.helper();
     if (!dateWishToChange.isEmpty()) {
@@ -130,6 +128,7 @@ public class HandleSellPortfolio implements Command {
             model.getParticularFlexiblePortfolio(portfolioName);
     Double totalStock = 0.0;
     List<List<String>> tickerData = portfolioData.get(ticker);
+    Map<LocalDate, List<String>> sellDates = new HashMap<>();
     for (int i = 0; i < tickerData.size(); i++) {
       int compareDate =
               LocalDate.parse(tickerData.get(i).get(3)).compareTo(LocalDate.parse(dateWishToChange));
@@ -137,37 +136,58 @@ public class HandleSellPortfolio implements Command {
         if (tickerData.get(i).get(0).equals("Buy")) {
           totalStock += Double.parseDouble(tickerData.get(i).get(2));
         } else if (tickerData.get(i).get(0).equals("Sell")) {
+          sellDates.put(LocalDate.parse(tickerData.get(i).get(3)), tickerData.get(i));
           totalStock -= Double.parseDouble(tickerData.get(i).get(2));
         }
       }
     }
-    if (totalStock == 0) {
-      view.displayNoStockToSell();
-    } else {
-      view.askForNumberOfStocksToSell();
-      double stockToSell;
-      sc.nextLine();
-      stockToSell = ceil(Double.parseDouble(sc.nextLine()));
-      if (stockToSell == totalStock || (stockToSell < totalStock && stockToSell >= 0)) {
-        totalStock -= stockToSell;
-        int index = model.getTickerFinder().get(ticker);
-        HashMap<String, String> companyStock = model.getApiStockData().get(index);
-        double valueOfStocks = 0.0;
+    if (sellDates.size() == 0) {
+      if (totalStock == 0) {
+        view.displayNoStockToSell();
+      } else {
+        view.askForNumberOfStocksToSell();
+        double stockToSell;
+        sc.nextLine();
+
         try {
-          valueOfStocks = Double.parseDouble(companyStock.get(dateWishToChange));
-        } catch (Exception e) {
-          view.displayNoStockDataForGivenDate();
-          return;
+          stockToSell = ceil(Double.parseDouble(sc.nextLine()));
+        } catch (InputMismatchException e) {
+          view.displayOnlyIntegers();
+          stockToSell = 0.0;
+          sc.next();
         }
 
-        double commission = totalStock * 0.1 * valueOfStocks;
-        model.setFlexibleAddPortfolio(portfolioName, ticker, List.of("Sell", ticker,
-                String.valueOf(stockToSell),
-                dateWishToChange, String.valueOf(commission), String.valueOf(totalStock)));
-        view.displayPortfolioUpdated();
-      } else {
-        view.enterValidStockToSell();
+        if (stockToSell == totalStock || (stockToSell < totalStock && stockToSell >= 0)) {
+          totalStock -= stockToSell;
+          int index = model.getTickerFinder().get(ticker);
+          HashMap<String, String> companyStock = model.getApiStockData().get(index);
+          double valueOfStocks = 0.0;
+          try {
+            valueOfStocks = Double.parseDouble(companyStock.get(dateWishToChange));
+          } catch (Exception e) {
+            view.displayNoStockDataForGivenDate();
+            return;
+          }
+
+          double commission = totalStock * 0.1 * valueOfStocks;
+          model.setFlexibleAddPortfolio(portfolioName, ticker, List.of("Sell", ticker,
+                  String.valueOf(stockToSell),
+                  dateWishToChange, String.valueOf(commission), String.valueOf(totalStock)));
+          view.displayPortfolioUpdated();
+        } else {
+          view.enterValidStockToSell();
+        }
       }
+
+    } else {
+      view.displayCannotSellStock();
     }
+//    TreeMap<LocalDate, List<String>> sorted = new TreeMap<>();
+
+    // Copy all data from hashMap into TreeMap
+//    sorted.putAll(sellDates);
+//    System.out.println(sorted);
+
+
   }
 }
