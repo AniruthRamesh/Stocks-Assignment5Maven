@@ -10,6 +10,9 @@ import java.util.Scanner;
 import Model.Model;
 import View.View;
 
+/**
+ * This class is used to handle the total stock value of a flexible portfolio.
+ */
 public class HandleTotalStockForFlexiblePortfolio implements Command {
   Scanner sc;
   View view;

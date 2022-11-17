@@ -64,7 +64,8 @@ public class ModelImpl implements Model {
   }
 
   @Override
-  public void setFlexibleNewPortfolio(String name, Map<String, List<List<String>>> companyDetails) {
+  public void setFlexibleNewPortfolio(String name, Map<String,
+          List<List<String>>> companyDetails) {
     flexiblePort.put(name, companyDetails);
   }
 
@@ -130,8 +131,14 @@ public class ModelImpl implements Model {
   public void getContentsFromFile() {
     for (String filepath : stockCompanies) {
       try {
-        //change this when building jar file
-        Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\" + "stockData");
+        //use this for main
+        Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\" +
+                "stockData");
+
+        //use this when building jar
+//        Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\" +
+//                "stockData");
+
         String files = String.valueOf(path);
 
         data = new String(Files.readAllBytes(Path.of(files + "\\" + filepath)));
@@ -214,12 +221,8 @@ public class ModelImpl implements Model {
 
     JsonPackage jsonp = new JsonPackage(this.inflexiblePortfolio, names);
     List<String> jsonPortfolios = jsonp.FormatFromHashMap();
-
-    //List<String> jsonPortfolios = json.FormatFromHashMap();
-
     Path path = Path.of(String.valueOf(Path.of(Path.of(System.getProperty("user.dir")) + "\\" +
             "InFlexiblePortfolios")));
-    //System.out.println(path.toString());
     for (int i = 0; i < jsonPortfolios.size(); i++) {
       String newPath = String.valueOf(path);
       newPath += "\\" + names.get(i);
@@ -347,8 +350,6 @@ public class ModelImpl implements Model {
       return "Failure";
       //throw new RuntimeException(e);
     }
-    //System.out.println(output);
-
     return output.toString();
   }
 
@@ -459,7 +460,8 @@ public class ModelImpl implements Model {
 
   @Override
   public void setFlexibleAddPortfolio(String portfolioName, String key, List<String> companies) {
-    List<List<String>> company = new ArrayList<>(flexiblePort.get(portfolioName).get(key));
+    List<List<String>> company = new ArrayList<>();
+    company.addAll(flexiblePort.get(portfolioName).get(key));
     company.add(companies);
     flexiblePort.get(portfolioName).put(key, company);
   }

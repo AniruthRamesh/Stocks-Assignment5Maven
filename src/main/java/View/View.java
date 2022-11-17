@@ -260,7 +260,7 @@ public class View {
   public void displayTotalStockValue(String portfolioName, String currentDate, String totalValue) {
     this.out.println("Portfolio: " + portfolioName);
     this.out.println("Date: " + currentDate);
-    this.out.println("Total Value: " + totalValue);
+    this.out.println("Total Value: $ " + totalValue);
     this.out.println();
   }
 
@@ -268,7 +268,7 @@ public class View {
                                              String totalValue) {
     this.out.println("Portfolio: " + portfolioName);
     this.out.println("Date: " + DateSelected);
-    this.out.println("Total Value: " + totalValue);
+    this.out.println("Total Value: $" + totalValue);
     this.out.println();
   }
 
@@ -303,7 +303,8 @@ public class View {
    * @param path The path where the portfolio is saved.
    */
   void displayAllPortfolioSaved(String path) {
-    this.out.println("All the portfolio created have been saved and It is in the location: " + path);
+    this.out.println("All the portfolio created have been saved and It is in the location: "
+            + path);
     this.out.println();
   }
 
@@ -379,13 +380,13 @@ public class View {
    * symbol they inputted doesn't exist.
    */
   public void displayCompanyTickerSymbolIsNotValid() {
-    this.out.println("Company associated with this ticker symbol doesn't exists. Please input " +
-            "the" + " correct ticker symbol.");
+    this.out.println("Please input correct ticker Symbol");
     this.out.println();
   }
 
+
   /**
-   * This function prints out a message asking the user to enter a ticker symbol for the company.
+   * This function asks the user for a ticker symbol.
    */
   public void askForTickerSymbol() {
     this.out.println("Enter ticker symbol for the company:");
@@ -414,6 +415,15 @@ public class View {
   public void askForFlexibleOrInFlexible() {
     this.out.println("Enter 1, for Inflexible Portfolios:");
     this.out.println("Enter 2, for Flexible Portfolios:");
+  }
+
+  /**
+   * This function displays the contents of the parameter in the console.
+   *
+   * @param contents The contents to be displayed.
+   */
+  public void displayContentsInParameter(String contents) {
+    this.out.println(contents);
   }
 
   /**
@@ -447,7 +457,7 @@ public class View {
    * @param value       The value of the flex field.
    */
   public void displayTotalFlexValue(String companyName, String value) {
-    this.out.println(companyName + "-->" + value);
+    this.out.println(companyName + "--> $" + value);
   }
 
   /**

@@ -244,7 +244,7 @@ public interface Model {
 
   /**
    * This method creates an Object of InputDataSource(with the source which we are using,
-   * currently we are using AlphaVantageAPI)
+   * currently we are using AlphaVantageAPI).
    *
    * @param companyTicker String, company ticker symbol to add.
    * @return String, containing a message "Failure" if the ticker is invalid or the stock data.
@@ -324,7 +324,7 @@ public interface Model {
   void setterForFlexiblePortfolio(String name, List<List<String>> companyDetails);
 
   /**
-   * Saves all the flexible Portfolios created
+   * Saves all the flexible Portfolios created.
    */
   void saveFlexiblePortfolios();
 
@@ -411,7 +411,7 @@ public interface Model {
   void removeTickerFromPortfolio(String ticker, String portfolioName);
 
   /**
-   * Given a portfolio name, this method returns all the company names in that portfolio
+   * Given a portfolio name, this method returns all the company names in that portfolio.
    *
    * @param portfolioName String, containing portfolio name.
    * @return List of Strings, containing ticker symbol of companies.
@@ -427,5 +427,13 @@ public interface Model {
    */
   List<List<String>> getStockDataInCertainPortfolio(String portfolioName, String CompanyName);
 
+  /**
+   * Given a portfolio name and a date, return a map of stock symbols to their total flexible stock
+   * value.
+   *
+   * @param portfolioName The name of the portfolio you want to get the total stock value of.
+   * @param currentDate   The date for which you want to get the total value of the portfolio.
+   * @return A HashMap of the total value of the flexible stocks in the portfolio.
+   */
   HashMap<String, Double> getTotalFlexibleStockValue(String portfolioName, String currentDate);
 }

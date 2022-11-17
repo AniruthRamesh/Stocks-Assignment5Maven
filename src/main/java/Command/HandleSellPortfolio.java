@@ -12,11 +12,22 @@ import View.View;
 
 import static java.lang.Math.ceil;
 
+/**
+ * This class is used to handle the sell portfolio options.
+ */
 public class HandleSellPortfolio implements Command {
   Model model;
   View view;
   Scanner sc;
 
+  /**
+   * Constructor for this class. Gets what model, view, scanner to use and processes
+   * accordingly.
+   *
+   * @param model Model object.
+   * @param view  View object.
+   * @param sc    Scanner object.
+   */
   public HandleSellPortfolio(Model model, View view, Scanner sc) {
     this.model = model;
     this.view = view;
@@ -27,7 +38,7 @@ public class HandleSellPortfolio implements Command {
   public Model execute() {
     boolean portfolioOptionExit = false;
     boolean nameEntered = false;
-    String name = "";
+    String name;
 
     while (!portfolioOptionExit) {
       int ans;
@@ -57,6 +68,11 @@ public class HandleSellPortfolio implements Command {
     return model;
   }
 
+  /**
+   * This function is used to get the name of the portfolio from the user.
+   *
+   * @return The name of the portfolio.
+   */
   public String handleGetPortfolioName() {
     String name;
     view.displayEnterNameForPortfolio();
@@ -75,6 +91,11 @@ public class HandleSellPortfolio implements Command {
     return name;
   }
 
+  /**
+   * This function is used to handle the sell portfolio options.
+   *
+   * @param portfolioName The name of the portfolio that the user wants to sell stocks from.
+   */
   public void handleSellPortfolioOptions(String portfolioName) {
     boolean optionExit = false;
 
@@ -109,10 +130,22 @@ public class HandleSellPortfolio implements Command {
 
   }
 
+  /**
+   * If the model returns true, then the user has entered a valid ticker symbol.
+   *
+   * @param name The name of the ticker symbol
+   * @return A boolean value.
+   */
   public boolean handleEnterTickerSymbol(String name) {
     return model.checkIfTickerExists(name);
   }
 
+  /**
+   * This function is used to handle the date selection for the user.
+   *
+   * @param portfolioName the name of the portfolio that the user wants to sell from
+   * @param ticker        the ticker of the stock you want to sell
+   */
   public void handleDateSelection(String portfolioName, String ticker) {
     DateHelper helper = new DateHelper(view, model, sc);
     String dateWishToChange = helper.helper();
@@ -123,24 +156,46 @@ public class HandleSellPortfolio implements Command {
     }
   }
 
+  /**
+   * This function handles the selling of stocks in a portfolio.
+   *
+   * @param portfolioName    The name of the portfolio that the user wants to sell stocks from.
+   * @param ticker           The ticker symbol of the stock.
+   * @param dateWishToChange The date on which the user wants to sell the stocks.
+   */
   public void handleStockForSelling(String portfolioName, String ticker,
                                     String dateWishToChange) {
-    Map<String, List<List<String>>> portfolioData =
-            model.getParticularFlexiblePortfolio(portfolioName);
+    Map<String, List<List<String>>> portfolioData = new HashMap<>();
+    try {
+      portfolioData =
+              model.getParticularFlexiblePortfolio(portfolioName);
+    } catch (NullPointerException e) {
+      view.displayNoSuchPortfolio();
+      return;
+    }
+    if (portfolioData == null) {
+      view.displayNoSuchPortfolio();
+      return;
+    }
+
     Double totalStock = 0.0;
     boolean check = false;
+    if (!portfolioData.containsKey(ticker)) {
+      view.displayCompanyTickerSymbolIsNotValid();
+      return;
+    }
     List<List<String>> tickerData = portfolioData.get(ticker);
-    for (int i = 0; i < tickerData.size(); i++) {
+    for (List<String> tickerDatum : tickerData) {
       int compareDate =
-              LocalDate.parse(tickerData.get(i).get(3)).compareTo(LocalDate.parse(dateWishToChange));
+              LocalDate.parse(tickerDatum.get(3)).compareTo(LocalDate.parse(dateWishToChange));
       if (compareDate <= 0) {
-        if (tickerData.get(i).get(0).equals("Buy")) {
-          totalStock += Double.parseDouble(tickerData.get(i).get(2));
-        } else if (tickerData.get(i).get(0).equals("Sell")) {
-          totalStock -= Double.parseDouble(tickerData.get(i).get(2));
+        if (tickerDatum.get(0).equals("Buy")) {
+          totalStock += Double.parseDouble(tickerDatum.get(2));
+        } else if (tickerDatum.get(0).equals("Sell")) {
+          totalStock -= Double.parseDouble(tickerDatum.get(2));
         }
       } else {
-        if (tickerData.get(i).get(0).equals("Sell")) {
+        if (tickerDatum.get(0).equals("Sell")) {
           check = true;
         }
       }
@@ -165,7 +220,7 @@ public class HandleSellPortfolio implements Command {
           totalStock -= stockToSell;
           int index = model.getTickerFinder().get(ticker);
           HashMap<String, String> companyStock = model.getApiStockData().get(index);
-          double valueOfStocks = 0.0;
+          double valueOfStocks;
           try {
             valueOfStocks = Double.parseDouble(companyStock.get(dateWishToChange));
           } catch (Exception e) {
@@ -187,11 +242,4 @@ public class HandleSellPortfolio implements Command {
     }
 
   }
-//    TreeMap<LocalDate, List<String>> sorted = new TreeMap<>();
-
-  // Copy all data from hashMap into TreeMap
-//    sorted.putAll(sellDates);
-//    System.out.println(sorted);
-
-
 }

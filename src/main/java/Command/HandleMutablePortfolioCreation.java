@@ -10,14 +10,23 @@ import Model.Model;
 import View.View;
 
 /**
- * It handles the creation of a mutable portfolio. Stocks can be added or deleted from this
- * portfolio.
+ * It handles the creation of a mutable portfolio. Stocks can be added or to a new portfolio
+ * or add stock to existing portfolio.
  */
 public class HandleMutablePortfolioCreation implements Command {
   Model model;
   View view;
   Scanner sc;
 
+
+  /**
+   * Constructor for this class. Gets what model, view, scanner to use and processes
+   * accordingly.
+   *
+   * @param model Model object.
+   * @param view  View object.
+   * @param sc    Scanner object.
+   */
   public HandleMutablePortfolioCreation(Model model, View view, Scanner sc) {
     this.model = model;
     this.view = view;
@@ -41,7 +50,6 @@ public class HandleMutablePortfolioCreation implements Command {
       switch (choice) {
         case 1:
           name = handleFlexiblePortfolioMenu();
-          //System.out.println(name);
           break;
         case 2:
           name = handleFlexiblePortfolioMenu();
@@ -75,6 +83,12 @@ public class HandleMutablePortfolioCreation implements Command {
     return model;
   }
 
+  /**
+   * This function displays a menu to the user, and returns the name of the portfolio that the user
+   * wants to create.
+   *
+   * @return The name of the portfolio.
+   */
   String handleFlexiblePortfolioMenu() {
     String name = "";
     view.displayPortfolioNameMenu();
@@ -100,6 +114,11 @@ public class HandleMutablePortfolioCreation implements Command {
     return name;
   }
 
+  /**
+   * This function is used to add a stock to a portfolio using the API.
+   *
+   * @param portfolioName The name of the portfolio that the user wants to add the stock to.
+   */
   void handleAddApiCompanyStock(String portfolioName) {
     boolean initialOptions = false;
     int choice;

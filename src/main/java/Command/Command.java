@@ -3,10 +3,8 @@ package Command;
 import Model.Model;
 
 /**
- * This interface acts as a helper interface for our Controller.Controller. We are following
- * Command.Command
- * design pattern to overcome the problem of having our Controller.Controller polluted with several
- * methods.
+ * This interface acts as a helper interface for our Controller. We are following Command design
+ * pattern to overcome the problem of having our Controller polluted with several methods.
  */
 public interface Command {
   /**
