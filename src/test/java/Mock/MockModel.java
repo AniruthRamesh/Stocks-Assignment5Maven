@@ -21,11 +21,31 @@ import Model.Model;
 import OutputDataSource.JsonPackage;
 
 /**
- * This class is a mock of the model, which is mainly used of logging what values controller sends
+ * This class is mock of the model, which is mainly used of logging what values controller sends
  * and what value is calculated after model performs an execution, it is mainly used for
  * testing.
  */
 public class MockModel implements Model {
+  private final StringBuilder logForAddPortfolioData = new StringBuilder();
+  private final StringBuilder logForCheckingIfCompanyNameExist = new StringBuilder();
+  private final StringBuilder logForIsValidDate = new StringBuilder();
+  private final StringBuilder logForMakeStringDate = new StringBuilder();
+  private final StringBuilder logForReadFromFile = new StringBuilder();
+  private final StringBuilder logForParseJson = new StringBuilder();
+  private final StringBuilder logForCheckParsedPortfolio = new StringBuilder();
+  private final StringBuilder logForSetPortfolio = new StringBuilder();
+  private final StringBuilder logForGetPortfolio = new StringBuilder();
+  private final StringBuilder logForGetPortfolioKeys = new StringBuilder();
+  private final StringBuilder LogForGetPortfolioSize = new StringBuilder();
+  private final StringBuilder logForHelper = new StringBuilder();
+  private final StringBuilder logForCheckingHelperWorksCorrectly = new StringBuilder();
+  private final StringBuilder logForSetCurrentDate = new StringBuilder();
+  private final StringBuilder logForPortfolioContainsCertainKey = new StringBuilder();
+  private final StringBuilder logForHasAnotherPortfolioWithSameName = new StringBuilder();
+  private final StringBuilder logForTotalStockValue = new StringBuilder();
+  private final StringBuilder logForSetContainsGivenDate = new StringBuilder();
+  private final StringBuilder logForSavePortfolio = new StringBuilder();
+  private final StringBuilder logForModelSavePortfolio = new StringBuilder();
   List<String> stockCompanies = List.of("AAPL.txt", "AMZN.txt", "ATVI.txt", "BCS.txt",
           "CAJ.txt", "CSCO.txt", "DIS.txt", "JPM.txt", "MCD.txt", "MSFT.txt", "ORCL.txt",
           "SBUX.txt"
@@ -76,6 +96,156 @@ public class MockModel implements Model {
   private String checkIfTickerExistsReturnValue;
   private StringBuilder putNameInCompanyInPortfolioLog = new StringBuilder("");
   private String putNameInCompanyReturnValue;
+
+  private String setFlexibleAddPortfolioLog;
+  public String getSetFlexibleAddPortfolioLog() {
+
+    return setFlexibleAddPortfolioLog;
+  }
+
+  /**
+   * Getter method for logForCheckingHelperWorksCorrectly.
+   *
+   * @return String containing the contents of logForCheckingHelperWorksCorrectly.
+   */
+  public String getLogForCheckingHelper() {
+    return logForCheckingHelperWorksCorrectly.toString();
+  }
+
+  /**
+   * Getter for logForHelper.
+   *
+   * @return String containing the contents of logForHelper.
+   */
+  public String getLogForHelper() {
+    return logForHelper.toString();
+  }
+
+  /**
+   * Getter for LogForGetPortfolioSize.
+   *
+   * @return String containing the contents of LogForGetPortfolioSize.
+   */
+  public String getLogForGetPortfolioSize() {
+    return LogForGetPortfolioSize.toString();
+  }
+
+  /**
+   * Getter for logForGetPortfolioKeys.
+   *
+   * @return String containing the contents of logForGetPortfolioKeys.
+   */
+  public String getLogForPortfolioKeys() {
+    return logForGetPortfolioKeys.toString();
+  }
+
+  /**
+   * Getter for logForReadFromFile.
+   *
+   * @return String containing the contents of logForReadFromFile.
+   */
+  public String getLogForReadFromFile() {
+    return logForReadFromFile.toString();
+  }
+
+  /**
+   * Getter for logForMakeStringDate.
+   *
+   * @return String containing the contents of logForMakeStringDate.
+   */
+  public String getLogForMakeString() {
+    return logForMakeStringDate.toString();
+  }
+
+  /**
+   * Getter for logForIsValidDate.
+   *
+   * @return String containing the contents of logForIsValidDate.
+   */
+  public String getLogForIsValidDate() {
+    return logForIsValidDate.toString();
+  }
+
+  /**
+   * Getter for logForAddPortfolioData.
+   *
+   * @return String containing the contents of logForAddPortfolioData.
+   */
+  public String getLogForAddPortfolioData() {
+    return logForAddPortfolioData.toString();
+  }
+
+  /**
+   * Getter for logForCheckingIfCompanyNameExist.
+   *
+   * @return String containing the contents of logForCheckingIfCompanyNameExist.
+   */
+  public String getLogForCheckingCompanyNameExist() {
+    return logForCheckingIfCompanyNameExist.toString();
+  }
+
+  /**
+   * Getter for logForSavePortfolio.
+   *
+   * @return String containing the contents of logForSavePortfolio.
+   */
+  public String getLogForSavePortfolio() {
+    return logForSavePortfolio.toString();
+  }
+
+  /**
+   * Getter for logForSetCurrentDate.
+   *
+   * @return String containing the contents of logForSetCurrentDate.
+   */
+  public String getLogForSetCurrentDate() {
+    return logForSetCurrentDate.toString();
+  }
+
+  /**
+   * Getter for logForPortfolioContainsCertainKey.
+   *
+   * @return String containing the contents of logForPortfolioContainsCertainKey.
+   */
+  public String getLogForPortfolioContainsCertainKey() {
+    return logForPortfolioContainsCertainKey.toString();
+  }
+
+  /**
+   * Getter for logForHasAnotherPortfolioWithSameName.
+   *
+   * @return String containing the contents of logForHasAnotherPortfolioWithSameName.
+   */
+  public String getLogForHasAnotherPortfolioWithSameName() {
+    return logForHasAnotherPortfolioWithSameName.toString();
+  }
+
+  /**
+   * Getter for logForTotalStockValue.
+   *
+   * @return String containing the contents of logForTotalStockValue.
+   */
+  public String getLogForTotalStockValue() {
+    return logForTotalStockValue.toString();
+  }
+
+  /**
+   * Getter for logForSetContainsGivenDate.
+   *
+   * @return String containing the contents of logForSetContainsGivenDate.
+   */
+  public String getSetContainsGivenDate() {
+    return logForSetContainsGivenDate.toString();
+  }
+
+  /**
+   * Getter for logForModelSavePortfolio.
+   *
+   * @return String containing the contents of logForModelSavePortfolio.
+   */
+  public String getLogForModelSavePortfolio() {
+    return logForModelSavePortfolio.toString();
+  }
 
   @Override
   public Map<String, Map<String, List<List<String>>>> getFlexiblePort() {
@@ -153,6 +323,7 @@ public class MockModel implements Model {
   //setter for currentDate
   @Override
   public void setCurrentDate(String currentDate) {
+    logForSetCurrentDate.append(currentDate);
     this.currentDate = currentDate;
   }
 
@@ -207,12 +378,20 @@ public class MockModel implements Model {
 
   @Override
   public boolean hasAnotherPortfolioWithSameName(String name) {
+    logForHasAnotherPortfolioWithSameName.append(name);
     return inflexiblePortfolio.containsKey(name);
   }
 
   @Override
   public void addsFinalDataToPortfolio(List<List<String>> dataToAdd, String name,
                                        String currentDate) {
+    logForAddPortfolioData.append(name);
+    for (List<String> stringList : dataToAdd) {
+      for (String s : stringList) {
+        logForAddPortfolioData.append(" " + s);
+      }
+    }
+
     ArrayList<List<String>> finalData = new ArrayList<>();
     ArrayList<String> data;
     for (List<String> strings : dataToAdd) {
@@ -225,6 +404,7 @@ public class MockModel implements Model {
 
   @Override
   public boolean checkIfCompanyExists(String name) {
+    logForCheckingIfCompanyNameExist.append("Received:" + name);
     return stockCompanyName.contains(name.toUpperCase());
   }
 
@@ -235,7 +415,7 @@ public class MockModel implements Model {
     if (names.size() == 0) {
       return;
     }
-    //Json json = new Json(this.flexiblePortfolio, names);
+
     for (int i = 0; i < names.size(); i++) {
       Map<String, Map<String, List<List<String>>>> tester = new HashMap<>();
       tester.put(names.get(i), flexiblePort.get(names.get(i)));
@@ -252,9 +432,6 @@ public class MockModel implements Model {
         File myObj = new File(newPath);
         Files.writeString(Path.of(newPath), jsonPortfolios.get(0));
       } catch (FileNotFoundException e) {
-        //
-//        System.out.println(e.getMessage());
-//        System.out.println("exception1");
       } catch (IOException e) {
         //System.out.println("Exception2");
       }
@@ -266,17 +443,14 @@ public class MockModel implements Model {
   public void savePortfolio() {
     List<String> names = new ArrayList<>();
     inflexiblePortfolio.forEach((key, value) -> names.add(key));
-    //Json json = new Json(this.inflexiblePortfolio, names);
 
     JsonPackage jsonp = new JsonPackage(this.inflexiblePortfolio, names);
     List<String> jsonPortfolios = jsonp.FormatFromHashMap();
 
-    //List<String> jsonPortfolios = json.FormatFromHashMap();
 
     Path path = Path.of(String.valueOf(Path.of(
             Path.of(System.getProperty("user.dir")) + "\\" +
                     "InFlexiblePortfolios")));
-    //System.out.println(path.toString());
     for (int i = 0; i < jsonPortfolios.size(); i++) {
       String newPath = String.valueOf(path);
       newPath += "\\" + names.get(i);
@@ -294,17 +468,52 @@ public class MockModel implements Model {
 
   @Override
   public boolean isValidDate(String date) {
+    logForIsValidDate.append("Received:" + date);
     try {
       LocalDate.parse(date);
+      validDateLog.append("true");
       return true;
     } catch (DateTimeParseException e) {
+      validDateLog.append("false");
       return false;
     }
+  }
+
+  StringBuilder getFinalDataLog = new StringBuilder();
+
+  /**
+   * This method returns the logger for getGetFinalDataLog Log, which records the
+   * input received from the controller.
+   * @return String, containing the log.
+   */
+  public String getGetFinalDataLog() {
+    return getFinalDataLog.toString();
+  }
+
+  /**
+   * This method returns the logger for portfolioUpdated Log, which records the
+   * input received from the controller.
+   * @return String, containing the log.
+   */
+  public String portfolioUpdated(){
+    return "PortfolioUpdated";
+  }
+
+  /**
+   * This method returns the logger for getEnterValidStockToSellLog, which records the
+   * input received from the controller.
+   * @return String, containing the log.
+   */
+  public String getEnterValidStockToSellLog() {
+    return "Please enter a valid number. The number is either negative or more than the stocks " +
+            "that exists.";
   }
 
   //if there is no stock data on certain date, we add 0.
   @Override
   public double getTotalStockValue(String portfolioName, String currentDate) {
+    logForTotalStockValue.append(portfolioName);
+    logForTotalStockValue.append(currentDate);
     double ans = 1;
 
     List<List<String>> contents = inflexiblePortfolio.get(portfolioName);
@@ -322,11 +531,13 @@ public class MockModel implements Model {
         //caught
       }
     }
+    logForModelSavePortfolio.append(ans);
     return ans;
   }
 
   @Override
   public int getPortfolioSize() {
+    LogForGetPortfolioSize.append(this.inflexiblePortfolio.size());
     return inflexiblePortfolio.size();
   }
 
@@ -337,11 +548,13 @@ public class MockModel implements Model {
 
   @Override
   public boolean portfolioContainsCertainKey(String name) {
+    logForPortfolioContainsCertainKey.append(name);
     return inflexiblePortfolio.containsKey(name);
   }
 
   @Override
   public String makeStringDate(int day, int month, int year) {
+    logForMakeStringDate.append("Day:" + day + "Month:" + month + "Year:" + year);
     String dateVal;
     String monthVal;
     if (day <= 9) {
@@ -370,11 +583,16 @@ public class MockModel implements Model {
 
   @Override
   public boolean setContainsGivenDate(String date) {
+    logForSetContainsGivenDate.append(date);
     return listOfDates.contains(date);
   }
 
   @Override
   public ArrayList<String> getPortfolioKeys() {
+    List<String> keys = new ArrayList<>(inflexiblePortfolio.keySet());
+    for (String key : keys) {
+      logForGetPortfolioKeys.append(key);
+    }
     return new ArrayList<>(inflexiblePortfolio.keySet());
   }
 
@@ -385,15 +603,15 @@ public class MockModel implements Model {
 
   @Override
   public HashMap<String, List<List<String>>> parseJson(String data) {
+    logForParseJson.append(data);
     JsonPackage jsonp = new JsonPackage();
     HashMap<String, List<List<String>>> filePortfolio = jsonp.Parser(data);
-//    Json json = new Json();
-//    HashMap<String, List<List<String>>> filePortfolio = json.Parser(data);
     return filePortfolio;
   }
 
   @Override
   public String readFromFile(String path) {
+    logForReadFromFile.append("Received:" + path);
     StringBuilder output = new StringBuilder();
     try {
       FileReader filereader = new FileReader(path);
@@ -411,12 +629,26 @@ public class MockModel implements Model {
       //throw new RuntimeException(e);
     }
     //System.out.println(output);
-
+    logForSavePortfolio.append(output);
     return output.toString();
   }
 
   @Override
   public boolean checkParsedPortfolio(Map<String, List<List<String>>> parsedPortfolio) {
+    List<String> keys = new ArrayList<>(parsedPortfolio.keySet());
+    List<List<String>> contents1;
+    List<String> insideContents1;
+    for (String s : keys) {
+      logForCheckParsedPortfolio.append(s);
+      contents1 = parsedPortfolio.get(s);
+      for (List<String> contents : contents1) {
+        insideContents1 = new ArrayList<>(contents);
+        logForCheckParsedPortfolio.append(insideContents1.get(0));
+        logForCheckParsedPortfolio.append(insideContents1.get(1));
+        logForCheckParsedPortfolio.append(insideContents1.get(2));
+      }
+    }
+
     List<String> keyset = new ArrayList<>(parsedPortfolio.keySet());
     List<List<String>> contents;
     List<String> insideContents;
@@ -461,6 +693,8 @@ public class MockModel implements Model {
 
   @Override
   public Double helper(Double val) {
+    logForHelper.append("Received:" + val);
+    logForCheckingHelperWorksCorrectly.append(Double.valueOf(Math.round(val)));
     return Double.valueOf(Math.round(val));
   }
 
@@ -527,7 +761,19 @@ public class MockModel implements Model {
 
   @Override
   public boolean flexiblePortfolioContainsCertainKey(String name) {
+    flexiblePortfolioContainsCertainKeyLog = "Received " + name;
     return flexiblePort.containsKey(name);
+  }
+
+  private StringBuilder validDateLog = new StringBuilder();
+
+  /**
+   * This method returns the logger for validDateLog, which records the
+   * input received from the controller.
+   * @return String, containing the log.
+   */
+  public String getValidDateLog() {
+    return validDateLog.toString();
   }
 
   /**
@@ -550,10 +796,20 @@ public class MockModel implements Model {
     return this.apiStockData.size();
   }
 
+  /**
+   * This method returns the logger for putCompanyNameInTickerFinderLog, which records the
+   * input received from the controller.
+   * @return String, containing the log.
+   */
   public String getPutCompanyNameInTickerFinderLog() {
     return putCompanyNameInTickerFinderLog;
   }
 
+  /**
+   * This method returns the logger for putCompanyNameInTickerFinderReturn Log, which records the
+   * input received from the controller.
+   * @return String, containing the log.
+   */
   public String getPutCompanyNameInTickerFinderReturn() {
     return putCompanyNameInTickerFinderReturn;
   }
@@ -567,9 +823,7 @@ public class MockModel implements Model {
 
   private boolean putCompanyNameInTickerFinderReturn(String name, int number) {
     if (tickerFinder.containsKey(name)) {
-      if (tickerFinder.get(name).equals(number)) {
-        return true;
-      }
+      return tickerFinder.get(name).equals(number);
     }
     return false;
   }
@@ -608,9 +862,20 @@ public class MockModel implements Model {
     return companiesInPortfolio.contains(name);
   }
 
+  private String flexiblePortfolioContainsCertainKeyLog;
+
+  /**
+   * This method returns the logger for flexiblePortfolioContainsCertainKeyLog, which records the
+   * input received from the controller.
+   * @return String, containing the log.
+   */
+  public String getflexiblePortfolioContainsCertainKeyLog() {
+    return flexiblePortfolioContainsCertainKeyLog;
+  }
   @Override
   public void setFlexibleAddPortfolio(String portfolioName, String key, List<String> companies) {
     List<List<String>> company = new ArrayList<>();
+    setFlexibleAddPortfolioLog = "Receive" + "name: " + portfolioName + "key:" + key;
     company.addAll(flexiblePort.get(portfolioName).get(key));
     company.add(companies);
     flexiblePort.get(portfolioName).put(key, company);
@@ -651,7 +916,47 @@ public class MockModel implements Model {
 
   @Override
   public HashMap<String, Double> getTotalFlexibleStockValue(String portfolioName, String currentDate) {
-    return null;
+    HashMap<String, Double> finalData = new HashMap<>();
+    Double[] result = {0.0};
+    Map<String, List<List<String>>> contents = flexiblePort.get(portfolioName);
+
+    contents.forEach((key, value) -> {
+      int ticker = getTickerFinder().get(key);
+      HashMap<String, String> companyStock = getApiStockData().get(ticker);
+      if (companyStock.get(currentDate) != null) {
+        double valueOfStocks = Double.parseDouble(companyStock.get(currentDate));
+        double totalStock = 0.0;
+        result[0] = 0.0;
+        for (int i = 0; i < value.size(); i++) {
+          int compareDate =
+                  LocalDate.parse(value.get(i).get(3)).compareTo(LocalDate.parse(currentDate));
+          if (compareDate <= 0) {
+            if (value.get(i).get(0).equals("Buy")) {
+              totalStock += Double.parseDouble(value.get(i).get(2));
+            } else if (value.get(i).get(0).equals("Sell")) {
+              totalStock -= Double.parseDouble(value.get(i).get(2));
+            }
+          }
+        }
+        result[0] += valueOfStocks * totalStock;
+      } else {
+        result[0] = 0.0;
+      }
+      finalData.put(key, result[0]);
+    });
+    getFinalDataLog.append(finalData);
+    System.out.println(finalData);
+    return finalData;
+  }
+  private String logforParser = "The portfolio provided in the text file is not in proper " +
+          "format,please look at the documentation";
+
+  /**
+   * This method returns the log recorded for checking if the file uploaded is correct or not.
+   * @return String, containing the log.
+   */
+  public String getLogForParser(){
+    return logforParser;
   }
 
   /**

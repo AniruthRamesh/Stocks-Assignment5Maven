@@ -1,4 +1,4 @@
-package HandleMutablePortfolioCreationTest;
+package handleSellPortfolio;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -10,12 +10,6 @@ import Mock.MockModel;
 
 import static org.junit.Assert.assertEquals;
 
-
-/**
- * A Junit test for the class HandleMutablePortfolioCreation. This class is mainly a testing class
- * for the Model. A mock Model logs the calculated values and we check by retrieving values
- * from the logger.
- */
 public class ModelTest extends Abstract {
   MockModel tester;
 
@@ -71,20 +65,36 @@ public class ModelTest extends Abstract {
   }
 
   @Test
-  public void checkModelProperlyAddsCompanyNameInTickerFinder() {
-    String input = "7\n1\n1\nfees\n3\n1\namzn\n1\n25\n10\n2022\n19\n2\n4\n11";
+  public void sellExistingStocks() {
+    String input = "5\nC:\\Users\\anikr\\Desktop\\Career course\\" +
+            "test.txt\n2\n8\n1\ntest\n1\naapl\n1\n02\n02\n2022\n20\n2\n11";
     tester = super.testingHelper(input);
-    assertEquals("true", tester.getPutCompanyNameInTickerFinderReturn());
+    assertEquals("PortfolioUpdated", tester.portfolioUpdated());
   }
 
   @Test
-  public void checkParser(){
-    String input = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven\\FlexiblePortfolios\\" +
-            "invalid.txt\n2\n11";
+  public void sellMoreThanExistingStocks() {
+    String input = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven\\FlexiblePortfolios" +
+            "test.txt\n2\n8\n1\ntest\n1\naapl\n1\n02\n02\n2022\n20000\n2\n11";
     tester = super.testingHelper(input);
-    assertEquals("The portfolio provided in the text file is not in proper format" +
-            ",please look at the documentation",tester.getLogForParser());
+    assertEquals("Please enter a valid number. The number is either negative or more than the " +
+            "stocks that exists.", tester.getEnterValidStockToSellLog());
+  }
 
+  @Test
+  public void checkValidDateFailTest() {
+    String input = "5\nA:\\Intellij\\PDP\\Stocks-Assignment5Maven\\FlexiblePortfolios\\" +
+            "test.txt\n2\n8\n1\ntest\n1\naapl\n1\n30\n02\n2022\n2\n11";
+    tester = super.testingHelper(input);
+    assertEquals("truetruetruetruetruetruetruetruefalse", tester.getValidDateLog());
+  }
+
+  @Test
+  public void checkValidDatePassTest() {
+    String input = "5\nC:\\Users\\anikr\\Desktop\\Career course\\test.txt" +
+            "\n2\n8\n1\ntest\n1\naapl\n1\n02\n02\n2022\n2\n11";
+    tester = super.testingHelper(input);
+    assertEquals("truetruetruetruetruetruetruetruetrue", tester.getValidDateLog());
   }
 
 

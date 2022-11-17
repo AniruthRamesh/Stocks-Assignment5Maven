@@ -380,8 +380,7 @@ public class View {
    * symbol they inputted doesn't exist.
    */
   public void displayCompanyTickerSymbolIsNotValid() {
-    this.out.println("Company associated with this ticker symbol doesn't exists. Please input " +
-            "the" + " correct ticker symbol.");
+    this.out.println("Please input correct ticker Symbol");
     this.out.println();
   }
 
