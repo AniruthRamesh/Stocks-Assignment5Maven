@@ -59,7 +59,7 @@ public class ModelImpl implements Model {
                   + " Date",
           "Upload a portfolio", "List all portfolios", "Create Flexible Portfolio", "Sell Stocks "
                   + "from a Portfolio", "Determine Cost Basis", "Determine value of Flexible "
-                  + "portfolio on certain Date", "Exit");
+                  + "portfolio on certain Date", "Flexible Portfolio performance", "Exit");
 
   Map<String, Map<String, List<List<String>>>> flexiblePort = new HashMap<>();
   Map<String, List<List<String>>> flexiblePortfolio = new HashMap<>();
@@ -141,9 +141,6 @@ public class ModelImpl implements Model {
   public void getContentsFromFile() {
     for (String filepath : stockCompanies) {
       try {
-        //use this for main
-//        Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\"
-//                + "stockData");
         Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\" + "stockData");
 
 
@@ -539,8 +536,6 @@ public class ModelImpl implements Model {
 
     return finalData;
   }
-
-  //////////////////////////////////////////////////////////////////////////////
 
   @Override
   public long numberOfDays(LocalDate date1, LocalDate date2) {

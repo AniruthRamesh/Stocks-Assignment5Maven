@@ -10,6 +10,10 @@ import java.util.Scanner;
 import model.Model;
 import view.View;
 
+/**
+ * This class handles the performance of a portfolio
+ * over a certain period of time.
+ */
 public class HandlePerformance implements Command {
   Model model;
   View view;
