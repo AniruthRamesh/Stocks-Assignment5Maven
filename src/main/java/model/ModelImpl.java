@@ -142,8 +142,10 @@ public class ModelImpl implements Model {
     for (String filepath : stockCompanies) {
       try {
         //use this for main
-        Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\"
-                + "stockData");
+//        Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\"
+//                + "stockData");
+        Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\" + "stockData");
+
 
         String files = String.valueOf(path);
 

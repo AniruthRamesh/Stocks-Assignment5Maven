@@ -25,7 +25,7 @@ public class ModelTest extends Abstract {
   }
 
   /**
-   * {Model test} check if correct data is sent from model(checkIfTickerExist-> false
+   * {Model test} check if correct data is sent from model(checkIfTickerExist false
    * because the ticker does not exist initially) to controller.
    */
   @Test
@@ -36,7 +36,7 @@ public class ModelTest extends Abstract {
   }
 
   /**
-   * {Model test} check if correct data is sent from model(checkIfTickerExist-> true
+   * {Model test} check if correct data is sent from model(checkIfTickerExist true
    * because we have already added aapl stock) to controller.
    */
   @Test

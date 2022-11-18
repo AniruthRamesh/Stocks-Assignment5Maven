@@ -29,11 +29,8 @@ This Readme comprise all the setup required by the project.
 
 * For now, jar file is in the folder res.
 
-* Project Structure is as follows:
-<img width="240" alt="image" src="https://user-images.githubusercontent.com/113320518/199860480-f26212d2-7c3e-4a7c-b647-b5b2a7adb7a9.png">
-
-
-* We are using stock data of 13 companies ranging from dates 02-02-2001 to 10-25-2022 (mm-dd-yyyy) for inflexible portfolio.
+* We are using stock data of 13 companies ranging from dates 02-02-2001 to 16-11-2022 (mm-dd-yyyy)
+for inflexible portfolio.
 
 * The new created Inflexible portfolios are saved in the parent of current working directory in InflexiblePortfolios (a
   new folder created).
@@ -51,6 +48,8 @@ This Readme comprise all the setup required by the project.
 * We are using AlphaVantage API so our program supports all ticker symbol in that API. Example - AAPL(apple), AMZN (Amazon), MSFT(Microsoft), SBUX(Starbucks), DIS(Disney), MCD(McDonalds). The dates are based on the availability in the API. If the date is not available the user will be prompted to enter date again.
 
 * For commission, we are including and deducting a fixed rate of 10% in every transaction of buy and sell. We are not asking for commission rate from the user.
+
+* UML Diagram, Jar file and Bar chart are in res folder.
 
 ## Steps to run program for grading (Flexible portfolio)-
 * On start of the program it shows menu with all options.

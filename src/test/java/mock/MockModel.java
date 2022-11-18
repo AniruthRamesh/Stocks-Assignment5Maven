@@ -814,6 +814,41 @@ public class MockModel implements Model {
     return finalData;
   }
 
+  @Override
+  public long numberOfDays(LocalDate date1, LocalDate date2) {
+    return 0;
+  }
+
+  @Override
+  public Map<String, String> calculatingMonths(LocalDate startingDate, LocalDate endingDate) {
+    return null;
+  }
+
+  @Override
+  public Map<String, String> moreMonths(LocalDate startingDate, LocalDate endingDate) {
+    return null;
+  }
+
+  @Override
+  public Map<String, String> calculatingYears(LocalDate startingDate, LocalDate endingDate) {
+    return null;
+  }
+
+  @Override
+  public Map<String, String> calculatingDays(LocalDate startingDate, LocalDate endingDate) {
+    return null;
+  }
+
+  @Override
+  public Map<String, String> moreDays(LocalDate startingDate, LocalDate endingDate) {
+    return null;
+  }
+
+  @Override
+  public Double calculateValueForGraph(HashMap<String, Double> data) {
+    return null;
+  }
+
   public String getLogForParser() {
     return logforParser;
   }
