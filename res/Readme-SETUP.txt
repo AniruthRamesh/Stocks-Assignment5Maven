@@ -21,7 +21,7 @@ This Readme comprise all the setup required by the project.
 
 * Java 18 and JDK 11 required.
 
-* The jar file can work only from the res folder, as the stock data files are there.
+* The jar file can work only from the res folder. As the stock data for inflexible portfolio is there.
 
 * Stable internet connection.
 
@@ -48,4 +48,50 @@ This Readme comprise all the setup required by the project.
 * The files created using this program is read only, so if you try to create another portfolio with same name, it will not be overwritten. Nothing will happen if you use already existing portfolio
   name.
 
+* We are using AlphaVantage API so our program supports all ticker symbol in that API. Example - AAPL(apple), AMZN (Amazon), MSFT(Microsoft), SBUX(Starbucks), DIS(Disney), MCD(McDonalds). The dates are based on the availability in the API. If the date is not available the user will be prompted to enter date again.
+
+* For commission, we are including and deducting a fixed rate of 10% in every transaction of buy and sell. We are not asking for commission rate from the user.
+
+## Steps to run program for grading (Flexible portfolio)-
+* On start of the program it shows menu with all options.
+* Select option 7 Create portfolio
+* Option 1 Enter name of portfolio
+* click 1 again and give the name of portfolio (like fees)
+* click 3 to add company stock
+* click 1 and enter ticker symbol (like AAPL). If its the first time, adding stocks of this company it will take 2-5 secs for the next step to load as data is fetched from the API.
+* click 1 to enter date.
+* enter day - 02
+* enter month - 02
+* enter year - 2006
+* Enter number of stocks - 16
+* Enter 1 to enter another company's ticker like AMZN
+* click 1 to enter date.
+* enter day - 12
+* enter month - 12
+* enter year - 2006
+* Enter number of stocks - 18
+* Enter 1 to enter another company's ticker like MSFT
+* click 1 to enter date.
+* enter day - 25
+* enter month - 10
+* enter year - 2022
+* Enter number of stocks - 100
+* click 2 to exit
+* click 4 to return to main menu
+* click 10 to check the value on specific date
+* click 1 to enter portfolio name
+* enter 3 to query value on different date
+* click 1 to enter date.
+* enter day - 15
+* enter month - 11
+* enter year - 2022
+* The value of portfolio will be displayed
+* click 4 to return to main menu.
+* click 9 for cost basis
+* enter name of portfolio
+* click 1 to enter date.
+* enter day - 16
+* enter month - 11
+* enter year - 2022
+* The cost basis data will be displayed
 
