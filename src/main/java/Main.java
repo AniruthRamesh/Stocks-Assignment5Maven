@@ -27,7 +27,7 @@ public class Main {
    */
   public static void main(String[] args) {
     //use this for main
-    // Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\");
+    //   Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\");
 
     //use this for jar
     Path path = Path.of(Path.of(System.getProperty("user.dir")) + "");

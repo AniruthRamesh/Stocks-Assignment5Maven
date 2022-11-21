@@ -111,7 +111,7 @@ public class ControllerImpl implements Controller {
           view.displaySwitchCaseDefault();
           break;
       }
-      if (command != null && initialOptions) {
+      if (command != null && !initialOptions) {
         model = command.execute();
       }
     }

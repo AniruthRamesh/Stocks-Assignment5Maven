@@ -45,6 +45,8 @@ for inflexible portfolio.
 * The files created using this program is read only, so if you try to create another portfolio with same name, it will not be overwritten. Nothing will happen if you use already existing portfolio
   name.
 
+* If we query, total stock value or performance on any date afte 16-11-2022 then the value will be 0
+
 * We are using AlphaVantage API so our program supports all ticker symbol in that API. Example - AAPL(apple), AMZN (Amazon), MSFT(Microsoft), SBUX(Starbucks), DIS(Disney), MCD(McDonalds). The dates are based on the availability in the API. If the date is not available the user will be prompted to enter date again.
 
 * For commission, we are including and deducting a fixed rate of 10% in every transaction of buy and sell. We are not asking for commission rate from the user.

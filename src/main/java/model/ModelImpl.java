@@ -508,17 +508,39 @@ public class ModelImpl implements Model {
     HashMap<String, Double> finalData = new HashMap<>();
     Double[] result = {0.0};
     Map<String, List<List<String>>> contents = flexiblePort.get(portfolioName);
-
+    final String[] currentDateCopy = {currentDate};
     contents.forEach((key, value) -> {
       int ticker = getTickerFinder().get(key);
       HashMap<String, String> companyStock = getApiStockData().get(ticker);
-      if (companyStock.get(currentDate) != null) {
-        double valueOfStocks = Double.parseDouble(companyStock.get(currentDate));
+      if (!companyStock.containsKey(currentDateCopy[0])) {
+        boolean continueOrNot = true;
+        while (continueOrNot) {
+          try {
+            LocalDate date = LocalDate.parse(currentDateCopy[0]);
+            currentDateCopy[0] = date.plusDays(1).toString();
+            if (currentDateCopy[0].compareTo("2022-11-17") > 0) {
+              currentDateCopy[0] = null;
+              break;
+            }
+            if (companyStock.containsKey(currentDateCopy[0])) {
+              continueOrNot = false;
+            }
+          } catch (Exception e) {
+            continue;
+          }
+        }
+      }
+
+
+      if (companyStock.get(currentDateCopy[0]) != null) {
+        double valueOfStocks = Double.parseDouble(companyStock.get(currentDateCopy[0]));
         double totalStock = 0.0;
         result[0] = 0.0;
         for (int i = 0; i < value.size(); i++) {
           int compareDate =
-                  LocalDate.parse(value.get(i).get(3)).compareTo(LocalDate.parse(currentDate));
+                  LocalDate.parse(value.get(i).get(3)).compareTo(LocalDate.
+
+                          parse(currentDateCopy[0]));
           if (compareDate <= 0) {
             if (value.get(i).get(0).equals("Buy")) {
               totalStock += Double.parseDouble(value.get(i).get(2));

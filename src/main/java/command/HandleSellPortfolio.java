@@ -43,7 +43,15 @@ public class HandleSellPortfolio implements Command {
     while (!portfolioOptionExit) {
       int ans;
       view.displayPortfolioNameMenu();
-      ans = sc.nextInt();
+      try {
+        ans = sc.nextInt();
+      }
+      catch (InputMismatchException e) {
+        view.displayOnlyIntegers();
+        sc.next();
+        continue;
+      }
+
 
       switch (ans) {
         case 1:
