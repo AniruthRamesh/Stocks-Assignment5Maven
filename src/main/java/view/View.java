@@ -476,5 +476,28 @@ public class View {
     this.out.println("Cannot sell stock on this date as some stocks are sold after this.");
   }
 
+  /**
+   * Tells the user to enter starting date first and ending date second.
+   */
+  public void displayEnterStartingDateFirstAndEndingSecond() {
+    this.out.println("Enter the starting date first and ending date second");
+    this.out.println();
+  }
+
+  /**
+   * Displays that ending date is either same as starting date or it is lesser than starting date.
+   */
+  public void displayEndingDateCannotBeSameOrSmallerThanStartingDate() {
+    this.out.println("Ending date cannot be same or lesser than the starting date");
+  }
+
+  /**
+   * Tells the user that range is very small, and we cannot calculate the performance.
+   */
+  public void displayRangeIsSmall() {
+    this.out.println("The provided range is very small, cannot calculate.");
+    this.out.println();
+  }
+
 }
 

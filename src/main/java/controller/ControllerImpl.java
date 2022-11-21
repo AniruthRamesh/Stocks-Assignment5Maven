@@ -9,6 +9,7 @@ import command.Command;
 import command.HandleCostBasis;
 import command.HandleFastForwardTime;
 import command.HandleMutablePortfolioCreation;
+import command.HandlePerformance;
 import command.HandlePortfolioComposition;
 import command.HandlePortfolioCreation;
 import command.HandleSellPortfolio;
@@ -100,6 +101,9 @@ public class ControllerImpl implements Controller {
           command = new HandleTotalStockForFlexiblePortfolio(model, view, sc);
           break;
         case 11:
+          command = new HandlePerformance(model, view, sc);
+          break;
+        case 12:
           initialOptions = true;
           break;
         default:
@@ -107,7 +111,7 @@ public class ControllerImpl implements Controller {
           view.displaySwitchCaseDefault();
           break;
       }
-      if (!(command == null) && !initialOptions) {
+      if (command != null && !initialOptions) {
         model = command.execute();
       }
     }
