@@ -23,7 +23,16 @@ public class ViewImpl implements View {
     this.out.println(optionNumber + "." + " " + needToDisplay);
   }
 
+  @Override
+  public void displayTotalFlexValue(String companyName, String value) {
+    this.out.println(companyName + "--> $" + value);
+  }
 
+  @Override
+  public void dateSelectionMenu() {
+    this.out.println("1. Enter the Date");
+    this.out.println("2. Exit");
+  }
   @Override
   public void displayOnlyIntegers() {
     this.out.println("Enter only valid Integers");

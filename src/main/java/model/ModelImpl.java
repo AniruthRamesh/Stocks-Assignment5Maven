@@ -651,4 +651,10 @@ public class ModelImpl implements Model {
     }
     return totalValue;
   }
+
+
+  @Override
+  public int getFlexiblePortfolioSize() {
+    return flexiblePort.size();
+  }
 }
