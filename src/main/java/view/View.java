@@ -1,60 +1,28 @@
 package view;
 
-import java.io.PrintStream;
-
-/**
- * This the view class for Stocks.
- * It represents the visualization of the data that model contains.
- */
-public class View {
-  private final PrintStream out;
-
-  /**
-   * Constructor for the View.View Class.
-   *
-   * @param out PrintStream object, required way ex. main method sends System.out.
-   */
-  public View(PrintStream out) {
-    this.out = out;
-  }
-
+public interface View {
   /**
    * This function displays the option number and the string that is passed as a parameter.
    *
    * @param optionNumber  This is the number of the option that will be displayed.
    * @param needToDisplay This is the string that you want to display.
    */
-  public void displayWhatIsInParameter(int optionNumber, String needToDisplay) {
-    this.out.println(optionNumber + "." + " " + needToDisplay);
-  }
+  void displayWhatIsInParameter(int optionNumber, String needToDisplay);
 
   /**
    * Displays only integers are valid values.
    */
-  public void displayOnlyIntegers() {
-    this.out.println("Enter only valid Integers");
-    this.out.println();
-  }
+  void displayOnlyIntegers();
 
   /**
    * Tells the user to enter a valid option.
    */
-  public void displaySwitchCaseDefault() {
-    this.out.println("Enter an valid option.");
-    this.out.println();
-  }
+  void displaySwitchCaseDefault();
 
   /**
    * Displays options menu for creating a new Portfolio.
    */
-  public void portfolioCreation() {
-    this.out.println("1.Give a name for the current Portfolio");
-    this.out.println("2.Show list of Companies");
-    this.out.println("3.Add a company Stock");
-    this.out.println("4.Exit");
-    this.out.println();
-  }
-
+  void portfolioCreation();
 
   /**
    * Displays the name of companies with number of stock.
@@ -62,192 +30,123 @@ public class View {
    * @param stockCompanyName company name
    * @param number           number of stocks.
    */
-  public void displayCompanies(String stockCompanyName, int number) {
-    this.out.println(number + "." + stockCompanyName);
-  }
+  void displayCompanies(String stockCompanyName, int number);
 
   /**
    * Display an empty line.
    */
-  public void displayEmptyLine() {
-    this.out.println();
-  }
-
+  void displayEmptyLine();
 
   /**
    * Display message that user cant change the name of portfolio.
    */
-  public void displayCannotEnterNameAgain() {
-    this.out.println("You already entered Name for this current Portfolio,cannot change Name.");
-    this.out.println();
-  }
+  void displayCannotEnterNameAgain();
 
   /**
    * Display message that name is mandatory for portfolio.
    */
-  public void displayCannotProceedWithoutName() {
-    this.out.println("Please Enter a name for the portfolio first.");
-    this.out.println();
-  }
+  void displayCannotProceedWithoutName();
 
   /**
    * Asks the user to enter name for portfolio.
    */
-  public void displayEnterNameForPortfolio() {
-    this.out.println("Enter Name of the Portfolio:");
-    this.out.println();
-  }
+  void displayEnterNameForPortfolio();
 
   /**
    * Displays that name cannot be empty.
    */
-  public void displayNameCannotBeEmpty() {
-    this.out.println("Name cannot be empty. Enter at least one character");
-    this.out.println();
-  }
+  void displayNameCannotBeEmpty();
 
   /**
    * Tells the user that he has created another portfolio with same name.
    */
-  public void displayAlreadyHaveAnotherPortfolioWithSameName() {
-    this.out.println("You already have another Portfolio with the same name.");
-    this.out.println();
-  }
+  void displayAlreadyHaveAnotherPortfolioWithSameName();
 
   /**
    * Asks the user to enter company name.
    */
-  public void askForCompanyName() {
-    this.out.println("Enter the company name:");
-    this.out.println();
-  }
-
+  void askForCompanyName();
 
   /**
    * Display message for user to enter number of stocks of company.
    */
-  public void askForNumberOfStocks() {
-    this.out.println("Enter number of stocks:");
-    this.out.println();
-  }
+  void askForNumberOfStocks();
 
   /**
    * Display message for the value of stock cannot be less than or equal 0.
    */
-  public void displayStockNumberCannotBeLessThanOrEqualToZero() {
-    this.out.println("Stock value cannot be less than or equal to zero. Please enter a valid"
-            + "number");
-    this.out.println();
-  }
+  void displayStockNumberCannotBeLessThanOrEqualToZero();
 
   /**
    * Displays message that no such company exists.
    */
-  public void displayNoSuchCompanyExist() {
-    this.out.println("There is no such company, enter using the list of companies available");
-    this.out.println();
-  }
+  void displayNoSuchCompanyExist();
 
   /**
    * Displays current portfolio name.
    *
    * @param currPortfolio name of current portfolio
    */
-  public void displayPortfolioName(String currPortfolio) {
-    this.out.println("Portfolio: " + currPortfolio);
-  }
+  void displayPortfolioName(String currPortfolio);
 
   /**
    * Displays data in table layout.
    */
-  public void displayTableLayout() {
-    this.out.println("Company\t\tStock-Numbers\t\tDate-obtained");
-  }
+  void displayTableLayout();
 
   /**
    * Displays content of portfolio.
    *
    * @param contents content in string form.
    */
-  public void displayContentsOfPortfolio(String contents) {
-    this.out.print(contents + "\t\t\t");
-  }
+  void displayContentsOfPortfolio(String contents);
 
   /**
    * Display message if portfolio is empty.
    */
-  public void displayPortfolioIsEmpty() {
-    this.out.println("Portfolio is empty, cannot view composition");
-    this.out.println();
-  }
+  void displayPortfolioIsEmpty();
 
   /**
    * Display options of select date.
    *
    * @param currentDate Date entered.
    */
-  public void displaySelectDateOption(String currentDate) {
-    this.out.println("Current Date: " + currentDate);
-    this.out.println("1.Select Date");
-    this.out.println("2.Exit");
-
-    this.out.println();
-  }
+  void displaySelectDateOption(String currentDate);
 
   /**
    * This function asks the user to enter the day of the month in number.
    */
-  public void askForDayOfTheMonth() {
-    this.out.println("Enter the day of the month in number(1-31):");
-  }
+  void askForDayOfTheMonth();
 
   /**
    * Display message to input month.
    */
-  public void askForMonth() {
-    this.out.println("Enter the month in number(1-12):");
-  }
+  void askForMonth();
 
   /**
    * Display message to input year.
    */
-  public void askForYear() {
-    this.out.println("Enter the year you wish to jump to(2001 - 2022):");
-  }
+  void askForYear();
 
   /**
    * Display message to input valid inputs.
    */
-  public void displayEnterValidDetailsForDate() {
-    this.out.println("Enter valid details.");
-  }
+  void displayEnterValidDetailsForDate();
 
   /**
    * Display message to show that entered date is invalid.
    */
-  public void displayDateIsNotValid() {
-    this.out.println("The entered date is not a valid date.");
-    this.out.println();
-  }
+  void displayDateIsNotValid();
 
   /**
    * Display message options for stock values.
    */
-  public void displayStockValueMenu() {
-    this.out.println("1.Enter the portfolio name to get value for");
-    this.out.println("2.Get total Stock Value on current Date");
-    this.out.println("3.Change the date and get Stock Value");
-    this.out.println("4.Exit");
-    this.out.println();
-  }
+  void displayStockValueMenu();
 
   /**
    * Displays if the user has already entered name for portfolio.
    */
-  public void displayPortfolioNameAlreadyEntered() {
-    this.out.println("You already entered name for portfolio. Choose option 2 or 3 or exit.");
-    this.out.println();
-  }
+  void displayPortfolioNameAlreadyEntered();
 
   /**
    * Displays data of a particular portfolio.
@@ -257,12 +156,7 @@ public class View {
    * @param totalValue    total value of stocks
    */
 
-  public void displayTotalStockValue(String portfolioName, String currentDate, String totalValue) {
-    this.out.println("Portfolio: " + portfolioName);
-    this.out.println("Date: " + currentDate);
-    this.out.println("Total Value: $ " + totalValue);
-    this.out.println();
-  }
+  void displayTotalStockValue(String portfolioName, String currentDate, String totalValue);
 
   /**
    * It prints out the portfolio name, date, and total value.
@@ -272,191 +166,117 @@ public class View {
    *                      portfolio.
    * @param totalValue    The total value of the portfolio.
    */
-  public void displayTotalFlexibleStockValue(String portfolioName, String dateSelected,
-                                             String totalValue) {
-    this.out.println("Portfolio: " + portfolioName);
-    this.out.println("Date: " + dateSelected);
-    this.out.println("Total Value: $" + totalValue);
-    this.out.println();
-  }
+  void displayTotalFlexibleStockValue(String portfolioName, String dateSelected,
+                                      String totalValue);
 
   /**
    * Displays message if no portfolio exists for the name entered.
    */
-  public void displayNoSuchPortfolio() {
-    this.out.println("No such portfolio exists, enter name again");
-    this.out.println();
-  }
+  void displayNoSuchPortfolio();
 
   /**
    * Display message to create portfolio and then check value.
    */
-  public void displayNoPortfolio() {
-    this.out.println("Create portfolio first.");
-    this.out.println();
-  }
+  void displayNoPortfolio();
 
   /**
    * Display is no stock is present for the entered day.
    */
-  public void displayNoStockDataForGivenDate() {
-    this.out.println("There is no stock data for given date, please enter another date");
-    this.out.println();
-  }
-
+  void displayNoStockDataForGivenDate();
 
   /**
    * This function prints out the path of the file where the portfolio is saved.
    *
    * @param path The path where the portfolio is saved.
    */
-  void displayAllPortfolioSaved(String path) {
-    this.out.println("All the portfolio created have been saved and It is in the location: "
-            + path);
-    this.out.println();
-  }
-
+  void displayAllPortfolioSaved(String path);
 
   /**
    * This function asks the user for the file path.
    */
-  public void askForFilePath() {
-    this.out.println("Enter the file path:");
-    this.out.println();
-  }
+  void askForFilePath();
 
   /**
    * This function displays a message to the user that the file path does not exist.
    */
-  public void displayTheFilePathDoesNotExist() {
-    this.out.println("The file path does not exist, Please Enter a valid path");
-    this.out.println();
-  }
-
+  void displayTheFilePathDoesNotExist();
 
   /**
    * This function prints out a message to the user that the portfolio provided in the text file
    * is not
    * in proper format.
    */
-  public void displayDataNotInProperFormat() {
-    this.out.println("The portfolio provided in the text file is not in proper format," + "please"
-            + " look at the documentation");
-    this.out.println();
-  }
+  void displayDataNotInProperFormat();
 
   /**
    * Displays a method to the user saying there is a new version released.
    */
-  public void displayWarning() {
-    this.out.println("Warning: You are using older feature of Stocks");
-    this.out.println("If you wish to use Mutable portfolios, have options to use multiple "
-            + "companies, choose the newer version");
-  }
+  void displayWarning();
 
   /**
    * It prints out the menu for the user to enter the name of the portfolio.
    */
-  public void displayPortfolioNameMenu() {
-    this.out.println("1. Enter the name of the portfolio");
-    this.out.println("2. Exit");
-    this.out.println();
-  }
+  void displayPortfolioNameMenu();
 
   /**
    * It prints out the menu for creating a flexible portfolio.
    */
-  public void displayCreateFlexiblePortfolioMenu() {
-    this.out.println("1. Create new flexible portfolio");
-    this.out.println("2. Edit the existing flexible portfolio");
-    this.out.println("3. Add the company's stock");
-    this.out.println("4. Exit");
-    this.out.println();
-  }
+  void displayCreateFlexiblePortfolioMenu();
 
   /**
    * This function displays the menu for adding a company stock to the portfolio.
    */
-  public void displayAddCompanyStockMenu() {
-    this.out.println("1. Enter the ticker symbol of the desired company.");
-    this.out.println("2. Exit");
-    this.out.println();
-  }
+  void displayAddCompanyStockMenu();
 
   /**
    * This function displays a message to the user that the company associated with the ticker
    * symbol they inputted doesn't exist.
    */
-  public void displayCompanyTickerSymbolIsNotValid() {
-    this.out.println("Please input correct ticker Symbol");
-    this.out.println();
-  }
-
+  void displayCompanyTickerSymbolIsNotValid();
 
   /**
    * This function asks the user for a ticker symbol.
    */
-  public void askForTickerSymbol() {
-    this.out.println("Enter ticker symbol for the company:");
-    this.out.println();
-  }
+  void askForTickerSymbol();
 
   /**
    * This function asks the user for the number of stocks to sell.
    */
-  public void askForNumberOfStocksToSell() {
-    this.out.println("Enter number of stock to sell:");
-    this.out.println();
-  }
+  void askForNumberOfStocksToSell();
 
   /**
    * This function prints out the menu for the user to select the date.
    */
-  public void dateSelectionMenu() {
-    this.out.println("1. Enter the Date");
-    this.out.println("2. Exit");
-  }
+  void dateSelectionMenu();
 
   /**
    * This function asks the user to enter 1 for inflexible portfolios or 2 for flexible portfolios.
    */
-  public void askForFlexibleOrInFlexible() {
-    this.out.println("Enter 1, for Inflexible Portfolios:");
-    this.out.println("Enter 2, for Flexible Portfolios:");
-  }
+  void askForFlexibleOrInFlexible();
 
   /**
    * This function displays the contents of the parameter in the console.
    *
    * @param contents The contents to be displayed.
    */
-  public void displayContentsInParameter(String contents) {
-    this.out.println(contents);
-  }
+  void displayContentsInParameter(String contents);
 
   /**
    * Printing out a message to the user that the number of stocks they want to sell is
    * either negative or more than the stocks that exists.
    */
 
-  public void enterValidStockToSell() {
-    this.out.println("Please enter a valid number. The number is either negative or more than the"
-            + " stocks that exists.");
-  }
+  void enterValidStockToSell();
 
   /**
    * This function displays a message to the user that the profile is updated.
    */
-  public void displayPortfolioUpdated() {
-    this.out.println("Portfolio updated.");
-  }
+  void displayPortfolioUpdated();
 
   /**
    * This function displays a message to the user that there are no stocks to sell.
    */
-  public void displayNoStockToSell() {
-    this.out.println("No Stocks to sell.");
-  }
+  void displayNoStockToSell();
 
   /**
    * This function displays the total flex value for a company.
@@ -464,40 +284,26 @@ public class View {
    * @param companyName The name of the company
    * @param value       The value of the flex field.
    */
-  public void displayTotalFlexValue(String companyName, String value) {
-    this.out.println(companyName + "--> $" + value);
-  }
+  void displayTotalFlexValue(String companyName, String value);
 
   /**
    * This function prints a message to the user that they cannot sell stock on this date as some
    * stocks are sold after this.
    */
-  public void displayCannotSellStock() {
-    this.out.println("Cannot sell stock on this date as some stocks are sold after this.");
-  }
+  void displayCannotSellStock();
 
   /**
    * Tells the user to enter starting date first and ending date second.
    */
-  public void displayEnterStartingDateFirstAndEndingSecond() {
-    this.out.println("Enter the starting date first and ending date second");
-    this.out.println();
-  }
+  void displayEnterStartingDateFirstAndEndingSecond();
 
   /**
    * Displays that ending date is either same as starting date or it is lesser than starting date.
    */
-  public void displayEndingDateCannotBeSameOrSmallerThanStartingDate() {
-    this.out.println("Ending date cannot be same or lesser than the starting date");
-  }
+  void displayEndingDateCannotBeSameOrSmallerThanStartingDate();
 
   /**
    * Tells the user that range is very small, and we cannot calculate the performance.
    */
-  public void displayRangeIsSmall() {
-    this.out.println("The provided range is very small, cannot calculate.");
-    this.out.println();
-  }
-
+  void displayRangeIsSmall();
 }
-

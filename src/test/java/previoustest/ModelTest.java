@@ -17,6 +17,7 @@ import mock.MockModel;
 import model.Model;
 import model.ModelImpl;
 import view.View;
+import view.ViewImpl;
 
 import static org.junit.Assert.assertEquals;
 
@@ -34,7 +35,7 @@ public class ModelTest extends Abstract {
   @Before
   public void setUp() {
     outStream = new ByteArrayOutputStream();
-    viewer = new View(new PrintStream(outStream));
+    viewer = new ViewImpl(new PrintStream(outStream));
     models = new ModelImpl();
     mock = new MockModel();
   }
