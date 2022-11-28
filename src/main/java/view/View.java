@@ -159,17 +159,6 @@ public interface View {
   void displayTotalStockValue(String portfolioName, String currentDate, String totalValue);
 
   /**
-   * It prints out the portfolio name, date, and total value.
-   *
-   * @param portfolioName The name of the portfolio.
-   * @param dateSelected  The date that the user has selected to view the total value of the
-   *                      portfolio.
-   * @param totalValue    The total value of the portfolio.
-   */
-  void displayTotalFlexibleStockValue(String portfolioName, String dateSelected,
-                                      String totalValue);
-
-  /**
    * Displays message if no portfolio exists for the name entered.
    */
   void displayNoSuchPortfolio();
@@ -183,13 +172,6 @@ public interface View {
    * Display is no stock is present for the entered day.
    */
   void displayNoStockDataForGivenDate();
-
-  /**
-   * This function prints out the path of the file where the portfolio is saved.
-   *
-   * @param path The path where the portfolio is saved.
-   */
-  void displayAllPortfolioSaved(String path);
 
   /**
    * This function asks the user for the file path.
@@ -245,11 +227,6 @@ public interface View {
   void askForNumberOfStocksToSell();
 
   /**
-   * This function prints out the menu for the user to select the date.
-   */
-  void dateSelectionMenu();
-
-  /**
    * This function asks the user to enter 1 for inflexible portfolios or 2 for flexible portfolios.
    */
   void askForFlexibleOrInFlexible();
@@ -277,14 +254,6 @@ public interface View {
    * This function displays a message to the user that there are no stocks to sell.
    */
   void displayNoStockToSell();
-
-  /**
-   * This function displays the total flex value for a company.
-   *
-   * @param companyName The name of the company
-   * @param value       The value of the flex field.
-   */
-  void displayTotalFlexValue(String companyName, String value);
 
   /**
    * This function prints a message to the user that they cannot sell stock on this date as some

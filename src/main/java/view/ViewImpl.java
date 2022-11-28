@@ -195,14 +195,6 @@ public class ViewImpl implements View {
     this.out.println();
   }
 
-  @Override
-  public void displayTotalFlexibleStockValue(String portfolioName, String dateSelected,
-                                             String totalValue) {
-    this.out.println("Portfolio: " + portfolioName);
-    this.out.println("Date: " + dateSelected);
-    this.out.println("Total Value: $" + totalValue);
-    this.out.println();
-  }
 
   @Override
   public void displayNoSuchPortfolio() {
@@ -221,14 +213,6 @@ public class ViewImpl implements View {
     this.out.println("There is no stock data for given date, please enter another date");
     this.out.println();
   }
-
-  @Override
-  public void displayAllPortfolioSaved(String path) {
-    this.out.println("All the portfolio created have been saved and It is in the location: "
-            + path);
-    this.out.println();
-  }
-
 
   @Override
   public void askForFilePath() {
@@ -298,12 +282,6 @@ public class ViewImpl implements View {
   }
 
   @Override
-  public void dateSelectionMenu() {
-    this.out.println("1. Enter the Date");
-    this.out.println("2. Exit");
-  }
-
-  @Override
   public void askForFlexibleOrInFlexible() {
     this.out.println("Enter 1, for Inflexible Portfolios:");
     this.out.println("Enter 2, for Flexible Portfolios:");
@@ -328,12 +306,6 @@ public class ViewImpl implements View {
   @Override
   public void displayNoStockToSell() {
     this.out.println("No Stocks to sell.");
-  }
-
-
-  @Override
-  public void displayTotalFlexValue(String companyName, String value) {
-    this.out.println(companyName + "--> $" + value);
   }
 
   @Override

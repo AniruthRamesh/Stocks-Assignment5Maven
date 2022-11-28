@@ -63,7 +63,6 @@ public class ModelImpl implements Model {
                   "Create a Strategy", "Exit");
 
   Map<String, Map<String, List<List<String>>>> flexiblePort = new HashMap<>();
-  Map<String, List<List<String>>> flexiblePortfolio = new HashMap<>();
   List<HashMap<String, String>> apiStockData = new ArrayList<>();
 
   Map<String, Integer> tickerFinder = new HashMap<>();
@@ -90,11 +89,6 @@ public class ModelImpl implements Model {
   public boolean flexiblePortContainsCertainKey(String name) {
     return flexiblePort.containsKey(name);
   }
-
-  public Map<String, List<List<String>>> getFlexiblePortfolio() {
-    return flexiblePortfolio;
-  }
-
   public Map<String, Integer> getTickerFinder() {
     return tickerFinder;
   }
@@ -282,10 +276,6 @@ public class ModelImpl implements Model {
     return inflexiblePortfolio.size();
   }
 
-  @Override
-  public int getFlexiblePortfolioSize() {
-    return flexiblePort.size();
-  }
 
   @Override
   public boolean portfolioContainsCertainKey(String name) {
@@ -454,12 +444,6 @@ public class ModelImpl implements Model {
   public void putCompanyNameInTickerFinder(String name, int number) {
     tickerFinder.put(name, number);
   }
-
-  @Override
-  public void setterForFlexiblePortfolio(String name, List<List<String>> companyDetails) {
-    flexiblePortfolio.put(name, companyDetails);
-  }
-
   @Override
   public void putNameInCompanyInPortfolio(String name) {
     companiesInPortfolio.add(name);
@@ -476,11 +460,6 @@ public class ModelImpl implements Model {
   @Override
   public Map<String, List<List<String>>> getParticularFlexiblePortfolio(String portfolioName) {
     return flexiblePort.get(portfolioName);
-  }
-
-  @Override
-  public void removeTickerFromPortfolio(String ticker, String portfolioName) {
-    flexiblePort.get(portfolioName).remove(ticker);
   }
 
   @Override
