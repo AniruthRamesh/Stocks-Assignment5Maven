@@ -79,7 +79,6 @@ public class JsonPackage implements SavingDataSource {
 
   @Override
   public HashMap<String, List<List<String>>> parser(String json) {
-    HashMap<String, List<List<String>>> parsed = new Gson().fromJson(json, HashMap.class);
-    return parsed;
+    return new Gson().fromJson(json, HashMap.class);
   }
 }

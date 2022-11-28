@@ -11,6 +11,7 @@ import controller.ControllerImpl;
 import model.Model;
 import model.ModelImpl;
 import view.View;
+import view.ViewImpl;
 
 /**
  * This is the class which contains main method. Creates an object for view with PrintStream
@@ -38,7 +39,7 @@ public class Main {
 
 
     Model model = new ModelImpl();
-    View view = new View(System.out);
+    View view = new ViewImpl(System.out);
     model.createDirectory();
     Controller controller = new ControllerImpl(model, view, System.in);
     controller.start();

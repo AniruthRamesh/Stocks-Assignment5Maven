@@ -128,13 +128,6 @@ public interface Model {
   int getPortfolioSize();
 
   /**
-   * Returns the number of flexible assets in the portfolio.
-   *
-   * @return The size of the flexible portfolio.
-   */
-  int getFlexiblePortfolioSize();
-
-  /**
    * Returns true if the portfolio contains a stock with the given name.
    *
    * @param name The name of the portfolio you want to check.
@@ -296,22 +289,6 @@ public interface Model {
    */
   List<HashMap<String, String>> getApiStockData();
 
-
-  /**
-   * Getter for flexiblePortfolio hashmap.
-   *
-   * @return Map of String, list of list of strings containing portfolio data.
-   */
-  Map<String, List<List<String>>> getFlexiblePortfolio();
-
-  /**
-   * Setter for adding a particular company stock details to a portfolio.
-   *
-   * @param name           String,Portfolio name.
-   * @param companyDetails List of List of Strings, containing company stock details.
-   */
-  void setterForFlexiblePortfolio(String name, List<List<String>> companyDetails);
-
   /**
    * Saves all the flexible Portfolios created.
    */
@@ -391,14 +368,6 @@ public interface Model {
    * @return A HashMap of String to List of List of String.
    */
   Map<String, List<List<String>>> getParticularFlexiblePortfolio(String portfolioName);
-
-  /**
-   * Removes a ticker from a portfolio.
-   *
-   * @param ticker        The ticker symbol of the stock you want to remove from the portfolio.
-   * @param portfolioName The name of the portfolio you want to remove the ticker from.
-   */
-  void removeTickerFromPortfolio(String ticker, String portfolioName);
 
   /**
    * Given a portfolio name, this method returns all the company names in that portfolio.

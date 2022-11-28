@@ -12,6 +12,7 @@ import controller.Controller;
 import controller.ControllerImpl;
 import mock.MockModel;
 import view.View;
+import view.ViewImpl;
 
 /**
  * This class is a helper class which all test classes extend, Every test class needs object of
@@ -27,7 +28,7 @@ public abstract class Abstract {
   @Before
   public void setup() {
     outStream = new ByteArrayOutputStream();
-    view = new View(new PrintStream(outStream));
+    view = new ViewImpl(new PrintStream(outStream));
     tester = new MockModel();
   }
 
