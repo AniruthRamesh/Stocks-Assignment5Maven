@@ -2,7 +2,6 @@ package controller;
 
 public interface Features {
 
-
   void createNewFlexiblePortfolio();
 
   void sellPortfolio();
@@ -21,4 +20,5 @@ public interface Features {
 
   void exit();
 
+  void createGraph();
 }

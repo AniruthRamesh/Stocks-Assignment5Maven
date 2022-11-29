@@ -61,4 +61,9 @@ public class ControllerGUIImpl implements Features {
     System.exit(0);
   }
 
+  @Override
+  public void createGraph() {
+
+  }
+
 }

@@ -19,9 +19,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   JButton dollarCostAvg = new JButton("Dollar Cost Averaging");
   JButton dollarCostAvgPerformance = new JButton("Dollar Cost Average Performance");
   JButton exit = new JButton("Exit");
-  private JLabel display;
-  private JButton echoButton, exitButton, toggleButton;
-  private JTextField input;
 
   public ViewGuiImpl(String caption) {
     super(caption);
@@ -50,5 +47,14 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   @Override
   public void addFeatures(ControllerGUIImpl features) {
     exit.addActionListener(evt -> features.exit());
+    createFlexiblePortfolio.addActionListener(evt -> features.createNewFlexiblePortfolio());
+    sellStocksFromAPortfolio.addActionListener(evt -> features.sellPortfolio());
+    determineCostBasis.addActionListener(evt -> features.costBasis());
+    portfolioOnCertainDateFlexible.addActionListener(evt -> features.totalValue());
+    portfolioPerformance.addActionListener(evt -> features.createGraph());
+    uploadPortfolio.addActionListener(evt -> features.uploadPortfolio());
+    savePortfolio.addActionListener(evt -> features.savePortfolio());
+    dollarCostAvg.addActionListener(evt -> features.dollarCostAveraging());
+    dollarCostAvgPerformance.addActionListener(evt -> features.dollarCostAveragingAndQueryCostBasisAndValue());
   }
 }
