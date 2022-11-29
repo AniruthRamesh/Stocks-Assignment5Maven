@@ -10,7 +10,6 @@ import java.util.zip.ZipInputStream;
 import controller.Controller;
 import controller.ControllerGUIImpl;
 import controller.ControllerImpl;
-import controller.Features;
 import model.Model;
 import model.ModelImpl;
 import view.View;
@@ -42,40 +41,35 @@ public class Main {
     //change the view object
     //add necessary constructors
 
-    String zipFilePath = path.toString() + "\\stockData.zip";
+    String zipFilePath = path + "\\stockData.zip";
     String destDir = path.toString();
     unzip(zipFilePath, destDir);
 
     Model model = new ModelImpl();
     View view = new ViewImpl(System.out);
-    ViewGui viewGui = new ViewGuiImpl();
-    Controller controller = new ControllerImpl(model,view,System.in);
-    Features controllerGui = new ControllerGUIImpl(model,viewGui);
+    ViewGui viewGui;
+    Controller controller;
     model.createDirectory();
 
-     Scanner sc = new Scanner(System.in);
+    Scanner sc = new Scanner(System.in);
     String viewType;
     boolean exitStatus = true;
-    while(exitStatus){
+    while (exitStatus) {
       System.out.println("Which view do you want to use?");
       System.out.println("Enter T for textbase View or Enter G for GUI bases View");
       viewType = sc.nextLine();
-      if(viewType.equals("T")){
+      if (viewType.equals("T")) {
         controller = new ControllerImpl(model, view, System.in);
         controller.start();
         exitStatus = false;
-      }
-      else if(viewType.equals("G")){
-        controllerGui = new ControllerGUIImpl(model,viewGui);
+      } else if (viewType.equals("G")) {
+        viewGui = new ViewGuiImpl("Stock Application");
+        new ControllerGUIImpl(model, viewGui);
         exitStatus = false;
-      }
-      else{
+      } else {
         System.out.println("Please enter valid input");
       }
     }
-
-
-    //change model.getContentsFromFile when building jar
   }
 
   private static void unzip(String zipFilePath, String destDir) {

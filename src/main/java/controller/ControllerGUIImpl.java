@@ -1,15 +1,19 @@
 package controller;
+
 import command.Command;
 import model.Model;
 import view.ViewGui;
 
-public class ControllerGUIImpl implements Features{
+public class ControllerGUIImpl implements Features {
   ViewGui view;
   Model model;
   Command command;
+
   public ControllerGUIImpl(Model model, ViewGui viewGui) {
     this.model = model;
     this.view = viewGui;
+    this.view.addFeatures(this);
+
   }
 
   @Override
@@ -51,4 +55,10 @@ public class ControllerGUIImpl implements Features{
   public void dollarCostAveragingAndQueryCostBasisAndValue() {
 
   }
+
+  @Override
+  public void exit() {
+    System.exit(0);
+  }
+
 }

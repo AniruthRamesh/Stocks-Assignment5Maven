@@ -74,7 +74,7 @@ public class HandleCostBasis implements Command {
     Double overallTotalMoneySpent = 0.0;
     Double totalMoneySpent = 0.0;
     for (int i = 0; i < actualCompanyData.size(); i++) {
-
+      totalMoneySpent = 0.0;
       List<List<String>> data = model.getStockDataInCertainPortfolio(portfolioName,
               actualCompanyData.get(i));
       view.displayEmptyLine();
@@ -118,7 +118,7 @@ public class HandleCostBasis implements Command {
    *
    * @param number the number of underscores to return
    * @return The number of underscores that are needed to fill the space between the left and
-   *        right side of the tree.
+   * right side of the tree.
    */
   private String helper(int number) {
     StringBuilder str = new StringBuilder();

@@ -2,6 +2,7 @@ package controller;
 
 public interface Features {
 
+
   void createNewFlexiblePortfolio();
 
   void sellPortfolio();
@@ -17,5 +18,7 @@ public interface Features {
   void dollarCostAveraging();
 
   void dollarCostAveragingAndQueryCostBasisAndValue();
+
+  void exit();
 
 }

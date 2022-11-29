@@ -14,7 +14,7 @@ import view.View;
 /**
  * This class handles creating a new Strategy plan and adding stocks in the portfolio.
  */
-public class HandleStrategy implements Command{
+public class HandleStrategy implements Command {
   Scanner sc;
   View view;
   Model model;
@@ -51,31 +51,31 @@ public class HandleStrategy implements Command{
     duration = 0;
     portfolioName = "";
   }
+
   @Override
   public Model execute() {
     boolean exit = false;
-    while(!exit){
+    while (!exit) {
       view.displayContentsInParameter("1. Enter name of the Portfolio.\n2. Exit");
       int input;
-      try{
+      try {
         input = sc.nextInt();
-      }
-      catch(InputMismatchException e){
+      } catch (InputMismatchException e) {
         view.displayOnlyIntegers();
         sc.next();
         continue;
       }
-      if(input==1){
+      if (input == 1) {
         handlingStrategy();
-        if(tickers.size()==0){
+        if (tickers.size() == 0) {
           continue;
         }
         view.displayContentsInParameter("Enter start date first and then end date");
         boolean askEndDate = true;
-        while(startDate.length()==0&&askEndDate){
-          DateHelper date = new DateHelper(view,model,sc);
+        while (startDate.length() == 0 && askEndDate) {
+          DateHelper date = new DateHelper(view, model, sc);
           startDate = date.helper();
-          if(startDate.equals("")){
+          if (startDate.equals("")) {
             view.displayDateIsNotValid();
             continue;
           }
@@ -83,52 +83,49 @@ public class HandleStrategy implements Command{
           view.displayContentsInParameter("Enter Y for yes, N for no.");
           sc.nextLine();
           String askingEndDate = sc.nextLine();
-          if(askingEndDate.equals("Y")||askingEndDate.equals("N")){
-            if(askingEndDate.equals("N")){
+          if (askingEndDate.equals("Y") || askingEndDate.equals("N")) {
+            if (askingEndDate.equals("N")) {
               askEndDate = false;
               continue;
             }
-          }
-          else{
-            view.displayContentsInParameter("Enter valid Details and please enter Start date again");
+          } else {
+            view.displayContentsInParameter("Enter valid Details and please enter Start date " +
+                    "again");
             startDate = "";
             continue;
           }
           endDate = date.helper();
-          if(endDate.equals("")){
+          if (endDate.equals("")) {
             view.displayDateIsNotValid();
           }
         }
         //add the logic for getting months, years,days etc.
-        while(myd.length()==0){
+        while (myd.length() == 0) {
           view.displayContentsInParameter("Enter D for days, Enter M for months, " +
                   "Enter Y for years");
           //sc.nextLine();
           myd = sc.nextLine();
-          if(myd.equals("D")||myd.equals("M")||myd.equals("Y")){
-            try{
+          if (myd.equals("D") || myd.equals("M") || myd.equals("Y")) {
+            try {
               view.displayContentsInParameter("Enter the duration:");
               duration = sc.nextInt();
-            }
-            catch(InputMismatchException e){
+            } catch (InputMismatchException e) {
               view.displayOnlyIntegers();
               sc.next();
               continue;
             }
-            if(myd.equals("D")){
-              if(duration>31){
+            if (myd.equals("D")) {
+              if (duration > 31) {
                 view.displayContentsInParameter("Please use Months");
                 myd = "";
               }
-            }
-            else if(myd.equals("M")){
-              if(duration>12){
+            } else if (myd.equals("M")) {
+              if (duration > 12) {
                 view.displayContentsInParameter("Please use Years");
                 myd = "";
               }
             }
-          }
-          else if(myd.length()!=0){
+          } else if (myd.length() != 0) {
             myd = "";
             view.displayContentsInParameter("Enter valid option");
           }
@@ -136,11 +133,9 @@ public class HandleStrategy implements Command{
         handleAddingStocks();
         initializer();
         model.saveFlexiblePortfolios();
-      }
-      else if(input==2){
+      } else if (input == 2) {
         exit = true;
-      }
-      else{
+      } else {
         view.displaySwitchCaseDefault();
       }
     }
@@ -148,60 +143,55 @@ public class HandleStrategy implements Command{
     return model;
   }
 
-  void handlingStrategy(){
-    try{
+  void handlingStrategy() {
+    try {
       sc.nextLine();
       portfolioName = sc.nextLine();
-    }
-    catch(Exception e){
+    } catch (Exception e) {
       return;
     }
     boolean portfolioContainsTheName = model.flexiblePortContainsCertainKey(portfolioName);
-    if(!portfolioContainsTheName){
+    if (!portfolioContainsTheName) {
       view.displayNoSuchPortfolio();
       return;
     }
     view.displayContentsInParameter("Enter the Amount");
-    try{
+    try {
       amount = sc.nextDouble();
-    }
-    catch(InputMismatchException e){
+    } catch (InputMismatchException e) {
       view.displayContentsInParameter("Enter valid number");
       sc.next();
       return;
     }
-    if(amount<=0){
+    if (amount <= 0) {
       view.displayContentsInParameter("Amount cannot be negative or zero.");
       return;
     }
 
     boolean tickerExit = false;
     // A while loop that keeps on running until the condition is false.
-    while(!tickerExit){
+    while (!tickerExit) {
       int option1 = 0;
 
       view.displayContentsInParameter("1. Enter investment details\n2. Exit");
-      try{
+      try {
         option1 = sc.nextInt();
-      }
-      catch (InputMismatchException e){
+      } catch (InputMismatchException e) {
         view.displayOnlyIntegers();
         sc.next();
         continue;
       }
-      if(option1==1){
+      if (option1 == 1) {
         handleGettingTickerDetails();
-      }
-      else if(option1==2){
+      } else if (option1 == 2) {
         return;
-      }
-      else{
+      } else {
         view.displaySwitchCaseDefault();
       }
     }
   }
 
-  void handleGettingTickerDetails(){
+  void handleGettingTickerDetails() {
     String companyName;
     view.displayContentsInParameter("Enter the ticker symbol to invest");
     sc.nextLine();
@@ -222,53 +212,51 @@ public class HandleStrategy implements Command{
     }
     view.displayContentsInParameter("Enter the percentage");
     Double percent;
-    try{
+    try {
       percent = sc.nextDouble();
-    }
-    catch (InputMismatchException e){
+    } catch (InputMismatchException e) {
       view.displayContentsInParameter("Please Enter a valid number");
       sc.next();
       return;
     }
-    if(percent>100||percent+percentageSoFar>100){
+    if (percent > 100 || percent + percentageSoFar > 100) {
       view.displayContentsInParameter("Percentage cannot exceed 100%. " +
               "Please Enter a valid percent.");
       return;
     }
 
-    this.percentageSoFar+=percent;
+    this.percentageSoFar += percent;
     this.tickers.add(companyName);
     this.percentage.add(percent);
   }
 
-  void handleAddingStocks(){
+  void handleAddingStocks() {
     List<String> ticker = tickers;
     List<Double> percent = percentage;
-    if(ticker.size()==0){
+    if (ticker.size() == 0) {
       return;
     }
-    if(startDate.length()==0){
+    if (startDate.length() == 0) {
       return;
     }
     LocalDate endingDate;
-    if(endDate.length()!=0){
-      if(endDate.compareTo(startDate)>=0){
+    if (endDate.length() != 0) {
+      if (endDate.compareTo(startDate) >= 0) {
         view.displayContentsInParameter("End date cannot be same or equal to start date.");
         initializer();
         return;
       }
-      if(LocalDate.parse(endDate).isAfter(LocalDate.now())){
-        view.displayContentsInParameter("No data after this "+LocalDate.now()+" date");
+      if (LocalDate.parse(endDate).isAfter(LocalDate.now())) {
+        view.displayContentsInParameter("No data after this " + LocalDate.now() + " date");
         return;
       }
       endingDate = LocalDate.parse(endDate);
-    }
-    else{
+    } else {
       endingDate = LocalDate.now();
     }
     LocalDate currDate = LocalDate.parse(startDate);
-    while(currDate.isBefore(endingDate)){
-      for(int i=0;i<ticker.size();i++){
+    while (currDate.isBefore(endingDate)) {
+      for (int i = 0; i < ticker.size(); i++) {
         String companyName = ticker.get(i);
         HashMap<String, String> stockData;
         //getting the stock data and storing in stockData
@@ -290,18 +278,18 @@ public class HandleStrategy implements Command{
         }
 
         //adding 1 day if stockData doesnt contain the following date.
-        while(currDate.isBefore(endingDate)&&!stockData.containsKey(currDate.toString())){
+        while (currDate.isBefore(endingDate) && !stockData.containsKey(currDate.toString())) {
           currDate = currDate.plusDays(1);
         }
-        if(currDate.isAfter(endingDate)||currDate.isEqual(endingDate)){
+        if (currDate.isAfter(endingDate) || currDate.isEqual(endingDate)) {
           view.displayContentsInParameter("Cannot proceed");
           return;
         }
         //System.out.println(stockData.get(currDate.toString()));
 
         Double stockPrice = Double.valueOf(stockData.get(currDate.toString()));
-        Double share = amount*(percent.get(i)/100.0);
-        Double numberOfStocks = share/stockPrice;
+        Double share = amount * (percent.get(i) / 100.0);
+        Double numberOfStocks = share / stockPrice;
         Double commission = 0.1;
         String alreadyExisting = ticker.get(i);
 
@@ -330,20 +318,18 @@ public class HandleStrategy implements Command{
         }
 
       }
-      if(myd.equals("Y")){
+      if (myd.equals("Y")) {
         currDate = currDate.plusYears(duration);
-      }
-      else if(myd.equals("D")){
+      } else if (myd.equals("D")) {
         currDate = currDate.plusDays(duration);
-      }
-      else if(myd.equals("M")){
+      } else if (myd.equals("M")) {
         currDate = currDate.plusMonths(duration);
       }
     }
 
   }
 
-  void initializer(){
+  void initializer() {
     this.tickers = new ArrayList<>();
     this.percentage = new ArrayList<>();
     this.percentageSoFar = 0.0;

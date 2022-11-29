@@ -33,6 +33,7 @@ public class ViewImpl implements View {
     this.out.println("1. Enter the Date");
     this.out.println("2. Exit");
   }
+
   @Override
   public void displayOnlyIntegers() {
     this.out.println("Enter only valid Integers");
