@@ -17,12 +17,18 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   //These are the Panels
   private final JPanel mainPanel;
   JLabel l1, l2, l3, l4, l5, l6, l7, upload_l1, upload_l2, upload_l3;
+  JLabel costBasis_l1, costBasis_l2, costBasis_l3, costBasis_l4, costBasis_l5;
   JLabel totalValue_l1, totalValue_l2, totalValue_l3, totalValue_l4, totalValue_l5;
   JLabel sell_l1, sell_l2, sell_l3, sell_l4, sell_l5, sell_l6, sell_l7;
+
+  JLabel dollar_l1, dollar_l2, dollar_l3, dollar_l4, dollar_l5, dollar_l6, dollar_l7;
+
+  JTextField dollar_nameOfPort, dollar_day, dollar_month, dollar_year, dollar_ticker, dollar_number;
   ButtonGroup G1;
   JRadioButton jRadioButton1;
   JRadioButton jRadioButton2;
   JTextField nameOfPort, day, month, year, ticker, number, filePath;
+  JTextField costBasis_nameOfPort, costBasis_day, costBasis_month, costBasis_year;
   JTextField sell_nameOfPort, sell_day, sell_month, sell_year, sell_ticker, sell_number;
   JTextField totalValue_nameOfPort, totalValue_day, totalValue_month, totalValue_year;
   JButton buyButton, sellButton, uploadButton, totalValueButton,btn4;
@@ -113,7 +119,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 //    total_value.addActionListener(new totalValuePanelShow());
     cost_basis.addActionListener(new costBasisPanelShow());
 //    upload_file.addActionListener(new uploadPanelShow());
-//    dollar_cost_average.addActionListener(new dollarCostPanelShow());
+    dollar_cost_average.addActionListener(new dollarCostPanelShow());
 //    dollar_cost_avg_performance.addActionListener(new dollarCostPerformancePanelShow());
 //    quit.addActionListener(new buyPanelShow());
   }
@@ -229,6 +235,13 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   private JPanel dollarCostAvgWindow() {
     dollarCostAvg = new JPanel();
+    dollarCostAvg.setPreferredSize(new Dimension(500, 500));
+    dollarCostAvg.setVisible(true);
+    dollarCostAvg.setLayout(null);
+    dollar_l1 = new JLabel("Creating Portfolio using Dollar Cost Average Strategy");
+    dollar_l1.setForeground(Color.blue);
+    dollar_l1.setFont(new Font("Serif", Font.BOLD, 20));
+
     return dollarCostAvg;
   }
 
@@ -319,39 +332,39 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     costBasis.setPreferredSize(new Dimension(500, 500));
     costBasis.setVisible(true);
     costBasis.setLayout(null);
-    l1 = new JLabel("View the Cost Basis");
-    l1.setForeground(Color.darkGray);
-    l1.setFont(new Font("Serif", Font.BOLD, 20));
-    l2 = new JLabel("Name of Portfolio:");
-    l3 = new JLabel("Day:");
-    l4 = new JLabel("Month:");
-    l5 = new JLabel("Year:");
-    nameOfPort = new JTextField();
-    day = new JTextField();
-    month = new JTextField();
-    year = new JTextField();
+    costBasis_l1 = new JLabel("View the Cost Basis");
+    costBasis_l1.setForeground(Color.darkGray);
+    costBasis_l1.setFont(new Font("Serif", Font.BOLD, 20));
+    costBasis_l2 = new JLabel("Name of Portfolio:");
+    costBasis_l3 = new JLabel("Day:");
+    costBasis_l4 = new JLabel("Month:");
+    costBasis_l5 = new JLabel("Year:");
+    costBasis_nameOfPort = new JTextField();
+    costBasis_day = new JTextField();
+    costBasis_month = new JTextField();
+    costBasis_year = new JTextField();
     btn4 = new JButton("Submit");
-    l1.setBounds(100, 30, 400, 30);
-    l2.setBounds(80, 70, 200, 30);
-    l3.setBounds(80, 110, 200, 30);
-    l4.setBounds(80, 150, 200, 30);
-    l5.setBounds(80, 190, 200, 30);
-    nameOfPort.setBounds(300, 70, 200, 30);
-    day.setBounds(300, 110, 200, 30);
-    month.setBounds(300, 150, 200, 30);
-    year.setBounds(300, 190, 200, 30);
+    costBasis_l1.setBounds(100, 30, 400, 30);
+    costBasis_l2.setBounds(80, 70, 200, 30);
+    costBasis_l3.setBounds(80, 110, 200, 30);
+    costBasis_l4.setBounds(80, 150, 200, 30);
+    costBasis_l5.setBounds(80, 190, 200, 30);
+    costBasis_nameOfPort.setBounds(300, 70, 200, 30);
+    costBasis_day.setBounds(300, 110, 200, 30);
+    costBasis_month.setBounds(300, 150, 200, 30);
+    costBasis_year.setBounds(300, 190, 200, 30);
     btn4.setBounds(50, 250, 100, 30);
 
 
-    costBasis.add(l1);
-    costBasis.add(l2);
-    costBasis.add(nameOfPort);
-    costBasis.add(l3);
-    costBasis.add(day);
-    costBasis.add(l4);
-    costBasis.add(month);
-    costBasis.add(l5);
-    costBasis.add(year);
+    costBasis.add(costBasis_l1);
+    costBasis.add(costBasis_l2);
+    costBasis.add(costBasis_nameOfPort);
+    costBasis.add(costBasis_l3);
+    costBasis.add(costBasis_day);
+    costBasis.add(costBasis_l4);
+    costBasis.add(costBasis_month);
+    costBasis.add(costBasis_l5);
+    costBasis.add(costBasis_year);
     costBasis.add(btn4);
     return costBasis;
   }
@@ -381,8 +394,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
                       filePath.getText(), selected);
             }
     );
-    btn4.addActionListener(evt -> features.costBasis(costBasis, nameOfPort.getText(),
-            day.getText(), month.getText(), year.getText()));
+    btn4.addActionListener(evt -> features.costBasis(costBasis, costBasis_nameOfPort.getText(),
+            costBasis_day.getText(), costBasis_month.getText(), costBasis_year.getText()));
   }
 
   public void createMessageBox(JPanel frame, String message) {
@@ -451,4 +464,15 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
       }
     }
   }
+
+  private class dollarCostPanelShow implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      String buttonString = e.getActionCommand();
+      if (buttonString.equals("Dollar Cost Average")) {
+        CardLayout cl = (CardLayout) mainPanel.getLayout();
+        cl.show(mainPanel, "Dollar Cost Average Panel");
+      }
+    }
+  }
+
 }
