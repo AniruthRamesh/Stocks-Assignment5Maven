@@ -25,13 +25,15 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   JTextField dollar_nameOfPort, dollar_day, dollar_month, dollar_year, dollar_ticker, dollar_number;
   ButtonGroup G1;
+  ButtonGroup dollarG1;
   JRadioButton jRadioButton1;
   JRadioButton jRadioButton2;
+  JRadioButton jRadioButtonDollar1,jRadioButtonDollar2;
   JTextField nameOfPort, day, month, year, ticker, number, filePath;
   JTextField costBasis_nameOfPort, costBasis_day, costBasis_month, costBasis_year;
   JTextField sell_nameOfPort, sell_day, sell_month, sell_year, sell_ticker, sell_number;
   JTextField totalValue_nameOfPort, totalValue_day, totalValue_month, totalValue_year;
-  JButton buyButton, sellButton, uploadButton, totalValueButton,btn4;
+  JButton buyButton, sellButton, uploadButton, totalValueButton,btn4,dollarCostAvg_button;
   private JPanel commandPanel;
   private JPanel buy;
   private JPanel sell;
@@ -238,10 +240,55 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     dollarCostAvg.setPreferredSize(new Dimension(500, 500));
     dollarCostAvg.setVisible(true);
     dollarCostAvg.setLayout(null);
-    dollar_l1 = new JLabel("Creating Portfolio using Dollar Cost Average Strategy");
+    dollar_l1 = new JLabel("Dollar Cost Average Strategy");
     dollar_l1.setForeground(Color.blue);
     dollar_l1.setFont(new Font("Serif", Font.BOLD, 20));
-
+    dollar_l2 = new JLabel("Name of the Portfolio:");
+    dollar_l3 = new JLabel("Amount:");
+    dollar_l4 = new JLabel("Start date day:");
+    dollar_l5 = new JLabel("Start date month:");
+    dollar_l6 = new JLabel("Start date Year:");
+    jRadioButtonDollar1 = new JRadioButton();
+    jRadioButtonDollar2 = new JRadioButton();
+    dollar_nameOfPort = new JTextField();
+    dollar_number = new JTextField();
+    dollar_day = new JTextField();
+    dollar_month = new JTextField();
+    dollar_year = new JTextField();
+    dollarG1 = new ButtonGroup();
+    dollarCostAvg_button = new JButton("Submit");
+    dollarG1.add(jRadioButtonDollar1);
+    dollarG1.add(jRadioButtonDollar2);
+    dollar_l1.setBounds(100, 30, 400, 30);
+    dollar_l2.setBounds(80, 70, 200, 30);
+    dollar_l3.setBounds(80, 110, 200, 30);
+    dollar_l4.setBounds(80, 150, 200, 30);
+    dollar_l5.setBounds(80, 190, 200, 30);
+    dollar_l6.setBounds(80, 230, 200, 30);
+    dollar_nameOfPort.setBounds(300, 70, 200, 30);
+    dollar_number.setBounds(300, 110, 200, 30);
+    dollar_day.setBounds(300, 150, 200, 30);
+    dollar_month.setBounds(300, 190, 200, 30);
+    dollar_year.setBounds(300, 230, 200, 30);
+    jRadioButtonDollar1.setBounds(300, 270, 100, 30);
+    jRadioButtonDollar2.setBounds(400, 270, 200, 30);
+    dollarCostAvg_button.setBounds(410,320,100,30);
+    jRadioButtonDollar1.setText("Enter End Date");
+    jRadioButtonDollar2.setText("No End Date");
+    dollarCostAvg.add(dollar_l1);
+    dollarCostAvg.add(dollar_l2);
+    dollarCostAvg.add(dollar_nameOfPort);
+    dollarCostAvg.add(dollar_l3);
+    dollarCostAvg.add(dollar_number);
+    dollarCostAvg.add(dollar_l4);
+    dollarCostAvg.add(dollar_day);
+    dollarCostAvg.add(dollar_l5);
+    dollarCostAvg.add(dollar_month);
+    dollarCostAvg.add(dollar_l6);
+    dollarCostAvg.add(dollar_year);
+    dollarCostAvg.add(jRadioButtonDollar1);
+    dollarCostAvg.add(jRadioButtonDollar2);
+    dollarCostAvg.add(dollarCostAvg_button);
     return dollarCostAvg;
   }
 
@@ -396,6 +443,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     );
     btn4.addActionListener(evt -> features.costBasis(costBasis, costBasis_nameOfPort.getText(),
             costBasis_day.getText(), costBasis_month.getText(), costBasis_year.getText()));
+    dollarCostAvg_button.addActionListener(evt->features.dollarCostAveraging());
   }
 
   public void createMessageBox(JPanel frame, String message) {
@@ -412,6 +460,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
             "Portfolio: " + portfolioName + "\n" + "Date: " + date + "\n" +
             "Total Value: $ " + value);
   }
+
+
 
   private class buyPanelShow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
