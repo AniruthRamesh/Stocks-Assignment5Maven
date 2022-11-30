@@ -17,16 +17,14 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   //These are the Panels
   private final JPanel mainPanel;
   JLabel l1, l2, l3, l4, l5, l6, l7, upload_l1, upload_l2, upload_l3;
-  JLabel totalValue_l1, totalValue_l2, totalValue_l3, totalValue_l4, totalValue_l5, totalValue_l6
-          , totalValue_l7;
+  JLabel totalValue_l1, totalValue_l2, totalValue_l3, totalValue_l4, totalValue_l5;
   JLabel sell_l1, sell_l2, sell_l3, sell_l4, sell_l5, sell_l6, sell_l7;
   ButtonGroup G1;
   JRadioButton jRadioButton1;
   JRadioButton jRadioButton2;
   JTextField nameOfPort, day, month, year, ticker, number, filePath;
   JTextField sell_nameOfPort, sell_day, sell_month, sell_year, sell_ticker, sell_number;
-  JTextField totalValue_nameOfPort, totalValue_day, totalValue_month, totalValue_year,
-          totalValue_ticker, totalValue_number;
+  JTextField totalValue_nameOfPort, totalValue_day, totalValue_month, totalValue_year;
   JButton buyButton, sellButton, uploadButton, totalValueButton;
   private JPanel commandPanel;
   private JPanel buy;
@@ -277,19 +275,16 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     totalValue.setPreferredSize(new Dimension(500, 500));
     totalValue.setVisible(true);
     totalValue.setLayout(null);
-    totalValue_l1 = new JLabel("Create a flexible portfolio");
+    totalValue_l1 = new JLabel("Get Total Value of Portfolio");
     totalValue_l1.setForeground(Color.blue);
     totalValue_l1.setFont(new Font("Serif", Font.BOLD, 20));
     totalValue_l2 = new JLabel("Name of Portfolio:");
     totalValue_l3 = new JLabel("Day:");
     totalValue_l4 = new JLabel("Month:");
     totalValue_l5 = new JLabel("Year:");
-    totalValue_l6 = new JLabel("Enter the ticker symbol:");
-    totalValue_l7 = new JLabel("Number of stocks:");
     totalValue_nameOfPort = new JTextField();
     totalValue_day = new JTextField();
-    totalValue_ticker = new JTextField();
-    totalValue_number = new JTextField();
+
     totalValue_month = new JTextField();
     totalValue_year = new JTextField();
     totalValueButton = new JButton("Submit");
@@ -298,14 +293,10 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     totalValue_l3.setBounds(80, 110, 200, 30);
     totalValue_l4.setBounds(80, 150, 200, 30);
     totalValue_l5.setBounds(80, 190, 200, 30);
-    totalValue_l6.setBounds(80, 230, 200, 30);
-    totalValue_l7.setBounds(80, 270, 200, 30);
     totalValue_nameOfPort.setBounds(300, 70, 200, 30);
     totalValue_day.setBounds(300, 110, 200, 30);
     totalValue_month.setBounds(300, 150, 200, 30);
     totalValue_year.setBounds(300, 190, 200, 30);
-    totalValue_ticker.setBounds(300, 230, 200, 30);
-    totalValue_number.setBounds(300, 270, 200, 30);
     totalValueButton.setBounds(50, 350, 100, 30);
     totalValue.add(totalValue_l1);
     totalValue.add(totalValue_l2);
@@ -316,10 +307,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     totalValue.add(totalValue_month);
     totalValue.add(totalValue_l5);
     totalValue.add(totalValue_year);
-    totalValue.add(totalValue_l6);
-    totalValue.add(totalValue_ticker);
-    totalValue.add(totalValue_l7);
-    totalValue.add(totalValue_number);
     totalValue.add(totalValueButton);
     return totalValue;
   }
