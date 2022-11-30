@@ -23,7 +23,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   JLabel sell_l1, sell_l2, sell_l3, sell_l4, sell_l5, sell_l6, sell_l7;
 
   JLabel dollar_l1, dollar_l2, dollar_l3, dollar_l4, dollar_l5, dollar_l6, datePopup_l1,
-          datePopup_l2, datePopup_l3, noDatePopup_l1,noDatePopup_l2;
+          datePopup_l2, datePopup_l3, noDatePopup_l1, noDatePopup_l2;
 
   JTextField dollar_nameOfPort, dollar_day, dollar_month, dollar_year, dollar_ticker, dollar_number;
   ButtonGroup G1;
@@ -32,12 +32,12 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   JRadioButton jRadioButton2;
   JRadioButton jRadioButtonDollar1, jRadioButtonDollar2;
   JTextField nameOfPort, day, month, year, ticker, number, filePath, datePopup_tf1, datePopup_tf2,
-          datePopup_tf3, noDatePopup_tf1,noDatePopup_tf2;
+          datePopup_tf3, noDatePopup_tf1, noDatePopup_tf2;
   JTextField costBasis_nameOfPort, costBasis_day, costBasis_month, costBasis_year;
   JTextField sell_nameOfPort, sell_day, sell_month, sell_year, sell_ticker, sell_number;
   JTextField totalValue_nameOfPort, totalValue_day, totalValue_month, totalValue_year;
   JButton buyButton, sellButton, uploadButton, totalValueButton, btn4, btnPopup,
-  noDatePopupBtnQuit, noDatePopupBtnOk;
+          noDatePopupBtnQuit, noDatePopupBtnOk;
   JButton dollarCostAvg_button;
   private JTextArea textArea;
   private JTextArea costBasis_textArea;
@@ -48,12 +48,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   private JPanel datePopup;
   private JPanel noDatePopup;
 
-  private JPanel sell;
-  private JPanel costBasis;
-  private JPanel totalValue;
-  private JPanel upload;
-  private JPanel dollarCostAvg;
-  private JPanel dollarCostAvgPerformance;
+  private JPanel sell, costBasis, totalValue, upload, dollarCostAvg, graph,
+          dollarCostAvgPerformance;
 
   public ViewGuiImpl(String caption) {
     super(caption);
@@ -69,6 +65,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     mainPanel.add(costBasisWindow(), "Cost Basis Panel");
     mainPanel.add(totalValueWindow(), "Total Value Panel");
     mainPanel.add(uploadWindow(), "Upload File Panel");
+    mainPanel.add(createGraphWindow(), "Upload File Panel");
     mainPanel.add(dollarCostAvgWindow(), "Dollar Cost Average Panel");
     mainPanel.add(dollarCostAvgPerformanceWindow(), "Cost Avg Performance Panel");
 
@@ -121,6 +118,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     JMenuItem upload_file = new JMenuItem("Upload File");
     JMenuItem dollar_cost_average = new JMenuItem("Dollar Cost Average");
     JMenuItem dollar_cost_avg_performance = new JMenuItem("Cost Avg Performance");
+    JMenuItem create_graph = new JMenuItem("Create Graph");
     JMenuItem quit = new JMenuItem("Quit");
     menu.add(buy);
     menu.add(sell);
@@ -135,11 +133,9 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     buy.addActionListener(new buyPanelShow());
     sell.addActionListener(new sellPanelShow());
     total_value.addActionListener(new totalValuePanelShow());
-//    cost_basis.addActionListener(new costBasisPanelShow());
     upload_file.addActionListener(new uploadPanelShow());
-//    total_value.addActionListener(new totalValuePanelShow());
     cost_basis.addActionListener(new costBasisPanelShow());
-//    upload_file.addActionListener(new uploadPanelShow());
+    upload_file.addActionListener(new createGraph());
     dollar_cost_average.addActionListener(new dollarCostPanelShow());
 //    dollar_cost_avg_performance.addActionListener(new dollarCostPerformancePanelShow());
 //    quit.addActionListener(new buyPanelShow());
@@ -309,6 +305,11 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     dollarCostAvg.add(jRadioButtonDollar2);
     dollarCostAvg.add(dollarCostAvg_button);
     return dollarCostAvg;
+  }
+
+  private JPanel createGraphWindow() {
+    graph = new JPanel();
+    return graph;
   }
 
   private JPanel uploadWindow() {
@@ -498,6 +499,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   public void displayCostBasis(String data) {
     costBasis_textArea.append("\n" + data + "\n");
   }
+
   private void noDatePopUp(ControllerGUIImpl features) {
     noDatePopup = new JPanel();
     noDatePopup.setLayout(new GridLayout(4, 2));
@@ -518,7 +520,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
             null, JOptionPane.OK_CANCEL_OPTION);
     if (result == JOptionPane.OK_OPTION) {
       noDatePopUp(features);
-      features.noDate(noDatePopup_tf1.getText(),noDatePopup_tf2.getText());
+      features.noDate(noDatePopup_tf1.getText(), noDatePopup_tf2.getText());
 //      System.out.println("x value: " + xField.getText());
 //      System.out.println("y value: " + yField.getText());
     }
@@ -593,6 +595,16 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
       if (buttonString.equals("Cost Basis")) {
         CardLayout cl = (CardLayout) mainPanel.getLayout();
         cl.show(mainPanel, "Cost Basis Panel");
+      }
+    }
+  }
+
+  private class createGraph implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      String buttonString = e.getActionCommand();
+      if (buttonString.equals("Create Graph")) {
+        CardLayout cl = (CardLayout) mainPanel.getLayout();
+        cl.show(mainPanel, "Create Graph Panel");
       }
     }
   }
