@@ -471,4 +471,6 @@ public interface Model {
    * @return The size of the flexible portfolio.
    */
   int getFlexiblePortfolioSize();
+
+  int stringToNumber(String number);
 }

@@ -57,6 +57,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
       }
     });
   }
+
   public JPanel commandWindow() {
     JLabel welcomeMessage = new JLabel("<html><strong>This is a Portfolio Management " +
             "Application<br>" +
@@ -72,6 +73,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
     return commandPanel;
   }
+
   public void window() {
 
     setTitle("Investment Portfolio");
@@ -101,16 +103,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     setJMenuBar(menuBar);
     buy.addActionListener(new buyPanelShow());
   }
-  private class buyPanelShow implements ActionListener {
-    public void actionPerformed(ActionEvent e) {
-      String buttonString = e.getActionCommand();
-      if (buttonString.equals("Buy")) {
-        CardLayout cl = (CardLayout) mainPanel.getLayout();
-        cl.show(mainPanel, "Buy Panel");
-      }
-    }
-  }
-
 
   public JPanel buyWindow() {
     buy = new JPanel();
@@ -153,13 +145,13 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     buy.add(l3);
     buy.add(day);
     buy.add(l4);
-    buy.add(ticker);
-    buy.add(l5);
-    buy.add(number);
-    buy.add(l6);
     buy.add(month);
-    buy.add(l7);
+    buy.add(l5);
     buy.add(year);
+    buy.add(l6);
+    buy.add(ticker);
+    buy.add(l7);
+    buy.add(number);
     buy.add(btn1);
     return buy;
   }
@@ -198,13 +190,24 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     costBasis = new JPanel();
     return costBasis;
   }
+
   @Override
   public void addFeatures(ControllerGUIImpl features) {
-    btn1.addActionListener(evt -> features.createNewFlexiblePortfolio(buy,nameOfPort.getText(),
+    btn1.addActionListener(evt -> features.createNewFlexiblePortfolio(buy, nameOfPort.getText(),
             day.getText(), month.getText(), year.getText(), ticker.getText(), number.getText()));
   }
 
-  public void createMessageBox(JPanel frame, String message ){
+  public void createMessageBox(JPanel frame, String message) {
     JOptionPane.showMessageDialog(frame, message);
+  }
+
+  private class buyPanelShow implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      String buttonString = e.getActionCommand();
+      if (buttonString.equals("Buy")) {
+        CardLayout cl = (CardLayout) mainPanel.getLayout();
+        cl.show(mainPanel, "Buy Panel");
+      }
+    }
   }
 }

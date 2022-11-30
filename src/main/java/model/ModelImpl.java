@@ -659,4 +659,14 @@ public class ModelImpl implements Model {
   public int getFlexiblePortfolioSize() {
     return flexiblePort.size();
   }
+  @Override
+  public int stringToNumber(String number) {
+    int date;
+    try {
+      date = Integer.parseInt(number);
+    } catch (NumberFormatException e) {
+      date = 0;
+    }
+    return date;
+  }
 }

@@ -4,7 +4,7 @@ import javax.swing.*;
 
 public interface Features {
 
-  void createNewFlexiblePortfolio(JPanel frame,String text, String dayText, String monthText,
+  void createNewFlexiblePortfolio(JPanel frame, String text, String dayText, String monthText,
                                   String yearText,
                                   String tickerText, String numberText);
 

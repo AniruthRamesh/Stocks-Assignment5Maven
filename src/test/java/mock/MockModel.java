@@ -454,6 +454,11 @@ public class MockModel implements Model {
   }
 
   @Override
+  public int stringToNumber(String number) {
+    return 0;
+  }
+
+  @Override
   public boolean portfolioContainsCertainKey(String name) {
     logForPortfolioContainsCertainKey.append(name);
     return inflexiblePortfolio.containsKey(name);
