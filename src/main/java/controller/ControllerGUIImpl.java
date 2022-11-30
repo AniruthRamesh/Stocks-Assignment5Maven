@@ -7,14 +7,12 @@ import java.util.Map;
 
 import javax.swing.*;
 
-import command.Command;
 import model.Model;
 import view.ViewGui;
 
 public class ControllerGUIImpl implements Features {
   ViewGui view;
   Model model;
-  Command command;
 
   public ControllerGUIImpl(Model model, ViewGui viewGui) {
     this.model = model;
@@ -63,18 +61,16 @@ public class ControllerGUIImpl implements Features {
             int ind = model.getTickerFinder().get(tickerText);
             stockData = model.getApiStockData().get(ind);
             numberOfStocks = model.stringToNumber(numberText);
-            if (numberOfStocks == 0 || numberOfStocks <= 0) {
+            if (numberOfStocks <= 0) {
               view.createMessageBox(frame, "Number of stocks should be numeric. Value" +
                       " cannot be 0" + " " + "or negative");
             } else {
-              double stockNumber = model.helper(Double.valueOf(numberOfStocks));
-              Double commission = 0.1;
+              double commission = 0.1;
 
               if (stockData.containsKey(date)) {
-                Double priceOnThatDate = Double.parseDouble(stockData.get(date));
-                Double totalPrice = priceOnThatDate * numberOfStocks;
+                double priceOnThatDate = Double.parseDouble(stockData.get(date));
+                double totalPrice = priceOnThatDate * numberOfStocks;
                 commission *= totalPrice;
-                Map<String, Map<String, List<List<String>>>> flexible = model.getFlexiblePort();
                 Map<String, List<List<String>>> val = new HashMap<>();
                 val.put(tickerText, List.of(List.of("Buy",
                         tickerText, String.valueOf(numberOfStocks), date,
