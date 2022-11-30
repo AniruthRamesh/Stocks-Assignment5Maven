@@ -1,5 +1,6 @@
 package controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -114,7 +115,88 @@ public class ControllerGUIImpl implements Features {
   }
 
   @Override
-  public void uploadPortfolio() {
+  public void uploadPortfolio(JPanel frame, String path, int selected) {
+    String isFileReadSuccessFull = model.readFromFile(path);
+    if (isFileReadSuccessFull.equals("Failure")) {
+      view.createMessageBox(frame, "Enter a valid Path");
+      if (selected == 1) {
+        Map<String, List<List<String>>> parsedPortfolio = model.parseJson(isFileReadSuccessFull);
+        if (parsedPortfolio == null) {
+          view.createMessageBox(frame, "The format of data is incorrect.");
+        }
+        boolean checker = false;
+        try {
+          checker = model.checkParsedPortfolio(parsedPortfolio);
+        } catch (Exception e) {
+          view.createMessageBox(frame, "The format of data is incorrect.");
+        }
+        if (!checker) {
+          view.createMessageBox(frame, "The format of data is incorrect.");
+        }
+        model.setInflexiblePortfolio(parsedPortfolio);
+        model.savePortfolio();
+      } else if (selected == 2) {
+        Map<String, Map<String, List<List<String>>>> parseFlexiblePortfolio =
+                model.parseFlexiblePortfolio(isFileReadSuccessFull);
+        List<String> keys = new ArrayList<>();
+        try {
+          keys = new ArrayList<>(parseFlexiblePortfolio.keySet());
+        } catch (Exception e) {
+          view.createMessageBox(frame, "The format of data is incorrect.");
+        }
+        for (int i = 0; i < keys.size(); i++) {
+          Map<String, List<List<String>>> insideContents = parseFlexiblePortfolio.get(keys.get(i));
+          List<String> insideKeySet = new ArrayList<>();
+          try {
+            insideKeySet = new ArrayList<>(insideContents.keySet());
+            if (insideKeySet.size() == 0) {
+              view.createMessageBox(frame, "The format of data is incorrect.");
+            }
+          } catch (Exception e) {
+            view.createMessageBox(frame, "The format of data is incorrect.");
+          }
+          for (int k = 0; k < insideKeySet.size(); k++) {
+            List<List<String>> contents =
+                    parseFlexiblePortfolio.get(keys.get(i)).get(insideKeySet.get(k));
+            for (int j = 0; j < contents.size(); j++) {
+              List<String> insideValues = contents.get(j);
+              if (insideValues.size() != 6) {
+                view.createMessageBox(frame, "The format of data is incorrect.");
+              }
+              if ((!insideValues.get(0).equals("Buy") && !insideValues.get(0).equals("Sell"))) {
+                view.createMessageBox(frame, "The format of data is incorrect.");
+              }
+              String ticker = insideValues.get(1);
+              String date = insideValues.get(3);
+              String numberOfStocks = insideValues.get(2);
+              String commission = insideValues.get(4);
+              if (!model.isValidDate(date)) {
+                view.createMessageBox(frame, "The format of data is incorrect.");
+              }
+              try {
+                Double.parseDouble(numberOfStocks);
+                Double.parseDouble(commission);
+              } catch (Exception e) {
+                view.createMessageBox(frame, "The format of data is incorrect.");
+              }
+              String data = model.addApiCompanyStockData(ticker);
+              if (data.equals("Failure")) {
+                view.createMessageBox(frame, "The format of data is incorrect.");
+              } else {
+                HashMap<String, String> stockData = model.convertingStringToHashMap(data);
+                model.addStockDataToFlexibleList(stockData);
+                int num = model.getApiStockDataSize();
+                model.putNameInCompanyInPortfolio(ticker);
+                model.putCompanyNameInTickerFinder(ticker, num - 1);
+              }
+            }
+          }
+        }
+        model.setFlexible(parseFlexiblePortfolio);
+        model.saveFlexiblePortfolios();
+        view.createMessageBox(frame, "File uploaded successfully");
+      }
+    }
 
   }
 

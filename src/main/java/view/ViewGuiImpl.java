@@ -15,8 +15,11 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   private static final int WIDTH = 700;
   private static final int HEIGHT = 700;
   JLabel l1, l2, l3, l4, l5, l6, l7;
+  ButtonGroup G1;
+  JRadioButton jRadioButton1;
+  JRadioButton jRadioButton2;
   JTextField nameOfPort, day, month, year, ticker, number;
-  JButton btn1;
+  JButton buyButton, sellButton, uploadButton;
   //These are the Panels
   private JPanel mainPanel;
   private JPanel commandPanel;
@@ -102,7 +105,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     sell.addActionListener(new sellPanelShow());
 //    total_value.addActionListener(new totalValuePanelShow());
 //    cost_basis.addActionListener(new costBasisPanelShow());
-//    upload_file.addActionListener(new uploadPanelShow());
+    upload_file.addActionListener(new uploadPanelShow());
 //    dollar_cost_average.addActionListener(new dollarCostPanelShow());
 //    dollar_cost_avg_performance.addActionListener(new dollarCostPerformancePanelShow());
 //    quit.addActionListener(new buyPanelShow());
@@ -128,7 +131,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     number = new JTextField();
     month = new JTextField();
     year = new JTextField();
-    btn1 = new JButton("Submit");
+    buyButton = new JButton("Submit");
     l1.setBounds(100, 30, 400, 30);
     l2.setBounds(80, 70, 200, 30);
     l3.setBounds(80, 110, 200, 30);
@@ -142,7 +145,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     year.setBounds(300, 190, 200, 30);
     ticker.setBounds(300, 230, 200, 30);
     number.setBounds(300, 270, 200, 30);
-    btn1.setBounds(50, 350, 100, 30);
+    buyButton.setBounds(50, 350, 100, 30);
     buy.add(l1);
     buy.add(l2);
     buy.add(nameOfPort);
@@ -156,7 +159,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     buy.add(ticker);
     buy.add(l7);
     buy.add(number);
-    buy.add(btn1);
+    buy.add(buyButton);
     return buy;
   }
 
@@ -177,6 +180,42 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   private JPanel uploadWindow() {
     upload = new JPanel();
+    upload.setPreferredSize(new Dimension(500, 500));
+    upload.setVisible(true);
+    upload.setLayout(null);
+    jRadioButton1 = new JRadioButton();
+    jRadioButton2 = new JRadioButton();
+    l1 = new JLabel("Upload portfolio");
+    l1.setForeground(Color.blue);
+    l1.setFont(new Font("Serif", Font.BOLD, 20));
+    l2 = new JLabel("Enter path of Portfolio:");
+    l3 = new JLabel("Select Type of Portfolio");
+    nameOfPort = new JTextField();
+    G1 = new ButtonGroup();
+    G1.add(jRadioButton1);
+    G1.add(jRadioButton2);
+    uploadButton = new JButton("Submit");
+    l1.setBounds(100, 30, 400, 30);
+    l2.setBounds(80, 70, 200, 30);
+    l3.setBounds(80, 110, 200, 30);
+//    jRadioButton1.setBounds(120, 30, 120, 50);
+//
+//    // Setting Bounds of "jRadioButton4".
+//    jRadioButton2.setBounds(250, 30, 80, 50);
+    jRadioButton1.setBounds(300, 110, 100, 30);
+    jRadioButton2.setBounds(400, 110, 200, 30);
+    nameOfPort.setBounds(300, 70, 200, 30);
+    uploadButton.setBounds(80, 150, 100, 30);
+    jRadioButton1.setText("Inflexible");
+    jRadioButton2.setText("Flexible");
+    upload.add(l1);
+    upload.add(l2);
+    upload.add(l3);
+
+    upload.add(nameOfPort);
+    upload.add(jRadioButton1);
+    upload.add(jRadioButton2);
+    upload.add(uploadButton);
     return upload;
   }
 
@@ -192,8 +231,22 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   @Override
   public void addFeatures(ControllerGUIImpl features) {
-    btn1.addActionListener(evt -> features.createNewFlexiblePortfolio(buy, nameOfPort.getText(),
+    buyButton.addActionListener(evt -> features.createNewFlexiblePortfolio(buy,
+            nameOfPort.getText(),
             day.getText(), month.getText(), year.getText(), ticker.getText(), number.getText()));
+    uploadButton.addActionListener(evt -> {
+              int selected = 0;
+              if (jRadioButton1.isSelected()) {
+                selected = 1;
+              } else if (jRadioButton2.isSelected()) {
+                selected = 2;
+              } else {
+                createMessageBox(upload, "Please select an option");
+              }
+              features.uploadPortfolio(upload,
+                      nameOfPort.getText(), selected);
+            }
+    );
   }
 
   public void createMessageBox(JPanel frame, String message) {
@@ -204,18 +257,28 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     public void actionPerformed(ActionEvent e) {
       String buttonString = e.getActionCommand();
       if (buttonString.equals("Buy")) {
-
         CardLayout cl = (CardLayout) mainPanel.getLayout();
         cl.show(mainPanel, "Buy Panel");
       }
     }
   }
+
   private class sellPanelShow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       String buttonString = e.getActionCommand();
       if (buttonString.equals("Sell")) {
         CardLayout cl = (CardLayout) mainPanel.getLayout();
         cl.show(mainPanel, "Sell Panel");
+      }
+    }
+  }
+
+  private class uploadPanelShow implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      String buttonString = e.getActionCommand();
+      if (buttonString.equals("Upload File")) {
+        CardLayout cl = (CardLayout) mainPanel.getLayout();
+        cl.show(mainPanel, "Upload File Panel");
       }
     }
   }
