@@ -14,14 +14,16 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   private static final int WIDTH = 700;
   private static final int HEIGHT = 700;
-  JLabel l1, l2, l3, l4, l5, l6, l7,upload_l1,upload_l2,upload_l3;
+  //These are the Panels
+  private final JPanel mainPanel;
+  JLabel l1, l2, l3, l4, l5, l6, l7, upload_l1, upload_l2, upload_l3;
+  JLabel sell_l1, sell_l2, sell_l3, sell_l4, sell_l5, sell_l6, sell_l7;
   ButtonGroup G1;
   JRadioButton jRadioButton1;
   JRadioButton jRadioButton2;
   JTextField nameOfPort, day, month, year, ticker, number, filePath;
+  JTextField sell_nameOfPort, sell_day, sell_month, sell_year, sell_ticker, sell_number;
   JButton buyButton, sellButton, uploadButton;
-  //These are the Panels
-  private JPanel mainPanel;
   private JPanel commandPanel;
   private JPanel buy;
   private JPanel sell;
@@ -165,6 +167,53 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   private JPanel sellWindow() {
     sell = new JPanel();
+    sell.setPreferredSize(new Dimension(500, 500));
+    sell.setVisible(true);
+    sell.setLayout(null);
+    sell_l1 = new JLabel("Create a flexible portfolio");
+    sell_l1.setForeground(Color.blue);
+    sell_l1.setFont(new Font("Serif", Font.BOLD, 20));
+    sell_l2 = new JLabel("Name of Portfolio:");
+    sell_l3 = new JLabel("Day:");
+    sell_l4 = new JLabel("Month:");
+    sell_l5 = new JLabel("Year:");
+    sell_l6 = new JLabel("Enter the ticker symbol:");
+    sell_l7 = new JLabel("Number of stocks:");
+    sell_nameOfPort = new JTextField();
+    sell_day = new JTextField();
+    sell_ticker = new JTextField();
+    sell_number = new JTextField();
+    sell_month = new JTextField();
+    sell_year = new JTextField();
+    sellButton = new JButton("Submit");
+    sell_l1.setBounds(100, 30, 400, 30);
+    sell_l2.setBounds(80, 70, 200, 30);
+    sell_l3.setBounds(80, 110, 200, 30);
+    sell_l4.setBounds(80, 150, 200, 30);
+    sell_l5.setBounds(80, 190, 200, 30);
+    sell_l6.setBounds(80, 230, 200, 30);
+    sell_l7.setBounds(80, 270, 200, 30);
+    sell_nameOfPort.setBounds(300, 70, 200, 30);
+    sell_day.setBounds(300, 110, 200, 30);
+    sell_month.setBounds(300, 150, 200, 30);
+    sell_year.setBounds(300, 190, 200, 30);
+    sell_ticker.setBounds(300, 230, 200, 30);
+    sell_number.setBounds(300, 270, 200, 30);
+    sellButton.setBounds(50, 350, 100, 30);
+    sell.add(sell_l1);
+    sell.add(sell_l2);
+    sell.add(sell_nameOfPort);
+    sell.add(sell_l3);
+    sell.add(sell_day);
+    sell.add(sell_l4);
+    sell.add(sell_month);
+    sell.add(sell_l5);
+    sell.add(sell_year);
+    sell.add(sell_l6);
+    sell.add(sell_ticker);
+    sell.add(sell_l7);
+    sell.add(sell_number);
+    sell.add(sellButton);
     return sell;
   }
 
@@ -234,6 +283,10 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     buyButton.addActionListener(evt -> features.createNewFlexiblePortfolio(buy,
             nameOfPort.getText(),
             day.getText(), month.getText(), year.getText(), ticker.getText(), number.getText()));
+    sellButton.addActionListener(evt -> features.sellPortfolio(sell,
+            sell_nameOfPort.getText(),
+            sell_day.getText(), sell_month.getText(), sell_year.getText(), sell_ticker.getText(),
+            sell_number.getText()));
     uploadButton.addActionListener(evt -> {
               int selected = 0;
               if (jRadioButton1.isSelected()) {

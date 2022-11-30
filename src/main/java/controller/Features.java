@@ -8,7 +8,9 @@ public interface Features {
                                   String yearText,
                                   String tickerText, String numberText);
 
-  void sellPortfolio();
+  void sellPortfolio(JPanel frame, String text, String dayText, String monthText,
+                     String yearText,
+                     String tickerText, String numberText);
 
   void costBasis();
 
