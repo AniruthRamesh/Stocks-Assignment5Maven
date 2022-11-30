@@ -23,7 +23,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   JLabel sell_l1, sell_l2, sell_l3, sell_l4, sell_l5, sell_l6, sell_l7;
 
   JLabel dollar_l1, dollar_l2, dollar_l3, dollar_l4, dollar_l5, dollar_l6, datePopup_l1,
-          datePopup_l2, datePopup_l3, noDatePopup_l1, noDatePopup_l2;
+          datePopup_l2, datePopup_l3, noDatePopup_l1, noDatePopup_l2, graph_l1, graph_l2,
+          graph_l3, graph_l4, graph_l5, graph_l6, graph_l7, graph_l8;
 
   JTextField dollar_nameOfPort, dollar_day, dollar_month, dollar_year, dollar_ticker, dollar_number;
   ButtonGroup G1;
@@ -36,8 +37,9 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   JTextField costBasis_nameOfPort, costBasis_day, costBasis_month, costBasis_year;
   JTextField sell_nameOfPort, sell_day, sell_month, sell_year, sell_ticker, sell_number;
   JTextField totalValue_nameOfPort, totalValue_day, totalValue_month, totalValue_year;
-  JButton buyButton, sellButton, uploadButton, totalValueButton, btn4, btnPopup,
-          noDatePopupBtnQuit, noDatePopupBtnOk;
+  JTextField graph_name, graph_startDay, graph_startMonth, graph_startYear, graph_endDay,
+          graph_endMonth, graph_endYear;
+  JButton buyButton, sellButton, uploadButton, totalValueButton, btn4, btnPopup, graphButton;
   JButton dollarCostAvg_button;
   private JTextArea textArea;
   private JTextArea costBasis_textArea;
@@ -65,7 +67,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     mainPanel.add(costBasisWindow(), "Cost Basis Panel");
     mainPanel.add(totalValueWindow(), "Total Value Panel");
     mainPanel.add(uploadWindow(), "Upload File Panel");
-    mainPanel.add(createGraphWindow(), "Upload File Panel");
+    mainPanel.add(createGraphWindow(), "Create Graph Panel");
     mainPanel.add(dollarCostAvgWindow(), "Dollar Cost Average Panel");
     mainPanel.add(dollarCostAvgPerformanceWindow(), "Cost Avg Performance Panel");
 
@@ -127,6 +129,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     menu.add(upload_file);
     menu.add(dollar_cost_average);
     menu.add(dollar_cost_avg_performance);
+    menu.add(create_graph);
     menu.add(quit);
     menuBar.add(menu);
     setJMenuBar(menuBar);
@@ -135,7 +138,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     total_value.addActionListener(new totalValuePanelShow());
     upload_file.addActionListener(new uploadPanelShow());
     cost_basis.addActionListener(new costBasisPanelShow());
-    upload_file.addActionListener(new createGraph());
+    create_graph.addActionListener(new createGraph());
     dollar_cost_average.addActionListener(new dollarCostPanelShow());
 //    dollar_cost_avg_performance.addActionListener(new dollarCostPerformancePanelShow());
 //    quit.addActionListener(new buyPanelShow());
@@ -309,6 +312,60 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   private JPanel createGraphWindow() {
     graph = new JPanel();
+    graph.setPreferredSize(new Dimension(500, 500));
+    graph.setVisible(true);
+    graph.setLayout(null);
+    graph_l1 = new JLabel("Show Performance");
+    graph_l1.setForeground(Color.blue);
+    graph_l1.setFont(new Font("Serif", Font.BOLD, 20));
+    graph_l2 = new JLabel("Name of the Portfolio:");
+    graph_l3 = new JLabel("Start date day:");
+    graph_l4 = new JLabel("Start date month:");
+    graph_l5 = new JLabel("Start date year:");
+    graph_l6 = new JLabel("End date day:");
+    graph_l7 = new JLabel("End date month:");
+    graph_l8 = new JLabel("End date year:");
+    graph_name = new JTextField();
+    graph_startDay = new JTextField();
+    graph_startMonth = new JTextField();
+    graph_startYear = new JTextField();
+    graph_endDay = new JTextField();
+    graph_endMonth = new JTextField();
+    graph_endYear = new JTextField();
+    graphButton = new JButton("Submit");
+    graph_l1.setBounds(100, 30, 400, 30);
+    graph_l2.setBounds(80, 70, 200, 30);
+    graph_l3.setBounds(80, 110, 200, 30);
+    graph_l4.setBounds(80, 150, 200, 30);
+    graph_l5.setBounds(80, 190, 200, 30);
+    graph_l6.setBounds(80, 230, 200, 30);
+    graph_l7.setBounds(80, 270, 200, 30);
+    graph_l8.setBounds(80, 300, 200, 30);
+    graph_name.setBounds(300, 70, 200, 30);
+    graph_startDay.setBounds(300, 110, 200, 30);
+    graph_startMonth.setBounds(300, 150, 200, 30);
+    graph_startYear.setBounds(300, 190, 200, 30);
+    graph_endDay.setBounds(300, 230, 200, 30);
+    graph_endMonth.setBounds(300, 270, 200, 30);
+    graph_endYear.setBounds(300, 300, 200, 30);
+    graphButton.setBounds(50, 370, 100, 30);
+    graph.add(graph_l1);
+    graph.add(graph_l2);
+    graph.add(graph_name);
+    graph.add(graph_l3);
+    graph.add(graph_startDay);
+    graph.add(graph_l4);
+    graph.add(graph_startMonth);
+    graph.add(graph_l5);
+    graph.add(graph_startYear);
+    graph.add(graph_l6);
+    graph.add(graph_endDay);
+    graph.add(graph_l7);
+    graph.add(graph_endMonth);
+    graph.add(graph_l8);
+    graph.add(graph_endYear);
+    graph.add(graphButton);
+
     return graph;
   }
 
