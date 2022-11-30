@@ -1,6 +1,8 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -32,20 +34,21 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
     window();
     mainPanel = new JPanel();
+    this.setVisible(true);
     mainPanel.setLayout(new CardLayout());
 
     mainPanel.add(commandWindow(), "Command Panel");
     mainPanel.add(buyWindow(), "Buy Panel");
-    mainPanel.add(sellWindow(), "Sell Panel");
-    mainPanel.add(costBasisWindow(), "Cost Basis Panel");
-    mainPanel.add(totalValueWindow(), "Total Value Panel");
-    mainPanel.add(uploadWindow(), "Upload File Panel");
-    mainPanel.add(saveWindow(), "Save Panel");
-    mainPanel.add(dollarCostAvgWindow(), "Dollar Cost Average Panel");
-    mainPanel.add(dollarCostAvgPerformanceWindow(), "Cost Avg Performance Panel");
+//    mainPanel.add(sellWindow(), "Sell Panel");
+//    mainPanel.add(costBasisWindow(), "Cost Basis Panel");
+//    mainPanel.add(totalValueWindow(), "Total Value Panel");
+//    mainPanel.add(uploadWindow(), "Upload File Panel");
+//    mainPanel.add(saveWindow(), "Save Panel");
+//    mainPanel.add(dollarCostAvgWindow(), "Dollar Cost Average Panel");
+//    mainPanel.add(dollarCostAvgPerformanceWindow(), "Cost Avg Performance Panel");
 
     this.add(mainPanel);
-    this.setVisible(true);
+
     this.setDefaultCloseOperation(this.DO_NOTHING_ON_CLOSE);
     this.addWindowListener(new WindowAdapter() {
       @Override
@@ -96,11 +99,22 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     menu.add(quit);
     menuBar.add(menu);
     setJMenuBar(menuBar);
+    buy.addActionListener(new buyPanelShow());
+  }
+  private class buyPanelShow implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      String buttonString = e.getActionCommand();
+      if (buttonString.equals("Buy")) {
+        CardLayout cl = (CardLayout) mainPanel.getLayout();
+        cl.show(mainPanel, "Buy Panel");
+      }
+    }
   }
 
 
   public JPanel buyWindow() {
     buy = new JPanel();
+    buy.setPreferredSize(new Dimension(500, 500));
     buy.setVisible(true);
     buy.setLayout(null);
     l1 = new JLabel("Create a flexible portfolio");
@@ -147,7 +161,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     buy.add(l7);
     buy.add(year);
     buy.add(btn1);
-
     return buy;
   }
 
@@ -187,8 +200,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   }
   @Override
   public void addFeatures(ControllerGUIImpl features) {
-    btn1.addActionListener(evt -> features.createNewFlexiblePortfolio(buy,nameOfPort.getText(),
-            day.getText(), month.getText(), year.getText(), ticker.getText(), number.getText()));
+//    btn1.addActionListener(evt -> features.createNewFlexiblePortfolio(buy,nameOfPort.getText(),
+//            day.getText(), month.getText(), year.getText(), ticker.getText(), number.getText()));
   }
 
   public void createMessageBox(JPanel frame, String message ){
