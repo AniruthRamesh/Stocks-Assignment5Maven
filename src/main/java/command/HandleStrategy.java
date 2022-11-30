@@ -184,6 +184,10 @@ public class HandleStrategy implements Command {
       if (option1 == 1) {
         handleGettingTickerDetails();
       } else if (option1 == 2) {
+        if (percentageSoFar != 100) {
+          view.displayContentsInParameter("Cannot exit, please enter values till 100%");
+          continue;
+        }
         return;
       } else {
         view.displaySwitchCaseDefault();
