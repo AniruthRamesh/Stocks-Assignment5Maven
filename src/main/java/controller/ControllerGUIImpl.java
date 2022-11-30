@@ -26,9 +26,8 @@ public class ControllerGUIImpl implements Features {
     if (nameText.length() == 0) {
       view.createMessageBox(frame, "Portfolio name cannot be empty");
     }
-    boolean alreadyContainsTheName = model.hasAnotherPortfolioWithSameName(name);
-    if (alreadyContainsTheName) {
-      view.createMessageBox(frame, "Already exists portfolio with this name");
+    if (model.flexiblePortContainsCertainKey(name)) {
+      view.createMessageBox(frame, "Portfolio already exists");
     }
 
   }
