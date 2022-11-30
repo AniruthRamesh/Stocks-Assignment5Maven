@@ -1,5 +1,6 @@
 package controller;
 
+import java.time.LocalDateTime;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -74,6 +75,7 @@ public class ControllerGUIImpl implements Features {
                 double priceOnThatDate = Double.parseDouble(stockData.get(date));
                 double totalPrice = priceOnThatDate * numberOfStocks;
                 commission *= totalPrice;
+                Map<String, Map<String, List<List<String>>>> flexible = model.getFlexiblePort();
                 Map<String, List<List<String>>> val = new HashMap<>();
                 val.put(tickerText, List.of(List.of("Buy", tickerText,
                         String.valueOf(numberOfStocks), date, String.format("%.2f", commission),
@@ -213,7 +215,95 @@ public class ControllerGUIImpl implements Features {
   }
 
   @Override
-  public void costBasis() {
+  public void costBasis(JPanel frame, String name, String dayText,
+                        String monthText,
+                        String yearText) {
+    String date;
+    if (name.length() == 0 || dayText.length() == 0 || monthText.length() == 0
+            || yearText.length() == 0) {
+      view.createMessageBox(frame, "Fields cannot be empty");
+      return;
+    } else {
+      int day = model.stringToNumber(dayText);
+      int month = model.stringToNumber(monthText);
+      int year = model.stringToNumber(yearText);
+
+      if (!model.flexiblePortContainsCertainKey(name)) {
+        view.createMessageBox(frame, "Portfolio does not exist");
+        return;
+      } else if (day == 0 || month == 0 || year == 0) {
+        view.createMessageBox(frame, "Enter numeric values for date");
+        return;
+      } else {
+        date = model.makeStringDate(day, month, year);
+        if (!model.isValidDate(date)) {
+          view.createMessageBox(frame, "Enter valid date.");
+          return;
+        }
+      }
+    }
+    List<String> companies = model.getCompaniesInCertainPortfolio(name);
+    List<String> actualCompanyData = new ArrayList<>();
+    for (int i = 0; i < companies.size(); i++) {
+      List<List<String>> data = model.getStockDataInCertainPortfolio(name,
+              companies.get(i));
+      for (int j = 0; j < data.size(); j++) {
+        List<String> insideContents = data.get(j);
+        if (date.compareTo(insideContents.get(3)) < 0) {
+          continue;
+        }
+        actualCompanyData.add(companies.get(i));
+        break;
+      }
+    }
+    if (actualCompanyData.size() == 0) {
+      view.createMessageBox(frame,"No stocks purchased before this date.");
+      return;
+    }
+    String dash;
+    Double overallTotalMoneySpent = 0.0;
+    Double totalMoneySpent = 0.0;
+    for (int i = 0; i < actualCompanyData.size(); i++) {
+      StringBuilder totalStrings = new StringBuilder("");
+      totalMoneySpent = 0.0;
+      List<List<String>> data = model.getStockDataInCertainPortfolio(name,
+              actualCompanyData.get(i));
+      dash = helper(actualCompanyData.get(i).length());
+      for (int j = 0; j < data.size(); j++) {
+        List<String> insideContents = data.get(j);
+        if (date.compareTo(insideContents.get(3)) < 0) {
+          continue;
+        }
+
+        if (insideContents.get(0).equals("Sell")) {
+          String seller = actualCompanyData.get(i)+"\n"+dash+"\n"+"Sell         -> " +
+                  insideContents.get(1) + " : "
+                  + insideContents.get(2) + "\n" + "Date        -> " + insideContents.get(3) + "\n"
+                  + "Commission  -> $" + insideContents.get(4);
+          totalStrings.append(seller);
+          view.createMessageBox(frame,seller);
+          totalMoneySpent += Double.parseDouble(insideContents.get(4));
+
+        }
+        if (insideContents.get(0).equals("Buy")) {
+          String buyer = actualCompanyData.get(i)+"\n"+dash+"\n"+"Buy         -> " +
+                  insideContents.get(1) + " : "
+                  + insideContents.get(2) + "\n" + "Date        -> " + insideContents.get(3) + "\n"
+                  + "Total value -> $" + insideContents.get(5) + "\n" + "Commission  -> $"
+                  + insideContents.get(4);
+          totalStrings.append(buyer);
+          view.createMessageBox(frame,buyer);
+          totalMoneySpent += Double.parseDouble(insideContents.get(4))
+                  + Double.parseDouble(insideContents.get(5));
+        }
+      }
+      overallTotalMoneySpent += totalMoneySpent;
+      totalStrings.append("Total money spent on "+actualCompanyData.get(i)+
+              "-> $" + totalMoneySpent);
+      view.createMessageBox(frame,"Total money spent on "+actualCompanyData.get(i)+
+              "-> $" + totalMoneySpent);
+    }
+    view.createMessageBox(frame,"Overall Total -> $" + overallTotalMoneySpent);
 
   }
 
@@ -359,6 +449,14 @@ public class ControllerGUIImpl implements Features {
   @Override
   public void createGraph() {
 
+  }
+
+  private String helper(int number) {
+    StringBuilder str = new StringBuilder();
+    for (int i = 0; i < number; i++) {
+      str.append("_");
+    }
+    return str.toString();
   }
 
 }

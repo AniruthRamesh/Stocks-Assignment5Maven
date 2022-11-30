@@ -12,7 +12,9 @@ public interface Features {
                      String yearText,
                      String tickerText, String numberText);
 
-  void costBasis();
+  void costBasis(JPanel frame, String name, String dayText,
+                 String monthText,
+                 String yearText);
 
   void totalValue(JPanel frame, String name, String dayText, String monthText,
                   String yearText);
