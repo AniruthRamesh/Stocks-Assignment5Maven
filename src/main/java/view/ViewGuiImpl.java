@@ -22,8 +22,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   JLabel totalValue_l1, totalValue_l2, totalValue_l3, totalValue_l4, totalValue_l5;
   JLabel sell_l1, sell_l2, sell_l3, sell_l4, sell_l5, sell_l6, sell_l7;
 
-  JLabel dollar_l1, dollar_l2, dollar_l3, dollar_l4, dollar_l5, dollar_l6, dollar_l7, datePopup_l1,
-          datePopup_l2, datePopup_l3;
+  JLabel dollar_l1, dollar_l2, dollar_l3, dollar_l4, dollar_l5, dollar_l6, datePopup_l1,
+          datePopup_l2, datePopup_l3, noDatePopup_l1,noDatePopup_l2;
 
   JTextField dollar_nameOfPort, dollar_day, dollar_month, dollar_year, dollar_ticker, dollar_number;
   ButtonGroup G1;
@@ -32,11 +32,12 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   JRadioButton jRadioButton2;
   JRadioButton jRadioButtonDollar1, jRadioButtonDollar2;
   JTextField nameOfPort, day, month, year, ticker, number, filePath, datePopup_tf1, datePopup_tf2,
-          datePopup_tf3;
+          datePopup_tf3, noDatePopup_tf1,noDatePopup_tf2;
   JTextField costBasis_nameOfPort, costBasis_day, costBasis_month, costBasis_year;
   JTextField sell_nameOfPort, sell_day, sell_month, sell_year, sell_ticker, sell_number;
   JTextField totalValue_nameOfPort, totalValue_day, totalValue_month, totalValue_year;
-  JButton buyButton, sellButton, uploadButton, totalValueButton, btn4, btnPopup;
+  JButton buyButton, sellButton, uploadButton, totalValueButton, btn4, btnPopup,
+  noDatePopupBtnQuit, noDatePopupBtnOk;
   JButton dollarCostAvg_button;
   private JTextArea textArea;
   private JTextArea costBasis_textArea;
@@ -45,6 +46,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   private JPanel commandPanel;
   private JPanel buy;
   private JPanel datePopup;
+  private JPanel noDatePopup;
+
   private JPanel sell;
   private JPanel costBasis;
   private JPanel totalValue;
@@ -450,9 +453,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     buyButton.addActionListener(evt -> features.createNewFlexiblePortfolio(buy,
             nameOfPort.getText(), day.getText(), month.getText(), year.getText(),
             ticker.getText(), number.getText()));
-    jRadioButtonDollar1.addActionListener(evt -> {
-      enterDatePopUp();
-    });
+    jRadioButtonDollar1.addActionListener(evt -> enterDatePopUp());
+    jRadioButtonDollar2.addActionListener(evt -> noDatePopUp(features));
     sellButton.addActionListener(evt -> features.sellPortfolio(sell, sell_nameOfPort.getText(),
             sell_day.getText(), sell_month.getText(), sell_year.getText(), sell_ticker.getText(),
             sell_number.getText()));
@@ -496,6 +498,31 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   public void displayCostBasis(String data) {
     costBasis_textArea.append("\n" + data + "\n");
   }
+  private void noDatePopUp(ControllerGUIImpl features) {
+    noDatePopup = new JPanel();
+    noDatePopup.setLayout(new GridLayout(4, 2));
+    noDatePopup.setPreferredSize(new Dimension(200, 100));
+    noDatePopup.setVisible(true);
+    noDatePopup_l1 = new JLabel("Ticker");
+    noDatePopup_l2 = new JLabel("Percentage");
+    noDatePopup_tf1 = new JTextField();
+    noDatePopup_tf2 = new JTextField();
+    noDatePopup_tf1.setPreferredSize(new Dimension(50, 30));
+    noDatePopup_tf2.setPreferredSize(new Dimension(50, 30));
+
+    noDatePopup.add(noDatePopup_l1);
+    noDatePopup.add(noDatePopup_tf1);
+    noDatePopup.add(noDatePopup_l2);
+    noDatePopup.add(noDatePopup_tf2);
+    int result = JOptionPane.showConfirmDialog(dollarCostAvg, noDatePopup,
+            null, JOptionPane.OK_CANCEL_OPTION);
+    if (result == JOptionPane.OK_OPTION) {
+      noDatePopUp(features);
+      features.noDate(noDatePopup_tf1.getText(),noDatePopup_tf2.getText());
+//      System.out.println("x value: " + xField.getText());
+//      System.out.println("y value: " + yField.getText());
+    }
+  }
 
   public void enterDatePopUp() {
     datePopup = new JPanel();
@@ -521,7 +548,12 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     datePopup.add(datePopup_tf2);
     datePopup.add(datePopup_l3);
     datePopup.add(datePopup_tf3);
-    JOptionPane.showMessageDialog(dollarCostAvg, datePopup);
+    int result = JOptionPane.showConfirmDialog(dollarCostAvg, datePopup,
+            null, JOptionPane.OK_CANCEL_OPTION);
+    if (result == JOptionPane.OK_OPTION) {
+//      System.out.println("x value: " + xField.getText());
+//      System.out.println("y value: " + yField.getText());
+    }
   }
 
   private class buyPanelShow implements ActionListener {

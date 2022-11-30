@@ -21,8 +21,8 @@ public interface Features {
 
   void uploadPortfolio(JPanel frame, String path, int selected);
 
-  void dollarCostAveraging();
-
+  void dollarCostAveraging() ;
+  void noDate(String ticker, String percentage);
   void dollarCostAveragingAndQueryCostBasisAndValue();
 
   void exit();

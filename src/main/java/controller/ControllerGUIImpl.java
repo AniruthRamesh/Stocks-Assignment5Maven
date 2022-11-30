@@ -436,6 +436,11 @@ public class ControllerGUIImpl implements Features {
   }
 
   @Override
+  public void noDate(String ticker, String percentage) {
+
+  }
+
+  @Override
   public void dollarCostAveragingAndQueryCostBasisAndValue() {
 
   }
