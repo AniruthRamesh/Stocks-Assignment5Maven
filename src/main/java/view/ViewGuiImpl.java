@@ -462,7 +462,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   }
 
 
-
   private class buyPanelShow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       String buttonString = e.getActionCommand();
