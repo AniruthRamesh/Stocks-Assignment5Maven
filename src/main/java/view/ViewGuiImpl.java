@@ -297,7 +297,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     totalValue_day.setBounds(300, 110, 200, 30);
     totalValue_month.setBounds(300, 150, 200, 30);
     totalValue_year.setBounds(300, 190, 200, 30);
-    totalValueButton.setBounds(50, 350, 100, 30);
+    totalValueButton.setBounds(50, 230, 100, 30);
     totalValue.add(totalValue_l1);
     totalValue.add(totalValue_l2);
     totalValue.add(totalValue_nameOfPort);
@@ -325,6 +325,9 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
             sell_nameOfPort.getText(),
             sell_day.getText(), sell_month.getText(), sell_year.getText(), sell_ticker.getText(),
             sell_number.getText()));
+    totalValueButton.addActionListener(evt -> features.totalValue(totalValue,
+            totalValue_nameOfPort.getText(),
+            totalValue_day.getText(), totalValue_month.getText(), totalValue_year.getText()));
     uploadButton.addActionListener(evt -> {
               int selected = 0;
               if (jRadioButton1.isSelected()) {
@@ -344,8 +347,15 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     JOptionPane.showMessageDialog(frame, message);
   }
 
-  public void displayDynamicDataTotalValue(JPanel frame, String message) {
+  public void displayDynamicDataTotalValue(JPanel frame, String companyName, String value) {
+    String message = companyName + "--> $" + value;
     JOptionPane.showMessageDialog(frame, message);
+  }
+
+  public void displayTotalValue(JPanel frame, String portfolioName, String date, String value) {
+    JOptionPane.showMessageDialog(frame,
+            "Portfolio: " + portfolioName + "\n" + "Date: " + date + "\n" +
+            "Total Value: $ " + value);
   }
 
   private class buyPanelShow implements ActionListener {

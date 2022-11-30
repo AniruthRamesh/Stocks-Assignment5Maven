@@ -14,11 +14,10 @@ public interface Features {
 
   void costBasis();
 
-  void totalValue();
+  void totalValue(JPanel frame, String name, String dayText, String monthText,
+                  String yearText);
 
   void uploadPortfolio(JPanel frame, String path, int selected);
-
-  void savePortfolio();
 
   void dollarCostAveraging();
 

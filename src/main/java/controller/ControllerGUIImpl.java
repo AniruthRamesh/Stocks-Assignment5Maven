@@ -1,5 +1,6 @@
 package controller;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -217,8 +218,42 @@ public class ControllerGUIImpl implements Features {
   }
 
   @Override
-  public void totalValue() {
+  public void totalValue(JPanel frame, String name, String dayText, String monthText,
+                         String yearText) {
+    String date;
+    if (name.length() == 0 || dayText.length() == 0 || monthText.length() == 0 || yearText.length() == 0) {
+      view.createMessageBox(frame, "Fields cannot be empty");
+    } else {
+      int day = model.stringToNumber(dayText);
+      int month = model.stringToNumber(monthText);
+      int year = model.stringToNumber(yearText);
 
+      if (!model.flexiblePortfolioContainsCertainKey(name)) {
+        view.createMessageBox(frame, "Portfolio with this name does not exists");
+      } else if (day == 0 || month == 0 || year == 0) {
+        view.createMessageBox(frame, "Enter numeric values for date");
+      } else {
+        date = model.makeStringDate(day, month, year);
+        if (model.isValidDate(date)) {
+          HashMap<String, Double> totalValueData = model.getTotalFlexibleStockValue(name,
+                  date);
+          double totalValue = 0.0;
+          for (Map.Entry<String, Double> set : totalValueData.entrySet()) {
+            totalValue += set.getValue();
+            if (set.getValue() != 0) {
+              view.displayDynamicDataTotalValue(frame, set.getKey(),
+                      String.valueOf(set.getValue()));
+            } else {
+              view.displayDynamicDataTotalValue(frame, set.getKey(), "no value for selected date");
+            }
+          }
+          view.displayTotalValue(frame, name, date,
+                  new BigDecimal(totalValue).toPlainString());
+        } else {
+          view.createMessageBox(frame, "Enter valid date.");
+        }
+      }
+    }
   }
 
   @Override
@@ -304,12 +339,6 @@ public class ControllerGUIImpl implements Features {
       model.saveFlexiblePortfolios();
       view.createMessageBox(frame, "Flexible Portfolio successfully");
     }
-  }
-
-
-  @Override
-  public void savePortfolio() {
-
   }
 
   @Override
