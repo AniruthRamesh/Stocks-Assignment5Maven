@@ -70,6 +70,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     commandPanel = new JPanel();
     commandPanel.setLayout(new GridBagLayout());
     commandPanel.add(welcomeMessage);
+    commandPanel.setBounds(100, 30, 600, 500);
 
     return commandPanel;
   }
@@ -134,10 +135,10 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     l7.setBounds(80, 270, 200, 30);
     nameOfPort.setBounds(300, 70, 200, 30);
     day.setBounds(300, 110, 200, 30);
-    ticker.setBounds(300, 150, 200, 30);
-    number.setBounds(300, 190, 200, 30);
-    month.setBounds(300, 230, 200, 30);
-    year.setBounds(300, 270, 200, 30);
+    month.setBounds(300, 150, 200, 30);
+    year.setBounds(300, 190, 200, 30);
+    ticker.setBounds(300, 230, 200, 30);
+    number.setBounds(300, 270, 200, 30);
     btn1.setBounds(50, 350, 100, 30);
     buy.add(l1);
     buy.add(l2);
