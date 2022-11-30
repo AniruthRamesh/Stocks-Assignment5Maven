@@ -1,6 +1,5 @@
 package controller;
 
-import java.time.LocalDateTime;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -257,7 +256,7 @@ public class ControllerGUIImpl implements Features {
       }
     }
     if (actualCompanyData.size() == 0) {
-      view.createMessageBox(frame,"No stocks purchased before this date.");
+      view.createMessageBox(frame, "No stocks purchased before this date.");
       return;
     }
     String dash;
@@ -276,34 +275,34 @@ public class ControllerGUIImpl implements Features {
         }
 
         if (insideContents.get(0).equals("Sell")) {
-          String seller = actualCompanyData.get(i)+"\n"+dash+"\n"+"Sell         -> " +
+          String seller = actualCompanyData.get(i) + "\n" + dash + "\n" + "Sell         -> " +
                   insideContents.get(1) + " : "
                   + insideContents.get(2) + "\n" + "Date        -> " + insideContents.get(3) + "\n"
                   + "Commission  -> $" + insideContents.get(4);
           totalStrings.append(seller);
-          view.createMessageBox(frame,seller);
+          view.displayCostBasis(seller);
           totalMoneySpent += Double.parseDouble(insideContents.get(4));
 
         }
         if (insideContents.get(0).equals("Buy")) {
-          String buyer = actualCompanyData.get(i)+"\n"+dash+"\n"+"Buy         -> " +
+          String buyer = actualCompanyData.get(i) + "\n" + dash + "\n" + "Buy         -> " +
                   insideContents.get(1) + " : "
                   + insideContents.get(2) + "\n" + "Date        -> " + insideContents.get(3) + "\n"
                   + "Total value -> $" + insideContents.get(5) + "\n" + "Commission  -> $"
                   + insideContents.get(4);
           totalStrings.append(buyer);
-          view.createMessageBox(frame,buyer);
+          view.displayCostBasis(buyer);
           totalMoneySpent += Double.parseDouble(insideContents.get(4))
                   + Double.parseDouble(insideContents.get(5));
         }
       }
       overallTotalMoneySpent += totalMoneySpent;
-      totalStrings.append("Total money spent on "+actualCompanyData.get(i)+
+      totalStrings.append("Total money spent on " + actualCompanyData.get(i) +
               "-> $" + totalMoneySpent);
-      view.createMessageBox(frame,"Total money spent on "+actualCompanyData.get(i)+
+      view.displayCostBasis("Total money spent on " + actualCompanyData.get(i) +
               "-> $" + totalMoneySpent);
     }
-    view.createMessageBox(frame,"Overall Total -> $" + overallTotalMoneySpent);
+    view.displayCostBasis("Overall Total -> $" + overallTotalMoneySpent);
 
   }
 

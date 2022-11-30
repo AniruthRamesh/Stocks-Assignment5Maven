@@ -27,15 +27,18 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   ButtonGroup G1;
   JRadioButton jRadioButton1;
   JRadioButton jRadioButton2;
-  JTextField nameOfPort, day, month, year, ticker, number, filePath;
+  JTextField nameOfPort, day, month, year, ticker, number, filePath, popup_1,popup_2,popup_3;
   JTextField costBasis_nameOfPort, costBasis_day, costBasis_month, costBasis_year;
   JTextField sell_nameOfPort, sell_day, sell_month, sell_year, sell_ticker, sell_number;
   JTextField totalValue_nameOfPort, totalValue_day, totalValue_month, totalValue_year;
-  JButton buyButton, sellButton, uploadButton, totalValueButton,btn4;
+  JButton buyButton, sellButton, uploadButton, totalValueButton, btn4;
   private JTextArea textArea;
+  private JTextArea costBasis_textArea;
   private JScrollPane scrollPane;
+  private JScrollPane costBasis_scrollPane;
   private JPanel commandPanel;
   private JPanel buy;
+  private JPanel popUp;
   private JPanel sell;
   private JPanel costBasis;
   private JPanel totalValue;
@@ -264,10 +267,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     upload_l1.setBounds(100, 30, 400, 30);
     upload_l2.setBounds(80, 70, 200, 30);
     upload_l3.setBounds(80, 110, 200, 30);
-//    jRadioButton1.setBounds(120, 30, 120, 50);
-//
-//    // Setting Bounds of "jRadioButton4".
-//    jRadioButton2.setBounds(250, 30, 80, 50);
     jRadioButton1.setBounds(300, 110, 100, 30);
     jRadioButton2.setBounds(400, 110, 200, 30);
     filePath.setBounds(300, 70, 200, 30);
@@ -352,6 +351,14 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     costBasis_month = new JTextField();
     costBasis_year = new JTextField();
     btn4 = new JButton("Submit");
+
+    costBasis_textArea = new JTextArea("");
+    costBasis_textArea.setEditable(false);
+    costBasis_textArea.setLineWrap(true);
+    costBasis_scrollPane = new JScrollPane(costBasis_textArea);
+    costBasis_scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+    costBasis.add(costBasis_scrollPane);
+
     costBasis_l1.setBounds(100, 30, 400, 30);
     costBasis_l2.setBounds(80, 70, 200, 30);
     costBasis_l3.setBounds(80, 110, 200, 30);
@@ -362,7 +369,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     costBasis_month.setBounds(300, 150, 200, 30);
     costBasis_year.setBounds(300, 190, 200, 30);
     btn4.setBounds(50, 250, 100, 30);
-
+    costBasis_scrollPane.setBounds(50, 350, 500, 200);
 
     costBasis.add(costBasis_l1);
     costBasis.add(costBasis_l2);
@@ -382,6 +389,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     buyButton.addActionListener(evt -> features.createNewFlexiblePortfolio(buy,
             nameOfPort.getText(), day.getText(), month.getText(), year.getText(),
             ticker.getText(), number.getText()));
+    jRadioButton2.addActionListener(evt -> createPopUp());
     sellButton.addActionListener(evt -> features.sellPortfolio(sell, sell_nameOfPort.getText(),
             sell_day.getText(), sell_month.getText(), sell_year.getText(), sell_ticker.getText(),
             sell_number.getText()));
@@ -416,8 +424,20 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   }
 
   public void displayTotalValue(JPanel frame, String portfolioName, String date, String value) {
-    textArea.append("\n" + "Portfolio: " + portfolioName + "\n" + "Date: " + date + "\n" + "Total " +
+    textArea.append("\n" + "Portfolio: " + portfolioName + "\n" + "Date: " + date + "\n" + "Total" +
+            " " +
             "Value: $ " + value);
+  }
+
+  public void displayCostBasis(String data) {
+    costBasis_textArea.append("\n" + data + "\n");
+  }
+
+  public void createPopUp() {
+    popUp = new JPanel();
+    popUp.setLayout(new GridLayout(4,2));
+
+
   }
 
   private class buyPanelShow implements ActionListener {
@@ -481,5 +501,4 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
       }
     }
   }
-
 }

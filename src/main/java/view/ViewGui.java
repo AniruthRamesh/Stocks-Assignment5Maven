@@ -13,4 +13,6 @@ public interface ViewGui {
   void displayTotalValue(JPanel frame, String portfolioName, String value, String date);
 
   void createMessageBox(JPanel frame, String message);
+
+  void displayCostBasis(String data);
 }
