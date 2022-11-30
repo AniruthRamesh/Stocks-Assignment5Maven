@@ -14,7 +14,7 @@ public interface Features {
 
   void totalValue();
 
-  void uploadPortfolio(JPanel frame,String path, int selected);
+  void uploadPortfolio(JPanel frame, String path, int selected);
 
   void savePortfolio();
 
