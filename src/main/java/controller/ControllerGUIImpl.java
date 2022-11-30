@@ -80,6 +80,7 @@ public class ControllerGUIImpl implements Features {
                         String.format("%.2f", commission), String.format("%.2f", totalPrice))));
                 model.setFlexibleNewPortfolio(name, val);
                 model.saveFlexiblePortfolios();
+                view.createMessageBox(frame, "Saved Portfolio");
               } else {
                 view.createMessageBox(frame, "No data for given date.");
 
