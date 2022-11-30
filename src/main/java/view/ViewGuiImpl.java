@@ -51,7 +51,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     this.setVisible(true);
     mainPanel.setLayout(new CardLayout());
 
-    mainPanel.add(commandWindow(), "Command Panel");
+    mainPanel.add(commandWindow(), "Options Panel");
     mainPanel.add(buyWindow(), "Buy Panel");
     mainPanel.add(sellWindow(), "Sell Panel");
     mainPanel.add(costBasisWindow(), "Cost Basis Panel");
@@ -91,7 +91,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     setSize(WIDTH, HEIGHT);
     JMenuBar menuBar = new JMenuBar();
 
-    JMenu menu = new JMenu("Commands");
+    JMenu menu = new JMenu("Options");
     JMenuItem buy = new JMenuItem("Buy");
     JMenuItem sell = new JMenuItem("Sell");
     JMenuItem cost_basis = new JMenuItem("Cost Basis");
