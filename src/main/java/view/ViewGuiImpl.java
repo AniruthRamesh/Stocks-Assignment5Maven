@@ -26,6 +26,10 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   JTextField sell_nameOfPort, sell_day, sell_month, sell_year, sell_ticker, sell_number;
   JTextField totalValue_nameOfPort, totalValue_day, totalValue_month, totalValue_year;
   JButton buyButton, sellButton, uploadButton, totalValueButton;
+  private JFrame f;
+  private JTextArea ta;
+  private JScrollPane sbrText;
+  private JButton btnQuit;
   private JPanel commandPanel;
   private JPanel buy;
   private JPanel sell;
@@ -65,13 +69,10 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   public JPanel commandWindow() {
     JLabel welcomeMessage = new JLabel("<html><strong>This is a Portfolio Management " +
-            "Application<br>" +
-            ".</strong><br><br> Choose a command from the “Commands” menu to buy, sell, cost " +
-            "basis of portfolio,<br> total value of stocks, upload portfolio, investing in " +
-            "portfolio " +
-            "using dollar cost averaging, check cost basis and value while creating strategy " +
-            "for a portfolio" +
-            "</html>");
+            "Application<br>" + ".</strong><br><br> Choose a command from the “Commands” menu to " +
+            "buy, sell, cost " + "basis of portfolio,<br> total value of stocks, upload " +
+            "portfolio, investing in " + "portfolio " + "using dollar cost averaging, check cost " +
+            "basis and value while creating strategy " + "for a portfolio" + "</html>");
     commandPanel = new JPanel();
     commandPanel.setLayout(new GridBagLayout());
     commandPanel.add(welcomeMessage);
@@ -288,6 +289,13 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     totalValue_month = new JTextField();
     totalValue_year = new JTextField();
     totalValueButton = new JButton("Submit");
+    ta = new JTextArea("");
+    ta.setEditable(false);
+    ta.setLineWrap(true);
+    sbrText = new JScrollPane(ta);
+    sbrText.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+    totalValue.add(sbrText);
+    sbrText.setBounds(50, 300, 500, 300);
     totalValue_l1.setBounds(100, 30, 400, 30);
     totalValue_l2.setBounds(80, 70, 200, 30);
     totalValue_l3.setBounds(80, 110, 200, 30);
@@ -308,6 +316,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     totalValue.add(totalValue_l5);
     totalValue.add(totalValue_year);
     totalValue.add(totalValueButton);
+
+
     return totalValue;
   }
 
@@ -319,28 +329,25 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   @Override
   public void addFeatures(ControllerGUIImpl features) {
     buyButton.addActionListener(evt -> features.createNewFlexiblePortfolio(buy,
-            nameOfPort.getText(),
-            day.getText(), month.getText(), year.getText(), ticker.getText(), number.getText()));
-    sellButton.addActionListener(evt -> features.sellPortfolio(sell,
-            sell_nameOfPort.getText(),
+            nameOfPort.getText(), day.getText(), month.getText(), year.getText(),
+            ticker.getText(), number.getText()));
+    sellButton.addActionListener(evt -> features.sellPortfolio(sell, sell_nameOfPort.getText(),
             sell_day.getText(), sell_month.getText(), sell_year.getText(), sell_ticker.getText(),
             sell_number.getText()));
     totalValueButton.addActionListener(evt -> features.totalValue(totalValue,
-            totalValue_nameOfPort.getText(),
-            totalValue_day.getText(), totalValue_month.getText(), totalValue_year.getText()));
+            totalValue_nameOfPort.getText(), totalValue_day.getText(), totalValue_month.getText()
+            , totalValue_year.getText()));
     uploadButton.addActionListener(evt -> {
-              int selected = 0;
-              if (jRadioButton1.isSelected()) {
-                selected = 1;
-              } else if (jRadioButton2.isSelected()) {
-                selected = 2;
-              } else {
-                createMessageBox(upload, "Please select an option");
-              }
-              features.uploadPortfolio(upload,
-                      filePath.getText(), selected);
-            }
-    );
+      int selected = 0;
+      if (jRadioButton1.isSelected()) {
+        selected = 1;
+      } else if (jRadioButton2.isSelected()) {
+        selected = 2;
+      } else {
+        createMessageBox(upload, "Please select an option");
+      }
+      features.uploadPortfolio(upload, filePath.getText(), selected);
+    });
   }
 
   public void createMessageBox(JPanel frame, String message) {
@@ -349,13 +356,13 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   public void displayDynamicDataTotalValue(JPanel frame, String companyName, String value) {
     String message = companyName + "--> $" + value;
-    JOptionPane.showMessageDialog(frame, message);
+    ta.append(message);
+    ta.append("\n" + "\n");
   }
 
   public void displayTotalValue(JPanel frame, String portfolioName, String date, String value) {
-    JOptionPane.showMessageDialog(frame,
-            "Portfolio: " + portfolioName + "\n" + "Date: " + date + "\n" +
-            "Total Value: $ " + value);
+    ta.append("\n" + "Portfolio: " + portfolioName + "\n" + "Date: " + date + "\n" + "Total " +
+            "Value: $ " + value);
   }
 
   private class buyPanelShow implements ActionListener {
