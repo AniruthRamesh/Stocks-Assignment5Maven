@@ -204,6 +204,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     public void actionPerformed(ActionEvent e) {
       String buttonString = e.getActionCommand();
       if (buttonString.equals("Buy")) {
+
         CardLayout cl = (CardLayout) mainPanel.getLayout();
         cl.show(mainPanel, "Buy Panel");
       }
