@@ -659,6 +659,7 @@ public class ModelImpl implements Model {
   public int getFlexiblePortfolioSize() {
     return flexiblePort.size();
   }
+
   @Override
   public int stringToNumber(String number) {
     int date;
