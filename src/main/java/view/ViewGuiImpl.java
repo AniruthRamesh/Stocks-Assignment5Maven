@@ -25,7 +25,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   private JPanel costBasis;
   private JPanel totalValue;
   private JPanel upload;
-  private JPanel save;
   private JPanel dollarCostAvg;
   private JPanel dollarCostAvgPerformance;
 
@@ -39,13 +38,12 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
     mainPanel.add(commandWindow(), "Command Panel");
     mainPanel.add(buyWindow(), "Buy Panel");
-//    mainPanel.add(sellWindow(), "Sell Panel");
-//    mainPanel.add(costBasisWindow(), "Cost Basis Panel");
-//    mainPanel.add(totalValueWindow(), "Total Value Panel");
-//    mainPanel.add(uploadWindow(), "Upload File Panel");
-//    mainPanel.add(saveWindow(), "Save Panel");
-//    mainPanel.add(dollarCostAvgWindow(), "Dollar Cost Average Panel");
-//    mainPanel.add(dollarCostAvgPerformanceWindow(), "Cost Avg Performance Panel");
+    mainPanel.add(sellWindow(), "Sell Panel");
+    mainPanel.add(costBasisWindow(), "Cost Basis Panel");
+    mainPanel.add(totalValueWindow(), "Total Value Panel");
+    mainPanel.add(uploadWindow(), "Upload File Panel");
+    mainPanel.add(dollarCostAvgWindow(), "Dollar Cost Average Panel");
+    mainPanel.add(dollarCostAvgPerformanceWindow(), "Cost Avg Performance Panel");
 
     this.add(mainPanel);
 
@@ -87,7 +85,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     JMenuItem cost_basis = new JMenuItem("Cost Basis");
     JMenuItem total_value = new JMenuItem("Total Value");
     JMenuItem upload_file = new JMenuItem("Upload File");
-    JMenuItem save1 = new JMenuItem("Save");
     JMenuItem dollar_cost_average = new JMenuItem("Dollar Cost Average");
     JMenuItem dollar_cost_avg_performance = new JMenuItem("Cost Avg Performance");
     JMenuItem quit = new JMenuItem("Quit");
@@ -96,13 +93,19 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     menu.add(total_value);
     menu.add(cost_basis);
     menu.add(upload_file);
-    menu.add(save1);
     menu.add(dollar_cost_average);
     menu.add(dollar_cost_avg_performance);
     menu.add(quit);
     menuBar.add(menu);
     setJMenuBar(menuBar);
     buy.addActionListener(new buyPanelShow());
+    sell.addActionListener(new sellPanelShow());
+//    total_value.addActionListener(new totalValuePanelShow());
+//    cost_basis.addActionListener(new costBasisPanelShow());
+//    upload_file.addActionListener(new uploadPanelShow());
+//    dollar_cost_average.addActionListener(new dollarCostPanelShow());
+//    dollar_cost_avg_performance.addActionListener(new dollarCostPerformancePanelShow());
+//    quit.addActionListener(new buyPanelShow());
   }
 
   public JPanel buyWindow() {
@@ -172,11 +175,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     return dollarCostAvg;
   }
 
-  private JPanel saveWindow() {
-    save = new JPanel();
-    return save;
-  }
-
   private JPanel uploadWindow() {
     upload = new JPanel();
     return upload;
@@ -208,6 +206,15 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
       if (buttonString.equals("Buy")) {
         CardLayout cl = (CardLayout) mainPanel.getLayout();
         cl.show(mainPanel, "Buy Panel");
+      }
+    }
+  }
+  private class sellPanelShow implements ActionListener {
+    public void actionPerformed(ActionEvent e) {
+      String buttonString = e.getActionCommand();
+      if (buttonString.equals("Sell")) {
+        CardLayout cl = (CardLayout) mainPanel.getLayout();
+        cl.show(mainPanel, "Sell Panel");
       }
     }
   }
