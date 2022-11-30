@@ -5,6 +5,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.nio.file.Path;
 
 import javax.swing.*;
 
@@ -21,27 +22,29 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   JLabel totalValue_l1, totalValue_l2, totalValue_l3, totalValue_l4, totalValue_l5;
   JLabel sell_l1, sell_l2, sell_l3, sell_l4, sell_l5, sell_l6, sell_l7;
 
-  JLabel dollar_l1, dollar_l2, dollar_l3, dollar_l4, dollar_l5, dollar_l6, dollar_l7;
+  JLabel dollar_l1, dollar_l2, dollar_l3, dollar_l4, dollar_l5, dollar_l6, dollar_l7, datePopup_l1,
+          datePopup_l2, datePopup_l3;
 
   JTextField dollar_nameOfPort, dollar_day, dollar_month, dollar_year, dollar_ticker, dollar_number;
   ButtonGroup G1;
   ButtonGroup dollarG1;
   JRadioButton jRadioButton1;
   JRadioButton jRadioButton2;
-  JRadioButton jRadioButtonDollar1,jRadioButtonDollar2;
-  JTextField nameOfPort, day, month, year, ticker, number, filePath, popup_1,popup_2,popup_3;
+  JRadioButton jRadioButtonDollar1, jRadioButtonDollar2;
+  JTextField nameOfPort, day, month, year, ticker, number, filePath, datePopup_tf1, datePopup_tf2,
+          datePopup_tf3;
   JTextField costBasis_nameOfPort, costBasis_day, costBasis_month, costBasis_year;
   JTextField sell_nameOfPort, sell_day, sell_month, sell_year, sell_ticker, sell_number;
   JTextField totalValue_nameOfPort, totalValue_day, totalValue_month, totalValue_year;
-  JButton buyButton, sellButton, uploadButton, totalValueButton, btn4;
+  JButton buyButton, sellButton, uploadButton, totalValueButton, btn4, btnPopup;
+  JButton dollarCostAvg_button;
   private JTextArea textArea;
   private JTextArea costBasis_textArea;
   private JScrollPane scrollPane;
   private JScrollPane costBasis_scrollPane;
-  JButton dollarCostAvg_button;
   private JPanel commandPanel;
   private JPanel buy;
-  private JPanel popUp;
+  private JPanel datePopup;
   private JPanel sell;
   private JPanel costBasis;
   private JPanel totalValue;
@@ -79,14 +82,21 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   public JPanel commandWindow() {
     JLabel welcomeMessage = new JLabel("<html><strong>This is a Portfolio Management " +
-            "Application<br>" + ".</strong><br><br> Choose a command from the “Commands” menu to " +
+            "Application.<br>" + "</strong><br><br> Choose a command from the “Commands” menu to " +
             "buy, sell, cost " + "basis of portfolio,<br> total value of stocks, upload " +
             "portfolio, investing in " + "portfolio " + "using dollar cost averaging, check cost " +
             "basis and value while creating strategy " + "for a portfolio" + "</html>");
     commandPanel = new JPanel();
-    commandPanel.setLayout(new GridBagLayout());
+    Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\" + "stock.jpeg");
+    JLabel picLabel = new JLabel("");
+
+    ImageIcon imageIcon1 =
+            new ImageIcon(new ImageIcon(path.toString()).getImage().getScaledInstance(100, 100,
+                    Image.SCALE_DEFAULT));
+    picLabel.setIcon(imageIcon1);
+    commandPanel.add(picLabel);
     commandPanel.add(welcomeMessage);
-    commandPanel.setBounds(100, 30, 600, 500);
+    welcomeMessage.setPreferredSize(new Dimension(500, 500));
 
     return commandPanel;
   }
@@ -275,7 +285,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     dollar_year.setBounds(300, 230, 200, 30);
     jRadioButtonDollar1.setBounds(300, 270, 100, 30);
     jRadioButtonDollar2.setBounds(400, 270, 200, 30);
-    dollarCostAvg_button.setBounds(410,320,100,30);
+    dollarCostAvg_button.setBounds(410, 320, 100, 30);
     jRadioButtonDollar1.setText("Enter End Date");
     jRadioButtonDollar2.setText("No End Date");
     dollarCostAvg.add(dollar_l1);
@@ -437,7 +447,9 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     buyButton.addActionListener(evt -> features.createNewFlexiblePortfolio(buy,
             nameOfPort.getText(), day.getText(), month.getText(), year.getText(),
             ticker.getText(), number.getText()));
-    jRadioButton2.addActionListener(evt -> createPopUp());
+    jRadioButtonDollar1.addActionListener(evt -> {
+      enterDatePopUp();
+    });
     sellButton.addActionListener(evt -> features.sellPortfolio(sell, sell_nameOfPort.getText(),
             sell_day.getText(), sell_month.getText(), sell_year.getText(), sell_ticker.getText(),
             sell_number.getText()));
@@ -459,7 +471,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     );
     btn4.addActionListener(evt -> features.costBasis(costBasis, costBasis_nameOfPort.getText(),
             costBasis_day.getText(), costBasis_month.getText(), costBasis_year.getText()));
-    dollarCostAvg_button.addActionListener(evt->features.dollarCostAveraging());
+    dollarCostAvg_button.addActionListener(evt -> features.dollarCostAveraging());
   }
 
   public void createMessageBox(JPanel frame, String message) {
@@ -482,14 +494,32 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     costBasis_textArea.append("\n" + data + "\n");
   }
 
-  public void createPopUp() {
-    popUp = new JPanel();
-    popUp.setLayout(new GridLayout(4,2));
+  public void enterDatePopUp() {
+    datePopup = new JPanel();
+    datePopup.setLayout(new GridLayout(4, 2));
+    datePopup.setPreferredSize(new Dimension(200, 100));
+    datePopup.setVisible(true);
+    datePopup_l1 = new JLabel("End Day:");
+    datePopup_l2 = new JLabel("End Month:");
+    datePopup_l3 = new JLabel("End Year:");
+    datePopup_tf1 = new JTextField();
+    datePopup_tf2 = new JTextField();
+    datePopup_tf3 = new JTextField();
 
+    datePopup_tf1.setPreferredSize(new Dimension(50, 30));
+    datePopup_tf2.setPreferredSize(new Dimension(50, 30));
+    datePopup_tf3.setPreferredSize(new Dimension(50, 30));
 
+    btnPopup = new JButton("Submit");
+
+    datePopup.add(datePopup_l1);
+    datePopup.add(datePopup_tf1);
+    datePopup.add(datePopup_l2);
+    datePopup.add(datePopup_tf2);
+    datePopup.add(datePopup_l3);
+    datePopup.add(datePopup_tf3);
+    JOptionPane.showMessageDialog(dollarCostAvg, datePopup);
   }
-
-
 
   private class buyPanelShow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
