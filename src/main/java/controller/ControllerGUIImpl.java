@@ -118,8 +118,8 @@ public class ControllerGUIImpl implements Features {
   public void uploadPortfolio(JPanel frame, String path, int selected) {
     String isFileReadSuccessFull = model.readFromFile(path);
     if (isFileReadSuccessFull.equals("Failure")) {
-      view.createMessageBox(frame, "Enter a valid Path");
-      if (selected == 1) {
+      view.createMessageBox(frame, "Enter a valid Path");}
+      else if (selected == 1) {
         Map<String, List<List<String>>> parsedPortfolio = model.parseJson(isFileReadSuccessFull);
         if (parsedPortfolio == null) {
           view.createMessageBox(frame, "The format of data is incorrect.");
@@ -135,7 +135,8 @@ public class ControllerGUIImpl implements Features {
         }
         model.setInflexiblePortfolio(parsedPortfolio);
         model.savePortfolio();
-      } else if (selected == 2) {
+      view.createMessageBox(frame, "Inflexible Portfolio uploaded successfully");
+    } else if (selected == 2) {
         Map<String, Map<String, List<List<String>>>> parseFlexiblePortfolio =
                 model.parseFlexiblePortfolio(isFileReadSuccessFull);
         List<String> keys = new ArrayList<>();
@@ -194,11 +195,10 @@ public class ControllerGUIImpl implements Features {
         }
         model.setFlexible(parseFlexiblePortfolio);
         model.saveFlexiblePortfolios();
-        view.createMessageBox(frame, "File uploaded successfully");
+        view.createMessageBox(frame, "Flexible Portfolio successfully");
       }
     }
 
-  }
 
   @Override
   public void savePortfolio() {

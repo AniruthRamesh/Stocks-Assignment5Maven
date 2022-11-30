@@ -14,11 +14,11 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   private static final int WIDTH = 700;
   private static final int HEIGHT = 700;
-  JLabel l1, l2, l3, l4, l5, l6, l7;
+  JLabel l1, l2, l3, l4, l5, l6, l7,upload_l1,upload_l2,upload_l3;
   ButtonGroup G1;
   JRadioButton jRadioButton1;
   JRadioButton jRadioButton2;
-  JTextField nameOfPort, day, month, year, ticker, number;
+  JTextField nameOfPort, day, month, year, ticker, number, filePath;
   JButton buyButton, sellButton, uploadButton;
   //These are the Panels
   private JPanel mainPanel;
@@ -185,34 +185,34 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     upload.setLayout(null);
     jRadioButton1 = new JRadioButton();
     jRadioButton2 = new JRadioButton();
-    l1 = new JLabel("Upload portfolio");
-    l1.setForeground(Color.blue);
-    l1.setFont(new Font("Serif", Font.BOLD, 20));
-    l2 = new JLabel("Enter path of Portfolio:");
-    l3 = new JLabel("Select Type of Portfolio");
-    nameOfPort = new JTextField();
+    upload_l1 = new JLabel("Upload portfolio");
+    upload_l1.setForeground(Color.blue);
+    upload_l1.setFont(new Font("Serif", Font.BOLD, 20));
+    upload_l2 = new JLabel("Enter path of Portfolio:");
+    upload_l3 = new JLabel("Select Type of Portfolio");
+    filePath = new JTextField();
     G1 = new ButtonGroup();
     G1.add(jRadioButton1);
     G1.add(jRadioButton2);
     uploadButton = new JButton("Submit");
-    l1.setBounds(100, 30, 400, 30);
-    l2.setBounds(80, 70, 200, 30);
-    l3.setBounds(80, 110, 200, 30);
+    upload_l1.setBounds(100, 30, 400, 30);
+    upload_l2.setBounds(80, 70, 200, 30);
+    upload_l3.setBounds(80, 110, 200, 30);
 //    jRadioButton1.setBounds(120, 30, 120, 50);
 //
 //    // Setting Bounds of "jRadioButton4".
 //    jRadioButton2.setBounds(250, 30, 80, 50);
     jRadioButton1.setBounds(300, 110, 100, 30);
     jRadioButton2.setBounds(400, 110, 200, 30);
-    nameOfPort.setBounds(300, 70, 200, 30);
+    filePath.setBounds(300, 70, 200, 30);
     uploadButton.setBounds(80, 150, 100, 30);
     jRadioButton1.setText("Inflexible");
     jRadioButton2.setText("Flexible");
-    upload.add(l1);
-    upload.add(l2);
-    upload.add(l3);
+    upload.add(upload_l1);
+    upload.add(upload_l2);
+    upload.add(upload_l3);
 
-    upload.add(nameOfPort);
+    upload.add(filePath);
     upload.add(jRadioButton1);
     upload.add(jRadioButton2);
     upload.add(uploadButton);
@@ -244,7 +244,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
                 createMessageBox(upload, "Please select an option");
               }
               features.uploadPortfolio(upload,
-                      nameOfPort.getText(), selected);
+                      filePath.getText(), selected);
             }
     );
   }
