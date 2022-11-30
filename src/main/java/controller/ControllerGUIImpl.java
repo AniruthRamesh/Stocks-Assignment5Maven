@@ -1,5 +1,6 @@
 package controller;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -91,7 +92,6 @@ public class ControllerGUIImpl implements Features {
           view.createMessageBox(frame, "Enter valid date.");
         }
 
-
       }
 
     }
@@ -104,8 +104,31 @@ public class ControllerGUIImpl implements Features {
   }
 
   @Override
-  public void costBasis() {
+  public void costBasis(JPanel frame, String name, String dayText,
+                        String monthText,
+                        String yearText) {
+    String date;
+    if (name.length() == 0 || dayText.length() == 0 || monthText.length() == 0
+            || yearText.length() == 0) {
+      view.createMessageBox(frame, "Fields cannot be empty");
+    } else {
+      int day = model.stringToNumber(dayText);
+      int month = model.stringToNumber(monthText);
+      int year = model.stringToNumber(yearText);
 
+      if (!model.flexiblePortContainsCertainKey(name)) {
+        view.createMessageBox(frame, "Portfolio does not exist");
+      } else if (day == 0 || month == 0 || year == 0) {
+        view.createMessageBox(frame, "Enter numeric values for date");
+      } else {
+        date = model.makeStringDate(day, month, year);
+        if (!model.isValidDate(date)) {
+          view.createMessageBox(frame, "Enter valid date.");
+          return;
+        }
+
+      }
+    }
   }
 
   @Override

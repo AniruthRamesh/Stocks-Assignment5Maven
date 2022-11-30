@@ -10,7 +10,9 @@ public interface Features {
 
   void sellPortfolio();
 
-  void costBasis();
+  void costBasis(JPanel frame, String name, String dayText,
+                 String monthText,
+                 String yearText);
 
   void totalValue();
 
