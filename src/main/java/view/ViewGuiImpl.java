@@ -26,10 +26,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   JTextField sell_nameOfPort, sell_day, sell_month, sell_year, sell_ticker, sell_number;
   JTextField totalValue_nameOfPort, totalValue_day, totalValue_month, totalValue_year;
   JButton buyButton, sellButton, uploadButton, totalValueButton;
-  private JFrame f;
-  private JTextArea ta;
-  private JScrollPane sbrText;
-  private JButton btnQuit;
+  private JTextArea textArea;
+  private JScrollPane scrollPane;
   private JPanel commandPanel;
   private JPanel buy;
   private JPanel sell;
@@ -289,13 +287,13 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     totalValue_month = new JTextField();
     totalValue_year = new JTextField();
     totalValueButton = new JButton("Submit");
-    ta = new JTextArea("");
-    ta.setEditable(false);
-    ta.setLineWrap(true);
-    sbrText = new JScrollPane(ta);
-    sbrText.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-    totalValue.add(sbrText);
-    sbrText.setBounds(50, 300, 500, 300);
+    textArea = new JTextArea("");
+    textArea.setEditable(false);
+    textArea.setLineWrap(true);
+    scrollPane = new JScrollPane(textArea);
+    scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+    totalValue.add(scrollPane);
+    scrollPane.setBounds(50, 300, 500, 300);
     totalValue_l1.setBounds(100, 30, 400, 30);
     totalValue_l2.setBounds(80, 70, 200, 30);
     totalValue_l3.setBounds(80, 110, 200, 30);
@@ -356,12 +354,12 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   public void displayDynamicDataTotalValue(JPanel frame, String companyName, String value) {
     String message = companyName + "--> $" + value;
-    ta.append(message);
-    ta.append("\n" + "\n");
+    textArea.append(message);
+    textArea.append("\n" + "\n");
   }
 
   public void displayTotalValue(JPanel frame, String portfolioName, String date, String value) {
-    ta.append("\n" + "Portfolio: " + portfolioName + "\n" + "Date: " + date + "\n" + "Total " +
+    textArea.append("\n" + "Portfolio: " + portfolioName + "\n" + "Date: " + date + "\n" + "Total " +
             "Value: $ " + value);
   }
 
