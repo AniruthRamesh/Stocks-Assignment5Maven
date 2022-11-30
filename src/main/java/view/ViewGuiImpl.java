@@ -200,8 +200,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   }
   @Override
   public void addFeatures(ControllerGUIImpl features) {
-//    btn1.addActionListener(evt -> features.createNewFlexiblePortfolio(buy,nameOfPort.getText(),
-//            day.getText(), month.getText(), year.getText(), ticker.getText(), number.getText()));
+    btn1.addActionListener(evt -> features.createNewFlexiblePortfolio(buy,nameOfPort.getText(),
+            day.getText(), month.getText(), year.getText(), ticker.getText(), number.getText()));
   }
 
   public void createMessageBox(JPanel frame, String message ){
