@@ -59,7 +59,7 @@ public class ModelImpl implements Model {
                   + " Date",
           "Upload a portfolio", "List all portfolios", "Create Flexible Portfolio", "Sell Stocks "
                   + "from a Portfolio", "Determine Cost Basis", "Determine value of Flexible "
-                  + "portfolio on certain Date", "Flexible Portfolio performance","" +
+                  + "portfolio on certain Date", "Flexible Portfolio performance", "" +
                   "Create a Strategy", "Exit");
 
   Map<String, Map<String, List<List<String>>>> flexiblePort = new HashMap<>();
@@ -89,6 +89,7 @@ public class ModelImpl implements Model {
   public boolean flexiblePortContainsCertainKey(String name) {
     return flexiblePort.containsKey(name);
   }
+
   public Map<String, Integer> getTickerFinder() {
     return tickerFinder;
   }
@@ -444,6 +445,7 @@ public class ModelImpl implements Model {
   public void putCompanyNameInTickerFinder(String name, int number) {
     tickerFinder.put(name, number);
   }
+
   @Override
   public void putNameInCompanyInPortfolio(String name) {
     companiesInPortfolio.add(name);
@@ -650,5 +652,22 @@ public class ModelImpl implements Model {
       totalValue += set.getValue();
     }
     return totalValue;
+  }
+
+
+  @Override
+  public int getFlexiblePortfolioSize() {
+    return flexiblePort.size();
+  }
+
+  @Override
+  public int stringToNumber(String number) {
+    int date;
+    try {
+      date = Integer.parseInt(number);
+    } catch (NumberFormatException e) {
+      date = 0;
+    }
+    return date;
   }
 }

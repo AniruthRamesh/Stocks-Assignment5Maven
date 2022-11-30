@@ -454,6 +454,11 @@ public class MockModel implements Model {
   }
 
   @Override
+  public int stringToNumber(String number) {
+    return 0;
+  }
+
+  @Override
   public boolean portfolioContainsCertainKey(String name) {
     logForPortfolioContainsCertainKey.append(name);
     return inflexiblePortfolio.containsKey(name);
@@ -705,12 +710,6 @@ public class MockModel implements Model {
     return false;
   }
 
-  @Override
-  public void setterForFlexiblePortfolio(String name, List<List<String>> companyDetails) {
-    flexiblePortfolio.put(name, companyDetails);
-  }
-
-
   public String getPutNameInCompanyInPortfolioLog() {
     return putNameInCompanyInPortfolioLog.toString();
   }
@@ -762,10 +761,10 @@ public class MockModel implements Model {
     return null;
   }
 
-  @Override
-  public void removeTickerFromPortfolio(String ticker, String portfolioName) {
-    //
-  }
+//  @Override
+//  public void removeTickerFromPortfolio(String ticker, String portfolioName) {
+//    //
+//  }
 
   @Override
   public List<String> getCompaniesInCertainPortfolio(String portfolioName) {

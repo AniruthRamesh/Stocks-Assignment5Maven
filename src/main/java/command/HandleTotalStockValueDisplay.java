@@ -101,7 +101,6 @@ public class HandleTotalStockValueDisplay implements Command {
    * displays the total stock value.
    *
    * @param portfolioName The name of the portfolio whose total stock value is to be calculated.
-   *
    * @return A string.
    */
   public String handleTotalStockOnCurrentDate(String portfolioName) {
@@ -119,7 +118,6 @@ public class HandleTotalStockValueDisplay implements Command {
    * It handles the total stock value on a different date.
    *
    * @param portfolioName The name of the portfolio.
-   *
    */
   public void handleTotalStockOnDifferentDate(String portfolioName) {
     int choice;

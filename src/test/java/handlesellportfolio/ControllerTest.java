@@ -20,7 +20,7 @@ public class ControllerTest extends Abstract {
    * Setting up the environment for the test.
    */
   @Before
-    public void setup() {
+  public void setup() {
     super.setup();
   }
 

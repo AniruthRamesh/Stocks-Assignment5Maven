@@ -275,4 +275,17 @@ public interface View {
    * Tells the user that range is very small, and we cannot calculate the performance.
    */
   void displayRangeIsSmall();
+
+  /**
+   * This function prints out the menu for the user to select the date.
+   */
+  public void dateSelectionMenu();
+
+  /**
+   * This function displays the total flex value for a company.
+   *
+   * @param companyName The name of the company
+   * @param value       The value of the flex field.
+   */
+  public void displayTotalFlexValue(String companyName, String value);
 }

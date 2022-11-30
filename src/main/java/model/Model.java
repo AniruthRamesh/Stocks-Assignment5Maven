@@ -464,4 +464,13 @@ public interface Model {
    * @return Double, containing total value.
    */
   Double calculateValueForGraph(HashMap<String, Double> data);
+
+  /**
+   * Returns the number of flexible assets in the portfolio.
+   *
+   * @return The size of the flexible portfolio.
+   */
+  int getFlexiblePortfolioSize();
+
+  int stringToNumber(String number);
 }

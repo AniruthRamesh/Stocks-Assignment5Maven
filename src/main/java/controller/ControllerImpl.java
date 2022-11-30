@@ -105,7 +105,7 @@ public class ControllerImpl implements Controller {
           command = new HandlePerformance(model, view, sc);
           break;
         case 12:
-          command = new HandleStrategy(model,view,sc);
+          command = new HandleStrategy(model, view, sc);
           break;
         case 13:
           initialOptions = true;
