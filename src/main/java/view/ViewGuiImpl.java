@@ -56,6 +56,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     });
   }
 
+
   public JPanel commandWindow() {
     JLabel welcomeMessage = new JLabel("<html><strong>This is a Portfolio Management " +
             "Application<br>" +
