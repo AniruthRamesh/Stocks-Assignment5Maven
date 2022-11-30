@@ -1,8 +1,12 @@
 package controller;
 
+import javax.swing.*;
+
 public interface Features {
 
-  void createNewFlexiblePortfolio();
+  void createNewFlexiblePortfolio(JPanel frame,String text, String dayText, String monthText,
+                                  String yearText,
+                                  String tickerText, String numberText);
 
   void sellPortfolio();
 

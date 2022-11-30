@@ -1,5 +1,7 @@
 package controller;
 
+import javax.swing.*;
+
 import command.Command;
 import model.Model;
 import view.ViewGui;
@@ -17,7 +19,17 @@ public class ControllerGUIImpl implements Features {
   }
 
   @Override
-  public void createNewFlexiblePortfolio() {
+  public void createNewFlexiblePortfolio(JPanel frame, String name, String dayText,
+                                         String monthText,
+                                         String yearText, String tickerText, String numberText) {
+    String nameText = name;
+    if (nameText.length() == 0) {
+      view.createMessageBox(frame, "Portfolio name cannot be empty");
+    }
+    boolean alreadyContainsTheName = model.hasAnotherPortfolioWithSameName(name);
+    if (alreadyContainsTheName) {
+      view.createMessageBox(frame, "Already exists portfolio with this name");
+    }
 
   }
 
