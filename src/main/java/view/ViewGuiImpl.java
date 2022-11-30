@@ -89,12 +89,15 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     commandPanel = new JPanel();
     Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\" + "stock.jpeg");
     JLabel picLabel = new JLabel("");
+    commandPanel.setLayout(new GridBagLayout());
 
     ImageIcon imageIcon1 =
             new ImageIcon(new ImageIcon(path.toString()).getImage().getScaledInstance(100, 100,
                     Image.SCALE_DEFAULT));
     picLabel.setIcon(imageIcon1);
     commandPanel.add(picLabel);
+    commandPanel.add(new JPanel());
+
     commandPanel.add(welcomeMessage);
     welcomeMessage.setPreferredSize(new Dimension(500, 500));
 
