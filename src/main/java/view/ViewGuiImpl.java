@@ -650,8 +650,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
       lineGraphFrame.setSize(800, 800);
       lineGraphFrame.setVisible(true);
     });
-
-
   }
 
   @Override
@@ -672,9 +670,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
       newFrame.setVisible(true);
       totalValue_nameOfPort.setText(portfolio);
       totalValue_nameOfPort.setEditable(false);
-
     });
-
   }
 
   public void createMessageBox(JPanel frame, String message) {

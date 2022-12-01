@@ -20,7 +20,6 @@ public class LineChart extends JFrame {
             dataset, PlotOrientation.VERTICAL,
             true, true, false
     );
-    JLabel label = new JLabel("Enter the ticker symbol:");
     ChartPanel panel = new ChartPanel(chart);
     setContentPane(panel);
   }
