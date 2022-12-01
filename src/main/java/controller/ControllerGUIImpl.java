@@ -19,6 +19,7 @@ import static java.lang.Math.ceil;
 public class ControllerGUIImpl implements Features {
   ViewGui view;
   Model model;
+
   public ControllerGUIImpl(Model model, ViewGui viewGui) {
     this.model = model;
     this.view = viewGui;
