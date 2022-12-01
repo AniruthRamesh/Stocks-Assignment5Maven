@@ -199,7 +199,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
    */
   public JPanel commandWindow() {
     JLabel welcomeMessage = new JLabel("<html><strong>This is a Portfolio Management " +
-            "Application.<br>" + "</strong><br><br> Choose an option from the “Option” menu on "
+            "Application.<br>" + "</strong><br><br> Choose an option from the Option menu on "
             + "the top" + " to " + "buy, sell, cost " +
             "basis of portfolio, total value of stocks," + " upload " + "portfolio, investing in "
             + "portfolio, create performance graph," + " using dollar cost averaging, " +

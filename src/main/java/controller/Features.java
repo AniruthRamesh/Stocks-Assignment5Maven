@@ -74,16 +74,28 @@ public interface Features {
   void uploadPortfolio(JPanel frame, String path, int selected);
 
   /**
-   * It calculates the dollar cost averaging of a stock.
+   * This function will take in a portfolio name, an amount, a day, a month, a year, and a value,
+   * and
+   * will add a new dollar cost averaging entry to the portfolio.
+   *
+   * @param frame The JPanel that the user is currently on.
+   * @param portfolio The name of the portfolio you want to add the stock to.
+   * @param amount The amount of money you want to invest.
+   * @param day The day of the month you want to buy the stock.
+   * @param month The month you want to start buying the stock.
+   * @param year The year you want to start dollar cost averaging.
+   * @param value The value of the stock you want to buy.
    */
   void dollarCostAveraging(JPanel frame, String portfolio, String amount, String day, String month,
                            String year, String value);
 
   /**
-   * This function takes in a ticker and a percentage.
+   * This function is used to check if the user has entered a date or not.
    *
-   * @param ticker     The ticker symbol of the stock you want to get the data for.
-   * @param percentage The percentage of the stock's price that you want to buy.
+   * @param frame The JPanel that the graph will be displayed on.
+   * @param ticker The ticker of the stock you want to get the data for.
+   * @param percentage The percentage of the data that is missing.
+   * @return A boolean value.
    */
   boolean noDate(JPanel frame, String ticker, String percentage);
 
