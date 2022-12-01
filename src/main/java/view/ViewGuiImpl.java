@@ -78,8 +78,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   JLabel dollar_l5;
   JLabel dollar_l6;
   JLabel datePopup_l1;
-  JLabel
-          datePopup_l2;
+  JLabel datePopup_l2;
   JLabel datePopup_l3;
   JLabel noDatePopup_l1;
   JLabel noDatePopup_l2;
@@ -108,8 +107,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   JTextField dollarPerf_day;
   JTextField dollarPerf_month;
   JTextField dollarPerf_year;
-  JTextField
-          dollarPerf_number;
+  JTextField dollarPerf_number;
 
 
   ButtonGroup group1;
@@ -134,8 +132,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   JTextField filePath;
   JTextField datePopup_tf1;
   JTextField datePopup_tf2;
-  JTextField
-          datePopup_tf3;
+  JTextField datePopup_tf3;
   JTextField noDatePopup_tf1;
   JTextField noDatePopup_tf2;
   JTextField duration;
@@ -158,8 +155,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   JTextField graph_startMonth;
   JTextField graph_startYear;
   JTextField graph_endDay;
-  JTextField
-          graph_endMonth;
+  JTextField graph_endMonth;
   JTextField graph_endYear;
   JButton buyButton;
   JButton sellButton;
@@ -182,6 +178,11 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   private JPanel graph;
   private JPanel dollarCostAvgPerformance;
 
+  /**
+   * Constructor for View GUI.
+   *
+   * @param caption The title for panel
+   */
   public ViewGuiImpl(String caption) {
     super(caption);
 
@@ -218,12 +219,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
    */
   public JPanel commandWindow() {
     JLabel welcomeMessage = new JLabel("<html><strong>This is a Portfolio Management " +
-            "Application.<br>" + "</strong><br><br> Choose an option from the “Option” menu on " +
-            "the top" + " to " + "buy, sell, cost " + "basis of portfolio, total value of stocks," +
-            " upload " + "portfolio, investing in " + "portfolio, create performance graph," +
-            " using dollar cost averaging, " +
-            "check cost " + "basis and value while creating strategy " +
-            "for a portfolio" + "</html>");
+            "Application.<br>" + "</strong><br><br> Choose an option from the “Option” menu on " + "the top" + " to " + "buy, sell, cost " + "basis of portfolio, total value of stocks," + " upload " + "portfolio, investing in " + "portfolio, create performance graph," + " using dollar cost averaging, " + "check cost " + "basis and value while creating strategy " + "for a portfolio" + "</html>");
     JPanel commandPanel = new JPanel();
     Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\" + "stock.jpeg");
     JLabel picLabel = new JLabel("");
@@ -272,14 +268,14 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     menu.add(quit);
     menuBar.add(menu);
     setJMenuBar(menuBar);
-    buy.addActionListener(new buyPanelShow());
-    sell.addActionListener(new sellPanelShow());
-    total_value.addActionListener(new totalValuePanelShow());
-    upload_file.addActionListener(new uploadPanelShow());
-    cost_basis.addActionListener(new costBasisPanelShow());
-    create_graph.addActionListener(new createGraph());
-    dollar_cost_average.addActionListener(new dollarCostPanelShow());
-    dollar_cost_avg_performance.addActionListener(new dollarCostPerformancePanelShow());
+    buy.addActionListener(new BuyPanelShow());
+    sell.addActionListener(new SellPanelShow());
+    total_value.addActionListener(new TotalValuePanelShow());
+    upload_file.addActionListener(new UploadPanelShow());
+    cost_basis.addActionListener(new CostBasisPanelShow());
+    create_graph.addActionListener(new CreateGraph());
+    dollar_cost_average.addActionListener(new DollarCostPanelShow());
+    dollar_cost_avg_performance.addActionListener(new DollarCostPerformancePanelShow());
     quit.addActionListener(evt -> System.exit(0));
   }
 
@@ -773,30 +769,23 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     graphButton.addActionListener(evt -> features.createGraph(graph, graph_name.getText(),
             graph_startDay.getText(), graph_startMonth.getText(), graph_startYear.getText(),
             graph_endDay.getText(), graph_endMonth.getText(), graph_endYear.getText()));
-//    graphButton.addActionListener(evt -> createGraphDemo());
     uploadButton.addActionListener(evt -> {
-              int selected = 0;
-              if (jRadioButton1.isSelected()) {
-                selected = 1;
-              } else if (jRadioButton2.isSelected()) {
-                selected = 2;
-              } else {
-                createMessageBox(upload, "Please select an option");
-              }
-              features.uploadPortfolio(upload,
-                      filePath.getText(), selected);
-            }
-    );
+      int selected = 0;
+      if (jRadioButton1.isSelected()) {
+        selected = 1;
+      } else if (jRadioButton2.isSelected()) {
+        selected = 2;
+      } else {
+        createMessageBox(upload, "Please select an option");
+      }
+      features.uploadPortfolio(upload, filePath.getText(), selected);
+    });
     btn4.addActionListener(evt -> features.costBasis(costBasis, costBasis_nameOfPort.getText(),
             costBasis_day.getText(), costBasis_month.getText(), costBasis_year.getText()));
     dollarCostAvg_button.addActionListener(evt -> features.dollarCostAveraging(dollarCostAvg,
             dollar_nameOfPort.getText(), dollar_number.getText(), dollar_day.getText(),
             dollar_month.getText(), dollar_year.getText(), "costAvg"));
-    dollarCostAvgPerformanceButton.addActionListener(evt ->
-            features.dollarCostAveraging(dollarCostAvgPerformance,
-                    dollarPerf_nameOfPort.getText(), dollarPerf_number.getText(),
-                    dollarPerf_day.getText(),
-                    dollarPerf_month.getText(), dollarPerf_year.getText(), "query"));
+    dollarCostAvgPerformanceButton.addActionListener(evt -> features.dollarCostAveraging(dollarCostAvgPerformance, dollarPerf_nameOfPort.getText(), dollarPerf_number.getText(), dollarPerf_day.getText(), dollarPerf_month.getText(), dollarPerf_year.getText(), "query"));
   }
 
   @Override
@@ -865,9 +854,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
    * @param value         The total value of the portfolio.
    */
   public void displayTotalValue(JPanel frame, String portfolioName, String date, String value) {
-    textArea.append("\n" + "Portfolio: " + portfolioName + "\n" + "Date: " + date + "\n" + "Total" +
-            " " +
-            "Value: $ " + value);
+    textArea.append("\n" + "Portfolio: " + portfolioName + "\n" + "Date: " + date + "\n" + "Total"
+            + " " + "Value: $ " + value);
   }
 
   /**
@@ -912,8 +900,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     durationPopup.add(monthR);
     durationPopup.add(yearR);
     durationPopup.add(duration);
-    int result = JOptionPane.showConfirmDialog(dollarCostAvg, durationPopup,
-            null, JOptionPane.OK_CANCEL_OPTION);
+    int result = JOptionPane.showConfirmDialog(dollarCostAvg, durationPopup, null,
+            JOptionPane.OK_CANCEL_OPTION);
     if (result == JOptionPane.OK_OPTION) {
       if (dayR.isSelected()) {
         selected = "day";
@@ -961,8 +949,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     noDatePopup.add(noDatePopup_tf1);
     noDatePopup.add(noDatePopup_l2);
     noDatePopup.add(noDatePopup_tf2);
-    int result = JOptionPane.showConfirmDialog(dollarCostAvg, noDatePopup,
-            null, JOptionPane.OK_CANCEL_OPTION);
+    int result = JOptionPane.showConfirmDialog(dollarCostAvg, noDatePopup, null,
+            JOptionPane.OK_CANCEL_OPTION);
 
     if (result == JOptionPane.OK_OPTION) {
       boolean close = features.noDate(frame, noDatePopup_tf1.getText(), noDatePopup_tf2.getText());
@@ -1016,8 +1004,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     datePopup.add(datePopup_tf2);
     datePopup.add(datePopup_l3);
     datePopup.add(datePopup_tf3);
-    int result = JOptionPane.showConfirmDialog(dollarCostAvg, datePopup,
-            null, JOptionPane.OK_CANCEL_OPTION);
+    int result = JOptionPane.showConfirmDialog(dollarCostAvg, datePopup, null,
+            JOptionPane.OK_CANCEL_OPTION);
     if (result == JOptionPane.OK_OPTION) {
       boolean yes = features.enteredDate(frame, datePopup_tf1.getText(), datePopup_tf2.getText(),
               datePopup_tf3.getText());
@@ -1030,7 +1018,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   /**
    * This class implements the ActionListener interface and overrides the actionPerformed method.
    */
-  private class buyPanelShow implements ActionListener {
+  private class BuyPanelShow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       String buttonString = e.getActionCommand();
       if (buttonString.equals("Buy")) {
@@ -1043,7 +1031,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   /**
    * This class implements the ActionListener interface and overrides the actionPerformed method.
    */
-  private class totalValuePanelShow implements ActionListener {
+  private class TotalValuePanelShow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       String buttonString = e.getActionCommand();
       if (buttonString.equals("Total Value")) {
@@ -1057,7 +1045,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   /**
    * This class implements the ActionListener interface and overrides the actionPerformed method.
    */
-  private class sellPanelShow implements ActionListener {
+  private class SellPanelShow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       String buttonString = e.getActionCommand();
       if (buttonString.equals("Sell")) {
@@ -1072,7 +1060,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
    * <p>
    * The actionPerformed method is called when the user clicks the "Cost Basis" button.
    */
-  private class costBasisPanelShow implements ActionListener {
+  private class CostBasisPanelShow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       String buttonString = e.getActionCommand();
       if (buttonString.equals("Cost Basis")) {
@@ -1090,7 +1078,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
    * "Create
    * Graph Panel"
    */
-  private class createGraph implements ActionListener {
+  private class CreateGraph implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       String buttonString = e.getActionCommand();
       if (buttonString.equals("Create Graph")) {
@@ -1106,7 +1094,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
    * CardLayout to
    * show the "Upload File Panel".
    */
-  private class uploadPanelShow implements ActionListener {
+  private class UploadPanelShow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       String buttonString = e.getActionCommand();
       if (buttonString.equals("Upload File")) {
@@ -1119,7 +1107,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   /**
    * This class is an action listener for the button that switches to the dollar cost average panel.
    */
-  private class dollarCostPanelShow implements ActionListener {
+  private class DollarCostPanelShow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       String buttonString = e.getActionCommand();
       if (buttonString.equals("Dollar Cost Average")) {
@@ -1133,7 +1121,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
    * This class is an action listener for the "Cost Avg Performance" button on the "Dollar Cost
    * Performance" panel. When the button is clicked, the "Cost Avg Performance" panel is displayed.
    */
-  private class dollarCostPerformancePanelShow implements ActionListener {
+  private class DollarCostPerformancePanelShow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       String buttonString = e.getActionCommand();
       if (buttonString.equals("Cost Avg Performance")) {

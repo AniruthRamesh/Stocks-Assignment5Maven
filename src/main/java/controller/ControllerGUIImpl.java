@@ -16,6 +16,9 @@ import view.ViewGui;
 
 import static java.lang.Math.ceil;
 
+/**
+ * This is a controller for GUI.
+ */
 public class ControllerGUIImpl implements Features {
   ViewGui view;
   Model model;
