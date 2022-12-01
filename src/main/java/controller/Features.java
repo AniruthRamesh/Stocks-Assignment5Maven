@@ -73,7 +73,7 @@ public interface Features {
   /**
    * It calculates the dollar cost averaging of a stock.
    */
-  void dollarCostAveraging(JPanel frame,String portfolio,String amount,String day,String month,
+  void dollarCostAveraging(JPanel frame, String portfolio, String amount, String day, String month,
                            String year);
 
   /**
@@ -82,21 +82,19 @@ public interface Features {
    * @param ticker     The ticker symbol of the stock you want to get the data for.
    * @param percentage The percentage of the stock's price that you want to buy.
    */
-  boolean noDate(JPanel frame,String ticker, String percentage);
+  boolean noDate(JPanel frame, String ticker, String percentage);
 
-  boolean enteredDate(JPanel frame,String day,String month,String year);
+  boolean enteredDate(JPanel frame, String day, String month, String year);
 
-  void dollarCostAveragingAndQueryCostBasisAndValue(JPanel frame,String portfolio,String amount,
-                                                    String day,String month,
+  void dollarCostAveragingAndQueryCostBasisAndValue(JPanel frame, String portfolio, String amount,
+                                                    String day, String month,
                                                     String year);
 
   void exit();
 
-  void createGraph();
-
   boolean getPercentage();
 
-  boolean durationCheck(JPanel frame,String myd, String duration);
+  boolean durationCheck(JPanel frame, String myd, String duration);
 
   boolean mydChecker();
 

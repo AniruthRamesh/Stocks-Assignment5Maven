@@ -499,23 +499,13 @@ public class MockModel implements Model {
   }
 
   @Override
-  public void setEndDate(String date) {
-
-  }
-
-  @Override
-  public void setMyd(String myd) {
-
-  }
-
-  @Override
-  public void setDuration(int number) {
-
-  }
-
-  @Override
   public String getEndDate() {
     return null;
+  }
+
+  @Override
+  public void setEndDate(String date) {
+
   }
 
   @Override
@@ -524,8 +514,18 @@ public class MockModel implements Model {
   }
 
   @Override
+  public void setMyd(String myd) {
+
+  }
+
+  @Override
   public int getDuration() {
     return 0;
+  }
+
+  @Override
+  public void setDuration(int number) {
+
   }
 
   @Override

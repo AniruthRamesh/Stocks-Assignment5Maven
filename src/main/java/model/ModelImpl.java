@@ -79,7 +79,6 @@ public class ModelImpl implements Model {
   private Map<String, String> dates = new HashMap<>();
 
 
-
   public Map<String, Map<String, List<List<String>>>> getFlexiblePort() {
     return flexiblePort;
   }
@@ -690,14 +689,17 @@ public class ModelImpl implements Model {
   public void addPercentage(String percentage) {
     this.percentages.add(percentage);
   }
+
   @Override
   public void addPercentageSoFar(Double percentage) {
-    this.percentageSoFar+=percentage;
+    this.percentageSoFar += percentage;
   }
+
   @Override
   public double getPercentageSoFar() {
     return percentageSoFar;
   }
+
   @Override
   public List<String> getTickerForDollar() {
     return tickers;
@@ -709,42 +711,31 @@ public class ModelImpl implements Model {
   }
 
   @Override
-  public double stringToDouble(String number){
+  public double stringToDouble(String number) {
     double num;
-    try{
+    try {
       num = Double.parseDouble(number);
-    }
-    catch(Exception e){
+    } catch (Exception e) {
       num = 0.0;
     }
     return num;
   }
 
   @Override
-  public void initializer(){
+  public void initializer() {
     tickers = new ArrayList<>();
     percentages = new ArrayList<>();
     percentageSoFar = 0.0;
   }
 
   @Override
-  public void setEndDate(String date){
-    endDate = date;
-  }
-
- @Override
-  public void setMyd(String myd){
-    this.myd = myd;
- }
-
- @Override
-  public void setDuration(int number){
-    this.duration = number;
- }
-
-  @Override
   public String getEndDate() {
     return endDate;
+  }
+
+  @Override
+  public void setEndDate(String date) {
+    endDate = date;
   }
 
   @Override
@@ -753,7 +744,17 @@ public class ModelImpl implements Model {
   }
 
   @Override
+  public void setMyd(String myd) {
+    this.myd = myd;
+  }
+
+  @Override
   public int getDuration() {
     return duration;
+  }
+
+  @Override
+  public void setDuration(int number) {
+    this.duration = number;
   }
 }

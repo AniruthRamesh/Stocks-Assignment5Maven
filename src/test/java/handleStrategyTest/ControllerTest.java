@@ -3,7 +3,6 @@ package handleStrategyTest;
 import org.junit.Before;
 import org.junit.Test;
 
-
 import abstracttest.Abstract;
 import mock.MockModel;
 
@@ -26,16 +25,19 @@ public class ControllerTest extends Abstract {
   }
 
   @Test
-  public void checkIfDataIsSentToAddApiStockData(){
-    String input = "T\n5\nC:\\Users\\anikr\\Desktop\\Career course\\fees.txt\n2\n12\n1\nfees\n1000\n" +
+  public void checkIfDataIsSentToAddApiStockData() {
+    String input = "T\n5\nC:\\Users\\anikr\\Desktop\\Career course\\fees" +
+            ".txt\n2\n12\n1\nfees\n1000\n" +
             "1\naapl\n30\n1\namzn\n40\n1\nmsft\n30\n2\n1\n12\n12\n2006\nN\nY\n2\n2\n13";
     tester = super.testingHelper(input);
-    assertEquals("Received : aaplReceived : amznReceived : msft",tester.getAddApiCompanyStockDataLog());
+    assertEquals("Received : aaplReceived : amznReceived : msft",
+            tester.getAddApiCompanyStockDataLog());
   }
 
   @Test
-  public void checkIfDataIsSentToFlexiblePortContainsCertainKey(){
-    String input = "T\n5\nC:\\Users\\anikr\\Desktop\\Career course\\fees.txt\n2\n12\n1\nfees\n1000\n" +
+  public void checkIfDataIsSentToFlexiblePortContainsCertainKey() {
+    String input = "T\n5\nC:\\Users\\anikr\\Desktop\\Career course\\fees" +
+            ".txt\n2\n12\n1\nfees\n1000\n" +
             "1\naapl\n30\n1\namzn\n40\n1\nmsft\n30\n2\n1\n12\n12\n2006\nN\nY\n2\n2\n13";
     tester = super.testingHelper(input);
     String val = "Received : aaplReceived : amznReceived : msftReceived : aaplReceived : " +
@@ -44,15 +46,16 @@ public class ControllerTest extends Abstract {
             "msftReceived : aaplReceived : amznReceived : msftReceived : aaplReceived : " +
             "amznReceived : msftReceived : aaplReceived : amznReceived : msftReceived : " +
             "aaplReceived : amznReceived : msft";
-    assertEquals(val,tester.getLogforCheckIfTickerExist());
+    assertEquals(val, tester.getLogforCheckIfTickerExist());
   }
 
   @Test
-  public void checkIfPortContainsCertainName(){
-    String input = "T\n5\nC:\\Users\\anikr\\Desktop\\Career course\\fees.txt\n2\n12\n1\nfees\n1000\n" +
+  public void checkIfPortContainsCertainName() {
+    String input = "T\n5\nC:\\Users\\anikr\\Desktop\\Career course\\fees" +
+            ".txt\n2\n12\n1\nfees\n1000\n" +
             "1\naapl\n30\n1\namzn\n40\n1\nmsft\n30\n2\n1\n12\n12\n2006\nN\nY\n2\n2\n13";
     tester = super.testingHelper(input);
-    assertEquals("Received : fees",tester.getFlexiblePortContainsCertainKeyLogger());
+    assertEquals("Received : fees", tester.getFlexiblePortContainsCertainKeyLogger());
   }
 
 
