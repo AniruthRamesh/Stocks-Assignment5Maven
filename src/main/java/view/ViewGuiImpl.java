@@ -28,7 +28,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   JLabel dollar_l1, dollar_l2, dollar_l3, dollar_l4, dollar_l5, dollar_l6, datePopup_l1,
           datePopup_l2, datePopup_l3, noDatePopup_l1, noDatePopup_l2, graph_l1, graph_l2,
-          graph_l3, graph_l4, graph_l5, graph_l6, graph_l7, graph_l8;
+          graph_l3, graph_l4, graph_l5, graph_l6, graph_l7, graph_l8, graph_l9;
   JLabel dollarPerf_l1, dollarPerf_l2, dollarPerf_l3, dollarPerf_l4, dollarPerf_l5, dollarPerf_l6
           , dollarperf_l7;
   JTextField dollar_nameOfPort, dollar_day, dollar_month, dollar_year, dollar_number;
@@ -99,10 +99,12 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   public JPanel commandWindow() {
     JLabel welcomeMessage = new JLabel("<html><strong>This is a Portfolio Management " +
-            "Application.<br>" + "</strong><br><br> Choose a command from the “Commands” menu to " +
-            "buy, sell, cost " + "basis of portfolio,<br> total value of stocks, upload " +
-            "portfolio, investing in " + "portfolio " + "using dollar cost averaging, check cost " +
-            "basis and value while creating strategy " + "for a portfolio" + "</html>");
+            "Application.<br>" + "</strong><br><br> Choose an option from the “Option” menu on " +
+            "the top" + " to " + "buy, sell, cost " + "basis of portfolio, total value of stocks," +
+            " upload " + "portfolio, investing in " + "portfolio, create performance graph," +
+            " using dollar cost averaging, " +
+            "check cost " + "basis and value while creating strategy " +
+            "for a portfolio" + "</html>");
     commandPanel = new JPanel();
     Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\" + "stock.jpeg");
     JLabel picLabel = new JLabel("");
@@ -156,7 +158,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     create_graph.addActionListener(new createGraph());
     dollar_cost_average.addActionListener(new dollarCostPanelShow());
     dollar_cost_avg_performance.addActionListener(new dollarCostPerformancePanelShow());
-//    quit.addActionListener(new buyPanelShow());
+    quit.addActionListener(evt -> System.exit(0));
   }
 
   public JPanel buyWindow() {
@@ -413,6 +415,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     graph_l6 = new JLabel("End date day:");
     graph_l7 = new JLabel("End date month:");
     graph_l8 = new JLabel("End date year:");
+    graph_l9 = new JLabel("Note : The values on the y axis are on the scale of 1000 i.e " +
+            "value*1000");
     graph_name = new JTextField();
     graph_startDay = new JTextField();
     graph_startMonth = new JTextField();
@@ -436,7 +440,9 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     graph_endDay.setBounds(300, 230, 200, 30);
     graph_endMonth.setBounds(300, 270, 200, 30);
     graph_endYear.setBounds(300, 310, 200, 30);
-    graphButton.setBounds(50, 370, 100, 30);
+    graphButton.setBounds(80, 370, 100, 30);
+    graph_l9.setBounds(80, 420, 600, 30);
+
     graph.add(graph_l1);
     graph.add(graph_l2);
     graph.add(graph_name);
@@ -451,6 +457,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     graph.add(graph_l7);
     graph.add(graph_endMonth);
     graph.add(graph_l8);
+    graph.add(graph_l9);
     graph.add(graph_endYear);
     graph.add(graphButton);
 
