@@ -211,7 +211,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     commandPanel.setLayout(new GridBagLayout());
 
     ImageIcon imageIcon1 =
-            new ImageIcon(new ImageIcon(path.toString()).getImage().getScaledInstance(100, 100,
+            new ImageIcon(new ImageIcon(path.toString()).getImage().getScaledInstance(100,
+                    100,
                     Image.SCALE_DEFAULT));
     picLabel.setIcon(imageIcon1);
     commandPanel.add(picLabel);

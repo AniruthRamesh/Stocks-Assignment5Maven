@@ -110,7 +110,7 @@ are using AlphaVantageAPI).
 String addApiCompanyStockData(String companyTicker);
 ```
 
-## Design Changes from previous assignment in controller:
+## Design Changes from previous assignment in controller(Assignment : 5):
 
 * We were using switch cases inside our controller earlier. In code walk got a suggestion that we
 can
@@ -171,3 +171,27 @@ public class HandleUploadFile implements command {}
 handles the upload file command from the controller interface. Asks the user if the uploaded file
  is inflexible or flexible and validates the contents of the file, if it is a valid file stores the
  content of the file in model.
+
+## Design Changes from previous assignment in controller(Assignment : 6):
+
+1. New View interface created for GUI
+```
+public interface ViewGui {}
+```
+2. New ViewGuiImpl class created for GUI
+```
+public class ViewGuiImpl extends JFrame implements ViewGui {}
+```
+3. All the methods required for GUI are implemented in this above-mentioned.
+
+4. A new Controller for GUI is implemented.
+```
+public interface Features {}
+```
+5. New controller class implementing the Features
+```
+public class ControllerGUIImpl implements Features {}
+```
+6. No major model changes done.
+}
+}
