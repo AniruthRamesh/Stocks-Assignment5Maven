@@ -31,12 +31,13 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
           graph_l3, graph_l4, graph_l5, graph_l6, graph_l7, graph_l8;
   JLabel dollarPerf_l1, dollarPerf_l2, dollarPerf_l3, dollarPerf_l4, dollarPerf_l5, dollarPerf_l6;
   JTextField dollar_nameOfPort, dollar_day, dollar_month, dollar_year, dollar_ticker, dollar_number;
-  JTextField dollarPerf_nameOfPort, dollarPerf_day, dollarPerf_month, dollarPerf_year, dollarPerf_ticker, dollarPerf_number;
+  JTextField dollarPerf_nameOfPort, dollarPerf_day, dollarPerf_month, dollarPerf_year,
+          dollarPerf_ticker, dollarPerf_number;
 
 
   ButtonGroup G1;
-  ButtonGroup dollarG1, durationGroup;
-  JRadioButton jRadioButton1, dayR, monthR, yearR;
+  ButtonGroup dollarG1, durationGroup, group;
+  JRadioButton jRadioButton1, dayR, monthR, yearR, r1, r2;
   JRadioButton jRadioButton2;
   JRadioButton jRadioButtonDollar1, jRadioButtonDollar2;
   JTextField nameOfPort, day, month, year, ticker, number, filePath, datePopup_tf1, datePopup_tf2,
@@ -276,6 +277,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     dollarPerf_l6 = new JLabel("Start date Year:");
     jRadioButtonDollar1 = new JRadioButton();
     jRadioButtonDollar2 = new JRadioButton();
+    r1 = new JRadioButton();
+    r2 = new JRadioButton();
     dollarPerf_nameOfPort = new JTextField();
     dollarPerf_number = new JTextField();
     dollarPerf_day = new JTextField();
@@ -285,6 +288,10 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     dollarCostAvgPerformanceButton = new JButton("Submit");
     dollarG1.add(jRadioButtonDollar1);
     dollarG1.add(jRadioButtonDollar2);
+    group = new ButtonGroup();
+    dollarCostAvgPerformanceButton = new JButton("Submit");
+    group.add(r1);
+    group.add(r2);
     dollarPerf_l1.setBounds(100, 30, 400, 30);
     dollarPerf_l2.setBounds(80, 70, 200, 30);
     dollarPerf_l3.setBounds(80, 110, 200, 30);
@@ -297,10 +304,15 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     dollarPerf_month.setBounds(300, 190, 200, 30);
     dollarPerf_year.setBounds(300, 230, 200, 30);
     jRadioButtonDollar1.setBounds(300, 270, 100, 30);
+
     jRadioButtonDollar2.setBounds(400, 270, 200, 30);
     dollarCostAvgPerformanceButton.setBounds(410, 320, 100, 30);
+    r1.setBounds(300, 400, 100, 30);
+    r2.setBounds(400, 400, 200, 30);
     jRadioButtonDollar1.setText("End Date");
     jRadioButtonDollar2.setText("No End Date");
+    r1.setText("Cost Basis");
+    r2.setText("Total Value");
     dollarCostAvgPerformance.add(dollarPerf_l1);
     dollarCostAvgPerformance.add(dollarPerf_l2);
     dollarCostAvgPerformance.add(dollarPerf_nameOfPort);
@@ -315,6 +327,10 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     dollarCostAvgPerformance.add(jRadioButtonDollar1);
     dollarCostAvgPerformance.add(jRadioButtonDollar2);
     dollarCostAvgPerformance.add(dollarCostAvgPerformanceButton);
+    dollarCostAvgPerformance.add(r1);
+    dollarCostAvgPerformance.add(r1);
+    dollarCostAvgPerformance.add(r1);
+    dollarCostAvgPerformance.add(r2);
     return dollarCostAvgPerformance;
 
 
@@ -605,7 +621,12 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
             costBasis_day.getText(), costBasis_month.getText(), costBasis_year.getText()));
     dollarCostAvg_button.addActionListener(evt -> features.dollarCostAveraging(dollarCostAvg,
             dollar_nameOfPort.getText(), dollar_number.getText(), dollar_day.getText(),
-            dollar_month.getText(), dollar_year.getText()));
+            dollar_month.getText(), dollar_year.getText(), "costAvg"));
+    dollarCostAvgPerformanceButton.addActionListener(evt ->
+            features.dollarCostAveraging(dollarCostAvgPerformance,
+                    dollarPerf_nameOfPort.getText(), dollarPerf_number.getText(),
+                    dollarPerf_day.getText(),
+                    dollarPerf_month.getText(), dollarPerf_year.getText(), "query"));
   }
 
   @Override
@@ -618,6 +639,29 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
       lineGraphFrame.setVisible(true);
     });
 
+
+  }
+
+  @Override
+  public void addRadioButtons(JPanel frame, String portfolio) {
+
+    r1.addActionListener(evt -> {
+      JFrame newFrame = new JFrame();
+      newFrame.setSize(700, 700);
+      newFrame.add(costBasisWindow());
+      newFrame.setVisible(true);
+      costBasis_nameOfPort.setText(portfolio);
+      costBasis_nameOfPort.setEditable(false);
+    });
+    r2.addActionListener(evt -> {
+      JFrame newFrame = new JFrame();
+      newFrame.setSize(700, 700);
+      newFrame.add(totalValueWindow());
+      newFrame.setVisible(true);
+      totalValue_nameOfPort.setText(portfolio);
+      totalValue_nameOfPort.setEditable(false);
+
+    });
 
   }
 

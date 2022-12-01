@@ -74,7 +74,7 @@ public interface Features {
    * It calculates the dollar cost averaging of a stock.
    */
   void dollarCostAveraging(JPanel frame, String portfolio, String amount, String day, String month,
-                           String year);
+                           String year, String value);
 
   /**
    * This function takes in a ticker and a percentage.

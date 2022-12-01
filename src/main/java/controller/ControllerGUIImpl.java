@@ -435,8 +435,7 @@ public class ControllerGUIImpl implements Features {
 
   @Override
   public void dollarCostAveraging(JPanel frame, String portfolio, String amount, String day,
-                                  String month,
-                                  String year) {
+                                  String month, String year, String frameName) {
     if (portfolio.length() == 0 || amount.length() == 0 || day.length() == 0 || month.length() == 0 || year.length() == 0) {
       view.createMessageBox(frame, "Fields cannot be empty");
       return;
@@ -496,8 +495,6 @@ public class ControllerGUIImpl implements Features {
           view.createMessageBox(frame, "Cannot proceed");
           return;
         }
-        //System.out.println(stockData.get(currDate.toString()));
-
         Double stockPrice = Double.valueOf(stockData.get(currDate.toString()));
         Double value = Double.parseDouble(percentage.get(i));
         Double share = Integer.parseInt(amount) * (value / 100.0);
@@ -539,6 +536,9 @@ public class ControllerGUIImpl implements Features {
     }
     model.saveFlexiblePortfolios();
     view.createMessageBox(frame, "Strategy created and saved.");
+    if (frameName.equals("query")) {
+      view.addRadioButtons(frame, portfolio);
+    }
 
   }
 
@@ -612,7 +612,7 @@ public class ControllerGUIImpl implements Features {
   public void dollarCostAveragingAndQueryCostBasisAndValue(JPanel frame, String portfolio,
                                                            String amount, String day, String month,
                                                            String year) {
-    dollarCostAveraging(frame, portfolio, amount, day, month, year);
+    dollarCostAveraging(frame, portfolio, amount, day, month, year, "query");
   }
 
   @Override

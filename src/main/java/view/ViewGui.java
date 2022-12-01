@@ -57,4 +57,5 @@ public interface ViewGui {
 
   void createLineGraph(DefaultCategoryDataset dataset);
 
+  void addRadioButtons(JPanel frame, String portfolio);
 }
