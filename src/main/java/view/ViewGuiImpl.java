@@ -29,8 +29,9 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   JLabel dollar_l1, dollar_l2, dollar_l3, dollar_l4, dollar_l5, dollar_l6, datePopup_l1,
           datePopup_l2, datePopup_l3, noDatePopup_l1, noDatePopup_l2, graph_l1, graph_l2,
           graph_l3, graph_l4, graph_l5, graph_l6, graph_l7, graph_l8;
-  JLabel dollarPerf_l1, dollarPerf_l2, dollarPerf_l3, dollarPerf_l4, dollarPerf_l5, dollarPerf_l6;
-  JTextField dollar_nameOfPort, dollar_day, dollar_month, dollar_year, dollar_ticker, dollar_number;
+  JLabel dollarPerf_l1, dollarPerf_l2, dollarPerf_l3, dollarPerf_l4, dollarPerf_l5, dollarPerf_l6
+          , dollarperf_l7;
+  JTextField dollar_nameOfPort, dollar_day, dollar_month, dollar_year, dollar_number;
   JTextField dollarPerf_nameOfPort, dollarPerf_day, dollarPerf_month, dollarPerf_year,
           dollarPerf_ticker, dollarPerf_number;
 
@@ -275,6 +276,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     dollarPerf_l4 = new JLabel("Start date day:");
     dollarPerf_l5 = new JLabel("Start date month:");
     dollarPerf_l6 = new JLabel("Start date Year:");
+    dollarperf_l7 = new JLabel("After creating a strategy, click on preferred radio for cost " +
+            "basis or total value");
     jRadioButtonDollar1 = new JRadioButton();
     jRadioButtonDollar2 = new JRadioButton();
     r1 = new JRadioButton();
@@ -304,11 +307,12 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     dollarPerf_month.setBounds(300, 190, 200, 30);
     dollarPerf_year.setBounds(300, 230, 200, 30);
     jRadioButtonDollar1.setBounds(300, 270, 100, 30);
+    dollarperf_l7.setBounds(80, 380, 500, 30);
 
     jRadioButtonDollar2.setBounds(400, 270, 200, 30);
     dollarCostAvgPerformanceButton.setBounds(410, 320, 100, 30);
-    r1.setBounds(300, 400, 100, 30);
-    r2.setBounds(400, 400, 200, 30);
+    r1.setBounds(300, 420, 100, 30);
+    r2.setBounds(400, 420, 200, 30);
     jRadioButtonDollar1.setText("End Date");
     jRadioButtonDollar2.setText("No End Date");
     r1.setText("Cost Basis");
@@ -331,6 +335,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     dollarCostAvgPerformance.add(r1);
     dollarCostAvgPerformance.add(r1);
     dollarCostAvgPerformance.add(r2);
+    dollarCostAvgPerformance.add(dollarperf_l7);
     return dollarCostAvgPerformance;
 
 
