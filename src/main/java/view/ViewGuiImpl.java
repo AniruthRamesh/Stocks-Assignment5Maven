@@ -28,16 +28,21 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   JLabel dollar_l1, dollar_l2, dollar_l3, dollar_l4, dollar_l5, dollar_l6, datePopup_l1,
           datePopup_l2, datePopup_l3, noDatePopup_l1, noDatePopup_l2, graph_l1, graph_l2,
-          graph_l3, graph_l4, graph_l5, graph_l6, graph_l7, graph_l8;
+          graph_l3, graph_l4, graph_l5, graph_l6, graph_l7, graph_l8, graph_l9;
+  JLabel dollarPerf_l1, dollarPerf_l2, dollarPerf_l3, dollarPerf_l4, dollarPerf_l5, dollarPerf_l6
+          , dollarperf_l7;
+  JTextField dollar_nameOfPort, dollar_day, dollar_month, dollar_year, dollar_number;
+  JTextField dollarPerf_nameOfPort, dollarPerf_day, dollarPerf_month, dollarPerf_year,
+          dollarPerf_ticker, dollarPerf_number;
 
-  JTextField dollar_nameOfPort, dollar_day, dollar_month, dollar_year, dollar_ticker, dollar_number;
+
   ButtonGroup G1;
-  ButtonGroup dollarG1,durationGroup;
-  JRadioButton jRadioButton1,dayR,monthR,yearR;
+  ButtonGroup dollarG1, durationGroup, group;
+  JRadioButton jRadioButton1, dayR, monthR, yearR, r1, r2;
   JRadioButton jRadioButton2;
   JRadioButton jRadioButtonDollar1, jRadioButtonDollar2;
   JTextField nameOfPort, day, month, year, ticker, number, filePath, datePopup_tf1, datePopup_tf2,
-          datePopup_tf3, noDatePopup_tf1, noDatePopup_tf2,duration;
+          datePopup_tf3, noDatePopup_tf1, noDatePopup_tf2, duration;
   JTextField costBasis_nameOfPort, costBasis_day, costBasis_month, costBasis_year;
   JTextField sell_nameOfPort, sell_day, sell_month, sell_year, sell_ticker, sell_number;
   JTextField totalValue_nameOfPort, totalValue_day, totalValue_month, totalValue_year;
@@ -57,7 +62,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   private JScrollPane costBasis_scrollPane;
   private JPanel commandPanel;
   private JPanel buy;
-  private JPanel datePopup,durationPopup;
+  private JPanel datePopup, durationPopup;
   private JPanel noDatePopup;
 
   private JPanel sell, costBasis, totalValue, upload, dollarCostAvg, graph,
@@ -94,10 +99,12 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   public JPanel commandWindow() {
     JLabel welcomeMessage = new JLabel("<html><strong>This is a Portfolio Management " +
-            "Application.<br>" + "</strong><br><br> Choose a command from the “Commands” menu to " +
-            "buy, sell, cost " + "basis of portfolio,<br> total value of stocks, upload " +
-            "portfolio, investing in " + "portfolio " + "using dollar cost averaging, check cost " +
-            "basis and value while creating strategy " + "for a portfolio" + "</html>");
+            "Application.<br>" + "</strong><br><br> Choose an option from the “Option” menu on " +
+            "the top" + " to " + "buy, sell, cost " + "basis of portfolio, total value of stocks," +
+            " upload " + "portfolio, investing in " + "portfolio, create performance graph," +
+            " using dollar cost averaging, " +
+            "check cost " + "basis and value while creating strategy " +
+            "for a portfolio" + "</html>");
     commandPanel = new JPanel();
     Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\" + "stock.jpeg");
     JLabel picLabel = new JLabel("");
@@ -151,7 +158,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     create_graph.addActionListener(new createGraph());
     dollar_cost_average.addActionListener(new dollarCostPanelShow());
     dollar_cost_avg_performance.addActionListener(new dollarCostPerformancePanelShow());
-//    quit.addActionListener(new buyPanelShow());
+    quit.addActionListener(evt -> System.exit(0));
   }
 
   public JPanel buyWindow() {
@@ -259,60 +266,81 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   }
 
   private JPanel dollarCostAvgPerformanceWindow() {
-      dollarCostAvg = new JPanel();
-//    dollarCostAvg.setPreferredSize(new Dimension(500, 500));
-//    dollarCostAvg.setVisible(true);
-//    dollarCostAvg.setLayout(null);
-//    dollar_l1 = new JLabel("Dollar Cost Average Strategy");
-//    dollar_l1.setForeground(Color.blue);
-//    dollar_l1.setFont(new Font("Serif", Font.BOLD, 20));
-//    dollar_l2 = new JLabel("Name of the Portfolio:");
-//    dollar_l3 = new JLabel("Amount:");
-//    dollar_l4 = new JLabel("Start date day:");
-//    dollar_l5 = new JLabel("Start date month:");
-//    dollar_l6 = new JLabel("Start date Year:");
-//    jRadioButtonDollar1 = new JRadioButton();
-//    jRadioButtonDollar2 = new JRadioButton();
-//    dollar_nameOfPort = new JTextField();
-//    dollar_number = new JTextField();
-//    dollar_day = new JTextField();
-//    dollar_month = new JTextField();
-//    dollar_year = new JTextField();
-//    dollarG1 = new ButtonGroup();
-//    dollarCostAvgPerformanceButton = new JButton("Submit");
-//    dollarG1.add(jRadioButtonDollar1);
-//    dollarG1.add(jRadioButtonDollar2);
-//    dollar_l1.setBounds(100, 30, 400, 30);
-//    dollar_l2.setBounds(80, 70, 200, 30);
-//    dollar_l3.setBounds(80, 110, 200, 30);
-//    dollar_l4.setBounds(80, 150, 200, 30);
-//    dollar_l5.setBounds(80, 190, 200, 30);
-//    dollar_l6.setBounds(80, 230, 200, 30);
-//    dollar_nameOfPort.setBounds(300, 70, 200, 30);
-//    dollar_number.setBounds(300, 110, 200, 30);
-//    dollar_day.setBounds(300, 150, 200, 30);
-//    dollar_month.setBounds(300, 190, 200, 30);
-//    dollar_year.setBounds(300, 230, 200, 30);
-//    jRadioButtonDollar1.setBounds(300, 270, 100, 30);
-//    jRadioButtonDollar2.setBounds(400, 270, 200, 30);
-//    dollarCostAvgPerformanceButton.setBounds(410, 320, 100, 30);
-//    jRadioButtonDollar1.setText("End Date");
-//    jRadioButtonDollar2.setText("No End Date");
-//    dollarCostAvg.add(dollar_l1);
-//    dollarCostAvg.add(dollar_l2);
-//    dollarCostAvg.add(dollar_nameOfPort);
-//    dollarCostAvg.add(dollar_l3);
-//    dollarCostAvg.add(dollar_number);
-//    dollarCostAvg.add(dollar_l4);
-//    dollarCostAvg.add(dollar_day);
-//    dollarCostAvg.add(dollar_l5);
-//    dollarCostAvg.add(dollar_month);
-//    dollarCostAvg.add(dollar_l6);
-//    dollarCostAvg.add(dollar_year);
-//    dollarCostAvg.add(jRadioButtonDollar1);
-//    dollarCostAvg.add(jRadioButtonDollar2);
-//    dollarCostAvg.add(dollarCostAvgPerformanceButton);
-    return dollarCostAvg;
+    dollarCostAvgPerformance = new JPanel();
+    dollarCostAvgPerformance.setPreferredSize(new Dimension(500, 500));
+    dollarCostAvgPerformance.setVisible(true);
+    dollarCostAvgPerformance.setLayout(null);
+    dollarPerf_l1 = new JLabel("Check Cost basis and Total Value for strategy");
+    dollarPerf_l1.setForeground(Color.blue);
+    dollarPerf_l1.setFont(new Font("Serif", Font.BOLD, 20));
+    dollarPerf_l2 = new JLabel("Name of the Portfolio:");
+    dollarPerf_l3 = new JLabel("Amount:");
+    dollarPerf_l4 = new JLabel("Start date day:");
+    dollarPerf_l5 = new JLabel("Start date month:");
+    dollarPerf_l6 = new JLabel("Start date Year:");
+    dollarperf_l7 = new JLabel("After creating a strategy, click on preferred radio for cost " +
+            "basis or total value");
+    jRadioButtonDollar1 = new JRadioButton();
+    jRadioButtonDollar2 = new JRadioButton();
+    r1 = new JRadioButton();
+    r2 = new JRadioButton();
+    dollarPerf_nameOfPort = new JTextField();
+    dollarPerf_number = new JTextField();
+    dollarPerf_day = new JTextField();
+    dollarPerf_month = new JTextField();
+    dollarPerf_year = new JTextField();
+    dollarG1 = new ButtonGroup();
+    dollarCostAvgPerformanceButton = new JButton("Submit");
+    dollarG1.add(jRadioButtonDollar1);
+    dollarG1.add(jRadioButtonDollar2);
+    group = new ButtonGroup();
+    dollarCostAvgPerformanceButton = new JButton("Submit");
+    group.add(r1);
+    group.add(r2);
+    dollarPerf_l1.setBounds(100, 30, 400, 30);
+    dollarPerf_l2.setBounds(80, 70, 200, 30);
+    dollarPerf_l3.setBounds(80, 110, 200, 30);
+    dollarPerf_l4.setBounds(80, 150, 200, 30);
+    dollarPerf_l5.setBounds(80, 190, 200, 30);
+    dollarPerf_l6.setBounds(80, 230, 200, 30);
+    dollarPerf_nameOfPort.setBounds(300, 70, 200, 30);
+    dollarPerf_number.setBounds(300, 110, 200, 30);
+    dollarPerf_day.setBounds(300, 150, 200, 30);
+    dollarPerf_month.setBounds(300, 190, 200, 30);
+    dollarPerf_year.setBounds(300, 230, 200, 30);
+    jRadioButtonDollar1.setBounds(300, 270, 100, 30);
+    dollarperf_l7.setBounds(80, 380, 500, 30);
+
+    jRadioButtonDollar2.setBounds(400, 270, 200, 30);
+    dollarCostAvgPerformanceButton.setBounds(410, 320, 100, 30);
+    r1.setBounds(300, 420, 100, 30);
+    r2.setBounds(400, 420, 200, 30);
+    jRadioButtonDollar1.setText("End Date");
+    jRadioButtonDollar2.setText("No End Date");
+    r1.setText("Cost Basis");
+    r2.setText("Total Value");
+    dollarCostAvgPerformance.add(dollarPerf_l1);
+    dollarCostAvgPerformance.add(dollarPerf_l2);
+    dollarCostAvgPerformance.add(dollarPerf_nameOfPort);
+    dollarCostAvgPerformance.add(dollarPerf_l3);
+    dollarCostAvgPerformance.add(dollarPerf_number);
+    dollarCostAvgPerformance.add(dollarPerf_l4);
+    dollarCostAvgPerformance.add(dollarPerf_day);
+    dollarCostAvgPerformance.add(dollarPerf_l5);
+    dollarCostAvgPerformance.add(dollarPerf_month);
+    dollarCostAvgPerformance.add(dollarPerf_l6);
+    dollarCostAvgPerformance.add(dollarPerf_year);
+    dollarCostAvgPerformance.add(jRadioButtonDollar1);
+    dollarCostAvgPerformance.add(jRadioButtonDollar2);
+    dollarCostAvgPerformance.add(dollarCostAvgPerformanceButton);
+    dollarCostAvgPerformance.add(r1);
+    dollarCostAvgPerformance.add(r1);
+    dollarCostAvgPerformance.add(r1);
+    dollarCostAvgPerformance.add(r2);
+    dollarCostAvgPerformance.add(dollarperf_l7);
+    return dollarCostAvgPerformance;
+
+
   }
 
   private JPanel dollarCostAvgWindow() {
@@ -320,7 +348,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     dollarCostAvg.setPreferredSize(new Dimension(500, 500));
     dollarCostAvg.setVisible(true);
     dollarCostAvg.setLayout(null);
-    dollar_l1 = new JLabel("Dollar Cost Average Strategy");
+    dollar_l1 = new JLabel("Dollar Cost Average Strategy Creation");
     dollar_l1.setForeground(Color.blue);
     dollar_l1.setFont(new Font("Serif", Font.BOLD, 20));
     dollar_l2 = new JLabel("Name of the Portfolio:");
@@ -387,6 +415,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     graph_l6 = new JLabel("End date day:");
     graph_l7 = new JLabel("End date month:");
     graph_l8 = new JLabel("End date year:");
+    graph_l9 = new JLabel("Note : The values on the y axis are on the scale of 1000 i.e " +
+            "value*1000");
     graph_name = new JTextField();
     graph_startDay = new JTextField();
     graph_startMonth = new JTextField();
@@ -410,7 +440,9 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     graph_endDay.setBounds(300, 230, 200, 30);
     graph_endMonth.setBounds(300, 270, 200, 30);
     graph_endYear.setBounds(300, 310, 200, 30);
-    graphButton.setBounds(50, 370, 100, 30);
+    graphButton.setBounds(80, 370, 100, 30);
+    graph_l9.setBounds(80, 420, 600, 30);
+
     graph.add(graph_l1);
     graph.add(graph_l2);
     graph.add(graph_name);
@@ -425,6 +457,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     graph.add(graph_l7);
     graph.add(graph_endMonth);
     graph.add(graph_l8);
+    graph.add(graph_l9);
     graph.add(graph_endYear);
     graph.add(graphButton);
 
@@ -571,8 +604,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     buyButton.addActionListener(evt -> features.createNewFlexiblePortfolio(buy,
             nameOfPort.getText(), day.getText(), month.getText(), year.getText(),
             ticker.getText(), number.getText()));
-    jRadioButtonDollar1.addActionListener(evt -> enterDatePopUp(features,dollarCostAvg));
-    jRadioButtonDollar2.addActionListener(evt -> noDatePopUp(features,dollarCostAvg));
+    jRadioButtonDollar1.addActionListener(evt -> enterDatePopUp(features, dollarCostAvg));
+    jRadioButtonDollar2.addActionListener(evt -> noDatePopUp(features, dollarCostAvg));
     sellButton.addActionListener(evt -> features.sellPortfolio(sell, sell_nameOfPort.getText(),
             sell_day.getText(), sell_month.getText(), sell_year.getText(), sell_ticker.getText(),
             sell_number.getText()));
@@ -599,8 +632,13 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     btn4.addActionListener(evt -> features.costBasis(costBasis, costBasis_nameOfPort.getText(),
             costBasis_day.getText(), costBasis_month.getText(), costBasis_year.getText()));
     dollarCostAvg_button.addActionListener(evt -> features.dollarCostAveraging(dollarCostAvg,
-            dollar_nameOfPort.getText(),dollar_number.getText(),dollar_day.getText(),
-            dollar_month.getText(),dollar_year.getText()));
+            dollar_nameOfPort.getText(), dollar_number.getText(), dollar_day.getText(),
+            dollar_month.getText(), dollar_year.getText(), "costAvg"));
+    dollarCostAvgPerformanceButton.addActionListener(evt ->
+            features.dollarCostAveraging(dollarCostAvgPerformance,
+                    dollarPerf_nameOfPort.getText(), dollarPerf_number.getText(),
+                    dollarPerf_day.getText(),
+                    dollarPerf_month.getText(), dollarPerf_year.getText(), "query"));
   }
 
   @Override
@@ -612,8 +650,27 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
       lineGraphFrame.setSize(800, 800);
       lineGraphFrame.setVisible(true);
     });
+  }
 
+  @Override
+  public void addRadioButtons(JPanel frame, String portfolio) {
 
+    r1.addActionListener(evt -> {
+      JFrame newFrame = new JFrame();
+      newFrame.setSize(700, 700);
+      newFrame.add(costBasisWindow());
+      newFrame.setVisible(true);
+      costBasis_nameOfPort.setText(portfolio);
+      costBasis_nameOfPort.setEditable(false);
+    });
+    r2.addActionListener(evt -> {
+      JFrame newFrame = new JFrame();
+      newFrame.setSize(700, 700);
+      newFrame.add(totalValueWindow());
+      newFrame.setVisible(true);
+      totalValue_nameOfPort.setText(portfolio);
+      totalValue_nameOfPort.setEditable(false);
+    });
   }
 
   public void createMessageBox(JPanel frame, String message) {
@@ -637,7 +694,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     costBasis_textArea.append("\n" + data + "\n");
   }
 
-  private void durationPopUp(ControllerGUIImpl features,JPanel frame){
+  private void durationPopUp(ControllerGUIImpl features, JPanel frame) {
     durationPopup = new JPanel();
     durationPopup.setLayout(new GridLayout(4, 2));
     durationPopup.setPreferredSize(new Dimension(200, 100));
@@ -651,11 +708,11 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     durationGroup.add(dayR);
     durationGroup.add(monthR);
     durationGroup.add(yearR);
-    dayR.setBounds(100,100,100,100);
-    monthR.setBounds(100,130,100,100);
-    yearR.setBounds(100,160,100,100);
-    durationLabel.setBounds(150,100,100,30);
-    duration.setBounds(150,130,100,100);
+    dayR.setBounds(100, 100, 100, 100);
+    monthR.setBounds(100, 130, 100, 100);
+    yearR.setBounds(100, 160, 100, 100);
+    durationLabel.setBounds(150, 100, 100, 30);
+    duration.setBounds(150, 130, 100, 100);
     dayR.setText("Day");
     monthR.setText("Month");
     yearR.setText("Year");
@@ -666,33 +723,31 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     durationPopup.add(duration);
     int result = JOptionPane.showConfirmDialog(dollarCostAvg, durationPopup,
             null, JOptionPane.OK_CANCEL_OPTION);
-    if(result==JOptionPane.OK_OPTION){
-      if(dayR.isSelected()){
+    if (result == JOptionPane.OK_OPTION) {
+      if (dayR.isSelected()) {
         selected = "day";
-      }
-      else if(monthR.isSelected()){
+      } else if (monthR.isSelected()) {
         selected = "month";
-      }
-      else if(yearR.isSelected()){
+      } else if (yearR.isSelected()) {
         selected = "year";
       }
-      boolean close = features.durationCheck(frame,selected,duration.getText());
-      if(!close){
-        durationPopUp(features,frame);
+      boolean close = features.durationCheck(frame, selected, duration.getText());
+      if (!close) {
+        durationPopUp(features, frame);
       }
     }
-    if(result==JOptionPane.CANCEL_OPTION||result==JOptionPane.CLOSED_OPTION){
+    if (result == JOptionPane.CANCEL_OPTION || result == JOptionPane.CLOSED_OPTION) {
       boolean closer = features.mydChecker();
-      if(!closer){
-        createMessageBox(frame,"Cannot close, please enter the details");
-        durationPopUp(features,frame);
+      if (!closer) {
+        createMessageBox(frame, "Cannot close, please enter the details");
+        durationPopUp(features, frame);
       }
 
     }
 
   }
 
-  private void noDatePopUp(ControllerGUIImpl features,JPanel frame) {
+  private void noDatePopUp(ControllerGUIImpl features, JPanel frame) {
     noDatePopup = new JPanel();
     noDatePopup.setLayout(new GridLayout(4, 2));
     noDatePopup.setPreferredSize(new Dimension(200, 100));
@@ -712,32 +767,30 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
             null, JOptionPane.OK_CANCEL_OPTION);
 
     if (result == JOptionPane.OK_OPTION) {
-      boolean close = features.noDate(frame,noDatePopup_tf1.getText(), noDatePopup_tf2.getText());
-      if(close==false){
+      boolean close = features.noDate(frame, noDatePopup_tf1.getText(), noDatePopup_tf2.getText());
+      if (close == false) {
         return;
       }
-      if(!features.getPercentage()){
-        noDatePopUp(features,frame);
-      }
-      else{
-        createMessageBox(frame,"Select Month or year or Day and enter duration gap in which" +
+      if (!features.getPercentage()) {
+        noDatePopUp(features, frame);
+      } else {
+        createMessageBox(frame, "Select Month or year or Day and enter duration gap in which" +
                 "you want to invest");
-        durationPopUp(features,frame);
+        durationPopUp(features, frame);
       }
 //      System.out.println("x value: " + xField.getText());
 //      System.out.println("y value: " + yField.getText());
-    }
-    else if(result==JOptionPane.CANCEL_OPTION||result==JOptionPane.CLOSED_OPTION){
+    } else if (result == JOptionPane.CANCEL_OPTION || result == JOptionPane.CLOSED_OPTION) {
       boolean yes = features.getPercentage();
-      if(!yes){
-        createMessageBox(frame,"Cannot exit, percentage does not add upto 100");
-        noDatePopUp(features,frame);
+      if (!yes) {
+        createMessageBox(frame, "Cannot exit, percentage does not add upto 100");
+        noDatePopUp(features, frame);
       }
 
     }
   }
 
-  public void enterDatePopUp(ControllerGUIImpl features,JPanel frame) {
+  public void enterDatePopUp(ControllerGUIImpl features, JPanel frame) {
     datePopup = new JPanel();
     datePopup.setLayout(new GridLayout(4, 2));
     datePopup.setPreferredSize(new Dimension(200, 100));
@@ -764,10 +817,10 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     int result = JOptionPane.showConfirmDialog(dollarCostAvg, datePopup,
             null, JOptionPane.OK_CANCEL_OPTION);
     if (result == JOptionPane.OK_OPTION) {
-      boolean yes = features.enteredDate(frame,datePopup_tf1.getText(), datePopup_tf2.getText(),
+      boolean yes = features.enteredDate(frame, datePopup_tf1.getText(), datePopup_tf2.getText(),
               datePopup_tf3.getText());
-      if(yes){
-        noDatePopUp(features,frame);
+      if (yes) {
+        noDatePopUp(features, frame);
       }
 //      System.out.println("x value: " + xField.getText());
 //      System.out.println("y value: " + yField.getText());
