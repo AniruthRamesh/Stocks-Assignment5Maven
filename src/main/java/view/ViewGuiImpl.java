@@ -9,7 +9,21 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.nio.file.Path;
 
-import javax.swing.*;
+import javax.swing.JPanel;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.JRadioButton;
+import javax.swing.JTextField;
+import javax.swing.ButtonGroup;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.ImageIcon;
+import javax.swing.JMenuItem;
+import javax.swing.JMenuBar;
+import javax.swing.JMenu;
+import javax.swing.SwingUtilities;
+import javax.swing.JOptionPane;
 
 import controller.ControllerGUIImpl;
 
@@ -17,10 +31,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   private static final int WIDTH = 700;
   private static final int HEIGHT = 700;
-  //These are the Panels
   private final JPanel mainPanel;
   String selected = "none";
-  ButtonGroup bg;
   JLabel l1, l2, l3, l4, l5, l6, l7, upload_l1, upload_l2, upload_l3;
   JLabel costBasis_l1, costBasis_l2, costBasis_l3, costBasis_l4, costBasis_l5;
   JLabel totalValue_l1, totalValue_l2, totalValue_l3, totalValue_l4, totalValue_l5;
@@ -33,7 +45,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
           , dollarperf_l7;
   JTextField dollar_nameOfPort, dollar_day, dollar_month, dollar_year, dollar_number;
   JTextField dollarPerf_nameOfPort, dollarPerf_day, dollarPerf_month, dollarPerf_year,
-          dollarPerf_ticker, dollarPerf_number;
+          dollarPerf_number;
 
 
   ButtonGroup G1;
@@ -51,11 +63,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   JButton buyButton, sellButton, uploadButton, totalValueButton, btn4, btnPopup, graphButton;
   JButton dollarCostAvg_button;
   JButton dollarCostAvgPerformanceButton;
-  JFrame costPanel;
-  JRadioButton cost;
-  JRadioButton totalValuePerformance;
-  JPanel costPopup;
-
   private JTextArea textArea;
   private JTextArea costBasis_textArea;
   private JScrollPane scrollPane;
@@ -97,6 +104,11 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     });
   }
 
+  /**
+   * This function creates a welcome message for the user.
+   *
+   * @return A JPanel with a welcome message and a picture of a stock.
+   */
   public JPanel commandWindow() {
     JLabel welcomeMessage = new JLabel("<html><strong>This is a Portfolio Management " +
             "Application.<br>" + "</strong><br><br> Choose an option from the “Option” menu on " +
@@ -123,6 +135,9 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     return commandPanel;
   }
 
+  /**
+   * This function creates the menu bar and adds the menu items to it.
+   */
   public void window() {
 
     setTitle("Investment Portfolio");
@@ -161,6 +176,11 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     quit.addActionListener(evt -> System.exit(0));
   }
 
+  /**
+   * This function creates a JPanel that allows the user to create a portfolio.
+   *
+   * @return A JPanel with all the components of the buy window.
+   */
   public JPanel buyWindow() {
     buy = new JPanel();
     buy.setPreferredSize(new Dimension(500, 500));
@@ -213,6 +233,11 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     return buy;
   }
 
+  /**
+   * This function creates a panel that allows the user to sell stocks of a flexible portfolio.
+   *
+   * @return The sellWindow() method returns the sell JPanel.
+   */
   private JPanel sellWindow() {
     sell = new JPanel();
     sell.setPreferredSize(new Dimension(500, 500));
@@ -265,6 +290,12 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     return sell;
   }
 
+  /**
+   * This function creates a JPanel that contains all the components of the Dollar Cost Averaging
+   * Performance window.
+   *
+   * @return The dollarCostAvgPerformance JPanel is being returned.
+   */
   private JPanel dollarCostAvgPerformanceWindow() {
     dollarCostAvgPerformance = new JPanel();
     dollarCostAvgPerformance.setPreferredSize(new Dimension(500, 500));
@@ -343,6 +374,11 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   }
 
+  /**
+   * This function creates a window that allows the user to create a dollar cost average strategy.
+   *
+   * @return The dollarCostAvg JPanel is being returned.
+   */
   private JPanel dollarCostAvgWindow() {
     dollarCostAvg = new JPanel();
     dollarCostAvg.setPreferredSize(new Dimension(500, 500));
@@ -400,6 +436,11 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     return dollarCostAvg;
   }
 
+  /**
+   * It creates a panel with a bunch of labels and text fields and a button.
+   *
+   * @return A JPanel object is being returned.
+   */
   private JPanel createGraphWindow() {
     graph = new JPanel();
     graph.setPreferredSize(new Dimension(500, 500));
@@ -464,6 +505,11 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     return graph;
   }
 
+  /**
+   * It creates a JPanel with a JLabel, JTextField, and two JRadioButtons.
+   *
+   * @return The upload window is being returned.
+   */
   private JPanel uploadWindow() {
     upload = new JPanel();
     upload.setPreferredSize(new Dimension(500, 500));
@@ -549,6 +595,11 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     return totalValue;
   }
 
+  /**
+   * This function creates a window that allows the user to view the cost basis of a portfolio.
+   *
+   * @return The costBasis JPanel is being returned.
+   */
   private JPanel costBasisWindow() {
     costBasis = new JPanel();
     costBasis.setPreferredSize(new Dimension(500, 500));
@@ -673,27 +724,61 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     });
   }
 
+  /**
+   * This function creates a message box with the given message.
+   *
+   * @param frame The frame that the message box will be displayed on.
+   * @param message The message you want to display in the message box.
+   */
   public void createMessageBox(JPanel frame, String message) {
     JOptionPane.showMessageDialog(frame, message);
   }
 
 
+  /**
+   * This function is used to display the total value of the stock portfolio in the text area.
+   *
+   * @param frame The JPanel that the text area is on.
+   * @param companyName The name of the company
+   * @param value The value of the stock
+   */
   public void displayDynamicDataTotalValue(JPanel frame, String companyName, String value) {
     String message = companyName + "--> $" + value;
     textArea.append(message);
     textArea.append("\n" + "\n");
   }
 
+  /**
+   * This function displays the total value of a portfolio
+   * on a given date.
+   *
+   * @param frame The JPanel that the text area is in.
+   * @param portfolioName The name of the portfolio.
+   * @param date The date for which the total value is to be displayed.
+   * @param value The total value of the portfolio.
+   */
   public void displayTotalValue(JPanel frame, String portfolioName, String date, String value) {
     textArea.append("\n" + "Portfolio: " + portfolioName + "\n" + "Date: " + date + "\n" + "Total" +
             " " +
             "Value: $ " + value);
   }
 
+  /**
+   * This function takes a string as an argument and appends it to the end of the text area.
+   *
+   * @param data The data to be displayed in the text area.
+   */
   public void displayCostBasis(String data) {
     costBasis_textArea.append("\n" + data + "\n");
   }
 
+  /**
+   * This function is used to create a pop up window to get the duration and the gap between the
+   * investments.
+   *
+   * @param features The controller object
+   * @param frame the frame that the popup is on
+   */
   private void durationPopUp(ControllerGUIImpl features, JPanel frame) {
     durationPopup = new JPanel();
     durationPopup.setLayout(new GridLayout(4, 2));
@@ -719,7 +804,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     durationPopup.add(dayR);
     durationPopup.add(monthR);
     durationPopup.add(yearR);
-    //durationPopup.add(durationLabel);
     durationPopup.add(duration);
     int result = JOptionPane.showConfirmDialog(dollarCostAvg, durationPopup,
             null, JOptionPane.OK_CANCEL_OPTION);
@@ -747,6 +831,13 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   }
 
+  /**
+   * This function is used to create a pop up window which asks the user to enter the ticker and
+   * percentage of the stock.
+   *
+   * @param features ControllerGUIImpl object
+   * @param frame The JPanel that the popup will be displayed on.
+   */
   private void noDatePopUp(ControllerGUIImpl features, JPanel frame) {
     noDatePopup = new JPanel();
     noDatePopup.setLayout(new GridLayout(4, 2));
@@ -778,8 +869,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
                 "you want to invest");
         durationPopUp(features, frame);
       }
-//      System.out.println("x value: " + xField.getText());
-//      System.out.println("y value: " + yField.getText());
     } else if (result == JOptionPane.CANCEL_OPTION || result == JOptionPane.CLOSED_OPTION) {
       boolean yes = features.getPercentage();
       if (!yes) {
@@ -790,6 +879,12 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     }
   }
 
+  /**
+   * This function creates a popup window that asks the user to enter a date.
+   *
+   * @param features the controllerGUIImpl object
+   * @param frame the JPanel that the popup is being called from
+   */
   public void enterDatePopUp(ControllerGUIImpl features, JPanel frame) {
     datePopup = new JPanel();
     datePopup.setLayout(new GridLayout(4, 2));
@@ -822,11 +917,12 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
       if (yes) {
         noDatePopUp(features, frame);
       }
-//      System.out.println("x value: " + xField.getText());
-//      System.out.println("y value: " + yField.getText());
     }
   }
 
+  /**
+   * This class implements the ActionListener interface and overrides the actionPerformed method.
+   */
   private class buyPanelShow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       String buttonString = e.getActionCommand();
@@ -837,6 +933,9 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     }
   }
 
+  /**
+   * This class implements the ActionListener interface and overrides the actionPerformed method.
+   */
   private class totalValuePanelShow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       String buttonString = e.getActionCommand();
@@ -848,6 +947,9 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   }
 
+  /**
+   * This class implements the ActionListener interface and overrides the actionPerformed method.
+   */
   private class sellPanelShow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       String buttonString = e.getActionCommand();
@@ -858,6 +960,12 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     }
   }
 
+  /**
+   * This class implements the ActionListener interface and overrides the actionPerformed method.
+   *
+   * The actionPerformed method is called when the user clicks the "Cost Basis" button.
+   *
+   */
   private class costBasisPanelShow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       String buttonString = e.getActionCommand();
@@ -868,6 +976,12 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     }
   }
 
+  /**
+   * It implements the ActionListener interface, which means it has to have an actionPerformed method.
+   * The actionPerformed method is called whenever the button is pressed. The actionPerformed method
+   * checks to see if the button was pressed, and if it was, it changes the card layout to the "Create
+   * Graph Panel"
+   */
   private class createGraph implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       String buttonString = e.getActionCommand();
@@ -879,6 +993,10 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   }
 
 
+  /**
+   * It listens for the "Upload File" button to be pressed, and when it is, it tells the CardLayout to
+   * show the "Upload File Panel".
+   */
   private class uploadPanelShow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       String buttonString = e.getActionCommand();
@@ -889,6 +1007,9 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     }
   }
 
+  /**
+   * This class is an action listener for the button that switches to the dollar cost average panel.
+   */
   private class dollarCostPanelShow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       String buttonString = e.getActionCommand();
@@ -899,6 +1020,10 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     }
   }
 
+  /**
+   * This class is an action listener for the "Cost Avg Performance" button on the "Dollar Cost
+   * Performance" panel. When the button is clicked, the "Cost Avg Performance" panel is displayed.
+   */
   private class dollarCostPerformancePanelShow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
       String buttonString = e.getActionCommand();

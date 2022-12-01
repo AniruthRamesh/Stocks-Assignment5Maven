@@ -6,18 +6,25 @@ import org.jfree.chart.JFreeChart;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import javax.swing.*;
+import javax.swing.JFrame;
 
+/**
+ * It creates a line chart using the data in the dataset passed to it.
+ */
 public class LineChart extends JFrame {
 
+  /**
+   * Constructor for line chart.
+   * @param title Title of chart
+   * @param data data to be displayed
+   */
   public LineChart(String title, DefaultCategoryDataset data) {
     super(title);
-    DefaultCategoryDataset dataset = data;
     JFreeChart chart = ChartFactory.createLineChart(
             "Stock Performance",
             "Time Period",
             "Value of Stock",
-            dataset, PlotOrientation.VERTICAL,
+            data, PlotOrientation.VERTICAL,
             true, true, false
     );
     ChartPanel panel = new ChartPanel(chart);

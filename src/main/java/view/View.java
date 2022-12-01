@@ -1,5 +1,9 @@
 package view;
 
+/**
+ * Creating an interface named View.
+ */
+
 public interface View {
   /**
    * This function displays the option number and the string that is passed as a parameter.

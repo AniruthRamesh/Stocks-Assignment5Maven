@@ -6,14 +6,11 @@ import javax.swing.*;
 
 import controller.ControllerGUIImpl;
 
-// Creating a new interface called ViewGui.
+/**
+ * Creating a new interface called ViewGui.
+ */
 public interface ViewGui {
 
-  /**
-   * * This function adds the features to the controller.
-   *
-   * @param features The features to add to the controller.
-   */
   /**
    * * This function adds the features to the controller.
    *
