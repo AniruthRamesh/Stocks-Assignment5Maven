@@ -59,7 +59,8 @@ for inflexible portfolio.
 * Option 1 Enter name of portfolio
 * click 1 again and give the name of portfolio (like fees)
 * click 3 to add company stock
-* click 1 and enter ticker symbol (like AAPL). If its the first time, adding stocks of this company it will take 2-5 secs for the next step to load as data is fetched from the API.
+* click 1 and enter ticker symbol (like AAPL). If its the first time, adding stocks of this company
+ it will take 2-5 secs for the next step to load as data is fetched from the API.
 * click 1 to enter date.
 * enter day - 02
 * enter month - 02
@@ -95,4 +96,9 @@ for inflexible portfolio.
 * enter month - 11
 * enter year - 2022
 * The cost basis data will be displayed
+
+## Setup for assignment 6:
+
+The new GUI is implemented. The app will run as it is. On initiation, it will show option of to
+choose between GUI and TUI. The GUI is very intuitive and user-friendly.
 

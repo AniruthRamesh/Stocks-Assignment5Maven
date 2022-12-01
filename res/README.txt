@@ -69,3 +69,27 @@ graph.
 
 20. Suitable text-based interface is created that allows a user to use all the above-mentioned
     functionality.
+
+## New Features Added (Assignment 6):
+
+21. Ability to invest a specific amount in an existing flexible portfolio on a specific date by
+    specifying the weights of how that money should be invested in each stock inside that portfolio.
+
+22. ability to create a portfolio using dollar-cost averaging as specified above, and query cost
+    basis and value of such a portfolio at a specific date.
+
+23. Created a GUI that has the following features:
+
+    - The ability to create a new flexible portfolio
+
+    - The ability to buy/sell stocks by specifying the number of shares , and date (with or without commission fees)
+
+    - The ability to query the cost basis and value of a flexible portfolio at a certain date
+
+    - The ability to save and retrieve flexible portfolios from files
+
+    - The ability to invest a specific amount in an existing flexible portfolio on a specific date by specifying the weights of how that money should be invested in each stock inside that portfolio.
+
+    - The ability to create a portfolio using dollar-cost averaging as specified above, and query cost basis and value of such a portfolio at a specific date.
+
+24. Created Line graph for performance in GUI.

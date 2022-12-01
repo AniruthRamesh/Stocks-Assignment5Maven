@@ -90,35 +90,19 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   JLabel graph_l7;
   JLabel graph_l8;
   JLabel graph_l9;
-  JLabel dollarPerf_l1;
-  JLabel dollarPerf_l2;
-  JLabel dollarPerf_l3;
-  JLabel dollarPerf_l4;
-  JLabel dollarPerf_l5;
-  JLabel dollarPerf_l6;
-  JLabel dollarperf_l7;
   JTextField dollar_nameOfPort;
   JTextField dollar_day;
   JTextField dollar_month;
   JTextField dollar_year;
   JTextField dollar_number;
-  JTextField dollarPerf_nameOfPort;
-  JTextField dollarPerf_day;
-  JTextField dollarPerf_month;
-  JTextField dollarPerf_year;
-  JTextField dollarPerf_number;
-
 
   ButtonGroup group1;
   ButtonGroup dollarG1;
   ButtonGroup durationGroup;
-  ButtonGroup group;
   JRadioButton jRadioButton1;
   JRadioButton dayR;
   JRadioButton monthR;
   JRadioButton yearR;
-  JRadioButton r1;
-  JRadioButton r2;
   JRadioButton jRadioButton2;
   JRadioButton jRadioButtonDollar1;
   JRadioButton jRadioButtonDollar2;
@@ -164,7 +148,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   JButton btnPopup;
   JButton graphButton;
   JButton dollarCostAvg_button;
-  JButton dollarCostAvgPerformanceButton;
   private JTextArea textArea;
   private JTextArea costBasis_textArea;
   private JPanel buy;
@@ -175,7 +158,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   private JPanel upload;
   private JPanel dollarCostAvg;
   private JPanel graph;
-  private JPanel dollarCostAvgPerformance;
 
   /**
    * Constructor for View GUI.
@@ -198,7 +180,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     mainPanel.add(uploadWindow(), "Upload File Panel");
     mainPanel.add(createGraphWindow(), "Create Graph Panel");
     mainPanel.add(dollarCostAvgWindow(), "Dollar Cost Average Panel");
-    mainPanel.add(dollarCostAvgPerformanceWindow(), "Cost Avg Performance Panel");
 
     this.add(mainPanel);
 
@@ -258,7 +239,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     JMenuItem total_value = new JMenuItem("Total Value");
     JMenuItem upload_file = new JMenuItem("Upload File");
     JMenuItem dollar_cost_average = new JMenuItem("Dollar Cost Average");
-    JMenuItem dollar_cost_avg_performance = new JMenuItem("Cost Avg Performance");
     JMenuItem create_graph = new JMenuItem("Create Graph");
     JMenuItem quit = new JMenuItem("Quit");
     menu.add(buy);
@@ -267,7 +247,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     menu.add(cost_basis);
     menu.add(upload_file);
     menu.add(dollar_cost_average);
-    menu.add(dollar_cost_avg_performance);
     menu.add(create_graph);
     menu.add(quit);
     menuBar.add(menu);
@@ -279,7 +258,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     cost_basis.addActionListener(new CostBasisPanelShow());
     create_graph.addActionListener(new CreateGraph());
     dollar_cost_average.addActionListener(new DollarCostPanelShow());
-    dollar_cost_avg_performance.addActionListener(new DollarCostPerformancePanelShow());
     quit.addActionListener(evt -> System.exit(0));
   }
 
@@ -395,90 +373,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     sell.add(sell_number);
     sell.add(sellButton);
     return sell;
-  }
-
-  /**
-   * This function creates a JPanel that contains all the components of the Dollar Cost Averaging
-   * Performance window.
-   *
-   * @return The dollarCostAvgPerformance JPanel is being returned.
-   */
-  private JPanel dollarCostAvgPerformanceWindow() {
-    dollarCostAvgPerformance = new JPanel();
-    dollarCostAvgPerformance.setPreferredSize(new Dimension(500, 500));
-    dollarCostAvgPerformance.setVisible(true);
-    dollarCostAvgPerformance.setLayout(null);
-    dollarPerf_l1 = new JLabel("Check Cost basis and Total Value for strategy");
-    dollarPerf_l1.setForeground(Color.blue);
-    dollarPerf_l1.setFont(new Font("Serif", Font.BOLD, 20));
-    dollarPerf_l2 = new JLabel("Name of the Portfolio:");
-    dollarPerf_l3 = new JLabel("Amount:");
-    dollarPerf_l4 = new JLabel("Start date day:");
-    dollarPerf_l5 = new JLabel("Start date month:");
-    dollarPerf_l6 = new JLabel("Start date Year:");
-    dollarperf_l7 = new JLabel("After creating a strategy, click on preferred radio for cost " +
-            "basis or total value");
-    jRadioButtonDollar1 = new JRadioButton();
-    jRadioButtonDollar2 = new JRadioButton();
-    r1 = new JRadioButton();
-    r2 = new JRadioButton();
-    dollarPerf_nameOfPort = new JTextField();
-    dollarPerf_number = new JTextField();
-    dollarPerf_day = new JTextField();
-    dollarPerf_month = new JTextField();
-    dollarPerf_year = new JTextField();
-    dollarG1 = new ButtonGroup();
-    dollarCostAvgPerformanceButton = new JButton("Submit");
-    dollarG1.add(jRadioButtonDollar1);
-    dollarG1.add(jRadioButtonDollar2);
-    group = new ButtonGroup();
-    dollarCostAvgPerformanceButton = new JButton("Submit");
-    group.add(r1);
-    group.add(r2);
-    dollarPerf_l1.setBounds(100, 30, 400, 30);
-    dollarPerf_l2.setBounds(80, 70, 200, 30);
-    dollarPerf_l3.setBounds(80, 110, 200, 30);
-    dollarPerf_l4.setBounds(80, 150, 200, 30);
-    dollarPerf_l5.setBounds(80, 190, 200, 30);
-    dollarPerf_l6.setBounds(80, 230, 200, 30);
-    dollarPerf_nameOfPort.setBounds(300, 70, 200, 30);
-    dollarPerf_number.setBounds(300, 110, 200, 30);
-    dollarPerf_day.setBounds(300, 150, 200, 30);
-    dollarPerf_month.setBounds(300, 190, 200, 30);
-    dollarPerf_year.setBounds(300, 230, 200, 30);
-    jRadioButtonDollar1.setBounds(300, 270, 100, 30);
-    dollarperf_l7.setBounds(80, 380, 500, 30);
-
-    jRadioButtonDollar2.setBounds(400, 270, 200, 30);
-    dollarCostAvgPerformanceButton.setBounds(410, 320, 100, 30);
-    r1.setBounds(300, 420, 100, 30);
-    r2.setBounds(400, 420, 200, 30);
-    jRadioButtonDollar1.setText("End Date");
-    jRadioButtonDollar2.setText("No End Date");
-    r1.setText("Cost Basis");
-    r2.setText("Total Value");
-    dollarCostAvgPerformance.add(dollarPerf_l1);
-    dollarCostAvgPerformance.add(dollarPerf_l2);
-    dollarCostAvgPerformance.add(dollarPerf_nameOfPort);
-    dollarCostAvgPerformance.add(dollarPerf_l3);
-    dollarCostAvgPerformance.add(dollarPerf_number);
-    dollarCostAvgPerformance.add(dollarPerf_l4);
-    dollarCostAvgPerformance.add(dollarPerf_day);
-    dollarCostAvgPerformance.add(dollarPerf_l5);
-    dollarCostAvgPerformance.add(dollarPerf_month);
-    dollarCostAvgPerformance.add(dollarPerf_l6);
-    dollarCostAvgPerformance.add(dollarPerf_year);
-    dollarCostAvgPerformance.add(jRadioButtonDollar1);
-    dollarCostAvgPerformance.add(jRadioButtonDollar2);
-    dollarCostAvgPerformance.add(dollarCostAvgPerformanceButton);
-    dollarCostAvgPerformance.add(r1);
-    dollarCostAvgPerformance.add(r1);
-    dollarCostAvgPerformance.add(r1);
-    dollarCostAvgPerformance.add(r2);
-    dollarCostAvgPerformance.add(dollarperf_l7);
-    return dollarCostAvgPerformance;
-
-
   }
 
   /**
@@ -713,7 +607,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     costBasis.setVisible(true);
     costBasis.setLayout(null);
     costBasis_l1 = new JLabel("View the Cost Basis");
-    costBasis_l1.setForeground(Color.darkGray);
+    costBasis_l1.setForeground(Color.blue);
     costBasis_l1.setFont(new Font("Serif", Font.BOLD, 20));
     costBasis_l2 = new JLabel("Name of Portfolio:");
     costBasis_l3 = new JLabel("Day:");
@@ -789,11 +683,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     dollarCostAvg_button.addActionListener(evt -> features.dollarCostAveraging(dollarCostAvg,
             dollar_nameOfPort.getText(), dollar_number.getText(), dollar_day.getText(),
             dollar_month.getText(), dollar_year.getText(), "costAvg"));
-    dollarCostAvgPerformanceButton.addActionListener(evt ->
-            features.dollarCostAveraging(dollarCostAvgPerformance,
-                    dollarPerf_nameOfPort.getText(), dollarPerf_number.getText(),
-                    dollarPerf_day.getText(), dollarPerf_month.getText(),
-                    dollarPerf_year.getText(), "query"));
   }
 
   @Override
@@ -804,27 +693,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
       lineGraphFrame.pack();
       lineGraphFrame.setSize(800, 800);
       lineGraphFrame.setVisible(true);
-    });
-  }
-
-  @Override
-  public void addRadioButtons(JPanel frame, String portfolio) {
-
-    r1.addActionListener(evt -> {
-      JFrame newFrame = new JFrame();
-      newFrame.setSize(700, 700);
-      newFrame.add(costBasisWindow());
-      newFrame.setVisible(true);
-      costBasis_nameOfPort.setText(portfolio);
-      costBasis_nameOfPort.setEditable(false);
-    });
-    r2.addActionListener(evt -> {
-      JFrame newFrame = new JFrame();
-      newFrame.setSize(700, 700);
-      newFrame.add(totalValueWindow());
-      newFrame.setVisible(true);
-      totalValue_nameOfPort.setText(portfolio);
-      totalValue_nameOfPort.setEditable(false);
     });
   }
 
@@ -1120,20 +988,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
       if (buttonString.equals("Dollar Cost Average")) {
         CardLayout cl = (CardLayout) mainPanel.getLayout();
         cl.show(mainPanel, "Dollar Cost Average Panel");
-      }
-    }
-  }
-
-  /**
-   * This class is an action listener for the "Cost Avg Performance" button on the "Dollar Cost
-   * Performance" panel. When the button is clicked, the "Cost Avg Performance" panel is displayed.
-   */
-  private class DollarCostPerformancePanelShow implements ActionListener {
-    public void actionPerformed(ActionEvent e) {
-      String buttonString = e.getActionCommand();
-      if (buttonString.equals("Cost Avg Performance")) {
-        CardLayout cl = (CardLayout) mainPanel.getLayout();
-        cl.show(mainPanel, "Cost Avg Performance Panel");
       }
     }
   }

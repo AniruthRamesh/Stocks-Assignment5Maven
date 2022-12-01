@@ -52,7 +52,11 @@ public interface ViewGui {
    */
   void displayCostBasis(String data);
 
+  /**
+   * This function creates a line graph using the data in the dataset.
+   *
+   * @param dataset The dataset that contains the data for the graph.
+   */
   void createLineGraph(DefaultCategoryDataset dataset);
 
-  void addRadioButtons(JPanel frame, String portfolio);
 }

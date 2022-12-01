@@ -110,7 +110,6 @@ are using AlphaVantageAPI).
 String addApiCompanyStockData(String companyTicker);
 ```
 
-
 ## Design Changes from previous assignment in controller:
 
 * We were using switch cases inside our controller earlier. In code walk got a suggestion that we

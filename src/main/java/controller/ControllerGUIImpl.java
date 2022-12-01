@@ -548,10 +548,6 @@ public class ControllerGUIImpl implements Features {
     }
     model.saveFlexiblePortfolios();
     view.createMessageBox(frame, "Strategy created and saved.");
-    if (frameName.equals("query")) {
-      view.addRadioButtons(frame, portfolio);
-    }
-
   }
 
   @Override
