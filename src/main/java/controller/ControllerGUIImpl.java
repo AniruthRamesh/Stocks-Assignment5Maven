@@ -25,7 +25,8 @@ public class ControllerGUIImpl implements Features {
 
   /**
    * Constructor for ControllerGUIImpl.
-   * @param model model
+   *
+   * @param model   model
    * @param viewGui view GUI
    */
   public ControllerGUIImpl(Model model, ViewGui viewGui) {
@@ -275,7 +276,7 @@ public class ControllerGUIImpl implements Features {
     Double overallTotalMoneySpent = 0.0;
     Double totalMoneySpent = 0.0;
     for (int i = 0; i < actualCompanyData.size(); i++) {
-      StringBuilder totalStrings = new StringBuilder("");
+      StringBuilder totalStrings = new StringBuilder();
       totalMoneySpent = 0.0;
       List<List<String>> data = model.getStockDataInCertainPortfolio(name,
               actualCompanyData.get(i));
@@ -680,10 +681,10 @@ public class ControllerGUIImpl implements Features {
    * and an ending date, and returns a DefaultCategoryDataset object that contains the values of the
    * portfolio on the dates between the starting date and the ending date.
    *
-   * @param graph The JPanel on which the graph is to be displayed.
+   * @param graph         The JPanel on which the graph is to be displayed.
    * @param portfolioName The name of the portfolio whose performance is to be plotted.
-   * @param startingDate The starting date of the graph
-   * @param endingDate The ending date of the graph.
+   * @param startingDate  The starting date of the graph
+   * @param endingDate    The ending date of the graph.
    * @return A DefaultCategoryDataset object is being returned.
    */
   public DefaultCategoryDataset lineGraphValues(JPanel graph, String portfolioName,
@@ -746,11 +747,7 @@ public class ControllerGUIImpl implements Features {
   @Override
   public boolean getPercentage() {
     double num = model.getPercentageSoFar();
-    if (num == 100.0) {
-      return true;
-    } else{
-      return false;
-    }
+    return num == 100.0;
   }
 
   @Override
@@ -785,11 +782,7 @@ public class ControllerGUIImpl implements Features {
 
   @Override
   public boolean mydChecker() {
-    if (model.getMyd().length() == 0 || model.getDuration() == 0) {
-      return false;
-    } else{
-      return true;
-    }
+    return model.getMyd().length() != 0 && model.getDuration() != 0;
   }
 
 }

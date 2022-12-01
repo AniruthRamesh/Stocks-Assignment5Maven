@@ -2,7 +2,6 @@ package view;
 
 import org.jfree.data.category.DefaultCategoryDataset;
 
-
 import java.awt.CardLayout;
 import java.awt.GridBagLayout;
 import java.awt.Image;
@@ -219,7 +218,12 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
    */
   public JPanel commandWindow() {
     JLabel welcomeMessage = new JLabel("<html><strong>This is a Portfolio Management " +
-            "Application.<br>" + "</strong><br><br> Choose an option from the “Option” menu on " + "the top" + " to " + "buy, sell, cost " + "basis of portfolio, total value of stocks," + " upload " + "portfolio, investing in " + "portfolio, create performance graph," + " using dollar cost averaging, " + "check cost " + "basis and value while creating strategy " + "for a portfolio" + "</html>");
+            "Application.<br>" + "</strong><br><br> Choose an option from the “Option” menu on "
+            + "the top" + " to " + "buy, sell, cost " +
+            "basis of portfolio, total value of stocks," + " upload " + "portfolio, investing in "
+            + "portfolio, create performance graph," + " using dollar cost averaging, " +
+            "check cost " + "basis and value while creating strategy " + "for a portfolio" +
+            "</html>");
     JPanel commandPanel = new JPanel();
     Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\" + "stock.jpeg");
     JLabel picLabel = new JLabel("");
@@ -785,7 +789,11 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     dollarCostAvg_button.addActionListener(evt -> features.dollarCostAveraging(dollarCostAvg,
             dollar_nameOfPort.getText(), dollar_number.getText(), dollar_day.getText(),
             dollar_month.getText(), dollar_year.getText(), "costAvg"));
-    dollarCostAvgPerformanceButton.addActionListener(evt -> features.dollarCostAveraging(dollarCostAvgPerformance, dollarPerf_nameOfPort.getText(), dollarPerf_number.getText(), dollarPerf_day.getText(), dollarPerf_month.getText(), dollarPerf_year.getText(), "query"));
+    dollarCostAvgPerformanceButton.addActionListener(evt ->
+            features.dollarCostAveraging(dollarCostAvgPerformance,
+                    dollarPerf_nameOfPort.getText(), dollarPerf_number.getText(),
+                    dollarPerf_day.getText(), dollarPerf_month.getText(),
+                    dollarPerf_year.getText(), "query"));
   }
 
   @Override
@@ -1057,7 +1065,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   /**
    * This class implements the ActionListener interface and overrides the actionPerformed method.
-   * <p>
    * The actionPerformed method is called when the user clicks the "Cost Basis" button.
    */
   private class CostBasisPanelShow implements ActionListener {
