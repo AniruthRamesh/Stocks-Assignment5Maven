@@ -1,4 +1,4 @@
-package handleStrategyTest;
+package handlestrategytest;
 
 import org.junit.Before;
 import org.junit.Test;

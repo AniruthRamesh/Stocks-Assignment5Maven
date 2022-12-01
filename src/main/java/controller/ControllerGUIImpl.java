@@ -9,18 +9,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
 import model.Model;
 import view.ViewGui;
 
 import static java.lang.Math.ceil;
 
+/**
+ * This is a controller for GUI.
+ */
 public class ControllerGUIImpl implements Features {
   ViewGui view;
   Model model;
 
-
+  /**
+   * Constructor for ControllerGUIImpl.
+   *
+   * @param model   model
+   * @param viewGui view GUI
+   */
   public ControllerGUIImpl(Model model, ViewGui viewGui) {
     this.model = model;
     this.view = viewGui;
@@ -34,7 +42,8 @@ public class ControllerGUIImpl implements Features {
                                          String numberText) {
 
     String date;
-    if (name.length() == 0 || dayText.length() == 0 || monthText.length() == 0 || yearText.length() == 0 || tickerText.length() == 0 || numberText.length() == 0) {
+    if (name.length() == 0 || dayText.length() == 0 || monthText.length() == 0
+            || yearText.length() == 0 || tickerText.length() == 0 || numberText.length() == 0) {
       view.createMessageBox(frame, "Fields cannot be empty");
     } else {
       int day = model.stringToNumber(dayText);
@@ -106,7 +115,8 @@ public class ControllerGUIImpl implements Features {
   public void sellPortfolio(JPanel frame, String name, String dayText, String monthText,
                             String yearText, String tickerText, String numberText) {
     String date;
-    if (name.length() == 0 || dayText.length() == 0 || monthText.length() == 0 || yearText.length() == 0 || tickerText.length() == 0 || numberText.length() == 0) {
+    if (name.length() == 0 || dayText.length() == 0 || monthText.length() == 0
+            || yearText.length() == 0 || tickerText.length() == 0 || numberText.length() == 0) {
       view.createMessageBox(frame, "Fields cannot be empty");
     } else {
       int day = model.stringToNumber(dayText);
@@ -266,7 +276,7 @@ public class ControllerGUIImpl implements Features {
     Double overallTotalMoneySpent = 0.0;
     Double totalMoneySpent = 0.0;
     for (int i = 0; i < actualCompanyData.size(); i++) {
-      StringBuilder totalStrings = new StringBuilder("");
+      StringBuilder totalStrings = new StringBuilder();
       totalMoneySpent = 0.0;
       List<List<String>> data = model.getStockDataInCertainPortfolio(name,
               actualCompanyData.get(i));
@@ -313,7 +323,8 @@ public class ControllerGUIImpl implements Features {
   public void totalValue(JPanel frame, String name, String dayText, String monthText,
                          String yearText) {
     String date;
-    if (name.length() == 0 || dayText.length() == 0 || monthText.length() == 0 || yearText.length() == 0) {
+    if (name.length() == 0 || dayText.length() == 0 || monthText.length() == 0
+            || yearText.length() == 0) {
       view.createMessageBox(frame, "Fields cannot be empty");
     } else {
       int day = model.stringToNumber(dayText);
@@ -436,7 +447,8 @@ public class ControllerGUIImpl implements Features {
   @Override
   public void dollarCostAveraging(JPanel frame, String portfolio, String amount, String day,
                                   String month, String year, String frameName) {
-    if (portfolio.length() == 0 || amount.length() == 0 || day.length() == 0 || month.length() == 0 || year.length() == 0) {
+    if (portfolio.length() == 0 || amount.length() == 0 || day.length() == 0
+            || month.length() == 0 || year.length() == 0) {
       view.createMessageBox(frame, "Fields cannot be empty");
       return;
     }
@@ -664,6 +676,17 @@ public class ControllerGUIImpl implements Features {
 
   }
 
+  /**
+   * It takes in a portfolio name, a starting date,
+   * and an ending date, and returns a DefaultCategoryDataset object that contains the values of the
+   * portfolio on the dates between the starting date and the ending date.
+   *
+   * @param graph         The JPanel on which the graph is to be displayed.
+   * @param portfolioName The name of the portfolio whose performance is to be plotted.
+   * @param startingDate  The starting date of the graph
+   * @param endingDate    The ending date of the graph.
+   * @return A DefaultCategoryDataset object is being returned.
+   */
   public DefaultCategoryDataset lineGraphValues(JPanel graph, String portfolioName,
                                                 String startingDate, String endingDate) {
     if (startingDate.compareTo(endingDate) >= 0) {
@@ -697,8 +720,6 @@ public class ControllerGUIImpl implements Features {
       values.add(model.calculateValueForGraph(model.getTotalFlexibleStockValue(portfolioName
               , dateValues.get(keys.get(i)))));
     }
-//    view.displayContentsInParameter("Performance of portfolio " + portfolioName + " from " +
-//            startingDate + " to " + endingDate);
     String series1 = "Stocks";
     DefaultCategoryDataset dataset = new DefaultCategoryDataset();
     for (int i = 0; i < values.size(); i++) {
@@ -708,6 +729,13 @@ public class ControllerGUIImpl implements Features {
     return dataset;
   }
 
+  /**
+   * This function takes in a number and returns a string of underscores that is the same length
+   * as the number.
+   *
+   * @param number the number of underscores to be returned
+   * @return The number of underscores that are in the string.
+   */
   private String helper(int number) {
     StringBuilder str = new StringBuilder();
     for (int i = 0; i < number; i++) {
@@ -719,10 +747,7 @@ public class ControllerGUIImpl implements Features {
   @Override
   public boolean getPercentage() {
     double num = model.getPercentageSoFar();
-    if (num == 100.0) {
-      return true;
-    }
-    return false;
+    return num == 100.0;
   }
 
   @Override
@@ -757,11 +782,7 @@ public class ControllerGUIImpl implements Features {
 
   @Override
   public boolean mydChecker() {
-    if (model.getMyd().length() == 0 || model.getDuration() == 0) {
-      return false;
-
-    }
-    return true;
+    return model.getMyd().length() != 0 && model.getDuration() != 0;
   }
 
 }

@@ -113,12 +113,13 @@ public class HandleCostBasis implements Command {
     return model;
   }
 
+
   /**
-   * It takes in a number and returns a string of underscores of that length.
+   * This function takes in a number and returns a string of underscores that is the same length
+   * as the number.
    *
-   * @param number the number of underscores to return
-   * @return The number of underscores that are needed to fill the space between the left and
-   * right side of the tree.
+   * @param number the number of underscores to be returned
+   * @return The number of underscores that are in the string.
    */
   private String helper(int number) {
     StringBuilder str = new StringBuilder();

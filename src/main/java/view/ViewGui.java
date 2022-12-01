@@ -2,18 +2,15 @@ package view;
 
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
 import controller.ControllerGUIImpl;
 
-// Creating a new interface called ViewGui.
+/**
+ * Creating a new interface called ViewGui.
+ */
 public interface ViewGui {
 
-  /**
-   * * This function adds the features to the controller.
-   *
-   * @param features The features to add to the controller.
-   */
   /**
    * * This function adds the features to the controller.
    *

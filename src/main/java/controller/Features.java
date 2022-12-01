@@ -2,8 +2,11 @@ package controller;
 
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
+/**
+ * Interface for all the features that can be performed by stock application.
+ */
 public interface Features {
 
   /**
