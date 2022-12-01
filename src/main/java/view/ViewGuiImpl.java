@@ -29,8 +29,11 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   JLabel dollar_l1, dollar_l2, dollar_l3, dollar_l4, dollar_l5, dollar_l6, datePopup_l1,
           datePopup_l2, datePopup_l3, noDatePopup_l1, noDatePopup_l2, graph_l1, graph_l2,
           graph_l3, graph_l4, graph_l5, graph_l6, graph_l7, graph_l8;
-
+  JLabel dollarPerf_l1, dollarPerf_l2, dollarPerf_l3, dollarPerf_l4, dollarPerf_l5, dollarPerf_l6;
   JTextField dollar_nameOfPort, dollar_day, dollar_month, dollar_year, dollar_ticker, dollar_number;
+  JTextField dollarPerf_nameOfPort, dollarPerf_day, dollarPerf_month, dollarPerf_year, dollarPerf_ticker, dollarPerf_number;
+
+
   ButtonGroup G1;
   ButtonGroup dollarG1, durationGroup;
   JRadioButton jRadioButton1, dayR, monthR, yearR;
@@ -259,61 +262,62 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   }
 
   private JPanel dollarCostAvgPerformanceWindow() {
-    dollarCostAvg = new JPanel();
-    dollarCostAvgWindow();
-//    dollarCostAvg.setPreferredSize(new Dimension(500, 500));
-//    dollarCostAvg.setVisible(true);
-//    dollarCostAvg.setLayout(null);
-//    dollar_l1 = new JLabel("Dollar Cost Average Strategy");
-//    dollar_l1.setForeground(Color.blue);
-//    dollar_l1.setFont(new Font("Serif", Font.BOLD, 20));
-//    dollar_l2 = new JLabel("Name of the Portfolio:");
-//    dollar_l3 = new JLabel("Amount:");
-//    dollar_l4 = new JLabel("Start date day:");
-//    dollar_l5 = new JLabel("Start date month:");
-//    dollar_l6 = new JLabel("Start date Year:");
-//    jRadioButtonDollar1 = new JRadioButton();
-//    jRadioButtonDollar2 = new JRadioButton();
-//    dollar_nameOfPort = new JTextField();
-//    dollar_number = new JTextField();
-//    dollar_day = new JTextField();
-//    dollar_month = new JTextField();
-//    dollar_year = new JTextField();
-//    dollarG1 = new ButtonGroup();
-//    dollarCostAvgPerformanceButton = new JButton("Submit");
-//    dollarG1.add(jRadioButtonDollar1);
-//    dollarG1.add(jRadioButtonDollar2);
-//    dollar_l1.setBounds(100, 30, 400, 30);
-//    dollar_l2.setBounds(80, 70, 200, 30);
-//    dollar_l3.setBounds(80, 110, 200, 30);
-//    dollar_l4.setBounds(80, 150, 200, 30);
-//    dollar_l5.setBounds(80, 190, 200, 30);
-//    dollar_l6.setBounds(80, 230, 200, 30);
-//    dollar_nameOfPort.setBounds(300, 70, 200, 30);
-//    dollar_number.setBounds(300, 110, 200, 30);
-//    dollar_day.setBounds(300, 150, 200, 30);
-//    dollar_month.setBounds(300, 190, 200, 30);
-//    dollar_year.setBounds(300, 230, 200, 30);
-//    jRadioButtonDollar1.setBounds(300, 270, 100, 30);
-//    jRadioButtonDollar2.setBounds(400, 270, 200, 30);
-//    dollarCostAvgPerformanceButton.setBounds(410, 320, 100, 30);
-//    jRadioButtonDollar1.setText("End Date");
-//    jRadioButtonDollar2.setText("No End Date");
-//    dollarCostAvg.add(dollar_l1);
-//    dollarCostAvg.add(dollar_l2);
-//    dollarCostAvg.add(dollar_nameOfPort);
-//    dollarCostAvg.add(dollar_l3);
-//    dollarCostAvg.add(dollar_number);
-//    dollarCostAvg.add(dollar_l4);
-//    dollarCostAvg.add(dollar_day);
-//    dollarCostAvg.add(dollar_l5);
-//    dollarCostAvg.add(dollar_month);
-//    dollarCostAvg.add(dollar_l6);
-//    dollarCostAvg.add(dollar_year);
-//    dollarCostAvg.add(jRadioButtonDollar1);
-//    dollarCostAvg.add(jRadioButtonDollar2);
-//    dollarCostAvg.add(dollarCostAvgPerformanceButton);
-    return dollarCostAvg;
+    dollarCostAvgPerformance = new JPanel();
+    dollarCostAvgPerformance.setPreferredSize(new Dimension(500, 500));
+    dollarCostAvgPerformance.setVisible(true);
+    dollarCostAvgPerformance.setLayout(null);
+    dollarPerf_l1 = new JLabel("Check Cost basis and Total Value for strategy");
+    dollarPerf_l1.setForeground(Color.blue);
+    dollarPerf_l1.setFont(new Font("Serif", Font.BOLD, 20));
+    dollarPerf_l2 = new JLabel("Name of the Portfolio:");
+    dollarPerf_l3 = new JLabel("Amount:");
+    dollarPerf_l4 = new JLabel("Start date day:");
+    dollarPerf_l5 = new JLabel("Start date month:");
+    dollarPerf_l6 = new JLabel("Start date Year:");
+    jRadioButtonDollar1 = new JRadioButton();
+    jRadioButtonDollar2 = new JRadioButton();
+    dollarPerf_nameOfPort = new JTextField();
+    dollarPerf_number = new JTextField();
+    dollarPerf_day = new JTextField();
+    dollarPerf_month = new JTextField();
+    dollarPerf_year = new JTextField();
+    dollarG1 = new ButtonGroup();
+    dollarCostAvgPerformanceButton = new JButton("Submit");
+    dollarG1.add(jRadioButtonDollar1);
+    dollarG1.add(jRadioButtonDollar2);
+    dollarPerf_l1.setBounds(100, 30, 400, 30);
+    dollarPerf_l2.setBounds(80, 70, 200, 30);
+    dollarPerf_l3.setBounds(80, 110, 200, 30);
+    dollarPerf_l4.setBounds(80, 150, 200, 30);
+    dollarPerf_l5.setBounds(80, 190, 200, 30);
+    dollarPerf_l6.setBounds(80, 230, 200, 30);
+    dollarPerf_nameOfPort.setBounds(300, 70, 200, 30);
+    dollarPerf_number.setBounds(300, 110, 200, 30);
+    dollarPerf_day.setBounds(300, 150, 200, 30);
+    dollarPerf_month.setBounds(300, 190, 200, 30);
+    dollarPerf_year.setBounds(300, 230, 200, 30);
+    jRadioButtonDollar1.setBounds(300, 270, 100, 30);
+    jRadioButtonDollar2.setBounds(400, 270, 200, 30);
+    dollarCostAvgPerformanceButton.setBounds(410, 320, 100, 30);
+    jRadioButtonDollar1.setText("End Date");
+    jRadioButtonDollar2.setText("No End Date");
+    dollarCostAvgPerformance.add(dollarPerf_l1);
+    dollarCostAvgPerformance.add(dollarPerf_l2);
+    dollarCostAvgPerformance.add(dollarPerf_nameOfPort);
+    dollarCostAvgPerformance.add(dollarPerf_l3);
+    dollarCostAvgPerformance.add(dollarPerf_number);
+    dollarCostAvgPerformance.add(dollarPerf_l4);
+    dollarCostAvgPerformance.add(dollarPerf_day);
+    dollarCostAvgPerformance.add(dollarPerf_l5);
+    dollarCostAvgPerformance.add(dollarPerf_month);
+    dollarCostAvgPerformance.add(dollarPerf_l6);
+    dollarCostAvgPerformance.add(dollarPerf_year);
+    dollarCostAvgPerformance.add(jRadioButtonDollar1);
+    dollarCostAvgPerformance.add(jRadioButtonDollar2);
+    dollarCostAvgPerformance.add(dollarCostAvgPerformanceButton);
+    return dollarCostAvgPerformance;
+
+
   }
 
   private JPanel dollarCostAvgWindow() {
@@ -321,7 +325,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     dollarCostAvg.setPreferredSize(new Dimension(500, 500));
     dollarCostAvg.setVisible(true);
     dollarCostAvg.setLayout(null);
-    dollar_l1 = new JLabel("Dollar Cost Average Strategy");
+    dollar_l1 = new JLabel("Dollar Cost Average Strategy Creation");
     dollar_l1.setForeground(Color.blue);
     dollar_l1.setFont(new Font("Serif", Font.BOLD, 20));
     dollar_l2 = new JLabel("Name of the Portfolio:");
