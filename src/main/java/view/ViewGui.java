@@ -2,7 +2,7 @@ package view;
 
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import javax.swing.*;
+import javax.swing.JPanel;
 
 import controller.ControllerGUIImpl;
 

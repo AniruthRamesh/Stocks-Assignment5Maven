@@ -460,17 +460,17 @@ public class MockModel implements Model {
 
   @Override
   public void addTicker(String ticker) {
-
+    //
   }
 
   @Override
   public void addPercentage(String percentage) {
-
+    //
   }
 
   @Override
   public void addPercentageSoFar(Double percentage) {
-
+    //
   }
 
   @Override
@@ -495,7 +495,7 @@ public class MockModel implements Model {
 
   @Override
   public void initializer() {
-
+    //
   }
 
   @Override
@@ -505,7 +505,7 @@ public class MockModel implements Model {
 
   @Override
   public void setEndDate(String date) {
-
+    //
   }
 
   @Override
@@ -515,7 +515,7 @@ public class MockModel implements Model {
 
   @Override
   public void setMyd(String myd) {
-
+    //
   }
 
   @Override
@@ -525,7 +525,7 @@ public class MockModel implements Model {
 
   @Override
   public void setDuration(int number) {
-
+    //
   }
 
   @Override
@@ -830,11 +830,6 @@ public class MockModel implements Model {
   public Map<String, List<List<String>>> getParticularFlexiblePortfolio(String portfolioName) {
     return null;
   }
-
-//  @Override
-//  public void removeTickerFromPortfolio(String ticker, String portfolioName) {
-//    //
-//  }
 
   @Override
   public List<String> getCompaniesInCertainPortfolio(String portfolioName) {

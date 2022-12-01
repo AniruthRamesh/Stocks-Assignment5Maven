@@ -443,7 +443,8 @@ public class ControllerGUIImpl implements Features {
   @Override
   public void dollarCostAveraging(JPanel frame, String portfolio, String amount, String day,
                                   String month, String year, String frameName) {
-    if (portfolio.length() == 0 || amount.length() == 0 || day.length() == 0 || month.length() == 0 || year.length() == 0) {
+    if (portfolio.length() == 0 || amount.length() == 0 || day.length() == 0
+            || month.length() == 0 || year.length() == 0) {
       view.createMessageBox(frame, "Fields cannot be empty");
       return;
     }
@@ -725,15 +726,14 @@ public class ControllerGUIImpl implements Features {
   }
 
   /**
-   * This function takes in a number and returns a string of underscores that is the same length as the
-   * number.
+   * This function takes in a number and returns a string of underscores that is the same length
+   * as the number.
    *
    * @param number the number of underscores to be returned
    * @return The number of underscores that are in the string.
    */
   private String helper(int number) {
     StringBuilder str = new StringBuilder();
-  // Getting the percentage of the student.
     for (int i = 0; i < number; i++) {
       str.append("_");
     }
@@ -745,7 +745,9 @@ public class ControllerGUIImpl implements Features {
     double num = model.getPercentageSoFar();
     if (num == 100.0) {
       return true;
-    } else return false;
+    } else{
+      return false;
+    }
   }
 
   @Override
@@ -782,9 +784,9 @@ public class ControllerGUIImpl implements Features {
   public boolean mydChecker() {
     if (model.getMyd().length() == 0 || model.getDuration() == 0) {
       return false;
-
+    } else{
+      return true;
     }
-    return true;
   }
 
 }

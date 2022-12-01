@@ -2,7 +2,14 @@ package view;
 
 import org.jfree.data.category.DefaultCategoryDataset;
 
-import java.awt.*;
+
+import java.awt.CardLayout;
+import java.awt.GridBagLayout;
+import java.awt.Image;
+import java.awt.Dimension;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -27,53 +34,153 @@ import javax.swing.JOptionPane;
 
 import controller.ControllerGUIImpl;
 
+/**
+ * Class for View Implementation.
+ */
 public class ViewGuiImpl extends JFrame implements ViewGui {
 
   private static final int WIDTH = 700;
   private static final int HEIGHT = 700;
   private final JPanel mainPanel;
   String selected = "none";
-  JLabel l1, l2, l3, l4, l5, l6, l7, upload_l1, upload_l2, upload_l3;
-  JLabel costBasis_l1, costBasis_l2, costBasis_l3, costBasis_l4, costBasis_l5;
-  JLabel totalValue_l1, totalValue_l2, totalValue_l3, totalValue_l4, totalValue_l5;
-  JLabel sell_l1, sell_l2, sell_l3, sell_l4, sell_l5, sell_l6, sell_l7;
+  JLabel l1;
+  JLabel l2;
+  JLabel l3;
+  JLabel l4;
+  JLabel l5;
+  JLabel l6;
+  JLabel l7;
+  JLabel upload_l1;
+  JLabel upload_l2;
+  JLabel upload_l3;
+  JLabel costBasis_l1;
+  JLabel costBasis_l2;
+  JLabel costBasis_l3;
+  JLabel costBasis_l4;
+  JLabel costBasis_l5;
+  JLabel totalValue_l1;
+  JLabel totalValue_l2;
+  JLabel totalValue_l3;
+  JLabel totalValue_l4;
+  JLabel totalValue_l5;
+  JLabel sell_l1;
+  JLabel sell_l2;
+  JLabel sell_l3;
+  JLabel sell_l4;
+  JLabel sell_l5;
+  JLabel sell_l6;
+  JLabel sell_l7;
 
-  JLabel dollar_l1, dollar_l2, dollar_l3, dollar_l4, dollar_l5, dollar_l6, datePopup_l1,
-          datePopup_l2, datePopup_l3, noDatePopup_l1, noDatePopup_l2, graph_l1, graph_l2,
-          graph_l3, graph_l4, graph_l5, graph_l6, graph_l7, graph_l8, graph_l9;
-  JLabel dollarPerf_l1, dollarPerf_l2, dollarPerf_l3, dollarPerf_l4, dollarPerf_l5, dollarPerf_l6
-          , dollarperf_l7;
-  JTextField dollar_nameOfPort, dollar_day, dollar_month, dollar_year, dollar_number;
-  JTextField dollarPerf_nameOfPort, dollarPerf_day, dollarPerf_month, dollarPerf_year,
+  JLabel dollar_l1;
+  JLabel dollar_l2;
+  JLabel dollar_l3;
+  JLabel dollar_l4;
+  JLabel dollar_l5;
+  JLabel dollar_l6;
+  JLabel datePopup_l1;
+  JLabel
+          datePopup_l2;
+  JLabel datePopup_l3;
+  JLabel noDatePopup_l1;
+  JLabel noDatePopup_l2;
+  JLabel graph_l1;
+  JLabel graph_l2;
+  JLabel graph_l3;
+  JLabel graph_l4;
+  JLabel graph_l5;
+  JLabel graph_l6;
+  JLabel graph_l7;
+  JLabel graph_l8;
+  JLabel graph_l9;
+  JLabel dollarPerf_l1;
+  JLabel dollarPerf_l2;
+  JLabel dollarPerf_l3;
+  JLabel dollarPerf_l4;
+  JLabel dollarPerf_l5;
+  JLabel dollarPerf_l6;
+  JLabel dollarperf_l7;
+  JTextField dollar_nameOfPort;
+  JTextField dollar_day;
+  JTextField dollar_month;
+  JTextField dollar_year;
+  JTextField dollar_number;
+  JTextField dollarPerf_nameOfPort;
+  JTextField dollarPerf_day;
+  JTextField dollarPerf_month;
+  JTextField dollarPerf_year;
+  JTextField
           dollarPerf_number;
 
 
-  ButtonGroup G1;
-  ButtonGroup dollarG1, durationGroup, group;
-  JRadioButton jRadioButton1, dayR, monthR, yearR, r1, r2;
+  ButtonGroup group1;
+  ButtonGroup dollarG1;
+  ButtonGroup durationGroup;
+  ButtonGroup group;
+  JRadioButton jRadioButton1;
+  JRadioButton dayR;
+  JRadioButton monthR;
+  JRadioButton yearR;
+  JRadioButton r1;
+  JRadioButton r2;
   JRadioButton jRadioButton2;
-  JRadioButton jRadioButtonDollar1, jRadioButtonDollar2;
-  JTextField nameOfPort, day, month, year, ticker, number, filePath, datePopup_tf1, datePopup_tf2,
-          datePopup_tf3, noDatePopup_tf1, noDatePopup_tf2, duration;
-  JTextField costBasis_nameOfPort, costBasis_day, costBasis_month, costBasis_year;
-  JTextField sell_nameOfPort, sell_day, sell_month, sell_year, sell_ticker, sell_number;
-  JTextField totalValue_nameOfPort, totalValue_day, totalValue_month, totalValue_year;
-  JTextField graph_name, graph_startDay, graph_startMonth, graph_startYear, graph_endDay,
-          graph_endMonth, graph_endYear;
-  JButton buyButton, sellButton, uploadButton, totalValueButton, btn4, btnPopup, graphButton;
+  JRadioButton jRadioButtonDollar1;
+  JRadioButton jRadioButtonDollar2;
+  JTextField nameOfPort;
+  JTextField day;
+  JTextField month;
+  JTextField year;
+  JTextField ticker;
+  JTextField number;
+  JTextField filePath;
+  JTextField datePopup_tf1;
+  JTextField datePopup_tf2;
+  JTextField
+          datePopup_tf3;
+  JTextField noDatePopup_tf1;
+  JTextField noDatePopup_tf2;
+  JTextField duration;
+  JTextField costBasis_nameOfPort;
+  JTextField costBasis_day;
+  JTextField costBasis_month;
+  JTextField costBasis_year;
+  JTextField sell_nameOfPort;
+  JTextField sell_day;
+  JTextField sell_month;
+  JTextField sell_year;
+  JTextField sell_ticker;
+  JTextField sell_number;
+  JTextField totalValue_nameOfPort;
+  JTextField totalValue_day;
+  JTextField totalValue_month;
+  JTextField totalValue_year;
+  JTextField graph_name;
+  JTextField graph_startDay;
+  JTextField graph_startMonth;
+  JTextField graph_startYear;
+  JTextField graph_endDay;
+  JTextField
+          graph_endMonth;
+  JTextField graph_endYear;
+  JButton buyButton;
+  JButton sellButton;
+  JButton uploadButton;
+  JButton totalValueButton;
+  JButton btn4;
+  JButton btnPopup;
+  JButton graphButton;
   JButton dollarCostAvg_button;
   JButton dollarCostAvgPerformanceButton;
   private JTextArea textArea;
   private JTextArea costBasis_textArea;
-  private JScrollPane scrollPane;
-  private JScrollPane costBasis_scrollPane;
-  private JPanel commandPanel;
   private JPanel buy;
-  private JPanel datePopup, durationPopup;
-  private JPanel noDatePopup;
 
-  private JPanel sell, costBasis, totalValue, upload, dollarCostAvg, graph,
-          dollarCostAvgPerformance;
+  private JPanel sell;
+  private JPanel costBasis;
+  private JPanel totalValue;
+  private JPanel upload;
+  private JPanel dollarCostAvg;
+  private JPanel graph;
+  private JPanel dollarCostAvgPerformance;
 
   public ViewGuiImpl(String caption) {
     super(caption);
@@ -117,7 +224,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
             " using dollar cost averaging, " +
             "check cost " + "basis and value while creating strategy " +
             "for a portfolio" + "</html>");
-    commandPanel = new JPanel();
+    JPanel commandPanel = new JPanel();
     Path path = Path.of(Path.of(System.getProperty("user.dir")) + "\\res\\" + "stock.jpeg");
     JLabel picLabel = new JLabel("");
     commandPanel.setLayout(new GridBagLayout());
@@ -523,9 +630,9 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     upload_l2 = new JLabel("Enter path of Portfolio:");
     upload_l3 = new JLabel("Select Type of Portfolio");
     filePath = new JTextField();
-    G1 = new ButtonGroup();
-    G1.add(jRadioButton1);
-    G1.add(jRadioButton2);
+    group1 = new ButtonGroup();
+    group1.add(jRadioButton1);
+    group1.add(jRadioButton2);
     uploadButton = new JButton("Submit");
     upload_l1.setBounds(100, 30, 400, 30);
     upload_l2.setBounds(80, 70, 200, 30);
@@ -568,7 +675,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     textArea = new JTextArea("");
     textArea.setEditable(false);
     textArea.setLineWrap(true);
-    scrollPane = new JScrollPane(textArea);
+    JScrollPane scrollPane = new JScrollPane(textArea);
     scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
     totalValue.add(scrollPane);
     scrollPane.setBounds(50, 300, 500, 300);
@@ -621,7 +728,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     costBasis_textArea = new JTextArea("");
     costBasis_textArea.setEditable(false);
     costBasis_textArea.setLineWrap(true);
-    costBasis_scrollPane = new JScrollPane(costBasis_textArea);
+    JScrollPane costBasis_scrollPane = new JScrollPane(costBasis_textArea);
     costBasis_scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
     costBasis.add(costBasis_scrollPane);
 
@@ -727,7 +834,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   /**
    * This function creates a message box with the given message.
    *
-   * @param frame The frame that the message box will be displayed on.
+   * @param frame   The frame that the message box will be displayed on.
    * @param message The message you want to display in the message box.
    */
   public void createMessageBox(JPanel frame, String message) {
@@ -738,9 +845,9 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   /**
    * This function is used to display the total value of the stock portfolio in the text area.
    *
-   * @param frame The JPanel that the text area is on.
+   * @param frame       The JPanel that the text area is on.
    * @param companyName The name of the company
-   * @param value The value of the stock
+   * @param value       The value of the stock
    */
   public void displayDynamicDataTotalValue(JPanel frame, String companyName, String value) {
     String message = companyName + "--> $" + value;
@@ -752,10 +859,10 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
    * This function displays the total value of a portfolio
    * on a given date.
    *
-   * @param frame The JPanel that the text area is in.
+   * @param frame         The JPanel that the text area is in.
    * @param portfolioName The name of the portfolio.
-   * @param date The date for which the total value is to be displayed.
-   * @param value The total value of the portfolio.
+   * @param date          The date for which the total value is to be displayed.
+   * @param value         The total value of the portfolio.
    */
   public void displayTotalValue(JPanel frame, String portfolioName, String date, String value) {
     textArea.append("\n" + "Portfolio: " + portfolioName + "\n" + "Date: " + date + "\n" + "Total" +
@@ -777,10 +884,10 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
    * investments.
    *
    * @param features The controller object
-   * @param frame the frame that the popup is on
+   * @param frame    the frame that the popup is on
    */
   private void durationPopUp(ControllerGUIImpl features, JPanel frame) {
-    durationPopup = new JPanel();
+    JPanel durationPopup = new JPanel();
     durationPopup.setLayout(new GridLayout(4, 2));
     durationPopup.setPreferredSize(new Dimension(200, 100));
     durationPopup.setVisible(true);
@@ -836,10 +943,10 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
    * percentage of the stock.
    *
    * @param features ControllerGUIImpl object
-   * @param frame The JPanel that the popup will be displayed on.
+   * @param frame    The JPanel that the popup will be displayed on.
    */
   private void noDatePopUp(ControllerGUIImpl features, JPanel frame) {
-    noDatePopup = new JPanel();
+    JPanel noDatePopup = new JPanel();
     noDatePopup.setLayout(new GridLayout(4, 2));
     noDatePopup.setPreferredSize(new Dimension(200, 100));
     noDatePopup.setVisible(true);
@@ -859,7 +966,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
     if (result == JOptionPane.OK_OPTION) {
       boolean close = features.noDate(frame, noDatePopup_tf1.getText(), noDatePopup_tf2.getText());
-      if (close == false) {
+      if (!close) {
         return;
       }
       if (!features.getPercentage()) {
@@ -883,10 +990,10 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
    * This function creates a popup window that asks the user to enter a date.
    *
    * @param features the controllerGUIImpl object
-   * @param frame the JPanel that the popup is being called from
+   * @param frame    the JPanel that the popup is being called from
    */
   public void enterDatePopUp(ControllerGUIImpl features, JPanel frame) {
-    datePopup = new JPanel();
+    JPanel datePopup = new JPanel();
     datePopup.setLayout(new GridLayout(4, 2));
     datePopup.setPreferredSize(new Dimension(200, 100));
     datePopup.setVisible(true);
@@ -962,9 +1069,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
   /**
    * This class implements the ActionListener interface and overrides the actionPerformed method.
-   *
+   * <p>
    * The actionPerformed method is called when the user clicks the "Cost Basis" button.
-   *
    */
   private class costBasisPanelShow implements ActionListener {
     public void actionPerformed(ActionEvent e) {
@@ -977,9 +1083,11 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
   }
 
   /**
-   * It implements the ActionListener interface, which means it has to have an actionPerformed method.
+   * It implements the ActionListener interface, which means it has to have an actionPerformed
+   * method.
    * The actionPerformed method is called whenever the button is pressed. The actionPerformed method
-   * checks to see if the button was pressed, and if it was, it changes the card layout to the "Create
+   * checks to see if the button was pressed, and if it was, it changes the card layout to the
+   * "Create
    * Graph Panel"
    */
   private class createGraph implements ActionListener {
@@ -994,7 +1102,8 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
 
 
   /**
-   * It listens for the "Upload File" button to be pressed, and when it is, it tells the CardLayout to
+   * It listens for the "Upload File" button to be pressed, and when it is, it tells the
+   * CardLayout to
    * show the "Upload File Panel".
    */
   private class uploadPanelShow implements ActionListener {
