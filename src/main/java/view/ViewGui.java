@@ -1,5 +1,7 @@
 package view;
 
+import org.jfree.data.category.DefaultCategoryDataset;
+
 import javax.swing.*;
 
 import controller.ControllerGUIImpl;
@@ -52,4 +54,6 @@ public interface ViewGui {
    * @param data The data to be displayed.
    */
   void displayCostBasis(String data);
+
+  void createLineGraph(DefaultCategoryDataset dataset);
 }

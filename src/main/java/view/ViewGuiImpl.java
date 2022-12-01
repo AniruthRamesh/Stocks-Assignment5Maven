@@ -1,5 +1,7 @@
 package view;
 
+import org.jfree.data.category.DefaultCategoryDataset;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -201,7 +203,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     sell.setPreferredSize(new Dimension(500, 500));
     sell.setVisible(true);
     sell.setLayout(null);
-    sell_l1 = new JLabel("Create a flexible portfolio");
+    sell_l1 = new JLabel("Sell Stocks of a flexible portfolio");
     sell_l1.setForeground(Color.blue);
     sell_l1.setFont(new Font("Serif", Font.BOLD, 20));
     sell_l2 = new JLabel("Name of Portfolio:");
@@ -347,7 +349,7 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     graph_startYear.setBounds(300, 190, 200, 30);
     graph_endDay.setBounds(300, 230, 200, 30);
     graph_endMonth.setBounds(300, 270, 200, 30);
-    graph_endYear.setBounds(300, 300, 200, 30);
+    graph_endYear.setBounds(300, 310, 200, 30);
     graphButton.setBounds(50, 370, 100, 30);
     graph.add(graph_l1);
     graph.add(graph_l2);
@@ -451,8 +453,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     totalValue.add(totalValue_l5);
     totalValue.add(totalValue_year);
     totalValue.add(totalValueButton);
-
-
     return totalValue;
   }
 
@@ -519,6 +519,10 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     totalValueButton.addActionListener(evt -> features.totalValue(totalValue,
             totalValue_nameOfPort.getText(), totalValue_day.getText(), totalValue_month.getText()
             , totalValue_year.getText()));
+    graphButton.addActionListener(evt -> features.createGraph(graph, graph_name.getText(),
+            graph_startDay.getText(), graph_startMonth.getText(), graph_startYear.getText(),
+            graph_endDay.getText(), graph_endMonth.getText(), graph_endYear.getText()));
+//    graphButton.addActionListener(evt -> createGraphDemo());
     uploadButton.addActionListener(evt -> {
               int selected = 0;
               if (jRadioButton1.isSelected()) {
@@ -535,6 +539,19 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     btn4.addActionListener(evt -> features.costBasis(costBasis, costBasis_nameOfPort.getText(),
             costBasis_day.getText(), costBasis_month.getText(), costBasis_year.getText()));
     dollarCostAvg_button.addActionListener(evt -> features.dollarCostAveraging());
+  }
+
+  @Override
+  public void createLineGraph(DefaultCategoryDataset dataset) {
+    SwingUtilities.invokeLater(() -> {
+      LineChart lineGraphFrame = new LineChart("Stock Performance Line Graph", dataset);
+      lineGraphFrame.setAlwaysOnTop(true);
+      lineGraphFrame.pack();
+      lineGraphFrame.setSize(800, 800);
+      lineGraphFrame.setVisible(true);
+    });
+
+
   }
 
   public void createMessageBox(JPanel frame, String message) {
@@ -610,8 +627,6 @@ public class ViewGuiImpl extends JFrame implements ViewGui {
     int result = JOptionPane.showConfirmDialog(dollarCostAvg, datePopup,
             null, JOptionPane.OK_CANCEL_OPTION);
     if (result == JOptionPane.OK_OPTION) {
-//      System.out.println("x value: " + xField.getText());
-//      System.out.println("y value: " + yField.getText());
     }
   }
 

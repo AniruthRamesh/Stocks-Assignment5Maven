@@ -1,5 +1,7 @@
 package controller;
 
+import org.jfree.data.category.DefaultCategoryDataset;
+
 import javax.swing.*;
 
 public interface Features {
@@ -85,5 +87,10 @@ public interface Features {
 
   void exit();
 
-  void createGraph();
+  void createGraph(JPanel graph, String portfolio, String startDay, String startMonth,
+                   String startYear,
+                   String endDay, String endMonth, String endYear);
+
+  DefaultCategoryDataset lineGraphValues(JPanel graph, String portfolioName, String startingDate,
+                                         String endingDate);
 }

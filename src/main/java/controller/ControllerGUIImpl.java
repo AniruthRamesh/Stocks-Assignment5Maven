@@ -1,5 +1,7 @@
 package controller;
 
+import org.jfree.data.category.DefaultCategoryDataset;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -17,7 +19,6 @@ import static java.lang.Math.ceil;
 public class ControllerGUIImpl implements Features {
   ViewGui view;
   Model model;
-
   public ControllerGUIImpl(Model model, ViewGui viewGui) {
     this.model = model;
     this.view = viewGui;
@@ -451,8 +452,91 @@ public class ControllerGUIImpl implements Features {
   }
 
   @Override
-  public void createGraph() {
+  public void createGraph(JPanel frame, String name, String startDay, String startMonth,
+                          String startYear,
+                          String endDay, String endMonth, String endYear) {
+    String startDate;
+    String endDate;
+    if (name.length() == 0 || startDay.length() == 0 || startMonth.length() == 0
+            || startYear.length() == 0 || endDay.length() == 0 || endMonth.length() == 0
+            || endYear.length() == 0) {
+      view.createMessageBox(frame, "Fields cannot be empty");
+    } else {
+      int day1 = model.stringToNumber(startDay);
+      int month1 = model.stringToNumber(startMonth);
+      int year1 = model.stringToNumber(startYear);
 
+      if (!model.flexiblePortfolioContainsCertainKey(name)) {
+        view.createMessageBox(frame, "Portfolio with this name does not exists");
+      } else if (day1 == 0 || month1 == 0 || year1 == 0) {
+        view.createMessageBox(frame, "Enter numeric values for start date");
+      } else {
+        startDate = model.makeStringDate(day1, month1, year1);
+        if (model.isValidDate(startDate)) {
+          int day2 = model.stringToNumber(endDay);
+          int month2 = model.stringToNumber(endMonth);
+          int year2 = model.stringToNumber(endYear);
+          if (day2 == 0 || month2 == 0 || year2 == 0) {
+            view.createMessageBox(frame, "Enter numeric values for end date");
+          } else {
+            endDate = model.makeStringDate(day2, month2, year2);
+            if (model.isValidDate(endDate)) {
+              DefaultCategoryDataset dataset = lineGraphValues(frame, name, startDate, endDate);
+              view.createLineGraph(dataset);
+            } else {
+              view.createMessageBox(frame, "Enter valid end date.");
+            }
+          }
+        } else {
+          view.createMessageBox(frame, "Enter valid start date.");
+        }
+      }
+    }
+
+  }
+
+  public DefaultCategoryDataset lineGraphValues(JPanel graph, String portfolioName,
+                                                String startingDate, String endingDate) {
+    if (startingDate.compareTo(endingDate) >= 0) {
+      view.createMessageBox(graph, "Ending date cannot be smaller then Start date");
+    }
+    long differenceBetweenDates = model.numberOfDays(LocalDate.parse(startingDate),
+            LocalDate.parse(endingDate));
+
+    if (differenceBetweenDates < 10) {
+      view.createMessageBox(graph, "Time range is very small");
+    }
+    LocalDate dateStartingDate = LocalDate.parse(startingDate);
+    LocalDate dateEndingDate = LocalDate.parse(endingDate);
+
+    Map<String, String> dateValues = new HashMap<>();
+    if (differenceBetweenDates >= 1825) {
+      dateValues = model.calculatingYears(dateStartingDate, dateEndingDate);
+    } else if (differenceBetweenDates < 1825 && differenceBetweenDates >= 900) {
+      dateValues = model.moreMonths(dateStartingDate, dateEndingDate);
+    } else if (differenceBetweenDates < 900 && differenceBetweenDates >= 150) {
+      dateValues = model.calculatingMonths(dateStartingDate, dateEndingDate);
+    } else if (differenceBetweenDates < 150 && differenceBetweenDates >= 30) {
+      dateValues = model.moreDays(dateStartingDate, dateEndingDate);
+    } else if (differenceBetweenDates < 30 && differenceBetweenDates >= 5) {
+      dateValues = model.calculatingDays(dateStartingDate, dateEndingDate);
+    }
+
+    List<String> keys = new ArrayList<>(dateValues.keySet());
+    List<Double> values = new ArrayList<>();
+    for (int i = 0; i < keys.size(); i++) {
+      values.add(model.calculateValueForGraph(model.getTotalFlexibleStockValue(portfolioName
+              , dateValues.get(keys.get(i)))));
+    }
+//    view.displayContentsInParameter("Performance of portfolio " + portfolioName + " from " +
+//            startingDate + " to " + endingDate);
+    String series1 = "Stocks";
+    DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+    for (int i = 0; i < values.size(); i++) {
+      int val = values.get(i).intValue();
+      dataset.addValue(val / 1000, series1, keys.get(i));
+    }
+    return dataset;
   }
 
   private String helper(int number) {
