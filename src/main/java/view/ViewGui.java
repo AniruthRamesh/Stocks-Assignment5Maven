@@ -56,4 +56,5 @@ public interface ViewGui {
   void displayCostBasis(String data);
 
   void createLineGraph(DefaultCategoryDataset dataset);
+
 }
