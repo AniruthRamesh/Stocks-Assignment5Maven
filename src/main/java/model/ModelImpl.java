@@ -51,6 +51,14 @@ public class ModelImpl implements Model {
 
   Set<String> listOfDates = new HashSet<>();
   String data;
+  String endDate = "";
+
+  List<String> tickers = new ArrayList<>();
+  List<String> percentages = new ArrayList<>();
+  Double percentageSoFar = 0.0;
+
+  String myd = "";
+  int duration = 0;
 
   Map<String, List<List<String>>> inflexiblePortfolio = new HashMap<>();
 
@@ -69,6 +77,8 @@ public class ModelImpl implements Model {
 
   Set<String> companiesInPortfolio = new HashSet<>();
   private Map<String, String> dates = new HashMap<>();
+
+
 
   public Map<String, Map<String, List<List<String>>>> getFlexiblePort() {
     return flexiblePort;
@@ -669,5 +679,81 @@ public class ModelImpl implements Model {
       date = 0;
     }
     return date;
+  }
+
+  @Override
+  public void addTicker(String ticker) {
+    this.tickers.add(ticker);
+  }
+
+  @Override
+  public void addPercentage(String percentage) {
+    this.percentages.add(percentage);
+  }
+  @Override
+  public void addPercentageSoFar(Double percentage) {
+    this.percentageSoFar+=percentage;
+  }
+  @Override
+  public double getPercentageSoFar() {
+    return percentageSoFar;
+  }
+  @Override
+  public List<String> getTickerForDollar() {
+    return tickers;
+  }
+
+  @Override
+  public List<String> getPercentageFOrDollar() {
+    return percentages;
+  }
+
+  @Override
+  public double stringToDouble(String number){
+    double num;
+    try{
+      num = Double.parseDouble(number);
+    }
+    catch(Exception e){
+      num = 0.0;
+    }
+    return num;
+  }
+
+  @Override
+  public void initializer(){
+    tickers = new ArrayList<>();
+    percentages = new ArrayList<>();
+    percentageSoFar = 0.0;
+  }
+
+  @Override
+  public void setEndDate(String date){
+    endDate = date;
+  }
+
+ @Override
+  public void setMyd(String myd){
+    this.myd = myd;
+ }
+
+ @Override
+  public void setDuration(int number){
+    this.duration = number;
+ }
+
+  @Override
+  public String getEndDate() {
+    return endDate;
+  }
+
+  @Override
+  public String getMyd() {
+    return myd;
+  }
+
+  @Override
+  public int getDuration() {
+    return duration;
   }
 }

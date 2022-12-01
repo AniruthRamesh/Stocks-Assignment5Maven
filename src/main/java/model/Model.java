@@ -473,4 +473,29 @@ public interface Model {
   int getFlexiblePortfolioSize();
 
   int stringToNumber(String number);
+
+  void addTicker(String ticker);
+
+  void addPercentage(String percentage);
+  void addPercentageSoFar(Double percentage);
+  double getPercentageSoFar();
+  List<String> getTickerForDollar();
+  List<String> getPercentageFOrDollar();
+
+  double stringToDouble(String number);
+
+  void initializer();
+
+  void setEndDate(String date);
+
+  void setMyd(String myd);
+
+  void setDuration(int number);
+
+  String getEndDate();
+
+  String getMyd();
+
+  int getDuration();
+
 }
