@@ -1,5 +1,7 @@
 package controller;
 
+import org.jfree.data.category.DefaultCategoryDataset;
+
 import javax.swing.*;
 
 public interface Features {
@@ -71,7 +73,8 @@ public interface Features {
   /**
    * It calculates the dollar cost averaging of a stock.
    */
-  void dollarCostAveraging();
+  void dollarCostAveraging(JPanel frame,String portfolio,String amount,String day,String month,
+                           String year);
 
   /**
    * This function takes in a ticker and a percentage.
@@ -79,11 +82,28 @@ public interface Features {
    * @param ticker     The ticker symbol of the stock you want to get the data for.
    * @param percentage The percentage of the stock's price that you want to buy.
    */
-  void noDate(String ticker, String percentage);
+  boolean noDate(JPanel frame,String ticker, String percentage);
 
-  void dollarCostAveragingAndQueryCostBasisAndValue();
+  boolean enteredDate(JPanel frame,String day,String month,String year);
+
+  void dollarCostAveragingAndQueryCostBasisAndValue(JPanel frame,String portfolio,String amount,
+                                                    String day,String month,
+                                                    String year);
 
   void exit();
 
   void createGraph();
+
+  boolean getPercentage();
+
+  boolean durationCheck(JPanel frame,String myd, String duration);
+
+  boolean mydChecker();
+
+  void createGraph(JPanel graph, String portfolio, String startDay, String startMonth,
+                   String startYear,
+                   String endDay, String endMonth, String endYear);
+
+  DefaultCategoryDataset lineGraphValues(JPanel graph, String portfolioName, String startingDate,
+                                         String endingDate);
 }

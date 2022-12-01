@@ -459,6 +459,76 @@ public class MockModel implements Model {
   }
 
   @Override
+  public void addTicker(String ticker) {
+
+  }
+
+  @Override
+  public void addPercentage(String percentage) {
+
+  }
+
+  @Override
+  public void addPercentageSoFar(Double percentage) {
+
+  }
+
+  @Override
+  public double getPercentageSoFar() {
+    return 0;
+  }
+
+  @Override
+  public List<String> getTickerForDollar() {
+    return null;
+  }
+
+  @Override
+  public List<String> getPercentageFOrDollar() {
+    return null;
+  }
+
+  @Override
+  public double stringToDouble(String number) {
+    return 0;
+  }
+
+  @Override
+  public void initializer() {
+
+  }
+
+  @Override
+  public void setEndDate(String date) {
+
+  }
+
+  @Override
+  public void setMyd(String myd) {
+
+  }
+
+  @Override
+  public void setDuration(int number) {
+
+  }
+
+  @Override
+  public String getEndDate() {
+    return null;
+  }
+
+  @Override
+  public String getMyd() {
+    return null;
+  }
+
+  @Override
+  public int getDuration() {
+    return 0;
+  }
+
+  @Override
   public boolean portfolioContainsCertainKey(String name) {
     logForPortfolioContainsCertainKey.append(name);
     return inflexiblePortfolio.containsKey(name);
